@@ -9,6 +9,7 @@ before_install:
   - "sudo apt-get install expect"
   - "sudo apt-get install curl"
 before_script: 
+  - "sudo chmod 755 run-redoc.exp"
   - "cat /etc/hosts"
   - "curl -I -v https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/master/.travis.yml"
 after_scritp:
