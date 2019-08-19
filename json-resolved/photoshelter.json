@@ -77,7 +77,7 @@
         }
       }
     },
-    "/gallery" : {
+    "/galleries" : {
       "get" : {
         "summary" : "Gets all the galleries for the account.",
         "description" : "Gets all the galleries for the account!",
@@ -134,7 +134,7 @@
         }
       }
     },
-    "/gallery/{gallery_id}" : {
+    "/galleries/{gallery_id}" : {
       "get" : {
         "summary" : "Get gallery data based off gallery id.",
         "description" : "Get gallery data based off gallery id",
@@ -147,9 +147,7 @@
           "style" : "simple",
           "explode" : false,
           "schema" : {
-            "pattern" : "^G0000[a-zA-Z0-9]{11}$",
-            "type" : "string",
-            "example" : "G0000ZJCk9LW4Zfc"
+            "$ref" : "#/components/schemas/schema"
           }
         }, {
           "name" : "include",
@@ -187,6 +185,85 @@
                       }
                     }
                   } ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Delete a gallery.",
+        "description" : "Delete a gallery.",
+        "operationId" : "GalleryDeleteId",
+        "parameters" : [ {
+          "name" : "gallery_id",
+          "in" : "path",
+          "description" : "Gallery ID",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "HTTP OK"
+          }
+        }
+      },
+      "patch" : {
+        "summary" : "Update the gallery at that id.",
+        "description" : "Update the gallery at that id.",
+        "operationId" : "GalleryUpdateId",
+        "parameters" : [ {
+          "name" : "gallery_id",
+          "in" : "path",
+          "description" : "The Gallery ID",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema"
+          }
+        }, {
+          "name" : "name",
+          "in" : "header",
+          "description" : "Gallery name",
+          "required" : false,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "description",
+          "in" : "header",
+          "description" : "Gallery description",
+          "required" : false,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "f_list",
+          "in" : "header",
+          "description" : "Boolean value denoting if it's listed on public site",
+          "required" : false,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "HTTP OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200"
                 }
               }
             }
@@ -270,7 +347,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200"
+                  "$ref" : "#/components/schemas/inline_response_200_1"
                 }
               }
             }
@@ -342,7 +419,48 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_1"
+                  "$ref" : "#/components/schemas/inline_response_200_2"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/media/{media_id}" : {
+      "get" : {
+        "summary" : "Get the media with the associated ID.",
+        "description" : "Get the media with the associated ID.",
+        "operationId" : "Media Get",
+        "parameters" : [ {
+          "name" : "media_id",
+          "in" : "path",
+          "description" : "Media",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "ok" ]
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "discriminator" : {
+                    "propertyName" : "type",
+                    "mapping" : {
+                      "gallery" : "#/components/schemas/Gallery",
+                      "image" : "#/components/schemas/Image"
+                    }
+                  },
+                  "oneOf" : [ {
+                    "$ref" : "#/components/schemas/Gallery"
+                  }, {
+                    "$ref" : "#/components/schemas/Image"
+                  } ]
                 }
               }
             }
@@ -405,12 +523,9 @@
         "description" : "A flat schema for the JSONAPI-light"
       },
       "Gallery" : {
-        "required" : [ "objectType" ],
+        "required" : [ "type" ],
         "type" : "object",
         "properties" : {
-          "objectType" : {
-            "type" : "string"
-          },
           "id" : {
             "type" : "string",
             "description" : "The gallery ID",
@@ -488,7 +603,33 @@
           }
         }
       },
+      "schema" : {
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^G0000[a-zA-Z0-9]{11}$",
+        "type" : "string",
+        "example" : "G0000ZJCk9LW4Zfc"
+      },
       "inline_response_200_data" : {
+        "type" : "object",
+        "properties" : {
+          "gallery_id" : {
+            "$ref" : "#/components/schemas/schema"
+          }
+        }
+      },
+      "inline_response_200" : {
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "$ref" : "#/components/schemas/inline_response_200_data"
+          },
+          "meta" : {
+            "type" : "object"
+          }
+        }
+      },
+      "inline_response_200_1_data" : {
         "type" : "object",
         "properties" : {
           "total" : {
@@ -502,28 +643,6 @@
           }
         }
       },
-      "inline_response_200" : {
-        "type" : "object",
-        "properties" : {
-          "status" : {
-            "type" : "string",
-            "enum" : [ "OK", "error" ]
-          },
-          "data" : {
-            "$ref" : "#/components/schemas/inline_response_200_data"
-          }
-        }
-      },
-      "inline_response_200_1_data" : {
-        "type" : "object",
-        "properties" : {
-          "gallery" : {
-            "pattern" : "^G0000[a-zA-Z0-9]{11}$",
-            "type" : "string",
-            "example" : "G0000ZJCk9LW4Zfc"
-          }
-        }
-      },
       "inline_response_200_1" : {
         "type" : "object",
         "properties" : {
@@ -533,6 +652,28 @@
           },
           "data" : {
             "$ref" : "#/components/schemas/inline_response_200_1_data"
+          }
+        }
+      },
+      "inline_response_200_2_data" : {
+        "type" : "object",
+        "properties" : {
+          "gallery" : {
+            "pattern" : "^G0000[a-zA-Z0-9]{11}$",
+            "type" : "string",
+            "example" : "G0000ZJCk9LW4Zfc"
+          }
+        }
+      },
+      "inline_response_200_2" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "string",
+            "enum" : [ "OK", "error" ]
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/inline_response_200_2_data"
           }
         }
       }
