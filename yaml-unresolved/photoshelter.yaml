@@ -134,8 +134,8 @@ paths:
                         $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/schemas/MetaTag'
     patch:
       operationId: GalleryUpdateId
-      description: "Update the gallery at that id"
-      summary: "Update the gallery at that id"
+      description: "Update the gallery at that id."
+      summary: "Update the gallery at that id."
       parameters:
         - in: path
           name: gallery_id
@@ -178,13 +178,18 @@ paths:
                     type: object
     delete:
       operationId: GalleryDeleteId
-      description: "Delete a gallery"
-      summary: "Delete a gallery"
+      description: "Delete a gallery."
+      summary: "Delete a gallery."
       parameters:
         - in: path
           name: gallery_id
-          
-      
+          schema:
+            $ref: "https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/parameters/gallery_id/schema"
+          required: true
+          description: Gallery ID
+      responses:
+        '200'
+          description: HTTP OK
 
   /gallery/search:
     get: 
