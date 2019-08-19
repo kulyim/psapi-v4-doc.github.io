@@ -1,0 +1,36 @@
+dist: trusty
+language: node_js
+node_js: 
+  - "9"
+before_install: 
+  - "npm install"
+  - "npm install redoc --save"
+  - "npm install -g create-openapi-repo"
+  - "sudo apt-get install expect"
+  - "sudo apt-get install curl"
+before_script: 
+  - "cat /etc/hosts"
+  - "curl -I -v https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/master/.travis.yml"
+after_scritp:
+  - "wget https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/master/index.html"
+cache: 
+  directories: 
+    - node_modules
+deploy: 
+  github_token: $GH_TOKEN
+  github_url: github.com
+  keep_history: true
+  project_name: psapi-v4-doc.github.io
+  provider: pages
+  repo: photoshelter-dev/psapi-v4-doc.github.io
+  skip_cleanup: true
+  true: 
+    branch: swagger-hub
+script: 
+  - ./run-redoc.exp
+  - "ls -la"
+  - "npm run gh-pages"
+  - pwd
+  - "ls -la"
+  - "sleep 3"
+sudo: required
