@@ -333,8 +333,8 @@ paths:
   /media/{media_id}:
     get:
       operationId: Media Get
-      description: "Get the media with the associated ID"
-      summary: "Get the media with the associated ID"
+      description: "Get the media with the associated ID."
+      summary: "Get the media with the associated ID."
       parameters:
         - in: path
           name: media_id
@@ -342,7 +342,8 @@ paths:
             type: string
             enum:
               oneOf:
-              
+          required: true
+          description: "Media"
       responses:
               
 components:
