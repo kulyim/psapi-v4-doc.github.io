@@ -36,6 +36,7 @@ deploy:
 script: 
   - ./run-redoc.exp
   - "ls -la"
+  - "cat json-resolved/photoshelter.json"
   - "npm run gh-pages"
   - pwd
   - "ls -la"
