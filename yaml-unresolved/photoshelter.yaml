@@ -341,11 +341,12 @@ paths:
           schema:
             type: string
             enum:
-              oneOf:
+              - ok
           required: true
           description: "Media"
       responses:
-              
+        '200':
+          $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/responses/Response'
 components:
   schemas:
     ApiProblem:
