@@ -54,7 +54,7 @@ paths:
                       meta:
                         $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/schemas/MetaTag'
                     
-  /gallery:
+  /galleries:
     get:
       operationId: GalleryGet
       description: "Gets all the galleries for the account!"
@@ -89,7 +89,7 @@ paths:
                         $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/schemas/MetaTag'
 
   
-  /gallery/{gallery_id}:
+  /galleries/{gallery_id}:
     get:
       operationId: GalleryGetId
       description: "Get gallery data based off gallery id"
@@ -330,6 +330,20 @@ paths:
                         type: string
                         pattern: '^G0000[a-zA-Z0-9]{11}$'
                         example: G0000ZJCk9LW4Zfc
+  /media/{media_id}:
+    get:
+      operationId: Media Get
+      description: "Get the media with the associated ID"
+      summary: "Get the media with the associated ID"
+      parameters:
+        - in: path
+          name: media_id
+          schema:
+            type: string
+            enum:
+              oneOf:
+              
+      responses:
               
 components:
   schemas:
