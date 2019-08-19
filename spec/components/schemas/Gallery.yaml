@@ -1,0 +1,44 @@
+required:
+  - objectType
+type: object
+properties:
+  objectType:
+    type: string
+  id:
+    type: string
+    description: The gallery ID
+    example: G0000b9PbmJDQcko
+  type:
+    type: string
+    description: Entity type
+    example: gallery
+  description:
+    type: string
+    description: Gallery description
+    example: My trip to DR
+  f_list:
+    type: boolean
+    description: Listed on public site
+  display_order:
+    type: integer
+    description: Custom display order
+    format: int32
+    example: 0
+  mode:
+    type: string
+    description: Native visibility mode
+  effective_mode:
+    type: string
+    description: Effective mode with permission inheritance
+  created_at:
+    type: string
+    description: Creation date
+    example: '2019-04-12'
+  modified_at:
+    type: string
+    description: Modification date
+    example: '2019-04-12'
+  collection_id:
+    type: string
+    description: Collection ID
+    example: C0000IRVZsqAiXtA

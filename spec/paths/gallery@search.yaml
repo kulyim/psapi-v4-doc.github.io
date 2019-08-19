@@ -1,0 +1,70 @@
+get:
+  summary: Retrieve a subset of galleries via parameters.
+  description: Search galleries for the account
+  operationId: GallerySearch
+  parameters:
+    - name: name
+      in: query
+      description: 'If provided, search for galleries by the name'
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: string
+    - name: parent
+      in: query
+      description: 'If provided, limit galleries to children of the provided collection ID'
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: string
+    - name: sort_by
+      in: query
+      description: 'If provided, gives a field to sort by'
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: string
+        enum:
+          - creation_time
+          - modification_time
+          - name
+          - display_order
+    - name: sort_dir
+      in: query
+      description: 'If provided, gives an order to sort by'
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: string
+        enum:
+          - asc
+          - desc
+    - name: per_page
+      in: query
+      description: 'If provided, defines the number of results per age'
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: integer
+        format: int32
+    - name: page
+      in: query
+      description: 'If provided, defines the current page number'
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: integer
+        format: int32
+  responses:
+    '200':
+      description: HTTP OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_200'

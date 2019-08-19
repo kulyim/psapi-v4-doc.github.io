@@ -1,0 +1,9 @@
+type: object
+properties:
+  status:
+    type: string
+    enum:
+      - OK
+      - error
+  data:
+    $ref: '#/components/schemas/inline_response_200_data'

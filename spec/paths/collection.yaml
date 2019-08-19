@@ -1,0 +1,42 @@
+get:
+  summary: Gets all the collections for the account.
+  description: Gets all the collections for the account!
+  operationId: GetCollection
+  parameters:
+    - name: page
+      in: query
+      description: >-
+        If provided, the endpoint will returns the requested data page if
+        available.
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: integer
+        format: int32
+    - name: per_page
+      in: query
+      description: >-
+        If provided. the endpoint will return the requested data limited by the
+        value of per_page
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: integer
+        format: int32
+  responses:
+    '200':
+      description: HTTP OK
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/v1JsonApi'
+              - properties:
+                  data:
+                    oneOf:
+                      - $ref: '#/components/schemas/Gallery'
+                      - $ref: '#/components/schemas/Image'
+                  meta:
+                    $ref: '#/components/schemas/MetaTag'

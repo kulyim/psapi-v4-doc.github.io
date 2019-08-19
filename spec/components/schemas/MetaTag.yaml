@@ -1,0 +1,8 @@
+type: object
+properties:
+  copyright:
+    type: string
+  authors:
+    type: array
+    items:
+      type: string

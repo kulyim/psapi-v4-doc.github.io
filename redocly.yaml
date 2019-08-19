@@ -1,0 +1,7 @@
+specFileName: json-resolved/photoshelter.json
+apiTitle: Photoshelter API v4
+splitSpec: true
+codeSamples: true
+swaggerUI: false
+travis: false
+oasVersion: 3.0.0

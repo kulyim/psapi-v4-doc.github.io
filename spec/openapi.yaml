@@ -1,0 +1,16 @@
+openapi: 3.0.0
+info:
+  title: PhotoShelter API v4
+  description: '# PhotoShelter API v4 definition'
+  termsOfService: 'https://www.photoshelter.com/support/terms/'
+  contact:
+    name: PhotoShelter API Support Team
+    url: 'https://support.photoshelter.com'
+    email: api-support@photoshelter.com
+  license:
+    name: PhotoShelter License
+    url: 'https://www.photoshelter.com/support/license'
+  version: '4'
+servers:
+  - url: 'https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4'
+    description: PhotoShelter Auto Mocking API

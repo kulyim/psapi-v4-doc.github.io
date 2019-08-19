@@ -1,0 +1,15 @@
+type: object
+properties:
+  data:
+    type: object
+    example: {}
+    oneOf:
+      - $ref: '#/components/schemas/Gallery'
+      - $ref: '#/components/schemas/Image'
+  meta:
+    type: object
+  errors:
+    type: array
+    items:
+      $ref: '#/components/schemas/ApiProblem'
+description: A flat schema for the JSONAPI-light

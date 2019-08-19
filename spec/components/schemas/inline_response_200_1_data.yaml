@@ -1,0 +1,6 @@
+type: object
+properties:
+  gallery:
+    pattern: '^G0000[a-zA-Z0-9]{11}$'
+    type: string
+    example: G0000ZJCk9LW4Zfc
