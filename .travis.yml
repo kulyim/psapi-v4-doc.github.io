@@ -17,13 +17,19 @@ after_scritp:
 cache: 
   directories: 
     - node_modules
+
+env:
+  global:
+    - secure: 7f331d4a5f96614f2da34bfee1e76f8feaa8ef03
+
 deploy: 
   github_token: $GH_TOKEN
   github_url: github.com
   keep_history: true
   project_name: psapi-v4-doc.github.io
   provider: pages
-  repo: photoshelter-dev/psapi-v4-doc.github.io
+#  repo: photoshelter-dev/psapi-v4-doc.github.io
+  public_repo: photoshelter-dev/psapi-v4-doc.github.io
   skip_cleanup: true
   true: 
     branch: swagger-hub
