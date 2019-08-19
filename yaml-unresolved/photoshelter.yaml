@@ -54,7 +54,7 @@ paths:
                       meta:
                         $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/schemas/MetaTag'
                     
-  /gallery:
+  /galleries:
     get:
       operationId: GalleryGet
       description: "Gets all the galleries for the account!"
@@ -89,7 +89,7 @@ paths:
                         $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/schemas/MetaTag'
 
   
-  /gallery/{gallery_id}:
+  /galleries/{gallery_id}:
     get:
       operationId: GalleryGetId
       description: "Get gallery data based off gallery id"
@@ -98,9 +98,7 @@ paths:
           - in: path
             name: gallery_id
             schema:
-              type: string
-              pattern: '^G0000[a-zA-Z0-9]{11}$'
-              example: G0000ZJCk9LW4Zfc
+              $ref: "https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/parameters/gallery_id/schema"
             required: true
             description: The gallery ID
           - in: query
@@ -114,11 +112,10 @@ paths:
                 - images, images.iptc, images.xmp
                 - cover
                 - count
-    #      - $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/parameters/page'
+     #     - $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/parameters/page'
      #     - $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/parameters/per_page'
       #    - $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/parameters/date_format'
     #      - $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/parameters/include'
-
 
       responses:
         '200':
@@ -135,10 +132,67 @@ paths:
                           - $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/schemas/Image'
                       meta:
                         $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/schemas/MetaTag'
-      
+    patch:
+      operationId: GalleryUpdateId
+      description: "Update the gallery at that id."
+      summary: "Update the gallery at that id."
+      parameters:
+        - in: path
+          name: gallery_id
+          schema:
+              $ref: "https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/parameters/gallery_id/schema"
+          required: true
+          description: The Gallery ID
+        - in: header
+          name: name
+          schema:
+            type: string
+          required: false
+          description: Gallery name
+        - in: header
+          name: description
+          schema:
+            type: string
+          required: false
+          description: Gallery description
+        - in: header
+          name: f_list
+          schema:
+            type: boolean
+          required: false
+          description: Boolean value denoting if it's listed on public site
+      responses:
+        '200':
+          description: HTTP OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      gallery_id:
+                        $ref: "https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/parameters/gallery_id/schema"
+                  meta:
+                    type: object
+    delete:
+      operationId: GalleryDeleteId
+      description: "Delete a gallery."
+      summary: "Delete a gallery."
+      parameters:
+        - in: path
+          name: gallery_id
+          schema:
+            $ref: "https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/parameters/gallery_id/schema"
+          required: true
+          description: Gallery ID
+      responses:
+        '200':
+          description: HTTP OK
 
   /gallery/search:
-    get: # Is this a post or a get? There is a difference between portal and library search functionality. ### Please use the comment feature of the editor 
+    get: 
       operationId: GallerySearch
       description: "Search galleries for the account"
       summary: "Retrieve a subset of galleries via parameters."
@@ -276,7 +330,23 @@ paths:
                         type: string
                         pattern: '^G0000[a-zA-Z0-9]{11}$'
                         example: G0000ZJCk9LW4Zfc
-              
+  /media/{media_id}:
+    get:
+      operationId: Media Get
+      description: "Get the media with the associated ID."
+      summary: "Get the media with the associated ID."
+      parameters:
+        - in: path
+          name: media_id
+          schema:
+            type: string
+            enum:
+              - ok
+          required: true
+          description: "Media"
+      responses:
+        '200':
+          $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/responses/Response'
 components:
   schemas:
     ApiProblem:

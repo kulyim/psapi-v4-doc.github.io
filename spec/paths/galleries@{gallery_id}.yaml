@@ -1,0 +1,103 @@
+get:
+  summary: Get gallery data based off gallery id.
+  description: Get gallery data based off gallery id
+  operationId: GalleryGetId
+  parameters:
+    - name: gallery_id
+      in: path
+      description: The gallery ID
+      required: true
+      style: simple
+      explode: false
+      schema:
+        $ref: '#/components/schemas/schema'
+    - name: include
+      in: query
+      required: false
+      style: form
+      explode: true
+      schema:
+        title: string
+        pattern: '[a-zA-Z]'
+        type: string
+        description: ITS A TRAP.
+        enum:
+          - children
+          - 'images, images.iptc, images.xmp'
+          - cover
+          - count
+  responses:
+    '200':
+      description: HTTP OK
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/v1JsonApi'
+              - properties:
+                  data:
+                    oneOf:
+                      - $ref: '#/components/schemas/Gallery'
+                      - $ref: '#/components/schemas/Image'
+                  meta:
+                    $ref: '#/components/schemas/MetaTag'
+delete:
+  summary: Delete a gallery.
+  description: Delete a gallery.
+  operationId: GalleryDeleteId
+  parameters:
+    - name: gallery_id
+      in: path
+      description: Gallery ID
+      required: true
+      style: simple
+      explode: false
+      schema:
+        $ref: '#/components/schemas/schema'
+  responses:
+    '200':
+      description: HTTP OK
+patch:
+  summary: Update the gallery at that id.
+  description: Update the gallery at that id.
+  operationId: GalleryUpdateId
+  parameters:
+    - name: gallery_id
+      in: path
+      description: The Gallery ID
+      required: true
+      style: simple
+      explode: false
+      schema:
+        $ref: '#/components/schemas/schema'
+    - name: name
+      in: header
+      description: Gallery name
+      required: false
+      style: simple
+      explode: false
+      schema:
+        type: string
+    - name: description
+      in: header
+      description: Gallery description
+      required: false
+      style: simple
+      explode: false
+      schema:
+        type: string
+    - name: f_list
+      in: header
+      description: Boolean value denoting if it's listed on public site
+      required: false
+      style: simple
+      explode: false
+      schema:
+        type: boolean
+  responses:
+    '200':
+      description: HTTP OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_200'

@@ -1,9 +1,4 @@
 type: object
 properties:
-  total:
-    type: integer
-    format: int32
-    example: 1
-  galleries:
-    type: array
-    items: {}
+  gallery_id:
+    $ref: '#/components/schemas/schema'

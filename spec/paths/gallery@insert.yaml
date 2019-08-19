@@ -57,4 +57,4 @@ post:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/inline_response_200_1'
+            $ref: '#/components/schemas/inline_response_200_2'

@@ -1,9 +1,7 @@
 required:
-  - objectType
+  - type
 type: object
 properties:
-  objectType:
-    type: string
   id:
     type: string
     description: The gallery ID
