@@ -189,6 +189,11 @@
               }
             }
           }
+        },
+        "x-code-samples" : {
+          "lang" : "PHP",
+          "label" : "PHP 7.1",
+          "source" : "echo \"ITS A TRAP!\";"
         }
       },
       "delete" : {
