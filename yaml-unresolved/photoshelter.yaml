@@ -91,6 +91,10 @@ paths:
   
   /galleries/{gallery_id}:
     get:
+      x-code-samples:
+        lang: "PHP"
+        label: "PHP 7.1"
+        source: 'echo "ITS A TRAP!";'  
       operationId: GalleryGetId
       description: "Get gallery data based off gallery id"
       summary: "Get gallery data based off gallery id."
