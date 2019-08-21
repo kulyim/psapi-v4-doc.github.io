@@ -1,6 +1,7 @@
-# psapi-v4-doc.github.io
-PhotoShelter API v4 generated client code and documentation
+# psapi-v4-doc.github.io 
+PhotoShelter API v4 generated client code and documentation (dup. repo of photoshelter)
 
-<img src="http://online.swagger.io/validator?url=https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/alee/photoshelter.json" />
-
-https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v2.0/json/petstore-expanded.json 
+|  Action | Status  |
+|---|---|
+| Documentation Build  | [![Build Status](https://travis-ci.org/photoshelter-dev/psapi-v4-doc.github.io.svg?branch=master)](https://travis-ci.org/photoshelter-dev/psapi-v4-doc.github.io) |
+| Your specification validation  | <img src="http://online.swagger.io/validator?url=https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/{branch/dev_name}/photoshelter.json" />  |
