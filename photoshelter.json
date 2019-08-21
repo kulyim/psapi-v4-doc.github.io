@@ -155,11 +155,7 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "title" : "string",
-            "pattern" : "[a-zA-Z]",
-            "type" : "string",
-            "description" : "ITS A TRAP.",
-            "enum" : [ "children", "images, images.iptc, images.xmp", "cover", "count" ]
+            "$ref" : "#/components/schemas/GalleryInclude"
           }
         } ],
         "responses" : {
