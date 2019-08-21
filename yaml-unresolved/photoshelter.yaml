@@ -344,7 +344,8 @@ paths:
           required: true
           description: "Media"
       responses:
-        '200': {}
+        '200':
+          description: HTTP OK
 components:
   schemas:
     ApiProblem:
