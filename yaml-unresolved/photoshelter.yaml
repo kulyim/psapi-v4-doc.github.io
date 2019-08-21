@@ -96,15 +96,10 @@ paths:
         label: "PHP 7.1"
         source: 'echo "ITS A TRAP!";'  
       operationId: GalleryGetId
-      description: "Get gallery data based off gallery id"
+      description: "/galleries/{gallery_id} - Get gallery data based off gallery id"
       summary: "Get gallery data based off gallery id."
       parameters:
-          - in: path
-            name: gallery_id
-            schema:
-              $ref: "https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/parameters/gallery_id/schema"
-            required: true
-            description: The gallery ID
+          - $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4.1#/components/parameters/gallery_id'
           - in: query
             name: include
             schema:
