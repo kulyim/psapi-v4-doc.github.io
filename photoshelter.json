@@ -161,7 +161,14 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "HTTP OK"
+            "description" : "/galleries/{gallery_id} - HTTP OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200"
+                }
+              }
+            }
           }
         },
         "x-code-samples" : {
@@ -242,7 +249,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200"
+                  "$ref" : "#/components/schemas/inline_response_200_1"
                 }
               }
             }
@@ -326,7 +333,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_1"
+                  "$ref" : "#/components/schemas/inline_response_200_2"
                 }
               }
             }
@@ -398,7 +405,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_2"
+                  "$ref" : "#/components/schemas/inline_response_200_3"
                 }
               }
             }
@@ -572,6 +579,67 @@
         "type" : "string",
         "example" : "G0000ZJCk9LW4Zfc"
       },
+      "Gallery_2" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "pattern" : "^G0000[a-zA-Z0-9]{11}$",
+            "type" : "string",
+            "description" : "Gallery ID",
+            "example" : "G0000ZJCk9LW4Zfc"
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "gallery" ]
+          },
+          "attributes" : {
+            "$ref" : "#/components/schemas/Gallery_2_attributes"
+          }
+        }
+      },
+      "MetaTag_2" : {
+        "type" : "object",
+        "properties" : {
+          "copyright" : {
+            "type" : "string"
+          },
+          "version" : {
+            "type" : "date"
+          },
+          "authors" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "Error" : {
+        "properties" : {
+          "title" : {
+            "type" : "string",
+            "description" : "A short, human-readable summary of the problem type"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "A URI reference (RFC3986) that identifies the problem type"
+          },
+          "status" : {
+            "type" : "integer",
+            "description" : "The HTTP status code set by the origin server for this occurrence of the problem.",
+            "format" : "int32"
+          },
+          "detail" : {
+            "type" : "string",
+            "description" : "An human readable explanation specific to this occurrence of the problem."
+          },
+          "instance" : {
+            "type" : "string",
+            "description" : "A URI reference that identifies the specific occurrence of the problem."
+          }
+        },
+        "description" : "This object generates errors in compliance with RFC 7807 'API Problem'"
+      },
       "schema_2" : {
         "maxLength" : 16,
         "minLength" : 16,
@@ -579,7 +647,21 @@
         "type" : "string",
         "example" : "G0000ZJCk9LW4Zfc"
       },
-      "inline_response_200_data" : {
+      "inline_response_200" : {
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "$ref" : "#/components/schemas/Gallery_2"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/MetaTag_2"
+          },
+          "error" : {
+            "$ref" : "#/components/schemas/Error"
+          }
+        }
+      },
+      "inline_response_200_1_data" : {
         "type" : "object",
         "properties" : {
           "gallery_id" : {
@@ -587,18 +669,18 @@
           }
         }
       },
-      "inline_response_200" : {
+      "inline_response_200_1" : {
         "type" : "object",
         "properties" : {
           "data" : {
-            "$ref" : "#/components/schemas/inline_response_200_data"
+            "$ref" : "#/components/schemas/inline_response_200_1_data"
           },
           "meta" : {
             "type" : "object"
           }
         }
       },
-      "inline_response_200_1_data" : {
+      "inline_response_200_2_data" : {
         "type" : "object",
         "properties" : {
           "total" : {
@@ -612,28 +694,6 @@
           }
         }
       },
-      "inline_response_200_1" : {
-        "type" : "object",
-        "properties" : {
-          "status" : {
-            "type" : "string",
-            "enum" : [ "OK", "error" ]
-          },
-          "data" : {
-            "$ref" : "#/components/schemas/inline_response_200_1_data"
-          }
-        }
-      },
-      "inline_response_200_2_data" : {
-        "type" : "object",
-        "properties" : {
-          "gallery" : {
-            "pattern" : "^G0000[a-zA-Z0-9]{11}$",
-            "type" : "string",
-            "example" : "G0000ZJCk9LW4Zfc"
-          }
-        }
-      },
       "inline_response_200_2" : {
         "type" : "object",
         "properties" : {
@@ -643,6 +703,72 @@
           },
           "data" : {
             "$ref" : "#/components/schemas/inline_response_200_2_data"
+          }
+        }
+      },
+      "inline_response_200_3_data" : {
+        "type" : "object",
+        "properties" : {
+          "gallery" : {
+            "pattern" : "^G0000[a-zA-Z0-9]{11}$",
+            "type" : "string",
+            "example" : "G0000ZJCk9LW4Zfc"
+          }
+        }
+      },
+      "inline_response_200_3" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "string",
+            "enum" : [ "OK", "error" ]
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/inline_response_200_3_data"
+          }
+        }
+      },
+      "Gallery_2_attributes" : {
+        "required" : [ "created_at", "description", "display_order", "effective_mode", "f_list", "mode", "modified_at", "name" ],
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Gallery name",
+            "example" : "DR Gallery"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Gallery description",
+            "example" : "My trip to DR"
+          },
+          "f_list" : {
+            "type" : "boolean",
+            "description" : "Listed on public site"
+          },
+          "display_order" : {
+            "type" : "integer",
+            "description" : "Custom display order",
+            "format" : "int32",
+            "example" : 1
+          },
+          "mode" : {
+            "type" : "string",
+            "description" : "Native visibility mode"
+          },
+          "effective_mode" : {
+            "type" : "string",
+            "description" : "Effective mode with permission inheritance"
+          },
+          "created_at" : {
+            "type" : "date",
+            "description" : "Gallery create date",
+            "example" : "2019-04-25 14:54:12.136828"
+          },
+          "modified_at" : {
+            "type" : "date",
+            "description" : "Gallery modified date",
+            "example" : "2019-04-25 14:54:12.136828"
           }
         }
       }
