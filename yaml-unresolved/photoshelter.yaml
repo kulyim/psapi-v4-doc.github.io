@@ -344,7 +344,7 @@ paths:
           required: true
           description: "Media"
       responses:
-        '200':
+        '200': {}
 components:
   schemas:
     ApiProblem:
