@@ -451,24 +451,7 @@
         } ],
         "responses" : {
           "200" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "discriminator" : {
-                    "propertyName" : "type",
-                    "mapping" : {
-                      "gallery" : "#/components/schemas/Gallery",
-                      "image" : "#/components/schemas/Image"
-                    }
-                  },
-                  "oneOf" : [ {
-                    "$ref" : "#/components/schemas/Gallery"
-                  }, {
-                    "$ref" : "#/components/schemas/Image"
-                  } ]
-                }
-              }
-            }
+            "description" : "A flat schema for the JSONAPI-light"
           }
         }
       }
