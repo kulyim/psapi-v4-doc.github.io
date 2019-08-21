@@ -9,7 +9,9 @@ info:
     email: 'api-support@photoshelter.com'
   version: '4'
   title: 'PhotoShelter API v4'
-  description: '# PhotoShelter API v4 definition'
+  description: |
+  #
+  '# PhotoShelter API v4 definition'
   termsOfService: "https://www.photoshelter.com/support/terms/"
 
 
@@ -96,10 +98,15 @@ paths:
         label: "PHP 7.1"
         source: 'echo "ITS A TRAP!";'  
       operationId: GalleryGetId
-      description: "/galleries/{gallery_id} - Get gallery data based off gallery id"
+      description: "Get gallery data based off gallery id"
       summary: "Get gallery data based off gallery id."
       parameters:
-          - $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4.1#/components/parameters/gallery_id'
+          - in: path
+            name: gallery_id
+            schema:
+              $ref: "https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/parameters/gallery_id/schema"
+            required: true
+            description: The gallery ID
           - in: query
             name: include
             schema:
@@ -115,7 +122,6 @@ paths:
      #     - $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/parameters/per_page'
       #    - $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/parameters/date_format'
     #      - $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/parameters/include'
-
 
       responses:
         '200':
@@ -346,7 +352,7 @@ paths:
           description: "Media"
       responses:
         '200':
-          description: HTTP OK
+          $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/responses/Response'
 components:
   schemas:
     ApiProblem:
