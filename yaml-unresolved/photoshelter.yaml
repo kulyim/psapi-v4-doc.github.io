@@ -9,7 +9,9 @@ info:
     email: 'api-support@photoshelter.com'
   version: '4'
   title: 'PhotoShelter API v4'
-  description: '# PhotoShelter API v4 definition'
+  description: |
+  #
+  '# PhotoShelter API v4 definition'
   termsOfService: "https://www.photoshelter.com/support/terms/"
 
 
@@ -350,7 +352,7 @@ paths:
           description: "Media"
       responses:
         '200':
-          $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/schemas/Response'
+          $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/responses/Response'
 components:
   schemas:
     ApiProblem:
