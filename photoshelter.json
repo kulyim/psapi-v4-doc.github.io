@@ -142,7 +142,6 @@
         "parameters" : [ {
           "name" : "gallery_id",
           "in" : "path",
-          "description" : "The gallery ID",
           "required" : true,
           "style" : "simple",
           "explode" : false,
@@ -208,7 +207,7 @@
           "style" : "simple",
           "explode" : false,
           "schema" : {
-            "$ref" : "#/components/schemas/schema"
+            "$ref" : "#/components/schemas/schema_2"
           }
         } ],
         "responses" : {
@@ -229,7 +228,7 @@
           "style" : "simple",
           "explode" : false,
           "schema" : {
-            "$ref" : "#/components/schemas/schema"
+            "$ref" : "#/components/schemas/schema_2"
           }
         }, {
           "name" : "name",
@@ -598,11 +597,18 @@
         "type" : "string",
         "example" : "G0000ZJCk9LW4Zfc"
       },
+      "schema_2" : {
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^G0000[a-zA-Z0-9]{11}$",
+        "type" : "string",
+        "example" : "G0000ZJCk9LW4Zfc"
+      },
       "inline_response_200_data" : {
         "type" : "object",
         "properties" : {
           "gallery_id" : {
-            "$ref" : "#/components/schemas/schema"
+            "$ref" : "#/components/schemas/schema_2"
           }
         }
       },
