@@ -161,29 +161,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "HTTP OK",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "allOf" : [ {
-                    "$ref" : "#/components/schemas/v1JsonApi"
-                  }, {
-                    "properties" : {
-                      "data" : {
-                        "oneOf" : [ {
-                          "$ref" : "#/components/schemas/Gallery"
-                        }, {
-                          "$ref" : "#/components/schemas/Image"
-                        } ]
-                      },
-                      "meta" : {
-                        "$ref" : "#/components/schemas/MetaTag"
-                      }
-                    }
-                  } ]
-                }
-              }
-            }
+            "description" : "HTTP OK"
           }
         },
         "x-code-samples" : {
