@@ -116,6 +116,7 @@ paths:
       #    - $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/parameters/date_format'
     #      - $ref: 'https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/4#/components/parameters/include'
 
+
       responses:
         '200':
           description: HTTP OK
