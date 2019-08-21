@@ -160,12 +160,22 @@
           }
         } ],
         "responses" : {
+          "400" : {
+            "description" : "/galleries/{gallery_id} - HTTP OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_400"
+                }
+              }
+            }
+          },
           "200" : {
             "description" : "/galleries/{gallery_id} - HTTP OK",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200"
+                  "$ref" : "#/components/schemas/inline_response_400"
                 }
               }
             }
@@ -249,7 +259,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_1"
+                  "$ref" : "#/components/schemas/inline_response_200"
                 }
               }
             }
@@ -333,7 +343,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_2"
+                  "$ref" : "#/components/schemas/inline_response_200_1"
                 }
               }
             }
@@ -405,7 +415,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_3"
+                  "$ref" : "#/components/schemas/inline_response_200_2"
                 }
               }
             }
@@ -647,7 +657,7 @@
         "type" : "string",
         "example" : "G0000ZJCk9LW4Zfc"
       },
-      "inline_response_200" : {
+      "inline_response_400" : {
         "type" : "object",
         "properties" : {
           "data" : {
@@ -661,7 +671,7 @@
           }
         }
       },
-      "inline_response_200_1_data" : {
+      "inline_response_200_data" : {
         "type" : "object",
         "properties" : {
           "gallery_id" : {
@@ -669,18 +679,18 @@
           }
         }
       },
-      "inline_response_200_1" : {
+      "inline_response_200" : {
         "type" : "object",
         "properties" : {
           "data" : {
-            "$ref" : "#/components/schemas/inline_response_200_1_data"
+            "$ref" : "#/components/schemas/inline_response_200_data"
           },
           "meta" : {
             "type" : "object"
           }
         }
       },
-      "inline_response_200_2_data" : {
+      "inline_response_200_1_data" : {
         "type" : "object",
         "properties" : {
           "total" : {
@@ -694,7 +704,7 @@
           }
         }
       },
-      "inline_response_200_2" : {
+      "inline_response_200_1" : {
         "type" : "object",
         "properties" : {
           "status" : {
@@ -702,11 +712,11 @@
             "enum" : [ "OK", "error" ]
           },
           "data" : {
-            "$ref" : "#/components/schemas/inline_response_200_2_data"
+            "$ref" : "#/components/schemas/inline_response_200_1_data"
           }
         }
       },
-      "inline_response_200_3_data" : {
+      "inline_response_200_2_data" : {
         "type" : "object",
         "properties" : {
           "gallery" : {
@@ -716,7 +726,7 @@
           }
         }
       },
-      "inline_response_200_3" : {
+      "inline_response_200_2" : {
         "type" : "object",
         "properties" : {
           "status" : {
@@ -724,7 +734,7 @@
             "enum" : [ "OK", "error" ]
           },
           "data" : {
-            "$ref" : "#/components/schemas/inline_response_200_3_data"
+            "$ref" : "#/components/schemas/inline_response_200_2_data"
           }
         }
       },
