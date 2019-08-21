@@ -1,0 +1,670 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "PhotoShelter API v4",
+    "description" : "# PhotoShelter API v4 definition",
+    "termsOfService" : "https://www.photoshelter.com/support/terms/",
+    "contact" : {
+      "name" : "PhotoShelter API Support Team",
+      "url" : "https://support.photoshelter.com",
+      "email" : "api-support@photoshelter.com"
+    },
+    "license" : {
+      "name" : "PhotoShelter License",
+      "url" : "https://www.photoshelter.com/support/license"
+    },
+    "version" : "Jenn"
+  },
+  "servers" : [ {
+    "url" : "https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4",
+    "description" : "PhotoShelter Auto Mocking API"
+  } ],
+  "paths" : {
+    "/collection" : {
+      "get" : {
+        "summary" : "Gets all the collections for the account.",
+        "description" : "Gets all the collections for the account!",
+        "operationId" : "GetCollection",
+        "parameters" : [ {
+          "name" : "page",
+          "in" : "query",
+          "description" : "If provided, the endpoint will returns the requested data page if available.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "per_page",
+          "in" : "query",
+          "description" : "If provided. the endpoint will return the requested data limited by the value of per_page",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "HTTP OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "allOf" : [ {
+                    "$ref" : "#/components/schemas/v1JsonApi"
+                  }, {
+                    "properties" : {
+                      "data" : {
+                        "oneOf" : [ {
+                          "$ref" : "#/components/schemas/Gallery"
+                        }, {
+                          "$ref" : "#/components/schemas/Image"
+                        } ]
+                      },
+                      "meta" : {
+                        "$ref" : "#/components/schemas/MetaTag"
+                      }
+                    }
+                  } ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/galleries" : {
+      "get" : {
+        "summary" : "Gets all the galleries for the account.",
+        "description" : "Gets all the galleries for the account!",
+        "operationId" : "GalleryGet",
+        "parameters" : [ {
+          "name" : "page",
+          "in" : "query",
+          "description" : "If provided, the endpoint will returns the requested data page if available.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "per_page",
+          "in" : "query",
+          "description" : "If provided. the endpoint will return the requested data limited by the value of per_page",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "allOf" : [ {
+                    "$ref" : "#/components/schemas/v1JsonApi"
+                  }, {
+                    "properties" : {
+                      "data" : {
+                        "oneOf" : [ {
+                          "$ref" : "#/components/schemas/Gallery"
+                        }, {
+                          "$ref" : "#/components/schemas/Image"
+                        } ]
+                      },
+                      "meta" : {
+                        "$ref" : "#/components/schemas/MetaTag"
+                      }
+                    }
+                  } ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/galleries/{gallery_id}" : {
+      "get" : {
+        "summary" : "Get gallery data based off gallery id.",
+        "description" : "Get gallery data based off gallery id",
+        "operationId" : "GalleryGetId",
+        "parameters" : [ {
+          "name" : "gallery_id",
+          "in" : "path",
+          "description" : "The gallery ID",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema"
+          }
+        }, {
+          "name" : "include",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "title" : "string",
+            "pattern" : "[a-zA-Z]",
+            "type" : "string",
+            "description" : "ITS A TRAP.",
+            "enum" : [ "children", "images, images.iptc, images.xmp", "cover", "count" ]
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "HTTP OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "allOf" : [ {
+                    "$ref" : "#/components/schemas/v1JsonApi"
+                  }, {
+                    "properties" : {
+                      "data" : {
+                        "oneOf" : [ {
+                          "$ref" : "#/components/schemas/Gallery"
+                        }, {
+                          "$ref" : "#/components/schemas/Image"
+                        } ]
+                      },
+                      "meta" : {
+                        "$ref" : "#/components/schemas/MetaTag"
+                      }
+                    }
+                  } ]
+                }
+              }
+            }
+          }
+        },
+        "x-code-samples" : {
+          "lang" : "PHP",
+          "label" : "PHP 7.1",
+          "source" : "echo \"ITS A TRAP!\";"
+        }
+      },
+      "delete" : {
+        "summary" : "Delete a gallery.",
+        "description" : "Delete a gallery.",
+        "operationId" : "GalleryDeleteId",
+        "parameters" : [ {
+          "name" : "gallery_id",
+          "in" : "path",
+          "description" : "Gallery ID",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "HTTP OK"
+          }
+        }
+      },
+      "patch" : {
+        "summary" : "Update the gallery at that id.",
+        "description" : "Update the gallery at that id.",
+        "operationId" : "GalleryUpdateId",
+        "parameters" : [ {
+          "name" : "gallery_id",
+          "in" : "path",
+          "description" : "The Gallery ID",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema"
+          }
+        }, {
+          "name" : "name",
+          "in" : "header",
+          "description" : "Gallery name",
+          "required" : false,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "description",
+          "in" : "header",
+          "description" : "Gallery description",
+          "required" : false,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "f_list",
+          "in" : "header",
+          "description" : "Boolean value denoting if it's listed on public site",
+          "required" : false,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "HTTP OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gallery/search" : {
+      "get" : {
+        "summary" : "Retrieve a subset of galleries via parameters.",
+        "description" : "Search galleries for the account",
+        "operationId" : "GallerySearch",
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "query",
+          "description" : "If provided, search for galleries by the name",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "parent",
+          "in" : "query",
+          "description" : "If provided, limit galleries to children of the provided collection ID",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sort_by",
+          "in" : "query",
+          "description" : "If provided, gives a field to sort by",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "creation_time", "modification_time", "name", "display_order" ]
+          }
+        }, {
+          "name" : "sort_dir",
+          "in" : "query",
+          "description" : "If provided, gives an order to sort by",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "asc", "desc" ]
+          }
+        }, {
+          "name" : "per_page",
+          "in" : "query",
+          "description" : "If provided, defines the number of results per age",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "If provided, defines the current page number",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "HTTP OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gallery/insert" : {
+      "post" : {
+        "summary" : "Insert a gallery.",
+        "description" : "Insert a gallery",
+        "operationId" : "GalleryInsert",
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "header",
+          "description" : "Gallery name",
+          "required" : false,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "description",
+          "in" : "header",
+          "description" : "Gallery description",
+          "required" : false,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "f_list",
+          "in" : "header",
+          "description" : "Boolean denoting if gallery is listed on public site",
+          "required" : false,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "mode",
+          "in" : "header",
+          "description" : "Visibility mode",
+          "required" : false,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "private", "permission", "everyone" ]
+          }
+        }, {
+          "name" : "native_mode",
+          "in" : "header",
+          "description" : "Native visibility mode of the specific gallery",
+          "required" : false,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "private", "permission", "everyone" ]
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "HTTP OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_2"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/media/{media_id}" : {
+      "get" : {
+        "summary" : "Get the media with the associated ID.",
+        "description" : "Get the media with the associated ID.",
+        "operationId" : "Media Get",
+        "parameters" : [ {
+          "name" : "media_id",
+          "in" : "path",
+          "description" : "Media",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "ok" ]
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "A flat schema for the JSONAPI-light"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "ApiProblem" : {
+        "type" : "object",
+        "properties" : {
+          "title" : {
+            "type" : "string",
+            "description" : "A short, human-readable summary of the problem type"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "A URI reference (RFC3986) that identifies the problem type"
+          },
+          "status" : {
+            "type" : "integer",
+            "description" : "The HTTP status code set by the origin server for this occurrence of the problem.",
+            "format" : "int32"
+          },
+          "detail" : {
+            "type" : "string",
+            "description" : "An human readable explanation specific to this occurrence of the problem."
+          },
+          "instance" : {
+            "type" : "string",
+            "description" : "A URI reference that identifies the specific occurrence of the problem."
+          }
+        },
+        "description" : "This object generates errors in compliance with RFC 7807 'API Problem'"
+      },
+      "v1JsonApi" : {
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "type" : "object",
+            "example" : { },
+            "oneOf" : [ {
+              "$ref" : "#/components/schemas/Gallery"
+            }, {
+              "$ref" : "#/components/schemas/Image"
+            } ]
+          },
+          "meta" : {
+            "type" : "object"
+          },
+          "errors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ApiProblem"
+            }
+          }
+        },
+        "description" : "A flat schema for the JSONAPI-light"
+      },
+      "Gallery" : {
+        "required" : [ "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "The gallery ID",
+            "example" : "G0000b9PbmJDQcko"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "Entity type",
+            "example" : "gallery"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Gallery description",
+            "example" : "My trip to DR"
+          },
+          "f_list" : {
+            "type" : "boolean",
+            "description" : "Listed on public site"
+          },
+          "display_order" : {
+            "type" : "integer",
+            "description" : "Custom display order",
+            "format" : "int32",
+            "example" : 0
+          },
+          "mode" : {
+            "type" : "string",
+            "description" : "Native visibility mode"
+          },
+          "effective_mode" : {
+            "type" : "string",
+            "description" : "Effective mode with permission inheritance"
+          },
+          "created_at" : {
+            "type" : "string",
+            "description" : "Creation date",
+            "example" : "2019-04-12"
+          },
+          "modified_at" : {
+            "type" : "string",
+            "description" : "Modification date",
+            "example" : "2019-04-12"
+          },
+          "collection_id" : {
+            "type" : "string",
+            "description" : "Collection ID",
+            "example" : "C0000IRVZsqAiXtA"
+          }
+        }
+      },
+      "Image" : {
+        "type" : "object",
+        "properties" : {
+          "gallery_id" : {
+            "$ref" : "#/components/schemas/id"
+          }
+        }
+      },
+      "id" : {
+        "type" : "string",
+        "description" : "The gallery ID",
+        "example" : "G0000b9PbmJDQcko"
+      },
+      "MetaTag" : {
+        "type" : "object",
+        "properties" : {
+          "copyright" : {
+            "type" : "string"
+          },
+          "authors" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "schema" : {
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^G0000[a-zA-Z0-9]{11}$",
+        "type" : "string",
+        "example" : "G0000ZJCk9LW4Zfc"
+      },
+      "inline_response_200_data" : {
+        "type" : "object",
+        "properties" : {
+          "gallery_id" : {
+            "$ref" : "#/components/schemas/schema"
+          }
+        }
+      },
+      "inline_response_200" : {
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "$ref" : "#/components/schemas/inline_response_200_data"
+          },
+          "meta" : {
+            "type" : "object"
+          }
+        }
+      },
+      "inline_response_200_1_data" : {
+        "type" : "object",
+        "properties" : {
+          "total" : {
+            "type" : "integer",
+            "format" : "int32",
+            "example" : 1
+          },
+          "galleries" : {
+            "type" : "array",
+            "items" : { }
+          }
+        }
+      },
+      "inline_response_200_1" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "string",
+            "enum" : [ "OK", "error" ]
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/inline_response_200_1_data"
+          }
+        }
+      },
+      "inline_response_200_2_data" : {
+        "type" : "object",
+        "properties" : {
+          "gallery" : {
+            "pattern" : "^G0000[a-zA-Z0-9]{11}$",
+            "type" : "string",
+            "example" : "G0000ZJCk9LW4Zfc"
+          }
+        }
+      },
+      "inline_response_200_2" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "string",
+            "enum" : [ "OK", "error" ]
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/inline_response_200_2_data"
+          }
+        }
+      }
+    }
+  }
+}
