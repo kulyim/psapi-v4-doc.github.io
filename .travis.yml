@@ -1,9 +1,15 @@
+stages:
+  - name: Documentation
+  - name: Linting 
+  - name: Syntax Validation # Stric (Open API, JSON Schema, Schema), Flex (Schema)
+
 dist: trusty
 language: node_js
 node_js: 
   - "9"
 before_install: 
   - "npm install"
+  - "npm install speccy -g"
   - "npm install -g swagger-cli"
   - "npm install redoc --save"
   - "npm install -g create-openapi-repo"
@@ -38,5 +44,7 @@ script:
   - pwd
   - "ls -la"
   - "swagger-cli validate -d --no-schema --no-spec json-resolved/photoshelter.json"
+  - "speccy -V json-resolved/photoshelter.json"
+  - "speccy -h"
   - "sleep 3"
 sudo: required
