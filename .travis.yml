@@ -4,6 +4,7 @@ node_js:
   - "9"
 before_install: 
   - "npm install"
+  - "npm install -g swagger-cli"
   - "npm install redoc --save"
   - "npm install -g create-openapi-repo"
   - "sudo apt-get install expect"
@@ -14,6 +15,9 @@ before_script:
   - "curl -I -v https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/master/.travis.yml"
 after_scritp:
   - "wget https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/master/index.html"
+  - "echo 'AFTER SCRIPT'"
+  - "ls -la"
+  - "swagger-cli validate -d --no-schema --no-spec json-resolved/photoshelter.json"
 cache: 
   directories: 
     - node_modules
