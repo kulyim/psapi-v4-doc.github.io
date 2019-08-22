@@ -44,7 +44,6 @@ script:
   - pwd
   - "ls -la"
   - "swagger-cli validate -d --no-schema --no-spec json-resolved/photoshelter.json"
-  - "speccy -V json-resolved/photoshelter.json"
-  - "speccy -h"
+  - "speccy lint -v json-resolved/photoshelter.json"
   - "sleep 3"
 sudo: required
