@@ -15,9 +15,8 @@ before_script:
   - "curl -I -v https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/master/.travis.yml"
 after_scritp:
   - "wget https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/master/index.html"
-  - "echo 'AFTER SCRIPT'"
   - "ls -la"
-  - "swagger-cli validate -d --no-schema --no-spec json-resolved/photoshelter.json"
+#  - "swagger-cli validate -d --no-schema --no-spec json-resolved/photoshelter.json"
 cache: 
   directories: 
     - node_modules
