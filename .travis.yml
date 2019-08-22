@@ -37,5 +37,6 @@ script:
   - "npm run gh-pages"
   - pwd
   - "ls -la"
+  - "swagger-cli validate -d --no-schema --no-spec json-resolved/photoshelter.json"
   - "sleep 3"
 sudo: required
