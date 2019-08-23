@@ -125,6 +125,26 @@
                 }
               }
             }
+          },
+          "403" : {
+            "description" : "403 Forbidden Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_403"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "404 Not Found Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_403"
+                }
+              }
+            }
           }
         },
         "x-code-samples" : {
@@ -444,6 +464,32 @@
           }
         }
       },
+      "GenericError" : {
+        "properties" : {
+          "title" : {
+            "type" : "string",
+            "description" : "A short, human-readable summary of the problem type"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "A URI reference (RFC3986) that identifies the problem type"
+          },
+          "status" : {
+            "type" : "integer",
+            "description" : "The HTTP status code set by the origin server for this occurrence of the problem.",
+            "format" : "int32"
+          },
+          "detail" : {
+            "type" : "string",
+            "description" : "An human readable explanation specific to this occurrence of the problem."
+          },
+          "instance" : {
+            "type" : "string",
+            "description" : "A URI reference that identifies the specific occurrence of the problem."
+          }
+        },
+        "description" : "This object generates errors in compliance with RFC 7807 'API Problem'"
+      },
       "schema_2" : {
         "maxLength" : 16,
         "minLength" : 16,
@@ -476,6 +522,18 @@
                 "$ref" : "#/components/schemas/GalleryCover"
               } ]
             }
+          }
+        }
+      },
+      "inline_response_403" : {
+        "required" : [ "error" ],
+        "type" : "object",
+        "properties" : {
+          "error" : {
+            "$ref" : "#/components/schemas/GenericError"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/MetaTag"
           }
         }
       },
