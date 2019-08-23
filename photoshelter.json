@@ -50,29 +50,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "HTTP OK",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "allOf" : [ {
-                    "$ref" : "#/components/schemas/v1JsonApi"
-                  }, {
-                    "properties" : {
-                      "data" : {
-                        "oneOf" : [ {
-                          "$ref" : "#/components/schemas/Gallery"
-                        }, {
-                          "$ref" : "#/components/schemas/Image"
-                        } ]
-                      },
-                      "meta" : {
-                        "$ref" : "#/components/schemas/MetaTag"
-                      }
-                    }
-                  } ]
-                }
-              }
-            }
+            "description" : "HTTP OK"
           }
         }
       }
@@ -107,29 +85,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "Successful operation",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "allOf" : [ {
-                    "$ref" : "#/components/schemas/v1JsonApi"
-                  }, {
-                    "properties" : {
-                      "data" : {
-                        "oneOf" : [ {
-                          "$ref" : "#/components/schemas/Gallery"
-                        }, {
-                          "$ref" : "#/components/schemas/Image"
-                        } ]
-                      },
-                      "meta" : {
-                        "$ref" : "#/components/schemas/MetaTag"
-                      }
-                    }
-                  } ]
-                }
-              }
-            }
+            "description" : "Successful operation"
           }
         }
       }
@@ -160,22 +116,12 @@
           }
         } ],
         "responses" : {
-          "400" : {
-            "description" : "/galleries/{gallery_id} - HTTP OK",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_400"
-                }
-              }
-            }
-          },
           "200" : {
             "description" : "/galleries/{gallery_id} - HTTP OK",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_400"
+                  "$ref" : "#/components/schemas/inline_response_200"
                 }
               }
             }
@@ -259,7 +205,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200"
+                  "$ref" : "#/components/schemas/inline_response_200_1"
                 }
               }
             }
@@ -343,7 +289,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_1"
+                  "$ref" : "#/components/schemas/inline_response_200_2"
                 }
               }
             }
@@ -415,7 +361,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_2"
+                  "$ref" : "#/components/schemas/inline_response_200_3"
                 }
               }
             }
@@ -450,138 +396,6 @@
   },
   "components" : {
     "schemas" : {
-      "ApiProblem" : {
-        "type" : "object",
-        "properties" : {
-          "title" : {
-            "type" : "string",
-            "description" : "A short, human-readable summary of the problem type"
-          },
-          "type" : {
-            "type" : "string",
-            "description" : "A URI reference (RFC3986) that identifies the problem type"
-          },
-          "status" : {
-            "type" : "integer",
-            "description" : "The HTTP status code set by the origin server for this occurrence of the problem.",
-            "format" : "int32"
-          },
-          "detail" : {
-            "type" : "string",
-            "description" : "An human readable explanation specific to this occurrence of the problem."
-          },
-          "instance" : {
-            "type" : "string",
-            "description" : "A URI reference that identifies the specific occurrence of the problem."
-          }
-        },
-        "description" : "This object generates errors in compliance with RFC 7807 'API Problem'"
-      },
-      "v1JsonApi" : {
-        "type" : "object",
-        "properties" : {
-          "data" : {
-            "type" : "object",
-            "example" : { },
-            "oneOf" : [ {
-              "$ref" : "#/components/schemas/Gallery"
-            }, {
-              "$ref" : "#/components/schemas/Image"
-            } ]
-          },
-          "meta" : {
-            "type" : "object"
-          },
-          "errors" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/ApiProblem"
-            }
-          }
-        },
-        "description" : "A flat schema for the JSONAPI-light"
-      },
-      "Gallery" : {
-        "required" : [ "type" ],
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "description" : "The gallery ID",
-            "example" : "G0000b9PbmJDQcko"
-          },
-          "type" : {
-            "type" : "string",
-            "description" : "Entity type",
-            "example" : "gallery"
-          },
-          "description" : {
-            "type" : "string",
-            "description" : "Gallery description",
-            "example" : "My trip to DR"
-          },
-          "f_list" : {
-            "type" : "boolean",
-            "description" : "Listed on public site"
-          },
-          "display_order" : {
-            "type" : "integer",
-            "description" : "Custom display order",
-            "format" : "int32",
-            "example" : 0
-          },
-          "mode" : {
-            "type" : "string",
-            "description" : "Native visibility mode"
-          },
-          "effective_mode" : {
-            "type" : "string",
-            "description" : "Effective mode with permission inheritance"
-          },
-          "created_at" : {
-            "type" : "string",
-            "description" : "Creation date",
-            "example" : "2019-04-12"
-          },
-          "modified_at" : {
-            "type" : "string",
-            "description" : "Modification date",
-            "example" : "2019-04-12"
-          },
-          "collection_id" : {
-            "type" : "string",
-            "description" : "Collection ID",
-            "example" : "C0000IRVZsqAiXtA"
-          }
-        }
-      },
-      "Image" : {
-        "type" : "object",
-        "properties" : {
-          "gallery_id" : {
-            "$ref" : "#/components/schemas/id"
-          }
-        }
-      },
-      "id" : {
-        "type" : "string",
-        "description" : "The gallery ID",
-        "example" : "G0000b9PbmJDQcko"
-      },
-      "MetaTag" : {
-        "type" : "object",
-        "properties" : {
-          "copyright" : {
-            "type" : "string"
-          },
-          "authors" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
-          }
-        }
-      },
       "schema" : {
         "maxLength" : 16,
         "minLength" : 16,
@@ -589,7 +403,8 @@
         "type" : "string",
         "example" : "G0000ZJCk9LW4Zfc"
       },
-      "Gallery_2" : {
+      "Gallery" : {
+        "required" : [ "attributes", "id", "type" ],
         "type" : "object",
         "properties" : {
           "id" : {
@@ -599,22 +414,27 @@
             "example" : "G0000ZJCk9LW4Zfc"
           },
           "type" : {
+            "pattern" : "gallery",
             "type" : "string",
-            "enum" : [ "gallery" ]
+            "example" : "gallery"
           },
           "attributes" : {
-            "$ref" : "#/components/schemas/Gallery_2_attributes"
+            "$ref" : "#/components/schemas/Gallery_attributes"
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/Gallery_links"
           }
         }
       },
-      "MetaTag_2" : {
+      "MetaTag" : {
         "type" : "object",
         "properties" : {
           "copyright" : {
             "type" : "string"
           },
           "version" : {
-            "type" : "date"
+            "type" : "string",
+            "enum" : [ "3.0", "4.0" ]
           },
           "authors" : {
             "type" : "array",
@@ -624,32 +444,6 @@
           }
         }
       },
-      "Error" : {
-        "properties" : {
-          "title" : {
-            "type" : "string",
-            "description" : "A short, human-readable summary of the problem type"
-          },
-          "type" : {
-            "type" : "string",
-            "description" : "A URI reference (RFC3986) that identifies the problem type"
-          },
-          "status" : {
-            "type" : "integer",
-            "description" : "The HTTP status code set by the origin server for this occurrence of the problem.",
-            "format" : "int32"
-          },
-          "detail" : {
-            "type" : "string",
-            "description" : "An human readable explanation specific to this occurrence of the problem."
-          },
-          "instance" : {
-            "type" : "string",
-            "description" : "A URI reference that identifies the specific occurrence of the problem."
-          }
-        },
-        "description" : "This object generates errors in compliance with RFC 7807 'API Problem'"
-      },
       "schema_2" : {
         "maxLength" : 16,
         "minLength" : 16,
@@ -657,21 +451,35 @@
         "type" : "string",
         "example" : "G0000ZJCk9LW4Zfc"
       },
-      "inline_response_400" : {
+      "inline_response_200" : {
+        "required" : [ "data" ],
         "type" : "object",
         "properties" : {
           "data" : {
-            "$ref" : "#/components/schemas/Gallery_2"
+            "$ref" : "#/components/schemas/Gallery"
           },
           "meta" : {
-            "$ref" : "#/components/schemas/MetaTag_2"
+            "$ref" : "#/components/schemas/MetaTag"
           },
-          "error" : {
-            "$ref" : "#/components/schemas/Error"
+          "included" : {
+            "type" : "array",
+            "items" : {
+              "anyOf" : [ {
+                "$ref" : "#/components/schemas/Gallery"
+              }, {
+                "$ref" : "#/components/schemas/Media"
+              }, {
+                "$ref" : "#/components/schemas/Collection"
+              }, {
+                "$ref" : "#/components/schemas/KeyImage"
+              }, {
+                "$ref" : "#/components/schemas/GalleryCover"
+              } ]
+            }
           }
         }
       },
-      "inline_response_200_data" : {
+      "inline_response_200_1_data" : {
         "type" : "object",
         "properties" : {
           "gallery_id" : {
@@ -679,18 +487,18 @@
           }
         }
       },
-      "inline_response_200" : {
+      "inline_response_200_1" : {
         "type" : "object",
         "properties" : {
           "data" : {
-            "$ref" : "#/components/schemas/inline_response_200_data"
+            "$ref" : "#/components/schemas/inline_response_200_1_data"
           },
           "meta" : {
             "type" : "object"
           }
         }
       },
-      "inline_response_200_1_data" : {
+      "inline_response_200_2_data" : {
         "type" : "object",
         "properties" : {
           "total" : {
@@ -701,28 +509,6 @@
           "galleries" : {
             "type" : "array",
             "items" : { }
-          }
-        }
-      },
-      "inline_response_200_1" : {
-        "type" : "object",
-        "properties" : {
-          "status" : {
-            "type" : "string",
-            "enum" : [ "OK", "error" ]
-          },
-          "data" : {
-            "$ref" : "#/components/schemas/inline_response_200_1_data"
-          }
-        }
-      },
-      "inline_response_200_2_data" : {
-        "type" : "object",
-        "properties" : {
-          "gallery" : {
-            "pattern" : "^G0000[a-zA-Z0-9]{11}$",
-            "type" : "string",
-            "example" : "G0000ZJCk9LW4Zfc"
           }
         }
       },
@@ -738,19 +524,41 @@
           }
         }
       },
-      "Gallery_2_attributes" : {
+      "inline_response_200_3_data" : {
+        "type" : "object",
+        "properties" : {
+          "gallery" : {
+            "pattern" : "^G0000[a-zA-Z0-9]{11}$",
+            "type" : "string",
+            "example" : "G0000ZJCk9LW4Zfc"
+          }
+        }
+      },
+      "inline_response_200_3" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "string",
+            "enum" : [ "OK", "error" ]
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/inline_response_200_3_data"
+          }
+        }
+      },
+      "Gallery_attributes" : {
         "required" : [ "created_at", "description", "display_order", "effective_mode", "f_list", "mode", "modified_at", "name" ],
         "type" : "object",
         "properties" : {
           "name" : {
             "type" : "string",
-            "description" : "Gallery name",
-            "example" : "DR Gallery"
+            "description" : "Name of Gallery or Collection object (Whichever it is)",
+            "example" : "My trip to DR"
           },
           "description" : {
             "type" : "string",
-            "description" : "Gallery description",
-            "example" : "My trip to DR"
+            "description" : "Description of the Gallery or Collection object (Whichever it is)",
+            "example" : "Trip to DR with my brothers and sisters"
           },
           "f_list" : {
             "type" : "boolean",
@@ -772,13 +580,23 @@
           },
           "created_at" : {
             "type" : "date",
-            "description" : "Gallery create date",
+            "description" : "Creation date",
             "example" : "2019-04-25 14:54:12.136828"
           },
           "modified_at" : {
             "type" : "date",
-            "description" : "Gallery modified date",
+            "description" : "Last modified date",
             "example" : "2019-04-25 14:54:12.136828"
+          }
+        }
+      },
+      "Gallery_links" : {
+        "type" : "object",
+        "properties" : {
+          "self" : {
+            "type" : "string",
+            "description" : "Link to itself",
+            "example" : "https://api.photoshelter.com/psapi/v4/galleries/G0000ZJCk9LW4Zfc"
           }
         }
       }
