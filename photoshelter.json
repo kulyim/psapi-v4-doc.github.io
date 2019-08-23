@@ -126,12 +126,22 @@
               }
             }
           },
+          "401" : {
+            "description" : "401 Unauthorized Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_401"
+                }
+              }
+            }
+          },
           "403" : {
             "description" : "403 Forbidden Client Error",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_403"
+                  "$ref" : "#/components/schemas/inline_response_401"
                 }
               }
             }
@@ -141,7 +151,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_403"
+                  "$ref" : "#/components/schemas/inline_response_401"
                 }
               }
             }
@@ -525,7 +535,7 @@
           }
         }
       },
-      "inline_response_403" : {
+      "inline_response_401" : {
         "required" : [ "error" ],
         "type" : "object",
         "properties" : {
