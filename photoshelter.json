@@ -455,6 +455,27 @@
           }
         }
       }
+    },
+    "/authenticate" : {
+      "post" : {
+        "summary" : "Use your PhotoShelter credentials to log in to your account.",
+        "description" : "Verify user is a member.",
+        "operationId" : "authenticate",
+        "requestBody" : {
+          "content" : {
+            "application/x-www-form-urlencoded" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "get token or cookie"
+          }
+        }
+      }
     }
   },
   "components" : {
@@ -662,6 +683,21 @@
           },
           "data" : {
             "$ref" : "#/components/schemas/inline_response_200_2_data"
+          }
+        }
+      },
+      "body" : {
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string",
+            "format" : "email"
+          },
+          "password" : {
+            "type" : "string"
+          },
+          "mode" : {
+            "type" : "object"
           }
         }
       }
