@@ -34,16 +34,6 @@
           "schema" : {
             "$ref" : "#/components/schemas/schema"
           }
-        }, {
-          "name" : "include",
-          "in" : "query",
-          "description" : "Includes",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
         } ],
         "responses" : {
           "200" : {
@@ -86,11 +76,6 @@
               }
             }
           }
-        },
-        "x-code-samples" : {
-          "lang" : "PHP",
-          "label" : "PHP 7.1",
-          "source" : "echo \"ITS A TRAP!\";"
         }
       }
     }
@@ -127,24 +112,6 @@
           }
         }
       },
-      "MetaTag" : {
-        "type" : "object",
-        "properties" : {
-          "copyright" : {
-            "type" : "string"
-          },
-          "version" : {
-            "type" : "string",
-            "enum" : [ "3.0", "4.0" ]
-          },
-          "authors" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
-          }
-        }
-      },
       "GenericError" : {
         "properties" : {
           "id" : {
@@ -175,35 +142,12 @@
         },
         "description" : "This object generates errors in compliance with RFC 7807 'API Problem'"
       },
-      "ErrorResponseMetaTag" : {
-        "type" : "object",
-        "properties" : { }
-      },
       "inline_response_200" : {
         "required" : [ "data" ],
         "type" : "object",
         "properties" : {
           "data" : {
             "$ref" : "#/components/schemas/Gallery"
-          },
-          "meta" : {
-            "$ref" : "#/components/schemas/MetaTag"
-          },
-          "included" : {
-            "type" : "array",
-            "items" : {
-              "anyOf" : [ {
-                "$ref" : "#/components/schemas/Gallery"
-              }, {
-                "$ref" : "#/components/schemas/Media"
-              }, {
-                "$ref" : "#/components/schemas/Collection"
-              }, {
-                "$ref" : "#/components/schemas/KeyImage"
-              }, {
-                "$ref" : "#/components/schemas/GalleryCover"
-              } ]
-            }
           }
         }
       },
@@ -213,9 +157,6 @@
         "properties" : {
           "error" : {
             "$ref" : "#/components/schemas/GenericError"
-          },
-          "meta" : {
-            "$ref" : "#/components/schemas/ErrorResponseMetaTag"
           }
         }
       },
