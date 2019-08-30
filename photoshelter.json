@@ -39,7 +39,7 @@
           "200" : {
             "description" : "/galleries/{gallery_id} - HTTP OK",
             "content" : {
-              "application/json" : {
+              "application/vnd.api+json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/inline_response_200"
                 }
