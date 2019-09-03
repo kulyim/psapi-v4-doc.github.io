@@ -83,10 +83,12 @@
   "components" : {
     "schemas" : {
       "schema" : {
+        "title" : "My Gallery Test",
         "maxLength" : 16,
         "minLength" : 16,
         "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
         "type" : "string",
+        "description" : "My gallery description",
         "example" : "G0000ZJCk9LW4Zfc"
       },
       "Gallery" : {
