@@ -41,7 +41,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Gallery"
+                  "$ref" : "#/components/schemas/MainResponse"
                 }
               }
             }
@@ -89,6 +89,17 @@
         "type" : "string",
         "description" : "The Gallery ID",
         "example" : "G0000ZJCk9LW4Zfc"
+      },
+      "MainResponse" : {
+        "discriminator" : {
+          "propertyName" : "type",
+          "mapping" : {
+            "gallery" : "#/components/schemas/Gallery"
+          }
+        },
+        "oneOf" : [ {
+          "$ref" : "#/components/schemas/Gallery"
+        } ]
       },
       "Gallery" : {
         "required" : [ "attributes", "id", "type" ],
