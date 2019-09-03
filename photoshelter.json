@@ -32,7 +32,7 @@
           "style" : "simple",
           "explode" : false,
           "schema" : {
-            "$ref" : "#/components/schemas/gallery_id"
+            "$ref" : "#/components/schemas/GalleryId"
           }
         } ],
         "responses" : {
@@ -51,7 +51,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
+                  "$ref" : "#/components/schemas/Error"
                 }
               }
             }
@@ -61,7 +61,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
+                  "$ref" : "#/components/schemas/Error"
                 }
               }
             }
@@ -71,7 +71,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
+                  "$ref" : "#/components/schemas/Error"
                 }
               }
             }
@@ -82,7 +82,7 @@
   },
   "components" : {
     "schemas" : {
-      "gallery_id" : {
+      "GalleryId" : {
         "maxLength" : 16,
         "minLength" : 16,
         "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
@@ -124,43 +124,15 @@
           }
         }
       },
-      "GenericError" : {
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "description" : "A unique identifier for this occurrence of the problem"
-          },
-          "title" : {
-            "type" : "string",
-            "description" : "A short, human-readable summary of the problem type"
-          },
-          "type" : {
-            "type" : "string",
-            "description" : "A URI reference (RFC3986) that identifies the problem type"
-          },
-          "status" : {
-            "type" : "integer",
-            "description" : "The HTTP status code set by the origin server for this occurrence of the problem."
-          },
-          "detail" : {
-            "type" : "string",
-            "description" : "An human readable explanation specific to this occurrence of the problem."
-          },
-          "instance" : {
-            "type" : "string",
-            "description" : "A URI reference that identifies the specific occurrence of the problem."
-          }
-        },
-        "description" : "This object generates errors in compliance with RFC 7807 API Problem"
-      },
-      "inline_response_401" : {
+      "Error" : {
         "required" : [ "error" ],
         "type" : "object",
         "properties" : {
           "error" : {
-            "$ref" : "#/components/schemas/GenericError"
+            "$ref" : "#/components/schemas/Error_error"
           }
-        }
+        },
+        "description" : "This object generates errors in compliance with RFC 7807 API Problem"
       },
       "Gallery_attributes" : {
         "required" : [ "created_at", "description", "display_order", "effective_mode", "f_list", "mode", "modified_at", "name" ],
@@ -213,6 +185,35 @@
             "type" : "string",
             "description" : "Link to itself",
             "example" : "https://api.photoshelter.com/psapi/v4/galleries/G0000ZJCk9LW4Zfc"
+          }
+        }
+      },
+      "Error_error" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "A unique identifier for this occurrence of the problem"
+          },
+          "title" : {
+            "type" : "string",
+            "description" : "A short, human-readable summary of the problem type"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "A URI reference (RFC3986) that identifies the problem type"
+          },
+          "status" : {
+            "type" : "integer",
+            "description" : "The HTTP status code set by the origin server for this occurrence of the problem."
+          },
+          "detail" : {
+            "type" : "string",
+            "description" : "An human readable explanation specific to this occurrence of the problem."
+          },
+          "instance" : {
+            "type" : "string",
+            "description" : "A URI reference that identifies the specific occurrence of the problem."
           }
         }
       }
