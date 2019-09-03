@@ -32,7 +32,7 @@
           "style" : "simple",
           "explode" : false,
           "schema" : {
-            "$ref" : "#/components/schemas/schema"
+            "$ref" : "#/components/schemas/gallery_id"
           }
         } ],
         "responses" : {
@@ -82,13 +82,12 @@
   },
   "components" : {
     "schemas" : {
-      "schema" : {
-        "title" : "My Gallery Test",
+      "gallery_id" : {
         "maxLength" : 16,
         "minLength" : 16,
         "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
         "type" : "string",
-        "description" : "My gallery description",
+        "description" : "The Gallery ID",
         "example" : "G0000ZJCk9LW4Zfc"
       },
       "Gallery" : {
@@ -141,7 +140,7 @@
             "description" : "A URI reference that identifies the specific occurrence of the problem."
           }
         },
-        "description" : "This object generates errors in compliance with RFC 7807 'API Problem'"
+        "description" : "This object generates errors in compliance with RFC 7807 API Problem"
       },
       "inline_response_200" : {
         "required" : [ "data" ],
