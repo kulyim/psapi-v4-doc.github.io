@@ -37,11 +37,11 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "Generic HTTP 200 Ok Response",
+            "description" : "Access forbidden, invalid API-KEY was used",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200"
+                  "$ref" : "#/components/schemas/Error"
                 }
               }
             }
@@ -90,6 +90,28 @@
         "description" : "The Gallery ID",
         "example" : "G0000ZJCk9LW4Zfc"
       },
+      "Error" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "maximum" : 600.0,
+            "minimum" : 100.0,
+            "type" : "integer",
+            "description" : "The HTTP status code."
+          },
+          "error" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "A URI reference [[RFC3986](https://tools.ietf.org/html/rfc3986)] that identifies the problem type. It should provide human-readable documentation for the problem type. When this member is not present, its value is assumed to be \"about:blank\"."
+          },
+          "title" : {
+            "type" : "string",
+            "description" : "A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization."
+          }
+        }
+      },
       "GenericError" : {
         "properties" : {
           "id" : {
@@ -118,25 +140,6 @@
           }
         },
         "description" : "This object generates errors in compliance with RFC 7807 API Problem"
-      },
-      "inline_response_200_data" : {
-        "required" : [ "status" ],
-        "type" : "object",
-        "properties" : {
-          "status" : {
-            "type" : "string",
-            "example" : "OK"
-          }
-        }
-      },
-      "inline_response_200" : {
-        "required" : [ "data" ],
-        "type" : "object",
-        "properties" : {
-          "data" : {
-            "$ref" : "#/components/schemas/inline_response_200_data"
-          }
-        }
       },
       "inline_response_401" : {
         "required" : [ "error" ],
