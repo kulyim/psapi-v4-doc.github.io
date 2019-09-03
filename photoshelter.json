@@ -37,11 +37,11 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "Access forbidden, invalid API-KEY was used",
+            "description" : "/galleries/{gallery_id} - HTTP OK",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Error"
+                  "$ref" : "#/components/schemas/Gallery"
                 }
               }
             }
@@ -90,25 +90,26 @@
         "description" : "The Gallery ID",
         "example" : "G0000ZJCk9LW4Zfc"
       },
-      "Error" : {
+      "Gallery" : {
+        "required" : [ "attributes", "id", "type" ],
         "type" : "object",
         "properties" : {
-          "status" : {
-            "maximum" : 600.0,
-            "minimum" : 100.0,
-            "type" : "integer",
-            "description" : "The HTTP status code."
-          },
-          "error" : {
-            "type" : "string"
+          "id" : {
+            "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Gallery ID",
+            "example" : "G0000ZJCk9LW4Zfc"
           },
           "type" : {
+            "pattern" : "gallery",
             "type" : "string",
-            "description" : "A URI reference [[RFC3986](https://tools.ietf.org/html/rfc3986)] that identifies the problem type. It should provide human-readable documentation for the problem type. When this member is not present, its value is assumed to be \"about:blank\"."
+            "example" : "gallery"
           },
-          "title" : {
-            "type" : "string",
-            "description" : "A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization."
+          "attributes" : {
+            "$ref" : "#/components/schemas/Gallery_attributes"
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/Gallery_links"
           }
         }
       },
@@ -147,6 +148,60 @@
         "properties" : {
           "error" : {
             "$ref" : "#/components/schemas/GenericError"
+          }
+        }
+      },
+      "Gallery_attributes" : {
+        "required" : [ "created_at", "description", "display_order", "effective_mode", "f_list", "mode", "modified_at", "name" ],
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Name of Gallery or Collection object (Whichever it is)",
+            "example" : "My trip to DR"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Description of the Gallery or Collection object (Whichever it is)",
+            "example" : "Trip to DR with my brothers and sisters"
+          },
+          "f_list" : {
+            "type" : "boolean",
+            "description" : "Listed on public site",
+            "example" : true
+          },
+          "display_order" : {
+            "type" : "integer",
+            "description" : "Custom display order",
+            "example" : 1
+          },
+          "mode" : {
+            "type" : "string",
+            "description" : "Native visibility mode"
+          },
+          "effective_mode" : {
+            "type" : "string",
+            "description" : "Effective mode with permission inheritance"
+          },
+          "created_at" : {
+            "type" : "date",
+            "description" : "Creation date",
+            "example" : "2019-04-25 14:54:12.136828"
+          },
+          "modified_at" : {
+            "type" : "date",
+            "description" : "Last modified date",
+            "example" : "2019-04-25 14:54:12.136828"
+          }
+        }
+      },
+      "Gallery_links" : {
+        "type" : "object",
+        "properties" : {
+          "self" : {
+            "type" : "string",
+            "description" : "Link to itself",
+            "example" : "https://api.photoshelter.com/psapi/v4/galleries/G0000ZJCk9LW4Zfc"
           }
         }
       }
