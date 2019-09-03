@@ -37,7 +37,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "/galleries/{gallery_id} - HTTP OK",
+            "description" : "Generic HTTP 200 Ok Response",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -90,29 +90,6 @@
         "description" : "The Gallery ID",
         "example" : "G0000ZJCk9LW4Zfc"
       },
-      "Gallery" : {
-        "required" : [ "attributes", "id", "type" ],
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
-            "type" : "string",
-            "description" : "Gallery ID",
-            "example" : "G0000ZJCk9LW4Zfc"
-          },
-          "type" : {
-            "pattern" : "gallery",
-            "type" : "string",
-            "example" : "gallery"
-          },
-          "attributes" : {
-            "$ref" : "#/components/schemas/Gallery_attributes"
-          },
-          "links" : {
-            "$ref" : "#/components/schemas/Gallery_links"
-          }
-        }
-      },
       "GenericError" : {
         "properties" : {
           "id" : {
@@ -142,12 +119,22 @@
         },
         "description" : "This object generates errors in compliance with RFC 7807 API Problem"
       },
+      "inline_response_200_data" : {
+        "required" : [ "status" ],
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "string",
+            "example" : "OK"
+          }
+        }
+      },
       "inline_response_200" : {
         "required" : [ "data" ],
         "type" : "object",
         "properties" : {
           "data" : {
-            "$ref" : "#/components/schemas/Gallery"
+            "$ref" : "#/components/schemas/inline_response_200_data"
           }
         }
       },
@@ -157,60 +144,6 @@
         "properties" : {
           "error" : {
             "$ref" : "#/components/schemas/GenericError"
-          }
-        }
-      },
-      "Gallery_attributes" : {
-        "required" : [ "created_at", "description", "display_order", "effective_mode", "f_list", "mode", "modified_at", "name" ],
-        "type" : "object",
-        "properties" : {
-          "name" : {
-            "type" : "string",
-            "description" : "Name of Gallery or Collection object (Whichever it is)",
-            "example" : "My trip to DR"
-          },
-          "description" : {
-            "type" : "string",
-            "description" : "Description of the Gallery or Collection object (Whichever it is)",
-            "example" : "Trip to DR with my brothers and sisters"
-          },
-          "f_list" : {
-            "type" : "boolean",
-            "description" : "Listed on public site",
-            "example" : true
-          },
-          "display_order" : {
-            "type" : "integer",
-            "description" : "Custom display order",
-            "example" : 1
-          },
-          "mode" : {
-            "type" : "string",
-            "description" : "Native visibility mode"
-          },
-          "effective_mode" : {
-            "type" : "string",
-            "description" : "Effective mode with permission inheritance"
-          },
-          "created_at" : {
-            "type" : "date",
-            "description" : "Creation date",
-            "example" : "2019-04-25 14:54:12.136828"
-          },
-          "modified_at" : {
-            "type" : "date",
-            "description" : "Last modified date",
-            "example" : "2019-04-25 14:54:12.136828"
-          }
-        }
-      },
-      "Gallery_links" : {
-        "type" : "object",
-        "properties" : {
-          "self" : {
-            "type" : "string",
-            "description" : "Link to itself",
-            "example" : "https://api.photoshelter.com/psapi/v4/galleries/G0000ZJCk9LW4Zfc"
           }
         }
       }
