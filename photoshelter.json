@@ -39,7 +39,7 @@
           "200" : {
             "description" : "/galleries/{gallery_id} - HTTP OK",
             "content" : {
-              "application/vnd.api+json" : {
+              "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/inline_response_200"
                 }
@@ -128,8 +128,7 @@
           },
           "status" : {
             "type" : "integer",
-            "description" : "The HTTP status code set by the origin server for this occurrence of the problem.",
-            "format" : "int32"
+            "description" : "The HTTP status code set by the origin server for this occurrence of the problem."
           },
           "detail" : {
             "type" : "string",
@@ -176,12 +175,12 @@
           },
           "f_list" : {
             "type" : "boolean",
-            "description" : "Listed on public site"
+            "description" : "Listed on public site",
+            "example" : true
           },
           "display_order" : {
             "type" : "integer",
             "description" : "Custom display order",
-            "format" : "int32",
             "example" : 1
           },
           "mode" : {
