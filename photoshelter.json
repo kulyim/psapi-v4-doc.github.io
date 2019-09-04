@@ -192,27 +192,6 @@
           "source" : "echo \"ITS A TRAP!\";"
         }
       },
-      "delete" : {
-        "summary" : "Delete a gallery.",
-        "description" : "Delete a gallery.",
-        "operationId" : "GalleryDeleteId",
-        "parameters" : [ {
-          "name" : "gallery_id",
-          "in" : "path",
-          "description" : "Gallery ID",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "$ref" : "#/components/schemas/schema"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "HTTP OK"
-          }
-        }
-      },
       "patch" : {
         "summary" : "Update the gallery at that id.",
         "description" : "Update the gallery at that id.",
