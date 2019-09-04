@@ -4,7 +4,7 @@ spawn npx create-openapi-repo .
 expect "? Do you already have OpenAPI/Swagger spec for your API?"
 send "Y\r"
 expect "? Please specify the path to the OpenAPI spec (local file):"
-send "json-resolved/photoshelter.json\r"
+send "photoshelter.json\r"
 expect "? API Name:"
 send "Photoshelter API v4\r"
 expect "? Split spec into separate files: paths/*, definitions/* \[Experimental\]?"
@@ -16,11 +16,11 @@ send "N\r"
 expect "? Set up Travis CI?"
 send "N\r"
 expect "? Specify name of GitHub repo in format User/Repo:"
-send -- "photoshelter-dev/psapi-v4-doc.github.io\r"
+send -- "psapi-v4-doc.github.io\r"
 #expect "Creating a new OpenAPI repo in"
 expect eof
 #? Do you already have OpenAPI/Swagger spec for your API? Yes
-#? Please specify the path to the OpenAPI spec (local file): json-resolved/photoshelter.json
+#? Please specify the path to the OpenAPI spec (local file): photoshelter.json
 #? API Name: PhotoShelter API v4
 #? Split spec into separate files: paths/*, definitions/* [Experimental]? Yes
 #? Prepare manual code samples folder? Yes
