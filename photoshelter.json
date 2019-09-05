@@ -192,27 +192,6 @@
           "source" : "echo \"ITS A TRAP!\";"
         }
       },
-      "delete" : {
-        "summary" : "Delete a gallery.",
-        "description" : "Delete a gallery.",
-        "operationId" : "GalleryDeleteId",
-        "parameters" : [ {
-          "name" : "gallery_id",
-          "in" : "path",
-          "description" : "Gallery ID",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "$ref" : "#/components/schemas/schema"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "HTTP OK"
-          }
-        }
-      },
       "patch" : {
         "summary" : "Update the gallery at that id.",
         "description" : "Update the gallery at that id.",
@@ -347,78 +326,6 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/inline_response_200_1"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/gallery/insert" : {
-      "post" : {
-        "summary" : "Insert a gallery.",
-        "description" : "Insert a gallery",
-        "operationId" : "GalleryInsert",
-        "parameters" : [ {
-          "name" : "name",
-          "in" : "header",
-          "description" : "Gallery name",
-          "required" : false,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "description",
-          "in" : "header",
-          "description" : "Gallery description",
-          "required" : false,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "f_list",
-          "in" : "header",
-          "description" : "Boolean denoting if gallery is listed on public site",
-          "required" : false,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "boolean"
-          }
-        }, {
-          "name" : "mode",
-          "in" : "header",
-          "description" : "Visibility mode",
-          "required" : false,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string",
-            "enum" : [ "private", "permission", "everyone" ]
-          }
-        }, {
-          "name" : "native_mode",
-          "in" : "header",
-          "description" : "Native visibility mode of the specific gallery",
-          "required" : false,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string",
-            "enum" : [ "private", "permission", "everyone" ]
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "HTTP OK",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_2"
                 }
               }
             }
@@ -632,28 +539,6 @@
           },
           "data" : {
             "$ref" : "#/components/schemas/inline_response_200_1_data"
-          }
-        }
-      },
-      "inline_response_200_2_data" : {
-        "type" : "object",
-        "properties" : {
-          "gallery" : {
-            "pattern" : "^G0000[a-zA-Z0-9]{11}$",
-            "type" : "string",
-            "example" : "G0000ZJCk9LW4Zfc"
-          }
-        }
-      },
-      "inline_response_200_2" : {
-        "type" : "object",
-        "properties" : {
-          "status" : {
-            "type" : "string",
-            "enum" : [ "OK", "error" ]
-          },
-          "data" : {
-            "$ref" : "#/components/schemas/inline_response_200_2_data"
           }
         }
       }
