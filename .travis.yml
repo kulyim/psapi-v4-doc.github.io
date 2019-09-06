@@ -1,79 +1,73 @@
 stages:
-  - name: linting # Speccy
-  - name: syntax-validation # Stric (Open API, JSON Schema, Schema), Flex (Schema)
-  - name: contract-testing # Prism + Dredd
-  - name: documentation # Redoc + Exp file + GitHub Pages 
-
+  -
+    name: linting
+  -
+    name: syntax-validation
+  -
+    name: contract-testing
+  -
+    name: documentation
 dist: xenial
 language: node_js
-node_js: 
-  - "9"
-before_install: 
-  - "npm install"
-  - "npm install speccy -g"
-  - "npm install -g swagger-cli"
-  - "npm install redoc --save"
-  - "npm install -g create-openapi-repo"
-  - "npm install -g @stoplight/prism-cli"
-  - "npm install -g dredd"
-  - "sudo apt-get install expect"
-  - "sudo apt-get install curl"
-before_script: 
-  - "sudo chmod 755 run-redoc.exp"
-  - "cat /etc/hosts"
-  - "curl -I -v https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/master/.travis.yml"
+node_js:
+  - '9'
+before_install:
+  - 'npm install'
+  - 'npm install speccy -g'
+  - 'npm install -g swagger-cli'
+  - 'npm install redoc --save'
+  - 'npm install -g create-openapi-repo'
+  - 'npm install -g @stoplight/prism-cli'
+  - 'npm install -g dredd'
+  - 'sudo apt-get install expect'
+  - 'sudo apt-get install curl'
+before_script:
+  - 'sudo chmod 755 run-redoc.exp'
+  - 'cat /etc/hosts'
+  - 'curl -I -v https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/master/.travis.yml'
 after_script:
-  - "wget https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/master/index.html"
-  - "ls -la"
-#  - "swaggeor-cli validate -d --no-schema --no-spec json-resolved/photoshelter.json"
-cache: 
-  directories: 
+  - 'wget https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/master/index.html'
+  - 'ls -la'
+cache:
+  directories:
     - node_modules
-
-## per stage definitions
-
-
- - stage: linting
-   verbose: true
-   script:
-     - "speccy lint -v photoshelter.json"
-     - "sleep 3"
-   install: skip
-
-
- - stage: syntax-validation
-   verbose: true
-   script:
-     - "swagger-cli validate -d --no-schema --no-spec" photoshelter.json"
-     - "sleep 3"
-   install: skip
-
- - stage: contract-testing
-   verbose: true
-   script: 
-     - "prism run --mock --list --spec photoshelter.json"
-     - "sleep 1"
-     - "dredd http://localhost:4010/photoshelter.json"
-
- - stage: documentation
-   deploy:
-   verbose: true
-   provider: pages
-   skip_cleanup: true
-   github_token: $GH_TOKEN
-   keep_history: true
-   project_name: psapi-v4-doc.github.io
-   public_repo: photoshelter-dev/psapi-v4-doc.github.io
-   on:
-     branch: master
- script: 
-   - ./run-redoc.exp
-   - "ls -la"
-   - "npm run gh-pages"
-   - pwd
-   - "ls -la"
-   - "swagger-cli validate -d --no-schema --no-spec json-resolved/photoshelter.json"
-   - "speccy lint -v json-resolved/photoshelter.json"
-   - "sleep 3"
- #sudo: required #
-
+jobs:
+  include:
+    -
+      stage: linting
+      verbose: true
+      script:
+        - 'speccy lint -v photoshelter.json'
+        - 'sleep 3'
+      install: skip
+    -
+      stage: syntax-validation
+      verbose: true
+      script:
+        - 'swagger-cli validate -d --no-schema --no-spec photoshelter.json'
+        - 'sleep 3'
+      install: skip
+    -
+      stage: contract-testing
+      verbose: true
+      script:
+        - 'prism run --mock --list --spec photoshelter.json'
+        - 'sleep 1'
+        - 'dredd http://localhost:4010/photoshelter.json'
+    -
+      stage: documentation
+      deploy: null
+      verbose: true
+      provider: pages
+      skip_cleanup: true
+      github_token: $GH_TOKEN
+      keep_history: true
+      project_name: psapi-v4-doc.github.io
+      public_repo: "photoshelter-dev/psapi-v4-doc.github.io\non:\n  branch: master"
+      script:
+        - ./run-redoc.exp
+        - 'ls -la'
+        - 'npm run gh-pages'
+        - pwd
+        - 'ls -la'
+        - 'sleep 3'
