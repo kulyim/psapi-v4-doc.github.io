@@ -125,11 +125,14 @@
         }
       },
       "Error" : {
-        "required" : [ "error" ],
+        "required" : [ "errors" ],
         "type" : "object",
         "properties" : {
-          "error" : {
-            "$ref" : "#/components/schemas/Error_error"
+          "errors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Error_errors"
+            }
           }
         },
         "description" : "This object generates errors in compliance with RFC 7807 API Problem"
@@ -188,7 +191,7 @@
           }
         }
       },
-      "Error_error" : {
+      "Error_errors" : {
         "type" : "object",
         "properties" : {
           "id" : {
