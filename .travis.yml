@@ -37,21 +37,21 @@ jobs:
       stage: linting
       verbose: true
       script:
-        - 'speccy lint -v photoshelter.json'
+        - 'speccy lint -v definitions/photoshelter.json'
         - 'sleep 3'
       install: skip
     -
       stage: syntax-validation
       verbose: true
       script:
-        - 'swagger-cli validate -d --no-schema --no-spec photoshelter.json'
+        - 'swagger-cli validate -d --no-schema --no-spec definitions/photoshelter.json'
         - 'sleep 3'
       install: skip
     -
       stage: contract-testing
       verbose: true
       script:
-        - 'prism run --mock --list --spec photoshelter.json'
+        - 'prism run --mock --list --spec definitions/photoshelter.json'
         - 'sleep 1'
         - 'dredd http://localhost:4010/photoshelter.json'
     -
