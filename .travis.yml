@@ -51,9 +51,9 @@ jobs:
       stage: contract-testing
       verbose: true
       script:
-        - 'prism run --mock --list --spec definitions/photoshelter.json'
+        - 'prism mock definitions/photoshelter.json'
         - 'sleep 1'
-        - 'dredd http://localhost:4010/photoshelter.json'
+       # - 'dredd http://localhost:4010/photoshelter.json'
     -
       stage: documentation
       deploy: null
