@@ -24,6 +24,7 @@ before_install:
 before_script:
   - 'sudo chmod 755 run-redoc.exp'
   - 'cat /etc/hosts'
+  - 'culr -I -v https://gh.corp.bitshelter.com/BitShelter/photoshelter-web/blob/master/psapi/v4.0/index.php'
   - 'curl -I -v https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/master/.travis.yml'
 after_script:
   - 'wget https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/master/index.html'
