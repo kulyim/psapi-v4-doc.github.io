@@ -19,9 +19,13 @@
     "url" : "https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4",
     "description" : "PhotoShelter Auto Mocking API"
   } ],
+  "tags" : [ {
+    "name" : "PhotoShelter"
+  } ],
   "paths" : {
     "/galleries" : {
       "get" : {
+        "tags" : [ "Gallery" ],
         "summary" : "Gets all the galleries for the account.",
         "description" : "Gets all the galleries for the account!",
         "operationId" : "GalleriesGet",
