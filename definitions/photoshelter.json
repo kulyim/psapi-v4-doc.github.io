@@ -61,7 +61,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Error"
+                  "$ref" : "#/components/schemas/ForbiddenError"
                 }
               }
             }
@@ -137,37 +137,72 @@
         },
         "description" : "This object generates errors in compliance with RFC 7807 API Problem"
       },
+      "ForbiddenError" : {
+        "required" : [ "errors" ],
+        "type" : "object",
+        "properties" : {
+          "errors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Error_errors"
+            }
+          }
+        },
+        "description" : "This object generates errors in compliance with RFC 7807 API Problem"
+      },
       "Gallery_attributes" : {
-        "required" : [ "created_at", "description", "display_order", "effective_mode", "f_list", "mode", "modified_at", "name" ],
+        "required" : [ "access_id", "created_at", "description", "display_order", "is_listed", "is_orig_enabled", "is_watermark_disabled", "key_image_id", "modified_at", "name", "name_url" ],
         "type" : "object",
         "properties" : {
           "name" : {
+            "maxLength" : 100,
             "type" : "string",
             "description" : "Name of Gallery or Collection object (Whichever it is)",
             "example" : "My trip to DR"
           },
-          "description" : {
+          "name_url" : {
+            "maxLength" : 100,
             "type" : "string",
-            "description" : "Description of the Gallery or Collection object (Whichever it is)",
-            "example" : "Trip to DR with my brothers and sisters"
+            "description" : "URL to the gallery"
           },
-          "f_list" : {
-            "type" : "boolean",
-            "description" : "Listed on public site",
-            "example" : true
+          "description" : {
+            "maxLength" : 100,
+            "type" : "string",
+            "description" : "Description of the Gallery",
+            "example" : "Trip to DR with my brothers and sisters"
           },
           "display_order" : {
             "type" : "integer",
             "description" : "Custom display order",
             "example" : 1
           },
-          "mode" : {
+          "key_image_id" : {
+            "pattern" : "^I0000[a-zA-Z0-9._]{11}$",
             "type" : "string",
-            "description" : "Native visibility mode"
+            "description" : "ID of the Image that is the key image",
+            "example" : "I0000ZJCk9LW4Zfc"
           },
-          "effective_mode" : {
+          "access_id" : {
+            "pattern" : "^A0000[a-zA-Z0-9._]{11}$",
             "type" : "string",
-            "description" : "Effective mode with permission inheritance"
+            "description" : "Access ID of the Gallery",
+            "example" : "A0000Aij231cM_1R"
+          },
+          "is_listed" : {
+            "type" : "string",
+            "description" : "Flag that denotes if it is listed on the public site",
+            "example" : "f",
+            "enum" : [ "f", "t" ]
+          },
+          "is_orig_enabled" : {
+            "type" : "boolean",
+            "description" : "Original enabled boolean value",
+            "example" : true
+          },
+          "is_watermark_disabled" : {
+            "type" : "boolean",
+            "description" : "Watermark disabled boolean value",
+            "example" : true
           },
           "created_at" : {
             "type" : "date",
@@ -207,7 +242,7 @@
             "description" : "A URI reference (RFC3986) that identifies the problem type"
           },
           "status" : {
-            "type" : "integer",
+            "type" : "string",
             "description" : "The HTTP status code set by the origin server for this occurrence of the problem."
           },
           "detail" : {
