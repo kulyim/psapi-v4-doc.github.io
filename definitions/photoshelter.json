@@ -22,12 +22,13 @@
   "paths" : {
     "/galleries/{gallery_id}" : {
       "get" : {
-        "summary" : "Get gallery data based off gallery id.",
-        "description" : "Get ",
+        "summary" : "Get a gallery by ID.",
+        "description" : "Get a gallery by ID.",
         "operationId" : "GalleryGetId",
         "parameters" : [ {
           "name" : "gallery_id",
           "in" : "path",
+          "description" : "The ID of the gallery",
           "required" : true,
           "style" : "simple",
           "explode" : false,
@@ -37,6 +38,7 @@
         }, {
           "name" : "api_key",
           "in" : "query",
+          "description" : "The API Key. Can be requested if you do not have one.",
           "required" : true,
           "style" : "form",
           "explode" : true,
