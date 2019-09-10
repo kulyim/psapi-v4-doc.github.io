@@ -75,6 +75,16 @@
               }
             }
           },
+          "401" : {
+            "description" : "401 Unauthorized Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
           "403" : {
             "description" : "403 Forbidden Client Error",
             "content" : {
