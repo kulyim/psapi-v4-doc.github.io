@@ -24,7 +24,7 @@
       "get" : {
         "summary" : "Get a gallery by ID.",
         "description" : "Get a gallery by ID.",
-        "operationId" : "GalleryGetId",
+        "operationId" : "galleryGetId",
         "parameters" : [ {
           "name" : "gallery_id",
           "in" : "path",
@@ -81,6 +81,14 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "AcsPermissionException",
+                    "status" : "401",
+                    "title" : "Invalid access to resource: Gallery",
+                    "detail" : "You are not authorized to view this resource."
+                  }
                 }
               }
             }
