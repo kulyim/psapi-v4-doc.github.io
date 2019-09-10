@@ -73,6 +73,15 @@
                   }
                 }
               }
+            },
+            "links" : {
+              "GetGallery" : {
+                "operationId" : "galleryGetId",
+                "parameters" : {
+                  "gallery_id" : "$response.body#/data/id"
+                },
+                "description" : "Links to self"
+              }
             }
           },
           "401" : {
