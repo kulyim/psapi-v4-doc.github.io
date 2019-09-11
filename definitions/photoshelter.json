@@ -189,15 +189,7 @@
         "type" : "object",
         "properties" : {
           "data" : {
-            "discriminator" : {
-              "propertyName" : "type",
-              "mapping" : {
-                "gallery" : "#/components/schemas/Gallery"
-              }
-            },
-            "oneOf" : [ {
-              "$ref" : "#/components/schemas/Gallery"
-            } ]
+            "$ref" : "#/components/schemas/Gallery"
           },
           "meta" : {
             "$ref" : "#/components/schemas/MetaTag"
