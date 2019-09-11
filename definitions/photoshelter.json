@@ -66,7 +66,7 @@
                       "name" : "Example Name",
                       "description" : "Example Description",
                       "display_order" : 10,
-                      "key_image_id" : "I0000ZJCk9LW4Zfc",
+                      "key_image_id" : "GI000ZJCk9LW4Zfc",
                       "access_id" : "A0000CxML4E07hTM",
                       "is_listed" : "t",
                       "is_orig_enabled" : false,
@@ -286,7 +286,7 @@
             "example" : 1
           },
           "key_image_id" : {
-            "pattern" : "^I0000[a-zA-Z0-9._]{11}$",
+            "pattern" : "^GI000[a-zA-Z0-9._]{11}$",
             "type" : "string",
             "description" : "ID of the Image that is the key image",
             "nullable" : true,
