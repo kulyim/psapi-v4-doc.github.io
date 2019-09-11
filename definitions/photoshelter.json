@@ -290,7 +290,7 @@
             "type" : "string",
             "description" : "ID of the Image that is the key image",
             "nullable" : true,
-            "example" : "I0000ZJCk9LW4Zfc"
+            "example" : "GI000ZJCk9LW4Zfc"
           },
           "access_id" : {
             "pattern" : "^A0000[a-zA-Z0-9._]{11}$",
