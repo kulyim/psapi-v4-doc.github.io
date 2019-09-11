@@ -78,7 +78,7 @@
         }, {
           "name" : "name",
           "in" : "query",
-          "description" : "Full or partial gallery name  fdsfs fdfsdf ds   fdsfds\n",
+          "description" : "Full or partial gallery name",
           "required" : false,
           "style" : "form",
           "explode" : true,
