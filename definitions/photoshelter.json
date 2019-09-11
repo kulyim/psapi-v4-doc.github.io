@@ -270,12 +270,14 @@
           "name_url" : {
             "maxLength" : 100,
             "type" : "string",
-            "description" : "URL to the gallery"
+            "description" : "URL to the gallery",
+            "nullable" : true
           },
           "description" : {
             "maxLength" : 100,
             "type" : "string",
             "description" : "Description of the Gallery",
+            "nullable" : true,
             "example" : "Trip to DR with my brothers and sisters"
           },
           "display_order" : {
@@ -287,6 +289,7 @@
             "pattern" : "^I0000[a-zA-Z0-9._]{11}$",
             "type" : "string",
             "description" : "ID of the Image that is the key image",
+            "nullable" : true,
             "example" : "I0000ZJCk9LW4Zfc"
           },
           "access_id" : {
