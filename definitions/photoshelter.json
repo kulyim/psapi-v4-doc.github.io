@@ -317,12 +317,12 @@
           "created_at" : {
             "type" : "string",
             "description" : "Creation date",
-            "format" : "date-time"
+            "example" : "2019-04-25T14:54:12.136828"
           },
           "modified_at" : {
             "type" : "string",
             "description" : "Last modified date",
-            "format" : "date-time"
+            "example" : "2019-04-25T14:54:12.136828"
           }
         }
       },
