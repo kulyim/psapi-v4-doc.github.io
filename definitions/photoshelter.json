@@ -83,8 +83,7 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "type" : "string",
-            "default" : "false"
+            "type" : "string"
           }
         }, {
           "name" : "portfolio",
@@ -94,7 +93,8 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "default" : false
           }
         }, {
           "name" : "recently_updated",
@@ -110,37 +110,118 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "Successful operation",
+            "description" : "/galleries/{gallery_id} - HTTP 200 OK Response.\n",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "allOf" : [ {
-                    "$ref" : "#/components/schemas/v1JsonApi"
-                  }, {
-                    "properties" : {
-                      "data" : {
-                        "oneOf" : [ {
-                          "$ref" : "#/components/schemas/Gallery"
-                        }, {
-                          "$ref" : "#/components/schemas/Image"
-                        } ]
-                      },
-                      "meta" : {
-                        "$ref" : "#/components/schemas/MetaTag"
-                      }
+                  "$ref" : "#/components/schemas/MainResponse"
+                },
+                "example" : {
+                  "data" : {
+                    "type" : "gallery",
+                    "id" : "G0000ySlj8A3bb9g",
+                    "attributes" : {
+                      "name" : "Example Name",
+                      "description" : "Example Description",
+                      "display_order" : 10,
+                      "key_image_id" : "I0000ZJCk9LW4Zfc",
+                      "access_id" : "A0000CxML4E07hTM",
+                      "is_listed" : "t",
+                      "is_orig_enabled" : false,
+                      "is_watermark_disabled" : false,
+                      "created_at" : "2019-04-09T18:34:40-04:00",
+                      "modified_at" : "2019-09-06T16:24:24-04:00"
+                    },
+                    "links" : {
+                      "self" : "example.photoshelter.com/galleries/G0000ySlj8A3bb9g"
                     }
-                  } ]
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/MainResponse"
                 }
               }
             },
             "links" : {
-              "GetGalleries" : {
-                "operationId" : "getGalleries"
+              "GetGallery" : {
+                "operationId" : "galleryGetId",
+                "parameters" : {
+                  "gallery_id" : "$response.body#/data/id"
+                },
+                "description" : "Links to self"
               }
             }
           },
-          "400" : {
-            "description" : "Error"
+          "401" : {
+            "description" : "401 Unauthorized Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "AcsPermissionException",
+                    "status" : "401",
+                    "title" : "Invalid access to resource: Gallery",
+                    "detail" : "You are not authorized to view this resource."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "403 Forbidden Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or is invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers. If you do not have an API key, you can request one on our website."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "404 Not Found Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ResourceNotFoundException",
+                    "status" : "404",
+                    "title" : "Resource not found",
+                    "detail" : "The requested resource was not found."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
@@ -181,7 +262,7 @@
             "type" : "object",
             "example" : { },
             "oneOf" : [ {
-              "$ref" : "#/components/schemas/Gallery"
+              "$ref" : "#/components/schemas/Gallery_2"
             }, {
               "$ref" : "#/components/schemas/Image"
             } ]
@@ -198,7 +279,54 @@
         },
         "description" : "A flat schema for the JSONAPI-light"
       },
+      "MainResponse" : {
+        "discriminator" : {
+          "propertyName" : "type",
+          "mapping" : {
+            "gallery" : "#/components/schemas/Gallery"
+          }
+        },
+        "oneOf" : [ {
+          "$ref" : "#/components/schemas/Gallery"
+        } ]
+      },
       "Gallery" : {
+        "required" : [ "attributes", "id", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Gallery ID",
+            "example" : "G0000ZJCk9LW4Zfc"
+          },
+          "type" : {
+            "pattern" : "gallery",
+            "type" : "string",
+            "example" : "gallery"
+          },
+          "attributes" : {
+            "$ref" : "#/components/schemas/Gallery_attributes"
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/Gallery_links"
+          }
+        }
+      },
+      "Error" : {
+        "required" : [ "errors" ],
+        "type" : "object",
+        "properties" : {
+          "errors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Error_errors"
+            }
+          }
+        },
+        "description" : "This object generates errors in compliance with RFC 7807 API Problem"
+      },
+      "Gallery_2" : {
         "required" : [ "type" ],
         "type" : "object",
         "properties" : {
@@ -265,17 +393,100 @@
         "description" : "The gallery ID",
         "example" : "G0000b9PbmJDQcko"
       },
-      "MetaTag" : {
+      "Gallery_attributes" : {
+        "required" : [ "access_id", "created_at", "description", "display_order", "is_listed", "is_orig_enabled", "is_watermark_disabled", "key_image_id", "modified_at", "name", "name_url" ],
         "type" : "object",
         "properties" : {
-          "copyright" : {
-            "type" : "string"
+          "name" : {
+            "maxLength" : 100,
+            "type" : "string",
+            "description" : "Name of Gallery or Collection object (Whichever it is)",
+            "example" : "My trip to DR"
           },
-          "authors" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
+          "name_url" : {
+            "maxLength" : 100,
+            "type" : "string",
+            "description" : "URL to the gallery"
+          },
+          "description" : {
+            "maxLength" : 100,
+            "type" : "string",
+            "description" : "Description of the Gallery",
+            "example" : "Trip to DR with my brothers and sisters"
+          },
+          "display_order" : {
+            "type" : "integer",
+            "description" : "Custom display order",
+            "example" : 1
+          },
+          "key_image_id" : {
+            "pattern" : "^I0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "ID of the Image that is the key image",
+            "example" : "I0000ZJCk9LW4Zfc"
+          },
+          "access_id" : {
+            "pattern" : "^A0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Access ID of the Gallery",
+            "example" : "A0000Aij231cM_1R"
+          },
+          "is_listed" : {
+            "type" : "string",
+            "description" : "Flag that denotes if it is listed on the public site",
+            "example" : "f",
+            "enum" : [ "f", "t" ]
+          },
+          "is_orig_enabled" : {
+            "type" : "boolean",
+            "description" : "Original enabled boolean value",
+            "example" : true
+          },
+          "is_watermark_disabled" : {
+            "type" : "boolean",
+            "description" : "Watermark disabled boolean value",
+            "example" : true
+          },
+          "created_at" : {
+            "type" : "date",
+            "description" : "Creation date",
+            "example" : "2019-04-25 14:54:12.136828"
+          },
+          "modified_at" : {
+            "type" : "date",
+            "description" : "Last modified date",
+            "example" : "2019-04-25 14:54:12.136828"
+          }
+        }
+      },
+      "Gallery_links" : {
+        "type" : "object",
+        "properties" : {
+          "self" : {
+            "type" : "string",
+            "description" : "Link to itself",
+            "example" : "https://api.photoshelter.com/psapi/v4/galleries/G0000ZJCk9LW4Zfc"
+          }
+        }
+      },
+      "Error_errors" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "A unique identifier for this occurrence of the problem"
+          },
+          "title" : {
+            "type" : "string",
+            "description" : "A short, human-readable summary of the problem type"
+          },
+          "status" : {
+            "type" : "string",
+            "description" : "The HTTP status code set by the origin server for this occurrence of the problem."
+          },
+          "detail" : {
+            "type" : "string",
+            "description" : "An human readable explanation specific to this occurrence of the problem."
           }
         }
       }
