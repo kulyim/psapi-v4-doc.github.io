@@ -282,14 +282,14 @@
             "example" : true
           },
           "created_at" : {
-            "type" : "date",
+            "type" : "string",
             "description" : "Creation date",
-            "example" : "2019-04-25 14:54:12.136828"
+            "format" : "date"
           },
           "modified_at" : {
-            "type" : "date",
+            "type" : "string",
             "description" : "Last modified date",
-            "example" : "2019-04-25 14:54:12.136828"
+            "format" : "date"
           }
         }
       },
@@ -303,12 +303,24 @@
           }
         }
       },
+      "Error_links" : {
+        "type" : "object",
+        "properties" : {
+          "about" : {
+            "type" : "string",
+            "description" : "A link to the current error"
+          }
+        }
+      },
       "Error_errors" : {
         "type" : "object",
         "properties" : {
           "id" : {
             "type" : "string",
             "description" : "A unique identifier for this occurrence of the problem"
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/Error_links"
           },
           "title" : {
             "type" : "string",
