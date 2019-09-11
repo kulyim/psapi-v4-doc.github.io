@@ -185,25 +185,45 @@
         "example" : "o5p5Ww9EZ_8"
       },
       "MainResponse" : {
-        "discriminator" : {
-          "propertyName" : "type",
-          "mapping" : {
-            "gallery" : "#/components/schemas/Gallery"
-          }
-        },
-        "oneOf" : [ {
-          "$ref" : "#/components/schemas/Gallery"
-        } ]
-      },
-      "Gallery" : {
         "required" : [ "data" ],
         "type" : "object",
         "properties" : {
           "data" : {
-            "$ref" : "#/components/schemas/Gallery_data"
+            "discriminator" : {
+              "propertyName" : "type",
+              "mapping" : {
+                "gallery" : "#/components/schemas/Gallery"
+              }
+            },
+            "oneOf" : [ {
+              "$ref" : "#/components/schemas/Gallery"
+            } ]
           },
           "meta" : {
             "$ref" : "#/components/schemas/MetaTag"
+          }
+        }
+      },
+      "Gallery" : {
+        "required" : [ "attributes", "id", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Gallery ID",
+            "example" : "G0000ZJCk9LW4Zfc"
+          },
+          "type" : {
+            "pattern" : "gallery",
+            "type" : "string",
+            "example" : "gallery"
+          },
+          "attributes" : {
+            "$ref" : "#/components/schemas/Gallery_attributes"
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/Gallery_links"
           }
         }
       },
@@ -245,7 +265,7 @@
         },
         "description" : "This object generates errors in compliance with RFC 7807 API Problem"
       },
-      "Gallery_data_attributes" : {
+      "Gallery_attributes" : {
         "required" : [ "access_id", "created_at", "description", "display_order", "is_listed", "is_orig_enabled", "is_watermark_disabled", "key_image_id", "modified_at", "name", "name_url" ],
         "type" : "object",
         "properties" : {
@@ -311,36 +331,13 @@
           }
         }
       },
-      "Gallery_data_links" : {
+      "Gallery_links" : {
         "type" : "object",
         "properties" : {
           "self" : {
             "type" : "string",
             "description" : "Link to itself",
             "example" : "https://api.photoshelter.com/psapi/v4/galleries/G0000ZJCk9LW4Zfc"
-          }
-        }
-      },
-      "Gallery_data" : {
-        "required" : [ "attributes", "id", "type" ],
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
-            "type" : "string",
-            "description" : "Gallery ID",
-            "example" : "G0000ZJCk9LW4Zfc"
-          },
-          "type" : {
-            "pattern" : "gallery",
-            "type" : "string",
-            "example" : "gallery"
-          },
-          "attributes" : {
-            "$ref" : "#/components/schemas/Gallery_data_attributes"
-          },
-          "links" : {
-            "$ref" : "#/components/schemas/Gallery_data_links"
           }
         }
       },
