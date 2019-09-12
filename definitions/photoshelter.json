@@ -267,7 +267,10 @@
             "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
             "type" : "string",
             "description" : "Gallery ID",
-            "example" : "G0000ZJCk9LW4Zfc"
+            "example" : "G0000ZJCk9LW4Zfc",
+            "xml" : {
+              "attribute" : true
+            }
           },
           "type" : {
             "pattern" : "gallery",
@@ -377,10 +380,9 @@
             "example" : "A0000Aij231cM_1R"
           },
           "is_listed" : {
-            "type" : "string",
+            "type" : "boolean",
             "description" : "Flag that denotes if it is listed on the public site",
-            "example" : "f",
-            "enum" : [ "f", "t" ]
+            "example" : false
           },
           "is_orig_enabled" : {
             "type" : "boolean",
