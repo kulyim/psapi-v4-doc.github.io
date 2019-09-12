@@ -321,12 +321,7 @@
         "properties" : {
           "about" : {
             "type" : "string",
-            "description" : "A link to the current error",
-            "example" : "http://api.developer.com/404.html",
-            "externalDocs" : {
-              "description" : "Error page",
-              "url" : "http://api.developer.com/ERROR_NUM.html"
-            }
+            "example" : "http://api.developer.com/404.html"
           }
         }
       },
