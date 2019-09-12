@@ -66,7 +66,7 @@
         }, {
           "name" : "sort_dir",
           "in" : "query",
-          "description" : "Sorting direction",
+          "description" : "Sorting result set direction (ascending or descending)",
           "required" : false,
           "style" : "form",
           "explode" : true,
