@@ -226,7 +226,7 @@
             }
           },
           "429" : {
-            "description" : "404 Not Found Client Error",
+            "description" : "429 Too Many Requests Error",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -234,10 +234,10 @@
                 },
                 "example" : {
                   "errors" : {
-                    "id" : "ResourceNotFoundException",
-                    "status" : "404",
-                    "title" : "Resource not found",
-                    "detail" : "The requested resource was not found."
+                    "id" : "TooManyRequestsException",
+                    "status" : "429",
+                    "title" : "Too Many Requests",
+                    "detail" : "The user has sent too many requests in a given amount of time see \"rate limiting\"."
                   }
                 }
               },
