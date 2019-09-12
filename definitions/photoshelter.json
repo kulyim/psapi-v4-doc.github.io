@@ -83,12 +83,13 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Search galleries by partial name"
           }
         }, {
           "name" : "portfolio",
           "in" : "query",
-          "description" : "Filter the result set to return galleries listed on public site \n",
+          "description" : "Filter the result set to return galleries listed on public site\n",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -99,7 +100,7 @@
         }, {
           "name" : "recently_updated",
           "in" : "query",
-          "description" : "Filter the result set to return galleries recently updated \n",
+          "description" : "Filter the result set to return galleries recently updated\n",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -110,47 +111,35 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "/galleries/{gallery_id} - HTTP 200 OK Response.\n",
+            "description" : "/galleries - HTTP 200 OK Response.\n",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/MainResponse"
+                  "$ref" : "#/components/schemas/inline_response_200"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 Bad Request Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
                 },
                 "example" : {
-                  "data" : {
-                    "type" : "gallery",
-                    "id" : "G0000ySlj8A3bb9g",
-                    "attributes" : {
-                      "name" : "Example Name",
-                      "description" : "Example Description",
-                      "display_order" : 10,
-                      "key_image_id" : "I0000ZJCk9LW4Zfc",
-                      "access_id" : "A0000CxML4E07hTM",
-                      "is_listed" : "t",
-                      "is_orig_enabled" : false,
-                      "is_watermark_disabled" : false,
-                      "created_at" : "2019-04-09T18:34:40-04:00",
-                      "modified_at" : "2019-09-06T16:24:24-04:00"
-                    },
-                    "links" : {
-                      "self" : "example.photoshelter.com/galleries/G0000ySlj8A3bb9g"
-                    }
+                  "errors" : {
+                    "id" : "ThisShouldBeARealId",
+                    "status" : "400",
+                    "title" : "Bad Request / Syntax",
+                    "detail" : "You are not authorized to access this resource."
                   }
                 }
               },
               "application/xml" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/MainResponse"
+                  "$ref" : "#/components/schemas/Error"
                 }
-              }
-            },
-            "links" : {
-              "GetGallery" : {
-                "operationId" : "galleryGetId",
-                "parameters" : {
-                  "gallery_id" : "$response.body#/data/id"
-                },
-                "description" : "Links to self"
               }
             }
           },
@@ -189,7 +178,7 @@
                     "id" : "ApiKeyInvalidException",
                     "status" : "403",
                     "title" : "Missing or invalid API key",
-                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or is invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers. If you do not have an API key, you can request one on our website."
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
                   }
                 }
               },
@@ -200,7 +189,30 @@
               }
             }
           },
-          "404" : {
+          "415" : {
+            "description" : "404 Not Found Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ResourceNotFoundException",
+                    "status" : "404",
+                    "title" : "Resource not found",
+                    "detail" : "The requested resource was not found."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429" : {
             "description" : "404 Not Found Client Error",
             "content" : {
               "application/json" : {
@@ -262,7 +274,7 @@
             "type" : "object",
             "example" : { },
             "oneOf" : [ {
-              "$ref" : "#/components/schemas/Gallery_2"
+              "$ref" : "#/components/schemas/Gallery"
             }, {
               "$ref" : "#/components/schemas/Image"
             } ]
@@ -279,38 +291,37 @@
         },
         "description" : "A flat schema for the JSONAPI-light"
       },
-      "MainResponse" : {
-        "discriminator" : {
-          "propertyName" : "type",
-          "mapping" : {
-            "gallery" : "#/components/schemas/Gallery"
-          }
-        },
-        "oneOf" : [ {
-          "$ref" : "#/components/schemas/Gallery"
-        } ]
-      },
-      "Gallery" : {
-        "required" : [ "attributes", "id", "type" ],
+      "MetaTag" : {
         "type" : "object",
         "properties" : {
-          "id" : {
-            "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
+          "copyright" : {
             "type" : "string",
-            "description" : "Gallery ID",
-            "example" : "G0000ZJCk9LW4Zfc"
+            "example" : "PhotoShelter 2019"
           },
-          "type" : {
-            "pattern" : "gallery",
+          "version" : {
             "type" : "string",
-            "example" : "gallery"
+            "example" : "2019-05-01"
           },
-          "attributes" : {
-            "$ref" : "#/components/schemas/Gallery_attributes"
+          "rate_limit_limit" : {
+            "type" : "integer",
+            "example" : 10
           },
-          "links" : {
-            "$ref" : "#/components/schemas/Gallery_links"
+          "rate_limit_current" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "rate_limit_expires" : {
+            "type" : "integer",
+            "example" : 60
           }
+        }
+      },
+      "ArrayOfGalleries" : {
+        "type" : "array",
+        "items" : {
+          "allOf" : [ {
+            "$ref" : "#/components/schemas/Gallery"
+          } ]
         }
       },
       "Error" : {
@@ -326,7 +337,7 @@
         },
         "description" : "This object generates errors in compliance with RFC 7807 API Problem"
       },
-      "Gallery_2" : {
+      "Gallery" : {
         "required" : [ "type" ],
         "type" : "object",
         "properties" : {
@@ -393,79 +404,28 @@
         "description" : "The gallery ID",
         "example" : "G0000b9PbmJDQcko"
       },
-      "Gallery_attributes" : {
-        "required" : [ "access_id", "created_at", "description", "display_order", "is_listed", "is_orig_enabled", "is_watermark_disabled", "key_image_id", "modified_at", "name", "name_url" ],
+      "inline_response_200" : {
+        "required" : [ "data" ],
         "type" : "object",
         "properties" : {
-          "name" : {
-            "maxLength" : 100,
-            "type" : "string",
-            "description" : "Name of Gallery or Collection object (Whichever it is)",
-            "example" : "My trip to DR"
+          "data" : {
+            "allOf" : [ {
+              "$ref" : "#/components/schemas/MetaTag"
+            }, {
+              "$ref" : "#/components/schemas/ArrayOfGalleries"
+            } ]
           },
-          "name_url" : {
-            "maxLength" : 100,
-            "type" : "string",
-            "description" : "URL to the gallery"
-          },
-          "description" : {
-            "maxLength" : 100,
-            "type" : "string",
-            "description" : "Description of the Gallery",
-            "example" : "Trip to DR with my brothers and sisters"
-          },
-          "display_order" : {
-            "type" : "integer",
-            "description" : "Custom display order",
-            "example" : 1
-          },
-          "key_image_id" : {
-            "pattern" : "^I0000[a-zA-Z0-9._]{11}$",
-            "type" : "string",
-            "description" : "ID of the Image that is the key image",
-            "example" : "I0000ZJCk9LW4Zfc"
-          },
-          "access_id" : {
-            "pattern" : "^A0000[a-zA-Z0-9._]{11}$",
-            "type" : "string",
-            "description" : "Access ID of the Gallery",
-            "example" : "A0000Aij231cM_1R"
-          },
-          "is_listed" : {
-            "type" : "string",
-            "description" : "Flag that denotes if it is listed on the public site",
-            "example" : "f",
-            "enum" : [ "f", "t" ]
-          },
-          "is_orig_enabled" : {
-            "type" : "boolean",
-            "description" : "Original enabled boolean value",
-            "example" : true
-          },
-          "is_watermark_disabled" : {
-            "type" : "boolean",
-            "description" : "Watermark disabled boolean value",
-            "example" : true
-          },
-          "created_at" : {
-            "type" : "date",
-            "description" : "Creation date",
-            "example" : "2019-04-25 14:54:12.136828"
-          },
-          "modified_at" : {
-            "type" : "date",
-            "description" : "Last modified date",
-            "example" : "2019-04-25 14:54:12.136828"
+          "meta" : {
+            "$ref" : "#/components/schemas/MetaTag"
           }
         }
       },
-      "Gallery_links" : {
+      "Error_links" : {
         "type" : "object",
         "properties" : {
-          "self" : {
+          "about" : {
             "type" : "string",
-            "description" : "Link to itself",
-            "example" : "https://api.photoshelter.com/psapi/v4/galleries/G0000ZJCk9LW4Zfc"
+            "description" : "A link to the current error"
           }
         }
       },
@@ -475,6 +435,9 @@
           "id" : {
             "type" : "string",
             "description" : "A unique identifier for this occurrence of the problem"
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/Error_links"
           },
           "title" : {
             "type" : "string",
