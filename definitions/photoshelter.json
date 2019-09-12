@@ -254,56 +254,6 @@
   },
   "components" : {
     "schemas" : {
-      "ApiProblem" : {
-        "type" : "object",
-        "properties" : {
-          "title" : {
-            "type" : "string",
-            "description" : "A short, human-readable summary of the problem type"
-          },
-          "type" : {
-            "type" : "string",
-            "description" : "A URI reference (RFC3986) that identifies the problem type"
-          },
-          "status" : {
-            "type" : "integer",
-            "description" : "The HTTP status code set by the origin server for this occurrence of the problem."
-          },
-          "detail" : {
-            "type" : "string",
-            "description" : "An human readable explanation specific to this occurrence of the problem."
-          },
-          "instance" : {
-            "type" : "string",
-            "description" : "A URI reference that identifies the specific occurrence of the problem."
-          }
-        },
-        "description" : "This object generates errors in compliance with RFC 7807 'API Problem'"
-      },
-      "v1JsonApi" : {
-        "type" : "object",
-        "properties" : {
-          "data" : {
-            "type" : "object",
-            "example" : { },
-            "oneOf" : [ {
-              "$ref" : "#/components/schemas/Gallery"
-            }, {
-              "$ref" : "#/components/schemas/Image"
-            } ]
-          },
-          "meta" : {
-            "type" : "object"
-          },
-          "errors" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/ApiProblem"
-            }
-          }
-        },
-        "description" : "A flat schema for the JSONAPI-light"
-      },
       "MetaTag" : {
         "type" : "object",
         "properties" : {
@@ -350,73 +300,6 @@
         },
         "description" : "This object generates errors in compliance with RFC 7807 API Problem"
       },
-      "Gallery" : {
-        "required" : [ "type" ],
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "description" : "The gallery ID",
-            "example" : "G0000b9PbmJDQcko"
-          },
-          "type" : {
-            "type" : "string",
-            "description" : "Entity type",
-            "example" : "gallery"
-          },
-          "description" : {
-            "type" : "string",
-            "description" : "Gallery description",
-            "example" : "My trip to DR"
-          },
-          "f_list" : {
-            "type" : "boolean",
-            "description" : "Listed on public site",
-            "example" : false
-          },
-          "display_order" : {
-            "type" : "integer",
-            "description" : "Custom display order",
-            "example" : 0
-          },
-          "mode" : {
-            "type" : "string",
-            "description" : "Native visibility mode"
-          },
-          "effective_mode" : {
-            "type" : "string",
-            "description" : "Effective mode with permission inheritance"
-          },
-          "created_at" : {
-            "type" : "string",
-            "description" : "Creation date",
-            "example" : "2019-04-12"
-          },
-          "modified_at" : {
-            "type" : "string",
-            "description" : "Modification date",
-            "example" : "2019-04-12"
-          },
-          "collection_id" : {
-            "type" : "string",
-            "description" : "Collection ID",
-            "example" : "C0000IRVZsqAiXtA"
-          }
-        }
-      },
-      "Image" : {
-        "type" : "object",
-        "properties" : {
-          "gallery_id" : {
-            "$ref" : "#/components/schemas/id"
-          }
-        }
-      },
-      "id" : {
-        "type" : "string",
-        "description" : "The gallery ID",
-        "example" : "G0000b9PbmJDQcko"
-      },
       "inline_response_200" : {
         "required" : [ "data" ],
         "type" : "object",
@@ -438,7 +321,12 @@
         "properties" : {
           "about" : {
             "type" : "string",
-            "description" : "A link to the current error"
+            "description" : "A link to the current error",
+            "example" : "http://api.developer.com/404.html",
+            "externalDocs" : {
+              "description" : "Error page",
+              "url" : "http://api.developer.com/ERROR_NUM.html"
+            }
           }
         }
       },
