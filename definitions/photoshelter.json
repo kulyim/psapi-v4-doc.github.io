@@ -94,7 +94,10 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "type" : "string"
+            "pattern" : "^C0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Collection ID",
+            "example" : "C0000LYrqIr59eJI"
           }
         }, {
           "name" : "portfolio",
