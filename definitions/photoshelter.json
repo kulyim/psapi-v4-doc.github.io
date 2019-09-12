@@ -130,6 +130,11 @@
                 "schema" : {
                   "$ref" : "#/components/schemas/inline_response_200"
                 }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200"
+                }
               }
             }
           },
