@@ -78,6 +78,15 @@ paths:
         schema:
           type: string
           description: Search galleries by partial name
+      - name: parent
+        in: query
+        description: Limit galleries to children of the provided collection ID. Pass
+          blank to find galleries with no parent.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
       - name: portfolio
         in: query
         description: |
