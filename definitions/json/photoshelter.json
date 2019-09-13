@@ -163,6 +163,17 @@
           },
           "401" : {
             "description" : "401 Unauthorized Client Error",
+            "headers" : {
+              "WWW-Authenticate" : {
+                "description" : "The HTTP WWW-Authenticate response header defines the authentication method that should be used to gain access to a resource.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                },
+                "example" : "WWW-Authenticate: Bearer"
+              }
+            },
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -208,7 +219,7 @@
             }
           },
           "415" : {
-            "description" : "404 Not Found Client Error",
+            "description" : "415 Unsupported Media Type Error",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -217,7 +228,7 @@
                 "example" : {
                   "errors" : {
                     "id" : "ResourceNotFoundException",
-                    "status" : "404",
+                    "status" : "415",
                     "title" : "Resource not found",
                     "detail" : "The requested resource was not found."
                   }
@@ -232,6 +243,17 @@
           },
           "429" : {
             "description" : "429 Too Many Requests Error",
+            "headers" : {
+              "Retry-After" : {
+                "description" : "The Retry-After response HTTP header, expressed in seconds, indicates how long the user agent should wait before making a follow-up request.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                },
+                "example" : 180
+              }
+            },
             "content" : {
               "application/json" : {
                 "schema" : {

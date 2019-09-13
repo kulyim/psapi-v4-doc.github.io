@@ -27,137 +27,356 @@ paths:
       parameters:
       - name: page
         in: query
-        description: If provided, the endpoint will returns the requested data page
-          if available.
+        description: Page number
         required: false
         style: form
         explode: true
         schema:
           type: integer
+          default: 1
       - name: per_page
         in: query
-        description: If provided. the endpoint will return the requested data limited
-          by the value of per_page
+        description: Number of rows returned per page
         required: false
         style: form
         explode: true
         schema:
           type: integer
+          default: 20
+      - name: sort_by
+        in: query
+        description: Sort by gallery property
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: creation_time
+          enum:
+          - creation_time
+          - modification_time
+          - name
+          - display_order
+      - name: sort_dir
+        in: query
+        description: Sorting result set direction (ascending or descending)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: asc
+          enum:
+          - asc
+          - desc
+      - name: name
+        in: query
+        description: Full or partial gallery name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          description: Search galleries by partial name
+      - name: parent
+        in: query
+        description: Limit galleries to children of the provided collection ID. Pass
+          blank to find galleries with no parent.
+        required: false
+        style: form
+        explode: true
+        schema:
+          pattern: ^C0000[a-zA-Z0-9._]{11}$
+          type: string
+          description: Collection ID
+          example: C0000LYrqIr59eJI
+      - name: portfolio
+        in: query
+        description: |
+          Filter the result set to return galleries listed on public site
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          default: false
+      - name: recently_updated
+        in: query
+        description: |
+          Filter the result set to return galleries recently updated
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          default: false
       responses:
         200:
-          description: Successful operation
+          description: |
+            /galleries - HTTP 200 OK Response.
           content:
             application/json:
               schema:
-                allOf:
-                - $ref: '#/components/schemas/v1JsonApi'
-                - properties:
-                    data:
-                      oneOf:
-                      - $ref: '#/components/schemas/Gallery'
-                      - $ref: '#/components/schemas/Image'
-                    meta:
-                      $ref: '#/components/schemas/MetaTag'
+                $ref: '#/components/schemas/inline_response_200'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
         400:
-          description: Error
+          description: 400 Bad Request Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                errors:
+                  id: ThisShouldBeARealId
+                  status: "400"
+                  title: Bad Request / Syntax
+                  detail: You are not authorized to access this resource.
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        401:
+          description: 401 Unauthorized Client Error
+          headers:
+            WWW-Authenticate:
+              description: The HTTP WWW-Authenticate response header defines the authentication
+                method that should be used to gain access to a resource.
+              style: simple
+              explode: false
+              schema:
+                type: integer
+              example: 'WWW-Authenticate: Bearer'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                errors:
+                  id: AcsPermissionException
+                  status: "401"
+                  title: 'Invalid access to resource: Gallery'
+                  detail: You are not authorized to view this resource.
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        403:
+          description: 403 Forbidden Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                errors:
+                  id: ApiKeyInvalidException
+                  status: "403"
+                  title: Missing or invalid API key
+                  detail: |-
+                    Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or
+                    is invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.
+                    If you do not have an API key, you can request one on our website.
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        415:
+          description: 415 Unsupported Media Type Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                errors:
+                  id: ResourceNotFoundException
+                  status: "415"
+                  title: Resource not found
+                  detail: The requested resource was not found.
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        429:
+          description: 429 Too Many Requests Error
+          headers:
+            Retry-After:
+              description: The Retry-After response HTTP header, expressed in seconds,
+                indicates how long the user agent should wait before making a follow-up
+                request.
+              style: simple
+              explode: false
+              schema:
+                type: integer
+              example: 180
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                errors:
+                  id: TooManyRequestsException
+                  status: "429"
+                  title: Too Many Requests
+                  detail: The user has sent too many requests in a given amount of
+                    time see "rate limiting".
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ApiProblem:
+    Gallery:
+      required:
+      - attributes
+      - id
+      - type
       type: object
       properties:
+        id:
+          pattern: ^G0000[a-zA-Z0-9._]{11}$
+          type: string
+          description: Gallery ID
+          example: G0000ZJCk9LW4Zfc
+          xml:
+            attribute: true
+        type:
+          pattern: gallery
+          type: string
+          example: gallery
+        attributes:
+          $ref: '#/components/schemas/Gallery_attributes'
+        links:
+          $ref: '#/components/schemas/Gallery_links'
+    MetaTag:
+      type: object
+      properties:
+        copyright:
+          type: string
+          example: PhotoShelter 2019
+        version:
+          type: string
+          example: 2019-05-01
+        rate_limit_limit:
+          type: integer
+          example: 10
+        rate_limit_current:
+          type: integer
+          example: 1
+        rate_limit_expires:
+          type: integer
+          example: 60
+    Error:
+      required:
+      - errors
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error_errors'
+      description: This object generates errors in compliance with RFC 7807 API Problem
+    inline_response_200:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Gallery'
+        meta:
+          $ref: '#/components/schemas/MetaTag'
+    Gallery_attributes:
+      required:
+      - access_id
+      - created_at
+      - description
+      - display_order
+      - is_listed
+      - is_orig_enabled
+      - is_watermark_disabled
+      - key_image_id
+      - modified_at
+      - name
+      - name_url
+      type: object
+      properties:
+        name:
+          maxLength: 100
+          type: string
+          description: Name of Gallery or Collection object (Whichever it is)
+          example: My trip to DR
+        name_url:
+          maxLength: 100
+          type: string
+          description: URL to the gallery
+          nullable: true
+        description:
+          maxLength: 100
+          type: string
+          description: Description of the Gallery
+          nullable: true
+          example: Trip to DR with my brothers and sisters
+        display_order:
+          type: integer
+          description: Custom display order
+          example: 1
+        key_image_id:
+          pattern: ^GI000[a-zA-Z0-9._]{11}$
+          type: string
+          description: ID of the Image that is the key image
+          nullable: true
+          example: GI000ZJCk9LW4Zfc
+        access_id:
+          pattern: ^A0000[a-zA-Z0-9._]{11}$
+          type: string
+          description: Access ID of the Gallery
+          example: A0000Aij231cM_1R
+        is_listed:
+          type: boolean
+          description: Flag that denotes if it is listed on the public site
+          example: false
+        is_orig_enabled:
+          type: boolean
+          description: Original enabled boolean value
+          example: true
+        is_watermark_disabled:
+          type: boolean
+          description: Watermark disabled boolean value
+          example: true
+        created_at:
+          type: string
+          description: Creation date
+          example: 2019-04-25T14:54:12.136828
+        modified_at:
+          type: string
+          description: Last modified date
+          example: 2019-04-25T14:54:12.136828
+    Gallery_links:
+      type: object
+      properties:
+        self:
+          type: string
+          description: Link to itself
+          example: https://api.photoshelter.com/psapi/v4/galleries/G0000ZJCk9LW4Zfc
+    Error_links:
+      type: object
+      properties:
+        about:
+          type: string
+          example: http://api.developer.com/404.html
+    Error_errors:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique identifier for this occurrence of the problem
+        links:
+          $ref: '#/components/schemas/Error_links'
         title:
           type: string
           description: A short, human-readable summary of the problem type
-        type:
-          type: string
-          description: A URI reference (RFC3986) that identifies the problem type
         status:
-          type: integer
+          type: string
           description: The HTTP status code set by the origin server for this occurrence
             of the problem.
         detail:
           type: string
           description: An human readable explanation specific to this occurrence of
             the problem.
-        instance:
-          type: string
-          description: A URI reference that identifies the specific occurrence of
-            the problem.
-      description: This object generates errors in compliance with RFC 7807 'API Problem'
-    v1JsonApi:
-      type: object
-      properties:
-        data:
-          type: object
-          example: {}
-          oneOf:
-          - $ref: '#/components/schemas/Gallery'
-          - $ref: '#/components/schemas/Image'
-        meta:
-          type: object
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiProblem'
-      description: A flat schema for the JSONAPI-light
-    Gallery:
-      required:
-      - type
-      type: object
-      properties:
-        id:
-          type: string
-          description: The gallery ID
-          example: G0000b9PbmJDQcko
-        type:
-          type: string
-          description: Entity type
-          example: gallery
-        description:
-          type: string
-          description: Gallery description
-          example: My trip to DR
-        f_list:
-          type: boolean
-          description: Listed on public site
-          example: false
-        display_order:
-          type: integer
-          description: Custom display order
-          example: 0
-        mode:
-          type: string
-          description: Native visibility mode
-        effective_mode:
-          type: string
-          description: Effective mode with permission inheritance
-        created_at:
-          type: string
-          description: Creation date
-          example: 2019-04-12
-        modified_at:
-          type: string
-          description: Modification date
-          example: 2019-04-12
-        collection_id:
-          type: string
-          description: Collection ID
-          example: C0000IRVZsqAiXtA
-    Image:
-      type: object
-      properties:
-        gallery_id:
-          $ref: '#/components/schemas/id'
-    id:
-      type: string
-      description: The gallery ID
-      example: G0000b9PbmJDQcko
-    MetaTag:
-      type: object
-      properties:
-        copyright:
-          type: string
-        authors:
-          type: array
-          items:
-            type: string
