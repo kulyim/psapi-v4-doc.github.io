@@ -24,7 +24,8 @@ before_install:
 before_script:
   - 'sudo chmod 755 run-redoc.exp'
   - 'cat /etc/hosts'
-  - 'culr -I -v https://gh.corp.bitshelter.com/BitShelter/photoshelter-web/blob/master/psapi/v4.0/index.php'
+# How to make this happen ? so each view can be dynamicaly setup
+ # - 'culr -I -v http://anthony.dev.bitshelter.com:8090/psapi/v4.0/gallery/G00006n1vPRXpsjw?api_key=A018guq6BbY&include=images:page(1):per_page(2):sort_dir(lambda):sort_by(alpha|teta)&date_format=iso8601&page=2&per_page=2&include=link'
   - 'curl -I -v https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/master/.travis.yml'
 after_script:
   - 'wget https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/master/index.html'
