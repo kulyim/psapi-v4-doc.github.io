@@ -24,7 +24,7 @@ pipeline {
         stage('Cloning Git') {
           steps {
               echo 'Test'
- 		#git branch: "${params.SPECIFIER}", url: "${GIT_URL}"
+ 		//git branch: "${params.SPECIFIER}", url: "${GIT_URL}"
 		git branch: "${GIT_BRANCH}",
     		credentialsId: '3bada076-ecef-435c-a405-fe3655cda97f',
     		url: 'https://github.com/photoshelter-dev/psapi-v4-doc.github.io'			
