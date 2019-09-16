@@ -29,6 +29,7 @@ pipeline {
 //		echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
 //		echo $GIT_BRANCH
 echo 'Print env'
+   sh "printenv | sort"
 echo  ${scm.branch}
 //GITHUB_PR_TARGET_BRANCH
 sh 'printenv'			
