@@ -36,7 +36,7 @@ sh 'printenv'
             //  git 'https://github.com/photoshelter-dev/psapi-v4-doc.github.io.git'
           }
         }
-        stage('Linting') {
+/*        stage('Linting') {
             steps {
                 echo 'Building..'
                 sh 'npm config ls'
@@ -57,6 +57,7 @@ sh 'printenv'
                 echo 'Deploying....'
             }
         }
+*/
     }
 }
 
