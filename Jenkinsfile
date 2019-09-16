@@ -29,7 +29,7 @@ pipeline {
 //		echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
 //		echo $GIT_BRANCH
 echo 'Print env'
-echo 'SCM :  ${scm.GITHUB_PR_SOURCE_BRANCH}'
+echo 'SCM :'   ${scm.GITHUB_PR_SOURCE_BRANCH}
 //GITHUB_PR_TARGET_BRANCH
 sh 'printenv'			
 		sh 'ls -la'
