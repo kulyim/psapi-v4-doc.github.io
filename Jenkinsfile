@@ -25,9 +25,12 @@ pipeline {
         stage('Cloning Git') {
           steps {
               echo 'Test'
-          //    echo 'Pulling...' + scm.branches[0].name
-               echo 'Print Env'
-
+ 		git branch: "${params.SPECIFIER}", url: "${GIT_URL}"
+		echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+//		echo $GIT_BRANCH
+echo 'Print env'
+sh 'printenv'			
+		sh 'ls -la'
             //  git 'https://github.com/photoshelter-dev/psapi-v4-doc.github.io.git'
           }
         }
