@@ -30,9 +30,9 @@ pipeline {
 //		echo $GIT_BRANCH
 echo 'Print env'
    sh "printenv | sort"
-echo  ${scm.branch}
+//echo  ${scm.branch}
 //GITHUB_PR_TARGET_BRANCH
-sh 'printenv'			
+//	sh 'printenv'			
 		sh 'ls -la'
             //  git 'https://github.com/photoshelter-dev/psapi-v4-doc.github.io.git'
           }
