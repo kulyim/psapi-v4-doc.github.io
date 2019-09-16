@@ -8,7 +8,7 @@ pipeline {
         CI = 'true'
     }
     stages {
-        stage('Install dependencies') {
+/*        stage('Install dependencies') {
           steps {
             sh 'npm install'
             sh 'npm install'
@@ -21,7 +21,7 @@ pipeline {
         //    sh 'sudo apt-get install expect'
         //    sh 'sudo apt-get install curl'
           }
-        }
+        } */
         stage('Cloning Git') {
           steps {
               echo 'Test'
