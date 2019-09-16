@@ -26,7 +26,7 @@ pipeline {
               echo 'Test'
  		//git branch: "${params.SPECIFIER}", url: "${GIT_URL}"
 		git branch: "${GIT_BRANCH}",
-    		credentialsId: '3bada076-ecef-435c-a405-fe3655cda97f',
+    		credentialsId: 'JenkinsAccesstoPSGit',
     		url: 'https://github.com/photoshelter-dev/psapi-v4-doc.github.io'			
 //		echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
 //		echo $GIT_BRANCH
@@ -42,19 +42,20 @@ echo 'Print env'
         }
         stage('Linting') {
             steps {
-                echo 'Building..'
+                echo 'Linting...'
                 sh 'npm config ls'
 		println('Speccy')
 		sh 'speccy lint -v definitions/photoshelter.json'
             }
         }
-/*
+
         stage('Syntax Validation') {
             steps {
-                echo 'Testing..'
+                echo 'Checking syntax'
+		
             }
         }
-        stage('Contract Testing') {
+/*        stage('Contract Testing') {
             steps {
                 echo 'Deploying....'
             }
