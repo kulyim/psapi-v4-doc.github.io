@@ -25,7 +25,7 @@ pipeline {
         stage('Cloning Git') {
           steps {
               echo 'Test'
-// 		git branch: "${params.SPECIFIER}", url: "${GIT_URL}"
+ 		git branch: "${params.SPECIFIER}", url: "${GIT_URL}"
 //		echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
 //		echo $GIT_BRANCH
 echo 'Print env'
