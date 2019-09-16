@@ -33,6 +33,7 @@ echo 'Print env'
 //GITHUB_PR_TARGET_BRANCH
 //	sh 'printenv'			
 		sh 'ls -la'
+		
             //  git 'https://github.com/photoshelter-dev/psapi-v4-doc.github.io.git'
           }
         }
@@ -40,7 +41,8 @@ echo 'Print env'
             steps {
                 echo 'Building..'
                 sh 'npm config ls'
-		
+		println('Speccy')
+		sh 'speccy lint -v definitions/photoshelter.json'
             }
         }
 /*
