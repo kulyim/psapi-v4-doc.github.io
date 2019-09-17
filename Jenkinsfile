@@ -38,7 +38,7 @@ pipeline {
 		sh 'speccy lint -v definitions/photoshelter.json'
             }
         }
-   */
+   
         stage('Syntax Validation') {
             steps {
                 echo 'Checking syntax'
@@ -51,13 +51,16 @@ pipeline {
 		sh 'dredd definitions/photoshelter.json http://anthony.dev.bitshelter.com:8090 --dry-run'
             }
         }
-/*
+*/
         stage('Documentation Generation') {
             steps {
+		echo 'Generating documentation'
+		sh './run-redoc.exp'
                 echo 'Deploying....'
+		sh 'npm run gh-pages'
             }
         }
-*/
+
     }
 }
 
