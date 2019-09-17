@@ -12,16 +12,16 @@ pipeline {
           steps {
             sh 'npm install --silent' // avoiding warnings from pkgs
             sh 'npm install speccy -g'
-         /*   sh 'npm install -g swagger-cli'
+            sh 'npm install -g swagger-cli'
             sh 'npm install redoc --save'
             sh 'npm install -g create-openapi-repo'
             sh 'npm install -g @stoplight/prism-cli'
-            sh 'npm install -g dredd' */
+            sh 'npm install -g dredd'
         //    sh 'sudo apt-get install expect'
         //    sh 'sudo apt-get install curl'
           }
         }
-        stage('Cloning Git') {
+	stage('Cloning Git') {
           steps {
 		echo 'Print env'
    		sh "printenv | sort"
@@ -29,6 +29,7 @@ pipeline {
                 git 'https://github.com/photoshelter-dev/psapi-v4-doc.github.io.git'
        		}
         }
+/* Skipping for now . step is working
         stage('Linting') {
             steps {
                 echo 'Linting...'
@@ -37,7 +38,7 @@ pipeline {
 		sh 'speccy lint -v definitions/photoshelter.json'
             }
         }
-
+   */
         stage('Syntax Validation') {
             steps {
                 echo 'Checking syntax'
