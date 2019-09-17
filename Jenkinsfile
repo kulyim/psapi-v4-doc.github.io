@@ -40,7 +40,8 @@ pipeline {
         stage('Contract Testing') {
             steps {
                 echo 'Contract Testing....'
-		sh "dredd definitions/json/photoshelter.json head -n 1 .ps-api --dry-run"
+		def viewPort = readfile('.ps-api').trim()
+		sh "dredd definitions/json/photoshelter.json ${viewPort} --dry-run"
             }
         }
 	// Documentation generation for master only, developers can replicate the steps to generate their own docs
