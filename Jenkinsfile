@@ -25,7 +25,7 @@ pipeline {
                 echo 'Linting...'
                 sh 'npm config ls'
 		println('Speccy')
-		sh 'speccy lint -v definitions/photoshelter.json'
+		sh 'speccy lint -v definitions/json/photoshelter.json'
             }
         }
    
@@ -35,11 +35,12 @@ pipeline {
 		sh 'swagger-cli validate -d --no-schema --no-spec definitions/json/photoshelter.json'
             }
         }
+
 	// Each developer must have a .ps-api config file with the PROTOCOL:URL:PORT or their view
         stage('Contract Testing') {
             steps {
                 echo 'Contract Testing....'
-		sh 'dredd definitions/json/photoshelter.json (head -n 1 .ps-api) --dry-run'
+		sh "dredd definitions/json/photoshelter.json (head -n 1 .ps-api) --dry-run"
             }
         }
 	// Documentation generation for master only, developers can replicate the steps to generate their own docs
