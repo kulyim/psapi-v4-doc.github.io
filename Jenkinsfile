@@ -27,6 +27,9 @@ pipeline {
    		sh "printenv | sort"
 		println('fetching public repo')
                 git 'https://github.com/photoshelter-dev/psapi-v4-doc.github.io.git'
+		sh 'git clone --single-branch --branch anthony https://github.com/photoshelter-dev/psapi-v4-doc.github.io.git'
+		sh 'pwd'
+		sh 'ls -la'
        		}
         }
 /* Skipping for now . step is working
@@ -55,6 +58,9 @@ pipeline {
         stage('Documentation Generation') {
             steps {
 		echo 'Generating documentation'
+		sh 'ls -la'
+		sh 'cd /var/jenkins_home/workspace/pecifications-workflow-mp_master'
+		sh 'ls -la'
 		sh 'chmod 500 run-redoc.exp'
 		sh './run-redoc.exp'
                 echo 'Deploying....'
