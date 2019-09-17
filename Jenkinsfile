@@ -17,23 +17,9 @@ pipeline {
             sh 'npm install -g create-openapi-repo'
             sh 'npm install -g @stoplight/prism-cli'
             sh 'npm install -g dredd'
-        //    sh 'sudo apt-get install expect'
-        //    sh 'sudo apt-get install curl'
           }
         }
-	stage('Cloning Git') {
-          steps {
-		echo 'Print env'
-   		sh "printenv | sort"
-		sh 'git branch'
-		println('fetching public repo')
-//                git 'https://github.com/photoshelter-dev/psapi-v4-doc.github.io.git'
-		sh 'git clone --single-branch --branch anthony https://github.com/photoshelter-dev/psapi-v4-doc.github.io.git'
-		sh 'pwd'
-		sh 'ls -la'
-       		}
-        }
-/* Skipping for now . step is working
+
         stage('Linting') {
             steps {
                 echo 'Linting...'
@@ -46,17 +32,21 @@ pipeline {
         stage('Syntax Validation') {
             steps {
                 echo 'Checking syntax'
-		sh 'swagger-cli validate -d --no-schema --no-spec definitions/photoshelter.json'
+		sh 'swagger-cli validate -d --no-schema --no-spec definitions/json/photoshelter.json'
             }
         }
+	// Each developer must have a .ps-api config file with the PROTOCOL:URL:PORT or their view
         stage('Contract Testing') {
             steps {
                 echo 'Contract Testing....'
-		sh 'dredd definitions/photoshelter.json http://anthony.dev.bitshelter.com:8090 --dry-run'
+		sh 'dredd definitions/json/photoshelter.json (head -n 1 .ps-api) --dry-run'
             }
         }
-*/
+	// Documentation generation for master only, developers can replicate the steps to generate their own docs
         stage('Documentation Generation') {
+	    when {
+		branch 'master'
+	    }
             steps {
 		echo 'Generating documentation'
 		sh 'ls -la'
