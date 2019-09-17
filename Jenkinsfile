@@ -55,6 +55,7 @@ pipeline {
         stage('Documentation Generation') {
             steps {
 		echo 'Generating documentation'
+		sh 'chmod 500 run-redoc.exp'
 		sh './run-redoc.exp'
                 echo 'Deploying....'
 		sh 'npm run gh-pages'
