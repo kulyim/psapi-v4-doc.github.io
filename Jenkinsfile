@@ -23,11 +23,13 @@ pipeline {
         }
         stage('Cloning Git') {
           steps {
-              echo 'Test'
+              echo 'Test clone git'
+
+		sh 'git clone git@github.com:photoshelter-dev/psapi-v4-doc.github.io.git'
  		//git branch: "${params.SPECIFIER}", url: "${GIT_URL}"
 		git branch: "${GIT_BRANCH}",
     		credentialsId: 'JenkinsAccesstoPSGit',
-    		url: 'https://github.com/photoshelter-dev/psapi-v4-doc.github.io.git'			
+    		url: 'git@github.com:photoshelter-dev/psapi-v4-doc.github.io.git'			
 //		echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
 //		echo $GIT_BRANCH
 echo 'Print env'
