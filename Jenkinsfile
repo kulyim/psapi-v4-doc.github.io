@@ -40,7 +40,8 @@ pipeline {
         stage('Contract Testing') {
             steps {
                 echo 'Contract Testing....'
-		def viewPort = readfile('.ps-api').trim()
+def viewPort = readfile('.ps-api').trim()
+		println $viewPort
 		sh "dredd definitions/json/photoshelter.json ${viewPort} --dry-run"
             }
         }
@@ -61,7 +62,6 @@ pipeline {
 		sh 'npm run gh-pages'
             }
         }
-
     }
 }
 
