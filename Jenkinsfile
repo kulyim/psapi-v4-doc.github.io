@@ -25,7 +25,7 @@ pipeline {
                 echo 'Linting...'
                 sh 'npm config ls'
 		println('Speccy')
-		sh 'speccy lint -v definitions/photoshelter.json'
+		sh 'speccy lint -v definitions/json/photoshelter.json'
             }
         }
    
