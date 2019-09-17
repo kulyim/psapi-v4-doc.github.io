@@ -25,11 +25,11 @@ pipeline {
           steps {
               echo 'Test clone git'
 
-		sh 'git clone git@github.com:photoshelter-dev/psapi-v4-doc.github.io.git'
+//		sh 'git clone git@github.com:photoshelter-dev/psapi-v4-doc.github.io.git'
  		//git branch: "${params.SPECIFIER}", url: "${GIT_URL}"
-		git branch: "${GIT_BRANCH}",
-    		credentialsId: 'JenkinsAccesstoPSGit',
-    		url: 'git@github.com:photoshelter-dev/psapi-v4-doc.github.io.git'			
+//		git branch: "${GIT_BRANCH}",
+    //		credentialsId: 'JenkinsAccesstoPSGit',
+    //		url: 'git@github.com:photoshelter-dev/psapi-v4-doc.github.io.git'			
 //		echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
 //		echo $GIT_BRANCH
 echo 'Print env'
@@ -37,9 +37,9 @@ echo 'Print env'
 //echo  ${scm.branch}
 //GITHUB_PR_TARGET_BRANCH
 //	sh 'printenv'			
-		sh 'ls -la'
+	//	sh 'ls -la'
 		
-            //  git 'https://github.com/photoshelter-dev/psapi-v4-doc.github.io.git'
+              git 'https://github.com/photoshelter-dev/psapi-v4-doc.github.io.git'
           }
         }
         stage('Linting') {
