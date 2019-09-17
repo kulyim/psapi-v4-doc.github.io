@@ -10,3 +10,6 @@ one more time we're gonna celebrate
 Oh yeah all right don't stop the dancing
 One more time we're gonna celebrate
 Oh yeah all right don't stop the dancing
+
+One more time we're gonna celebrate
+
