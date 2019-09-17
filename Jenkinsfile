@@ -25,6 +25,7 @@ pipeline {
           steps {
 		echo 'Print env'
    		sh "printenv | sort"
+		sh 'git branch'
 		println('fetching public repo')
 //                git 'https://github.com/photoshelter-dev/psapi-v4-doc.github.io.git'
 		sh 'git clone --single-branch --branch anthony https://github.com/photoshelter-dev/psapi-v4-doc.github.io.git'
