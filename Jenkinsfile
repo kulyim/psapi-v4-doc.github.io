@@ -23,23 +23,13 @@ pipeline {
         }
         stage('Cloning Git') {
           steps {
-              echo 'Test clone git'
-
-//		sh 'git clone git@github.com:photoshelter-dev/psapi-v4-doc.github.io.git'
- 		//git branch: "${params.SPECIFIER}", url: "${GIT_URL}"
-//		git branch: "${GIT_BRANCH}",
-    //		credentialsId: 'JenkinsAccesstoPSGit',
-    //		url: 'git@github.com:photoshelter-dev/psapi-v4-doc.github.io.git'			
-//		echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-//		echo $GIT_BRANCH
-echo 'Print env'
-   sh "printenv | sort"
-//echo  ${scm.branch}
-//GITHUB_PR_TARGET_BRANCH
-//	sh 'printenv'			
-	//	sh 'ls -la'
-		
-              git 'https://github.com/photoshelter-dev/psapi-v4-doc.github.io.git'
+		echo 'Print env'
+   		sh "printenv | sort"
+		println('fetching public repo')
+              	git 'https://github.com/photoshelter-dev/psapi-v4-doc.github.io.git'
+# NO NEED TO ACCESS THE PRIVATE REPOOOOO
+#		println('fetching private repo')
+ #		git 'https://gh.corp.bitshelter.com/BitShelter/photoshelter-web.git'
           }
         }
         stage('Linting') {
@@ -54,14 +44,16 @@ echo 'Print env'
         stage('Syntax Validation') {
             steps {
                 echo 'Checking syntax'
-		
+		sh 'swagger-cli validate -d --no-schema --no-spec definitions/photoshelter.json'
             }
         }
-/*        stage('Contract Testing') {
+        stage('Contract Testing') {
             steps {
-                echo 'Deploying....'
+                echo 'Contract Testing....'
+		sh 'dredd definitions/photoshelter.json http://anthony.dev.bitshelter.com:8090 --dry-run'
             }
         }
+/*
         stage('Documentation Generation') {
             steps {
                 echo 'Deploying....'
