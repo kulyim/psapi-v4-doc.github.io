@@ -26,11 +26,8 @@ pipeline {
 		echo 'Print env'
    		sh "printenv | sort"
 		println('fetching public repo')
-              	git 'https://github.com/photoshelter-dev/psapi-v4-doc.github.io.git'
-# NO NEED TO ACCESS THE PRIVATE REPOOOOO
-#		println('fetching private repo')
- #		git 'https://gh.corp.bitshelter.com/BitShelter/photoshelter-web.git'
-          }
+                git 'https://github.com/photoshelter-dev/psapi-v4-doc.github.io.git'
+       		}
         }
         stage('Linting') {
             steps {
