@@ -22,6 +22,58 @@
   "tags" : [ {
     "name" : "Authenticate"
   } ],
-  "paths" : { },
-  "components" : { }
+  "paths" : {
+    "/authenticate" : {
+      "post" : {
+        "summary" : "Use your PhotoShelter credentials to log in to your account.",
+        "description" : "Verify user is a member.",
+        "operationId" : "authenticateT",
+        "parameters" : [ {
+          "name" : "X-PS-Api-Key",
+          "in" : "header",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/x-www-form-urlencoded" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "response",
+            "content" : {
+              "text/html" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "body" : {
+        "required" : [ "email" ],
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string",
+            "format" : "email"
+          }
+        }
+      }
+    }
+  }
 }
