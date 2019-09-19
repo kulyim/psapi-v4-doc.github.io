@@ -28,6 +28,17 @@
         "summary" : "Use your PhotoShelter credentials to log in to your account.",
         "description" : "Verify user is a member.",
         "operationId" : "authenticate-get",
+        "parameters" : [ {
+          "name" : "api_key",
+          "in" : "query",
+          "description" : "The API Key. Can be requested if you do not have one.",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/ApiKey"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "/galleries/{gallery_id} - HTTP 200 OK Response.\n",
@@ -87,6 +98,9 @@
   },
   "components" : {
     "schemas" : {
+      "ApiKey" : {
+        "type" : "string"
+      },
       "Gallery" : {
         "required" : [ "attributes", "id", "type" ],
         "type" : "object",
