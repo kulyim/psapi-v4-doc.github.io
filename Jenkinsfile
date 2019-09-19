@@ -44,7 +44,6 @@ pipeline {
             steps {
                 echo 'Contract Testing....'
 //		def viewPort = readfile('.ps-api').trim()
-		println $
 		sh "dredd definitions/json/photoshelter.json echo \${VIEW} --dry-run"
             }
         }
