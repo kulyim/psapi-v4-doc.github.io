@@ -94,6 +94,80 @@
           }
         }
       }
+    },
+    "/authenticate/logout" : {
+      "get" : {
+        "summary" : "Log out of PhotoShelter.",
+        "description" : "Log our of PhotoShelter",
+        "operationId" : "logout",
+        "parameters" : [ {
+          "name" : "X-PS-Api-Key",
+          "in" : "header",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "object"
+          }
+        }, {
+          "name" : "X-PS-Auth-Token",
+          "in" : "header",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "object"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Generic HTTP 200 Ok Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_1"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Log out of PhotoShelter.",
+        "description" : "Log out of PhotoShelter",
+        "operationId" : "logout_post",
+        "parameters" : [ {
+          "name" : "X-PS-Api-Key",
+          "in" : "header",
+          "required" : false,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "object"
+          }
+        }, {
+          "name" : "X-PS-Auth-Token",
+          "in" : "header",
+          "required" : false,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "object"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Generic HTTP 200 Ok Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_1"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components" : {
@@ -161,6 +235,25 @@
           },
           "meta" : {
             "$ref" : "#/components/schemas/MetaTag"
+          }
+        }
+      },
+      "inline_response_200_1_meta" : {
+        "required" : [ "status" ],
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "string",
+            "example" : "OK"
+          }
+        }
+      },
+      "inline_response_200_1" : {
+        "required" : [ "meta" ],
+        "type" : "object",
+        "properties" : {
+          "meta" : {
+            "$ref" : "#/components/schemas/inline_response_200_1_meta"
           }
         }
       },
