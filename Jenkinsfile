@@ -7,6 +7,7 @@ pipeline {
 
     environment {
         CI = 'true'
+	VIEW = readfile('.ps-api').trim()
     }
     stages {
         stage('Install dependencies') {
@@ -18,8 +19,7 @@ pipeline {
             sh 'npm install -g create-openapi-repo'
             sh 'npm install -g @stoplight/prism-cli'
             sh 'npm install -g dredd'
-def viewPort = readfile('.ps-api').trim()
-sh "echo ${viewPort}"
+
           }
         }
 
