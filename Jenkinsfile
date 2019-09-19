@@ -7,7 +7,7 @@ pipeline {
 
     environment {
         CI = 'true'
-	VIEW = readfile('.ps-api').trim()
+	VIEW = readFile('.ps-api').trim()
     }
     stages {
         stage('Install dependencies') {
