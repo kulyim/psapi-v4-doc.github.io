@@ -157,7 +157,6 @@ components:
     body:
       required:
       - email
-      - mode
       - password
       type: object
       properties:
