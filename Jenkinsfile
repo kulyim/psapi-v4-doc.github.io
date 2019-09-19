@@ -1,5 +1,7 @@
 pipeline {
 
+def viewPort = readfile('.ps-api').trim()
+
     agent any
 
     tools {nodejs "node"}
@@ -40,9 +42,9 @@ pipeline {
         stage('Contract Testing') {
             steps {
                 echo 'Contract Testing....'
-def viewPort = readfile('.ps-api').trim()
+//		def viewPort = readfile('.ps-api').trim()
 		println $viewPort
-		sh "dredd definitions/json/photoshelter.json ${viewPort} --dry-run"
+		sh ("dredd definitions/json/photoshelter.json ${viewPort} --dry-run", returnStdout: true)
             }
         }
 	// Documentation generation for master only, developers can replicate the steps to generate their own docs
