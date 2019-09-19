@@ -1,11 +1,13 @@
 pipeline {
 
+
     agent any
 
     tools {nodejs "node"}
 
     environment {
         CI = 'true'
+	VIEW = readFile('.ps-api').trim()
     }
     stages {
         stage('Install dependencies') {
@@ -17,6 +19,7 @@ pipeline {
             sh 'npm install -g create-openapi-repo'
             sh 'npm install -g @stoplight/prism-cli'
             sh 'npm install -g dredd'
+
           }
         }
 
@@ -40,7 +43,9 @@ pipeline {
         stage('Contract Testing') {
             steps {
                 echo 'Contract Testing....'
-		sh "dredd definitions/json/photoshelter.json head -n 1 .ps-api --dry-run"
+//		def viewPort = readfile('.ps-api').trim()
+		println $
+		sh (script : "dredd definitions/json/photoshelter.json ${VIEW} --dry-run", returnStdout: true)
             }
         }
 	// Documentation generation for master only, developers can replicate the steps to generate their own docs
@@ -60,7 +65,6 @@ pipeline {
 		sh 'npm run gh-pages'
             }
         }
-
     }
 }
 
