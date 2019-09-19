@@ -71,6 +71,30 @@ paths:
               parameters:
                 gallery_id: $response.body#/data/id
               description: Links to self
+    post:
+      summary: Use your PhotoShelter credentials to log in to your account.
+      description: Verify user is a member.
+      operationId: authenticate
+      parameters:
+      - name: X-PS-Api-Key
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/body'
+      responses:
+        200:
+          description: response
+          content:
+            text/html:
+              schema:
+                type: string
   /authenticate/logout:
     get:
       summary: Log out of PhotoShelter.
@@ -177,6 +201,14 @@ components:
           $ref: '#/components/schemas/Gallery'
         meta:
           $ref: '#/components/schemas/MetaTag'
+    body:
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
     inline_response_200_1_meta:
       required:
       - status
