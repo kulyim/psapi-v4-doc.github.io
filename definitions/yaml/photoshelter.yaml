@@ -1,0 +1,54 @@
+openapi: 3.0.0
+info:
+  title: PhotoShelter API v4
+  description: '# PhotoShelter API v4 definition'
+  termsOfService: https://www.photoshelter.com/support/terms/
+  contact:
+    name: PhotoShelter API Support Team
+    url: https://support.photoshelter.com
+    email: api-support@photoshelter.com
+  license:
+    name: PhotoShelter License
+    url: https://www.photoshelter.com/support/license
+  version: Yemi
+servers:
+- url: https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4
+  description: PhotoShelter Auto Mocking API
+tags:
+- name: Authenticate
+paths:
+  /authenticate:
+    post:
+      summary: Use your PhotoShelter credentials to log in to your account.
+      description: Verify user is a member.
+      operationId: authenticate
+      parameters:
+      - name: X-PS-Api-Key
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/body'
+      responses:
+        200:
+          description: response
+          content:
+            text/html:
+              schema:
+                type: string
+components:
+  schemas:
+    body:
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
