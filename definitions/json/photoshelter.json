@@ -215,7 +215,7 @@
         }
       },
       "body" : {
-        "required" : [ "email", "mode", "password" ],
+        "required" : [ "email", "password" ],
         "type" : "object",
         "properties" : {
           "email" : {
