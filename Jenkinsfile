@@ -1,6 +1,5 @@
 pipeline {
 
-def viewPort = readfile('.ps-api').trim()
 
     agent any
 
@@ -19,6 +18,8 @@ def viewPort = readfile('.ps-api').trim()
             sh 'npm install -g create-openapi-repo'
             sh 'npm install -g @stoplight/prism-cli'
             sh 'npm install -g dredd'
+def viewPort = readfile('.ps-api').trim()
+sh "echo ${viewPort}"
           }
         }
 
