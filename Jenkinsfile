@@ -48,9 +48,9 @@ pipeline {
         }
 	// Documentation generation for master only, developers can replicate the steps to generate their own docs
         stage('Documentation Generation') {
-/*	    when {
-		branch 'master'
-	    } /*
+//	    when {
+//		branch 'master'
+//	    } 
             steps {
 		echo 'Generating documentation'
 		sh 'ls -la'
