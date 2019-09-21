@@ -43,7 +43,7 @@ pipeline {
         stage('Contract Testing') {
             steps {
                 echo 'Contract Testing....'
-		sh "dredd definitions/json/photoshelter.json \${VIEW} --dry-run"
+		sh "dredd definitions/json/photoshelter.json \${VIEW} --loglevel error --method GET,POST,DELETE --sorted"
             }
         }
 	// Documentation generation for master only, developers can replicate the steps to generate their own docs
