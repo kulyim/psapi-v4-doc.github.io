@@ -1,6 +1,6 @@
 <?php
 /**
- * GalleryLinks
+ * ApiKey
  *
  * PHP version 5
  *
@@ -26,20 +26,20 @@
  * Do not edit the class manually.
  */
 
-namespace PhotoShelter\psPackage;
+namespace PhotoShelter\APIv4;
 
 use \ArrayAccess;
 use \PhotoShelter\ObjectSerializer;
 
 /**
- * GalleryLinks Class Doc Comment
+ * ApiKey Class Doc Comment
  *
  * @category Class
  * @package  PhotoShelter
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class GalleryLinks implements ModelInterface, ArrayAccess
+class ApiKey implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class GalleryLinks implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Gallery_links';
+    protected static $swaggerModelName = 'ApiKey';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,7 +56,7 @@ class GalleryLinks implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'self' => 'string'    ];
+            ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -64,7 +64,7 @@ class GalleryLinks implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'self' => null    ];
+            ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -93,7 +93,7 @@ class GalleryLinks implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'self' => 'self'    ];
+            ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -101,7 +101,7 @@ class GalleryLinks implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'self' => 'setSelf'    ];
+            ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -109,7 +109,7 @@ class GalleryLinks implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'self' => 'getSelf'    ];
+            ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -169,7 +169,6 @@ class GalleryLinks implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['self'] = isset($data['self']) ? $data['self'] : null;
     }
 
     /**
@@ -195,30 +194,6 @@ class GalleryLinks implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets self
-     *
-     * @return string
-     */
-    public function getSelf()
-    {
-        return $this->container['self'];
-    }
-
-    /**
-     * Sets self
-     *
-     * @param string $self Link to itself
-     *
-     * @return $this
-     */
-    public function setSelf($self)
-    {
-        $this->container['self'] = $self;
-
-        return $this;
-    }
     /**
      * Returns true if offset exists. False otherwise.
      *

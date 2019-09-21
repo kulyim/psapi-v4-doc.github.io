@@ -26,7 +26,7 @@
  * Do not edit the class manually.
  */
 
-namespace PhotoShelter\psPackage;
+namespace PhotoShelter\APIv4;
 
 use \ArrayAccess;
 use \PhotoShelter\ObjectSerializer;

@@ -124,7 +124,8 @@
         }, {
           "name" : "api_key",
           "in" : "query",
-          "required" : false,
+          "description" : "Your PhotoShelter API Key",
+          "required" : true,
           "style" : "form",
           "explode" : true,
           "schema" : {

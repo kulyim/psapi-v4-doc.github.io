@@ -1,6 +1,6 @@
 <?php
 /**
- * ErrorLinks
+ * ErrorErrors
  *
  * PHP version 5
  *
@@ -26,20 +26,20 @@
  * Do not edit the class manually.
  */
 
-namespace PhotoShelter\psPackage;
+namespace PhotoShelter\APIv4;
 
 use \ArrayAccess;
 use \PhotoShelter\ObjectSerializer;
 
 /**
- * ErrorLinks Class Doc Comment
+ * ErrorErrors Class Doc Comment
  *
  * @category Class
  * @package  PhotoShelter
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class ErrorLinks implements ModelInterface, ArrayAccess
+class ErrorErrors implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class ErrorLinks implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Error_links';
+    protected static $swaggerModelName = 'Error_errors';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,7 +56,11 @@ class ErrorLinks implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'about' => 'string'    ];
+        'id' => 'string',
+'links' => '\PhotoShelter\APIv4\ErrorLinks',
+'title' => 'string',
+'status' => 'string',
+'detail' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -64,7 +68,11 @@ class ErrorLinks implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'about' => null    ];
+        'id' => null,
+'links' => null,
+'title' => null,
+'status' => null,
+'detail' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -93,7 +101,11 @@ class ErrorLinks implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'about' => 'about'    ];
+        'id' => 'id',
+'links' => 'links',
+'title' => 'title',
+'status' => 'status',
+'detail' => 'detail'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -101,7 +113,11 @@ class ErrorLinks implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'about' => 'setAbout'    ];
+        'id' => 'setId',
+'links' => 'setLinks',
+'title' => 'setTitle',
+'status' => 'setStatus',
+'detail' => 'setDetail'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -109,7 +125,11 @@ class ErrorLinks implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'about' => 'getAbout'    ];
+        'id' => 'getId',
+'links' => 'getLinks',
+'title' => 'getTitle',
+'status' => 'getStatus',
+'detail' => 'getDetail'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -169,7 +189,11 @@ class ErrorLinks implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['about'] = isset($data['about']) ? $data['about'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['links'] = isset($data['links']) ? $data['links'] : null;
+        $this->container['title'] = isset($data['title']) ? $data['title'] : null;
+        $this->container['status'] = isset($data['status']) ? $data['status'] : null;
+        $this->container['detail'] = isset($data['detail']) ? $data['detail'] : null;
     }
 
     /**
@@ -197,25 +221,121 @@ class ErrorLinks implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets about
+     * Gets id
      *
      * @return string
      */
-    public function getAbout()
+    public function getId()
     {
-        return $this->container['about'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets about
+     * Sets id
      *
-     * @param string $about about
+     * @param string $id A unique identifier for this occurrence of the problem
      *
      * @return $this
      */
-    public function setAbout($about)
+    public function setId($id)
     {
-        $this->container['about'] = $about;
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets links
+     *
+     * @return \PhotoShelter\APIv4\ErrorLinks
+     */
+    public function getLinks()
+    {
+        return $this->container['links'];
+    }
+
+    /**
+     * Sets links
+     *
+     * @param \PhotoShelter\APIv4\ErrorLinks $links links
+     *
+     * @return $this
+     */
+    public function setLinks($links)
+    {
+        $this->container['links'] = $links;
+
+        return $this;
+    }
+
+    /**
+     * Gets title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->container['title'];
+    }
+
+    /**
+     * Sets title
+     *
+     * @param string $title A short, human-readable summary of the problem type
+     *
+     * @return $this
+     */
+    public function setTitle($title)
+    {
+        $this->container['title'] = $title;
+
+        return $this;
+    }
+
+    /**
+     * Gets status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->container['status'];
+    }
+
+    /**
+     * Sets status
+     *
+     * @param string $status The HTTP status code set by the origin server for this occurrence of the problem.
+     *
+     * @return $this
+     */
+    public function setStatus($status)
+    {
+        $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets detail
+     *
+     * @return string
+     */
+    public function getDetail()
+    {
+        return $this->container['detail'];
+    }
+
+    /**
+     * Sets detail
+     *
+     * @param string $detail An human readable explanation specific to this occurrence of the problem.
+     *
+     * @return $this
+     */
+    public function setDetail($detail)
+    {
+        $this->container['detail'] = $detail;
 
         return $this;
     }

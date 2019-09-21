@@ -1,6 +1,6 @@
 <?php
 /**
- * Gallery
+ * InlineResponse200
  *
  * PHP version 5
  *
@@ -26,20 +26,20 @@
  * Do not edit the class manually.
  */
 
-namespace PhotoShelter\psPackage;
+namespace PhotoShelter\APIv4;
 
 use \ArrayAccess;
 use \PhotoShelter\ObjectSerializer;
 
 /**
- * Gallery Class Doc Comment
+ * InlineResponse200 Class Doc Comment
  *
  * @category Class
  * @package  PhotoShelter
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class Gallery implements ModelInterface, ArrayAccess
+class InlineResponse200 implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class Gallery implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Gallery';
+    protected static $swaggerModelName = 'inline_response_200';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,10 +56,8 @@ class Gallery implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'id' => 'string',
-'type' => 'string',
-'attributes' => '\PhotoShelter\psPackage\GalleryAttributes',
-'links' => '\PhotoShelter\psPackage\GalleryLinks'    ];
+        'data' => '\PhotoShelter\APIv4\Gallery[]',
+'meta' => '\PhotoShelter\APIv4\MetaTag'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -67,10 +65,8 @@ class Gallery implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'id' => null,
-'type' => null,
-'attributes' => null,
-'links' => null    ];
+        'data' => null,
+'meta' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -99,10 +95,8 @@ class Gallery implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-'type' => 'type',
-'attributes' => 'attributes',
-'links' => 'links'    ];
+        'data' => 'data',
+'meta' => 'meta'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -110,10 +104,8 @@ class Gallery implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-'type' => 'setType',
-'attributes' => 'setAttributes',
-'links' => 'setLinks'    ];
+        'data' => 'setData',
+'meta' => 'setMeta'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -121,10 +113,8 @@ class Gallery implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-'type' => 'getType',
-'attributes' => 'getAttributes',
-'links' => 'getLinks'    ];
+        'data' => 'getData',
+'meta' => 'getMeta'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -184,10 +174,8 @@ class Gallery implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
-        $this->container['attributes'] = isset($data['attributes']) ? $data['attributes'] : null;
-        $this->container['links'] = isset($data['links']) ? $data['links'] : null;
+        $this->container['data'] = isset($data['data']) ? $data['data'] : null;
+        $this->container['meta'] = isset($data['meta']) ? $data['meta'] : null;
     }
 
     /**
@@ -199,14 +187,8 @@ class Gallery implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
-        }
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
-        }
-        if ($this->container['attributes'] === null) {
-            $invalidProperties[] = "'attributes' can't be null";
+        if ($this->container['data'] === null) {
+            $invalidProperties[] = "'data' can't be null";
         }
         return $invalidProperties;
     }
@@ -224,97 +206,49 @@ class Gallery implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets id
+     * Gets data
      *
-     * @return string
+     * @return \PhotoShelter\APIv4\Gallery[]
      */
-    public function getId()
+    public function getData()
     {
-        return $this->container['id'];
+        return $this->container['data'];
     }
 
     /**
-     * Sets id
+     * Sets data
      *
-     * @param string $id Gallery ID
+     * @param \PhotoShelter\APIv4\Gallery[] $data data
      *
      * @return $this
      */
-    public function setId($id)
+    public function setData($data)
     {
-        $this->container['id'] = $id;
+        $this->container['data'] = $data;
 
         return $this;
     }
 
     /**
-     * Gets type
+     * Gets meta
      *
-     * @return string
+     * @return \PhotoShelter\APIv4\MetaTag
      */
-    public function getType()
+    public function getMeta()
     {
-        return $this->container['type'];
+        return $this->container['meta'];
     }
 
     /**
-     * Sets type
+     * Sets meta
      *
-     * @param string $type type
+     * @param \PhotoShelter\APIv4\MetaTag $meta meta
      *
      * @return $this
      */
-    public function setType($type)
+    public function setMeta($meta)
     {
-        $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Gets attributes
-     *
-     * @return \PhotoShelter\psPackage\GalleryAttributes
-     */
-    public function getAttributes()
-    {
-        return $this->container['attributes'];
-    }
-
-    /**
-     * Sets attributes
-     *
-     * @param \PhotoShelter\psPackage\GalleryAttributes $attributes attributes
-     *
-     * @return $this
-     */
-    public function setAttributes($attributes)
-    {
-        $this->container['attributes'] = $attributes;
-
-        return $this;
-    }
-
-    /**
-     * Gets links
-     *
-     * @return \PhotoShelter\psPackage\GalleryLinks
-     */
-    public function getLinks()
-    {
-        return $this->container['links'];
-    }
-
-    /**
-     * Sets links
-     *
-     * @param \PhotoShelter\psPackage\GalleryLinks $links links
-     *
-     * @return $this
-     */
-    public function setLinks($links)
-    {
-        $this->container['links'] = $links;
+        $this->container['meta'] = $meta;
 
         return $this;
     }

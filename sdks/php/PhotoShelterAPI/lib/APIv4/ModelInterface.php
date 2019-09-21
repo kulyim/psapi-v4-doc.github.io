@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  PhotoShelter\psPackage
+ * @package  PhotoShelter\APIv4
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -26,12 +26,12 @@
  * Do not edit the class manually.
  */
 
-namespace PhotoShelter\psPackage;
+namespace PhotoShelter\APIv4;
 
 /**
  * Interface abstracting model access.
  *
- * @package PhotoShelter\psPackage
+ * @package PhotoShelter\APIv4
  * @author  Swagger Codegen team
  */
 interface ModelInterface

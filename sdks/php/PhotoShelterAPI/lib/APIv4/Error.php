@@ -1,6 +1,6 @@
 <?php
 /**
- * ApiKey
+ * Error
  *
  * PHP version 5
  *
@@ -26,20 +26,21 @@
  * Do not edit the class manually.
  */
 
-namespace PhotoShelter\psPackage;
+namespace PhotoShelter\APIv4;
 
 use \ArrayAccess;
 use \PhotoShelter\ObjectSerializer;
 
 /**
- * ApiKey Class Doc Comment
+ * Error Class Doc Comment
  *
  * @category Class
+ * @description This object generates errors in compliance with RFC 7807 API Problem
  * @package  PhotoShelter
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class ApiKey implements ModelInterface, ArrayAccess
+class Error implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +49,7 @@ class ApiKey implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'ApiKey';
+    protected static $swaggerModelName = 'Error';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,7 +57,7 @@ class ApiKey implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-            ];
+        'errors' => '\PhotoShelter\APIv4\ErrorErrors[]'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -64,7 +65,7 @@ class ApiKey implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-            ];
+        'errors' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -93,7 +94,7 @@ class ApiKey implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-            ];
+        'errors' => 'errors'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -101,7 +102,7 @@ class ApiKey implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-            ];
+        'errors' => 'setErrors'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -109,7 +110,7 @@ class ApiKey implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-            ];
+        'errors' => 'getErrors'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -169,6 +170,7 @@ class ApiKey implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
     }
 
     /**
@@ -180,6 +182,9 @@ class ApiKey implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['errors'] === null) {
+            $invalidProperties[] = "'errors' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -194,6 +199,30 @@ class ApiKey implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets errors
+     *
+     * @return \PhotoShelter\APIv4\ErrorErrors[]
+     */
+    public function getErrors()
+    {
+        return $this->container['errors'];
+    }
+
+    /**
+     * Sets errors
+     *
+     * @param \PhotoShelter\APIv4\ErrorErrors[] $errors errors
+     *
+     * @return $this
+     */
+    public function setErrors($errors)
+    {
+        $this->container['errors'] = $errors;
+
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
      *

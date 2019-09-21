@@ -15,7 +15,7 @@
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./lib/APIv4Client</directory>
-            <directory suffix=".php">./lib/psPackage</directory>
+            <directory suffix=".php">./lib/APIv4</directory>
         </whitelist>
     </filter>
 </phpunit>

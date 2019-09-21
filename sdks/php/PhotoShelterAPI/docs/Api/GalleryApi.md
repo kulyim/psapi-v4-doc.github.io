@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**galleriesGet**](GalleryApi.md#galleriesget) | **GET** /galleries | Gets all the galleries for the account.
 
 # **galleriesGet**
-> \PhotoShelter\psPackage\InlineResponse200 galleriesGet($page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated, $api_key)
+> \PhotoShelter\APIv4\InlineResponse200 galleriesGet($api_key, $page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated)
 
 Gets all the galleries for the account.
 
@@ -23,6 +23,7 @@ $apiInstance = new PhotoShelter\APIv4Client\GalleryApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
+$api_key = new \PhotoShelter\APIv4\ApiKey(); // \PhotoShelter\APIv4\ApiKey | Your PhotoShelter API Key
 $page = 56; // int | Page number
 $per_page = 56; // int | Number of rows returned per page
 $sort_by = "sort_by_example"; // string | Sort by gallery property
@@ -31,10 +32,9 @@ $name = "name_example"; // string | Full or partial gallery name
 $parent = "parent_example"; // string | Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent.
 $portfolio = true; // bool | Filter the result set to return galleries listed on public site
 $recently_updated = true; // bool | Filter the result set to return galleries recently updated
-$api_key = new \PhotoShelter\psPackage\ApiKey(); // \PhotoShelter\psPackage\ApiKey | 
 
 try {
-    $result = $apiInstance->galleriesGet($page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated, $api_key);
+    $result = $apiInstance->galleriesGet($api_key, $page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling GalleryApi->galleriesGet: ', $e->getMessage(), PHP_EOL;
@@ -46,6 +46,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **api_key** | [**\PhotoShelter\APIv4\ApiKey**](../Model/.md)| Your PhotoShelter API Key |
  **page** | **int**| Page number | [optional]
  **per_page** | **int**| Number of rows returned per page | [optional]
  **sort_by** | **string**| Sort by gallery property | [optional]
@@ -54,11 +55,10 @@ Name | Type | Description  | Notes
  **parent** | **string**| Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent. | [optional]
  **portfolio** | **bool**| Filter the result set to return galleries listed on public site | [optional]
  **recently_updated** | **bool**| Filter the result set to return galleries recently updated | [optional]
- **api_key** | [**\PhotoShelter\psPackage\ApiKey**](../Model/.md)|  | [optional]
 
 ### Return type
 
-[**\PhotoShelter\psPackage\InlineResponse200**](../Model/InlineResponse200.md)
+[**\PhotoShelter\APIv4\InlineResponse200**](../Model/InlineResponse200.md)
 
 ### Authorization
 

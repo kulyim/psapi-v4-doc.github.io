@@ -1,6 +1,6 @@
 <?php
 /**
- * Error
+ * ErrorLinks
  *
  * PHP version 5
  *
@@ -26,21 +26,20 @@
  * Do not edit the class manually.
  */
 
-namespace PhotoShelter\psPackage;
+namespace PhotoShelter\APIv4;
 
 use \ArrayAccess;
 use \PhotoShelter\ObjectSerializer;
 
 /**
- * Error Class Doc Comment
+ * ErrorLinks Class Doc Comment
  *
  * @category Class
- * @description This object generates errors in compliance with RFC 7807 API Problem
  * @package  PhotoShelter
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class Error implements ModelInterface, ArrayAccess
+class ErrorLinks implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +48,7 @@ class Error implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Error';
+    protected static $swaggerModelName = 'Error_links';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +56,7 @@ class Error implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'errors' => '\PhotoShelter\psPackage\ErrorErrors[]'    ];
+        'about' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -65,7 +64,7 @@ class Error implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'errors' => null    ];
+        'about' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -94,7 +93,7 @@ class Error implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'errors' => 'errors'    ];
+        'about' => 'about'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -102,7 +101,7 @@ class Error implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'errors' => 'setErrors'    ];
+        'about' => 'setAbout'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -110,7 +109,7 @@ class Error implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'errors' => 'getErrors'    ];
+        'about' => 'getAbout'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -170,7 +169,7 @@ class Error implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
+        $this->container['about'] = isset($data['about']) ? $data['about'] : null;
     }
 
     /**
@@ -182,9 +181,6 @@ class Error implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['errors'] === null) {
-            $invalidProperties[] = "'errors' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -201,25 +197,25 @@ class Error implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets errors
+     * Gets about
      *
-     * @return \PhotoShelter\psPackage\ErrorErrors[]
+     * @return string
      */
-    public function getErrors()
+    public function getAbout()
     {
-        return $this->container['errors'];
+        return $this->container['about'];
     }
 
     /**
-     * Sets errors
+     * Sets about
      *
-     * @param \PhotoShelter\psPackage\ErrorErrors[] $errors errors
+     * @param string $about about
      *
      * @return $this
      */
-    public function setErrors($errors)
+    public function setAbout($about)
     {
-        $this->container['errors'] = $errors;
+        $this->container['about'] = $about;
 
         return $this;
     }

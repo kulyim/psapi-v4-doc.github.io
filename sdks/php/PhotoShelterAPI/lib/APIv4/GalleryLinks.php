@@ -1,6 +1,6 @@
 <?php
 /**
- * ErrorErrors
+ * GalleryLinks
  *
  * PHP version 5
  *
@@ -26,20 +26,20 @@
  * Do not edit the class manually.
  */
 
-namespace PhotoShelter\psPackage;
+namespace PhotoShelter\APIv4;
 
 use \ArrayAccess;
 use \PhotoShelter\ObjectSerializer;
 
 /**
- * ErrorErrors Class Doc Comment
+ * GalleryLinks Class Doc Comment
  *
  * @category Class
  * @package  PhotoShelter
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class ErrorErrors implements ModelInterface, ArrayAccess
+class GalleryLinks implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class ErrorErrors implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Error_errors';
+    protected static $swaggerModelName = 'Gallery_links';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,11 +56,7 @@ class ErrorErrors implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'id' => 'string',
-'links' => '\PhotoShelter\psPackage\ErrorLinks',
-'title' => 'string',
-'status' => 'string',
-'detail' => 'string'    ];
+        'self' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -68,11 +64,7 @@ class ErrorErrors implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'id' => null,
-'links' => null,
-'title' => null,
-'status' => null,
-'detail' => null    ];
+        'self' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -101,11 +93,7 @@ class ErrorErrors implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-'links' => 'links',
-'title' => 'title',
-'status' => 'status',
-'detail' => 'detail'    ];
+        'self' => 'self'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -113,11 +101,7 @@ class ErrorErrors implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-'links' => 'setLinks',
-'title' => 'setTitle',
-'status' => 'setStatus',
-'detail' => 'setDetail'    ];
+        'self' => 'setSelf'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -125,11 +109,7 @@ class ErrorErrors implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-'links' => 'getLinks',
-'title' => 'getTitle',
-'status' => 'getStatus',
-'detail' => 'getDetail'    ];
+        'self' => 'getSelf'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -189,11 +169,7 @@ class ErrorErrors implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['links'] = isset($data['links']) ? $data['links'] : null;
-        $this->container['title'] = isset($data['title']) ? $data['title'] : null;
-        $this->container['status'] = isset($data['status']) ? $data['status'] : null;
-        $this->container['detail'] = isset($data['detail']) ? $data['detail'] : null;
+        $this->container['self'] = isset($data['self']) ? $data['self'] : null;
     }
 
     /**
@@ -221,121 +197,25 @@ class ErrorErrors implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets id
+     * Gets self
      *
      * @return string
      */
-    public function getId()
+    public function getSelf()
     {
-        return $this->container['id'];
+        return $this->container['self'];
     }
 
     /**
-     * Sets id
+     * Sets self
      *
-     * @param string $id A unique identifier for this occurrence of the problem
+     * @param string $self Link to itself
      *
      * @return $this
      */
-    public function setId($id)
+    public function setSelf($self)
     {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets links
-     *
-     * @return \PhotoShelter\psPackage\ErrorLinks
-     */
-    public function getLinks()
-    {
-        return $this->container['links'];
-    }
-
-    /**
-     * Sets links
-     *
-     * @param \PhotoShelter\psPackage\ErrorLinks $links links
-     *
-     * @return $this
-     */
-    public function setLinks($links)
-    {
-        $this->container['links'] = $links;
-
-        return $this;
-    }
-
-    /**
-     * Gets title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->container['title'];
-    }
-
-    /**
-     * Sets title
-     *
-     * @param string $title A short, human-readable summary of the problem type
-     *
-     * @return $this
-     */
-    public function setTitle($title)
-    {
-        $this->container['title'] = $title;
-
-        return $this;
-    }
-
-    /**
-     * Gets status
-     *
-     * @return string
-     */
-    public function getStatus()
-    {
-        return $this->container['status'];
-    }
-
-    /**
-     * Sets status
-     *
-     * @param string $status The HTTP status code set by the origin server for this occurrence of the problem.
-     *
-     * @return $this
-     */
-    public function setStatus($status)
-    {
-        $this->container['status'] = $status;
-
-        return $this;
-    }
-
-    /**
-     * Gets detail
-     *
-     * @return string
-     */
-    public function getDetail()
-    {
-        return $this->container['detail'];
-    }
-
-    /**
-     * Sets detail
-     *
-     * @param string $detail An human readable explanation specific to this occurrence of the problem.
-     *
-     * @return $this
-     */
-    public function setDetail($detail)
-    {
-        $this->container['detail'] = $detail;
+        $this->container['self'] = $self;
 
         return $this;
     }
