@@ -121,6 +121,15 @@
             "type" : "boolean",
             "default" : false
           }
+        }, {
+          "name" : "api_key",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/ApiKey"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -169,7 +178,7 @@
                 "style" : "simple",
                 "explode" : false,
                 "schema" : {
-                  "type" : "integer"
+                  "type" : "string"
                 },
                 "example" : "WWW-Authenticate: Bearer"
               }
@@ -281,6 +290,9 @@
   },
   "components" : {
     "schemas" : {
+      "ApiKey" : {
+        "type" : "string"
+      },
       "Gallery" : {
         "required" : [ "attributes", "id", "type" ],
         "type" : "object",
