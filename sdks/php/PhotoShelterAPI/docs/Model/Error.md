@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**errors** | [**\PhotoShelter\psPackage\ErrorErrors[]**](ErrorErrors.md) |  | 
+**errors** | [**\PhotoShelter\APIv4\ErrorErrors[]**](ErrorErrors.md) |  | 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 
