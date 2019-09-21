@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**galleriesGet**](GalleryApi.md#galleriesget) | **GET** /galleries | Gets all the galleries for the account.
 
 # **galleriesGet**
-> \PhotoShelter\psPackage\InlineResponse200 galleriesGet($page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated)
+> \PhotoShelter\psPackage\InlineResponse200 galleriesGet($page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated, $api_key)
 
 Gets all the galleries for the account.
 
@@ -31,9 +31,10 @@ $name = "name_example"; // string | Full or partial gallery name
 $parent = "parent_example"; // string | Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent.
 $portfolio = true; // bool | Filter the result set to return galleries listed on public site
 $recently_updated = true; // bool | Filter the result set to return galleries recently updated
+$api_key = new \PhotoShelter\psPackage\ApiKey(); // \PhotoShelter\psPackage\ApiKey | 
 
 try {
-    $result = $apiInstance->galleriesGet($page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated);
+    $result = $apiInstance->galleriesGet($page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated, $api_key);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling GalleryApi->galleriesGet: ', $e->getMessage(), PHP_EOL;
@@ -53,6 +54,7 @@ Name | Type | Description  | Notes
  **parent** | **string**| Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent. | [optional]
  **portfolio** | **bool**| Filter the result set to return galleries listed on public site | [optional]
  **recently_updated** | **bool**| Filter the result set to return galleries recently updated | [optional]
+ **api_key** | [**\PhotoShelter\psPackage\ApiKey**](../Model/.md)|  | [optional]
 
 ### Return type
 
