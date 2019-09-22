@@ -225,11 +225,7 @@ paths:
           type: object
       responses:
         200:
-          description: Generic HTTP 200 Ok Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_200_2'
+          description: OK
 components:
   schemas:
     Error:
