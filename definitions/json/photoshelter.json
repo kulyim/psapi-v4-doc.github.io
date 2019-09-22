@@ -273,14 +273,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "Generic HTTP 200 Ok Response",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_2"
-                }
-              }
-            }
+            "description" : "OK"
           }
         }
       },
@@ -360,25 +353,6 @@
           "token" : {
             "type" : "string",
             "description" : "auth token"
-          }
-        }
-      },
-      "inline_response_200_2_meta" : {
-        "required" : [ "status" ],
-        "type" : "object",
-        "properties" : {
-          "status" : {
-            "type" : "string",
-            "example" : "OK"
-          }
-        }
-      },
-      "inline_response_200_2" : {
-        "required" : [ "meta" ],
-        "type" : "object",
-        "properties" : {
-          "meta" : {
-            "$ref" : "#/components/schemas/inline_response_200_2_meta"
           }
         }
       },
