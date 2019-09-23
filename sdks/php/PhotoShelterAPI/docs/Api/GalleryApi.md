@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**galleriesGet**](GalleryApi.md#galleriesget) | **GET** /galleries | Gets all the galleries for the account.
 
 # **galleriesGet**
-> \PhotoShelter\APIv4\InlineResponse200 galleriesGet($page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated, $api_key, $api_key2)
+> \PhotoShelter\APIv4\InlineResponse200 galleriesGet($page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated, $api_key, $x_ps_api_key)
 
 Gets all the galleries for the account.
 
@@ -32,10 +32,10 @@ $parent = "parent_example"; // string | Limit galleries to children of the provi
 $portfolio = true; // bool | Filter the result set to return galleries listed on public site
 $recently_updated = true; // bool | Filter the result set to return galleries recently updated
 $api_key = new \PhotoShelter\APIv4\ApiKey(); // \PhotoShelter\APIv4\ApiKey | Your PhotoShelter API Key
-$api_key2 = new \PhotoShelter\APIv4\ApiKey(); // \PhotoShelter\APIv4\ApiKey | Your PhotoShelter API Key
+$x_ps_api_key = new \PhotoShelter\APIv4\ApiKey(); // \PhotoShelter\APIv4\ApiKey | Your PhotoShelter API Key
 
 try {
-    $result = $apiInstance->galleriesGet($page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated, $api_key, $api_key2);
+    $result = $apiInstance->galleriesGet($page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated, $api_key, $x_ps_api_key);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling GalleryApi->galleriesGet: ', $e->getMessage(), PHP_EOL;
@@ -56,7 +56,7 @@ Name | Type | Description  | Notes
  **portfolio** | **bool**| Filter the result set to return galleries listed on public site | [optional]
  **recently_updated** | **bool**| Filter the result set to return galleries recently updated | [optional]
  **api_key** | [**\PhotoShelter\APIv4\ApiKey**](../Model/.md)| Your PhotoShelter API Key | [optional]
- **api_key2** | [**\PhotoShelter\APIv4\ApiKey**](../Model/.md)| Your PhotoShelter API Key | [optional]
+ **x_ps_api_key** | [**\PhotoShelter\APIv4\ApiKey**](../Model/.md)| Your PhotoShelter API Key | [optional]
 
 ### Return type
 
