@@ -110,7 +110,7 @@ paths:
           default: false
       - name: api_key
         in: query
-        description: Your PhotoShelter API Key
+        description: Your PhotoShelter API Key as a query parameter
         required: false
         style: form
         explode: true
@@ -118,6 +118,7 @@ paths:
           $ref: '#/components/schemas/ApiKey'
       - name: X-PS-Api-Key
         in: header
+        description: Your PhotoShelter API Key as a header parameter
         required: false
         style: simple
         explode: false
