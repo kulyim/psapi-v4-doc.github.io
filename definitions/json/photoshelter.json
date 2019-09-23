@@ -102,7 +102,7 @@
         }, {
           "name" : "portfolio",
           "in" : "query",
-          "description" : "Filter the result set to return galleries listed on public site\n",
+          "description" : "Filter the result set to return galleries listed on public site",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -113,7 +113,7 @@
         }, {
           "name" : "recently_updated",
           "in" : "query",
-          "description" : "Filter the result set to return galleries recently updated\n",
+          "description" : "Filter the result set to return galleries recently updated",
           "required" : false,
           "style" : "form",
           "explode" : true,
