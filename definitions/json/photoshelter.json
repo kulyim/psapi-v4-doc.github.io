@@ -125,9 +125,19 @@
           "name" : "api_key",
           "in" : "query",
           "description" : "Your PhotoShelter API Key",
-          "required" : true,
+          "required" : false,
           "style" : "form",
           "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/ApiKey"
+          }
+        }, {
+          "name" : "api_key",
+          "in" : "header",
+          "description" : "Your PhotoShelter API Key",
+          "required" : false,
+          "style" : "simple",
+          "explode" : false,
           "schema" : {
             "$ref" : "#/components/schemas/ApiKey"
           }
