@@ -116,7 +116,7 @@ paths:
         explode: true
         schema:
           $ref: '#/components/schemas/ApiKey'
-      - name: api_key
+      - name: X-PS-Api-Key
         in: header
         description: Your PhotoShelter API Key
         required: false
