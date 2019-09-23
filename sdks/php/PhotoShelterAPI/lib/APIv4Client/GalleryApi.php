@@ -99,8 +99,8 @@ class GalleryApi
      * @param  string $parent Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent. (optional)
      * @param  bool $portfolio Filter the result set to return galleries listed on public site (optional)
      * @param  bool $recently_updated Filter the result set to return galleries recently updated (optional)
-     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key (optional)
-     * @param  \PhotoShelter\APIv4\XPSApiKey $x_ps_api_key x_ps_api_key (optional)
+     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key as a query parameter (optional)
+     * @param  \PhotoShelter\APIv4\XPSApiKey $x_ps_api_key Your PhotoShelter API Key as a header parameter (optional)
      *
      * @throws \PhotoShelter\ApiException on non-2xx response
      * @throws \InvalidArgumentException
@@ -125,8 +125,8 @@ class GalleryApi
      * @param  string $parent Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent. (optional)
      * @param  bool $portfolio Filter the result set to return galleries listed on public site (optional)
      * @param  bool $recently_updated Filter the result set to return galleries recently updated (optional)
-     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key (optional)
-     * @param  \PhotoShelter\APIv4\XPSApiKey $x_ps_api_key (optional)
+     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key as a query parameter (optional)
+     * @param  \PhotoShelter\APIv4\XPSApiKey $x_ps_api_key Your PhotoShelter API Key as a header parameter (optional)
      *
      * @throws \PhotoShelter\ApiException on non-2xx response
      * @throws \InvalidArgumentException
@@ -249,8 +249,8 @@ class GalleryApi
      * @param  string $parent Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent. (optional)
      * @param  bool $portfolio Filter the result set to return galleries listed on public site (optional)
      * @param  bool $recently_updated Filter the result set to return galleries recently updated (optional)
-     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key (optional)
-     * @param  \PhotoShelter\APIv4\XPSApiKey $x_ps_api_key (optional)
+     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key as a query parameter (optional)
+     * @param  \PhotoShelter\APIv4\XPSApiKey $x_ps_api_key Your PhotoShelter API Key as a header parameter (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -278,8 +278,8 @@ class GalleryApi
      * @param  string $parent Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent. (optional)
      * @param  bool $portfolio Filter the result set to return galleries listed on public site (optional)
      * @param  bool $recently_updated Filter the result set to return galleries recently updated (optional)
-     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key (optional)
-     * @param  \PhotoShelter\APIv4\XPSApiKey $x_ps_api_key (optional)
+     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key as a query parameter (optional)
+     * @param  \PhotoShelter\APIv4\XPSApiKey $x_ps_api_key Your PhotoShelter API Key as a header parameter (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -337,8 +337,8 @@ class GalleryApi
      * @param  string $parent Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent. (optional)
      * @param  bool $portfolio Filter the result set to return galleries listed on public site (optional)
      * @param  bool $recently_updated Filter the result set to return galleries recently updated (optional)
-     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key (optional)
-     * @param  \PhotoShelter\APIv4\XPSApiKey $x_ps_api_key (optional)
+     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key as a query parameter (optional)
+     * @param  \PhotoShelter\APIv4\XPSApiKey $x_ps_api_key Your PhotoShelter API Key as a header parameter (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
