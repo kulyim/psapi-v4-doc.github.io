@@ -99,16 +99,14 @@ class GalleryApi
      * @param  string $parent Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent. (optional)
      * @param  bool $portfolio Filter the result set to return galleries listed on public site (optional)
      * @param  bool $recently_updated Filter the result set to return galleries recently updated (optional)
-     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key as a query parameter (optional)
-     * @param  \PhotoShelter\APIv4\XPSApiKey $x_ps_api_key Your PhotoShelter API Key as a header parameter (optional)
      *
      * @throws \PhotoShelter\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \PhotoShelter\APIv4\InlineResponse200
      */
-    public function galleriesGet($page = null, $per_page = null, $sort_by = null, $sort_dir = null, $name = null, $parent = null, $portfolio = null, $recently_updated = null, $api_key = null, $x_ps_api_key = null)
+    public function galleriesGet($page = null, $per_page = null, $sort_by = null, $sort_dir = null, $name = null, $parent = null, $portfolio = null, $recently_updated = null)
     {
-        list($response) = $this->galleriesGetWithHttpInfo($page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated, $api_key, $x_ps_api_key);
+        list($response) = $this->galleriesGetWithHttpInfo($page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated);
         return $response;
     }
 
@@ -125,17 +123,15 @@ class GalleryApi
      * @param  string $parent Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent. (optional)
      * @param  bool $portfolio Filter the result set to return galleries listed on public site (optional)
      * @param  bool $recently_updated Filter the result set to return galleries recently updated (optional)
-     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key as a query parameter (optional)
-     * @param  \PhotoShelter\APIv4\XPSApiKey $x_ps_api_key Your PhotoShelter API Key as a header parameter (optional)
      *
      * @throws \PhotoShelter\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \PhotoShelter\APIv4\InlineResponse200, HTTP status code, HTTP response headers (array of strings)
      */
-    public function galleriesGetWithHttpInfo($page = null, $per_page = null, $sort_by = null, $sort_dir = null, $name = null, $parent = null, $portfolio = null, $recently_updated = null, $api_key = null, $x_ps_api_key = null)
+    public function galleriesGetWithHttpInfo($page = null, $per_page = null, $sort_by = null, $sort_dir = null, $name = null, $parent = null, $portfolio = null, $recently_updated = null)
     {
         $returnType = '\PhotoShelter\APIv4\InlineResponse200';
-        $request = $this->galleriesGetRequest($page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated, $api_key, $x_ps_api_key);
+        $request = $this->galleriesGetRequest($page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated);
 
         try {
             $options = $this->createHttpClientOption();
@@ -249,15 +245,13 @@ class GalleryApi
      * @param  string $parent Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent. (optional)
      * @param  bool $portfolio Filter the result set to return galleries listed on public site (optional)
      * @param  bool $recently_updated Filter the result set to return galleries recently updated (optional)
-     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key as a query parameter (optional)
-     * @param  \PhotoShelter\APIv4\XPSApiKey $x_ps_api_key Your PhotoShelter API Key as a header parameter (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function galleriesGetAsync($page = null, $per_page = null, $sort_by = null, $sort_dir = null, $name = null, $parent = null, $portfolio = null, $recently_updated = null, $api_key = null, $x_ps_api_key = null)
+    public function galleriesGetAsync($page = null, $per_page = null, $sort_by = null, $sort_dir = null, $name = null, $parent = null, $portfolio = null, $recently_updated = null)
     {
-        return $this->galleriesGetAsyncWithHttpInfo($page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated, $api_key, $x_ps_api_key)
+        return $this->galleriesGetAsyncWithHttpInfo($page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -278,16 +272,14 @@ class GalleryApi
      * @param  string $parent Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent. (optional)
      * @param  bool $portfolio Filter the result set to return galleries listed on public site (optional)
      * @param  bool $recently_updated Filter the result set to return galleries recently updated (optional)
-     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key as a query parameter (optional)
-     * @param  \PhotoShelter\APIv4\XPSApiKey $x_ps_api_key Your PhotoShelter API Key as a header parameter (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function galleriesGetAsyncWithHttpInfo($page = null, $per_page = null, $sort_by = null, $sort_dir = null, $name = null, $parent = null, $portfolio = null, $recently_updated = null, $api_key = null, $x_ps_api_key = null)
+    public function galleriesGetAsyncWithHttpInfo($page = null, $per_page = null, $sort_by = null, $sort_dir = null, $name = null, $parent = null, $portfolio = null, $recently_updated = null)
     {
         $returnType = '\PhotoShelter\APIv4\InlineResponse200';
-        $request = $this->galleriesGetRequest($page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated, $api_key, $x_ps_api_key);
+        $request = $this->galleriesGetRequest($page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -337,13 +329,11 @@ class GalleryApi
      * @param  string $parent Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent. (optional)
      * @param  bool $portfolio Filter the result set to return galleries listed on public site (optional)
      * @param  bool $recently_updated Filter the result set to return galleries recently updated (optional)
-     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key as a query parameter (optional)
-     * @param  \PhotoShelter\APIv4\XPSApiKey $x_ps_api_key Your PhotoShelter API Key as a header parameter (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function galleriesGetRequest($page = null, $per_page = null, $sort_by = null, $sort_dir = null, $name = null, $parent = null, $portfolio = null, $recently_updated = null, $api_key = null, $x_ps_api_key = null)
+    protected function galleriesGetRequest($page = null, $per_page = null, $sort_by = null, $sort_dir = null, $name = null, $parent = null, $portfolio = null, $recently_updated = null)
     {
 
         $resourcePath = '/galleries';
@@ -384,14 +374,6 @@ class GalleryApi
         // query params
         if ($recently_updated !== null) {
             $queryParams['recently_updated'] = ObjectSerializer::toQueryValue($recently_updated);
-        }
-        // query params
-        if ($api_key !== null) {
-            $queryParams['api_key'] = ObjectSerializer::toQueryValue($api_key);
-        }
-        // header params
-        if ($x_ps_api_key !== null) {
-            $headerParams['X-PS-Api-Key'] = ObjectSerializer::toHeaderValue($x_ps_api_key);
         }
 
 
