@@ -100,7 +100,7 @@ class GalleryApi
      * @param  bool $portfolio Filter the result set to return galleries listed on public site (optional)
      * @param  bool $recently_updated Filter the result set to return galleries recently updated (optional)
      * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key (optional)
-     * @param  \PhotoShelter\APIv4\ApiKey $x_ps_api_key Your PhotoShelter API Key (optional)
+     * @param  \PhotoShelter\APIv4\XPSApiKey $x_ps_api_key x_ps_api_key (optional)
      *
      * @throws \PhotoShelter\ApiException on non-2xx response
      * @throws \InvalidArgumentException
@@ -126,7 +126,7 @@ class GalleryApi
      * @param  bool $portfolio Filter the result set to return galleries listed on public site (optional)
      * @param  bool $recently_updated Filter the result set to return galleries recently updated (optional)
      * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key (optional)
-     * @param  \PhotoShelter\APIv4\ApiKey $x_ps_api_key Your PhotoShelter API Key (optional)
+     * @param  \PhotoShelter\APIv4\XPSApiKey $x_ps_api_key (optional)
      *
      * @throws \PhotoShelter\ApiException on non-2xx response
      * @throws \InvalidArgumentException
@@ -250,7 +250,7 @@ class GalleryApi
      * @param  bool $portfolio Filter the result set to return galleries listed on public site (optional)
      * @param  bool $recently_updated Filter the result set to return galleries recently updated (optional)
      * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key (optional)
-     * @param  \PhotoShelter\APIv4\ApiKey $x_ps_api_key Your PhotoShelter API Key (optional)
+     * @param  \PhotoShelter\APIv4\XPSApiKey $x_ps_api_key (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -279,7 +279,7 @@ class GalleryApi
      * @param  bool $portfolio Filter the result set to return galleries listed on public site (optional)
      * @param  bool $recently_updated Filter the result set to return galleries recently updated (optional)
      * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key (optional)
-     * @param  \PhotoShelter\APIv4\ApiKey $x_ps_api_key Your PhotoShelter API Key (optional)
+     * @param  \PhotoShelter\APIv4\XPSApiKey $x_ps_api_key (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -338,7 +338,7 @@ class GalleryApi
      * @param  bool $portfolio Filter the result set to return galleries listed on public site (optional)
      * @param  bool $recently_updated Filter the result set to return galleries recently updated (optional)
      * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key (optional)
-     * @param  \PhotoShelter\APIv4\ApiKey $x_ps_api_key Your PhotoShelter API Key (optional)
+     * @param  \PhotoShelter\APIv4\XPSApiKey $x_ps_api_key (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
