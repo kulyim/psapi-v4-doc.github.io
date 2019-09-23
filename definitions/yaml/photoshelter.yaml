@@ -12,7 +12,7 @@ info:
     url: https://www.photoshelter.com/support/license
   version: Anthony
 servers:
-- url: https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4
+- url: https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/anthony
   description: PhotoShelter Auto Mocking API
 tags:
 - name: PhotoShelter
@@ -92,8 +92,7 @@ paths:
           example: C0000LYrqIr59eJI
       - name: portfolio
         in: query
-        description: |
-          Filter the result set to return galleries listed on public site
+        description: Filter the result set to return galleries listed on public site
         required: false
         style: form
         explode: true
@@ -102,14 +101,29 @@ paths:
           default: false
       - name: recently_updated
         in: query
-        description: |
-          Filter the result set to return galleries recently updated
+        description: Filter the result set to return galleries recently updated
         required: false
         style: form
         explode: true
         schema:
           type: boolean
           default: false
+      - name: api_key
+        in: query
+        description: Your PhotoShelter API Key
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/ApiKey'
+      - name: api_key
+        in: header
+        description: Your PhotoShelter API Key
+        required: false
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/ApiKey'
       responses:
         200:
           description: |
@@ -132,7 +146,7 @@ paths:
                   id: ThisShouldBeARealId
                   status: "400"
                   title: Bad Request / Syntax
-                  detail: You are not authorized to access this resource.
+                  detail: Bad Request
             application/xml:
               schema:
                 $ref: '#/components/schemas/Error'
@@ -145,7 +159,7 @@ paths:
               style: simple
               explode: false
               schema:
-                type: integer
+                type: string
               example: 'WWW-Authenticate: Bearer'
           content:
             application/json:
@@ -221,6 +235,8 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    ApiKey:
+      type: string
     Gallery:
       required:
       - attributes
@@ -232,7 +248,7 @@ components:
           pattern: ^G0000[a-zA-Z0-9._]{11}$
           type: string
           description: Gallery ID
-          example: G0000ZJCk9LW4Zfc
+          example: G0000EXAMPLE_GAL
           xml:
             attribute: true
         type:
@@ -322,12 +338,12 @@ components:
           type: string
           description: ID of the Image that is the key image
           nullable: true
-          example: GI000ZJCk9LW4Zfc
+          example: GI000EXAMPLE_IMG
         access_id:
           pattern: ^A0000[a-zA-Z0-9._]{11}$
           type: string
           description: Access ID of the Gallery
-          example: A0000Aij231cM_1R
+          example: A0000EXAMPLE_ACS
         is_listed:
           type: boolean
           description: Flag that denotes if it is listed on the public site
