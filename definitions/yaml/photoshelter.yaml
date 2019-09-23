@@ -33,6 +33,7 @@ paths:
         explode: true
         schema:
           type: integer
+          example: 1
           default: 1
       - name: per_page
         in: query
@@ -42,6 +43,7 @@ paths:
         explode: true
         schema:
           type: integer
+          example: 20
           default: 20
       - name: sort_by
         in: query
