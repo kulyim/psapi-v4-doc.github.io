@@ -16,7 +16,8 @@
     "version" : "Allan"
   },
   "servers" : [ {
-    "url" : "http://ps.dev.bitshelter.com:8320/psapi/v4.0"
+    "url" : "https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4",
+    "description" : "PhotoShelter Auto Mocking API"
   } ],
   "tags" : [ {
     "name" : "Gallery"
