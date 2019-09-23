@@ -134,12 +134,11 @@
         }, {
           "name" : "X-PS-Api-Key",
           "in" : "header",
-          "description" : "Your PhotoShelter API Key",
           "required" : false,
           "style" : "simple",
           "explode" : false,
           "schema" : {
-            "$ref" : "#/components/schemas/ApiKey"
+            "$ref" : "#/components/schemas/X-PS-Api-Key"
           }
         } ],
         "responses" : {
@@ -303,6 +302,13 @@
     "schemas" : {
       "ApiKey" : {
         "type" : "string"
+      },
+      "X-PS-Api-Key" : {
+        "maxLength" : 10,
+        "minLength" : 10,
+        "type" : "string",
+        "description" : "Your API key header",
+        "example" : "123456abc"
       },
       "Gallery" : {
         "required" : [ "attributes", "id", "type" ],
