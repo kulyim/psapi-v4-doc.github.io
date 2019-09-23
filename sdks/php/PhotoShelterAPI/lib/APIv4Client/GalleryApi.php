@@ -91,7 +91,6 @@ class GalleryApi
      *
      * Gets all the galleries for the account.
      *
-     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key (required)
      * @param  int $page Page number (optional)
      * @param  int $per_page Number of rows returned per page (optional)
      * @param  string $sort_by Sort by gallery property (optional)
@@ -100,14 +99,16 @@ class GalleryApi
      * @param  string $parent Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent. (optional)
      * @param  bool $portfolio Filter the result set to return galleries listed on public site (optional)
      * @param  bool $recently_updated Filter the result set to return galleries recently updated (optional)
+     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key (optional)
+     * @param  \PhotoShelter\APIv4\ApiKey $api_key2 Your PhotoShelter API Key (optional)
      *
      * @throws \PhotoShelter\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \PhotoShelter\APIv4\InlineResponse200
      */
-    public function galleriesGet($api_key, $page = null, $per_page = null, $sort_by = null, $sort_dir = null, $name = null, $parent = null, $portfolio = null, $recently_updated = null)
+    public function galleriesGet($page = null, $per_page = null, $sort_by = null, $sort_dir = null, $name = null, $parent = null, $portfolio = null, $recently_updated = null, $api_key = null, $api_key2 = null)
     {
-        list($response) = $this->galleriesGetWithHttpInfo($api_key, $page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated);
+        list($response) = $this->galleriesGetWithHttpInfo($page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated, $api_key, $api_key2);
         return $response;
     }
 
@@ -116,7 +117,6 @@ class GalleryApi
      *
      * Gets all the galleries for the account.
      *
-     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key (required)
      * @param  int $page Page number (optional)
      * @param  int $per_page Number of rows returned per page (optional)
      * @param  string $sort_by Sort by gallery property (optional)
@@ -125,15 +125,17 @@ class GalleryApi
      * @param  string $parent Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent. (optional)
      * @param  bool $portfolio Filter the result set to return galleries listed on public site (optional)
      * @param  bool $recently_updated Filter the result set to return galleries recently updated (optional)
+     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key (optional)
+     * @param  \PhotoShelter\APIv4\ApiKey $api_key2 Your PhotoShelter API Key (optional)
      *
      * @throws \PhotoShelter\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \PhotoShelter\APIv4\InlineResponse200, HTTP status code, HTTP response headers (array of strings)
      */
-    public function galleriesGetWithHttpInfo($api_key, $page = null, $per_page = null, $sort_by = null, $sort_dir = null, $name = null, $parent = null, $portfolio = null, $recently_updated = null)
+    public function galleriesGetWithHttpInfo($page = null, $per_page = null, $sort_by = null, $sort_dir = null, $name = null, $parent = null, $portfolio = null, $recently_updated = null, $api_key = null, $api_key2 = null)
     {
         $returnType = '\PhotoShelter\APIv4\InlineResponse200';
-        $request = $this->galleriesGetRequest($api_key, $page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated);
+        $request = $this->galleriesGetRequest($page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated, $api_key, $api_key2);
 
         try {
             $options = $this->createHttpClientOption();
@@ -239,7 +241,6 @@ class GalleryApi
      *
      * Gets all the galleries for the account.
      *
-     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key (required)
      * @param  int $page Page number (optional)
      * @param  int $per_page Number of rows returned per page (optional)
      * @param  string $sort_by Sort by gallery property (optional)
@@ -248,13 +249,15 @@ class GalleryApi
      * @param  string $parent Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent. (optional)
      * @param  bool $portfolio Filter the result set to return galleries listed on public site (optional)
      * @param  bool $recently_updated Filter the result set to return galleries recently updated (optional)
+     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key (optional)
+     * @param  \PhotoShelter\APIv4\ApiKey $api_key2 Your PhotoShelter API Key (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function galleriesGetAsync($api_key, $page = null, $per_page = null, $sort_by = null, $sort_dir = null, $name = null, $parent = null, $portfolio = null, $recently_updated = null)
+    public function galleriesGetAsync($page = null, $per_page = null, $sort_by = null, $sort_dir = null, $name = null, $parent = null, $portfolio = null, $recently_updated = null, $api_key = null, $api_key2 = null)
     {
-        return $this->galleriesGetAsyncWithHttpInfo($api_key, $page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated)
+        return $this->galleriesGetAsyncWithHttpInfo($page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated, $api_key, $api_key2)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -267,7 +270,6 @@ class GalleryApi
      *
      * Gets all the galleries for the account.
      *
-     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key (required)
      * @param  int $page Page number (optional)
      * @param  int $per_page Number of rows returned per page (optional)
      * @param  string $sort_by Sort by gallery property (optional)
@@ -276,14 +278,16 @@ class GalleryApi
      * @param  string $parent Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent. (optional)
      * @param  bool $portfolio Filter the result set to return galleries listed on public site (optional)
      * @param  bool $recently_updated Filter the result set to return galleries recently updated (optional)
+     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key (optional)
+     * @param  \PhotoShelter\APIv4\ApiKey $api_key2 Your PhotoShelter API Key (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function galleriesGetAsyncWithHttpInfo($api_key, $page = null, $per_page = null, $sort_by = null, $sort_dir = null, $name = null, $parent = null, $portfolio = null, $recently_updated = null)
+    public function galleriesGetAsyncWithHttpInfo($page = null, $per_page = null, $sort_by = null, $sort_dir = null, $name = null, $parent = null, $portfolio = null, $recently_updated = null, $api_key = null, $api_key2 = null)
     {
         $returnType = '\PhotoShelter\APIv4\InlineResponse200';
-        $request = $this->galleriesGetRequest($api_key, $page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated);
+        $request = $this->galleriesGetRequest($page, $per_page, $sort_by, $sort_dir, $name, $parent, $portfolio, $recently_updated, $api_key, $api_key2);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -325,7 +329,6 @@ class GalleryApi
     /**
      * Create request for operation 'galleriesGet'
      *
-     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key (required)
      * @param  int $page Page number (optional)
      * @param  int $per_page Number of rows returned per page (optional)
      * @param  string $sort_by Sort by gallery property (optional)
@@ -334,18 +337,14 @@ class GalleryApi
      * @param  string $parent Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent. (optional)
      * @param  bool $portfolio Filter the result set to return galleries listed on public site (optional)
      * @param  bool $recently_updated Filter the result set to return galleries recently updated (optional)
+     * @param  \PhotoShelter\APIv4\ApiKey $api_key Your PhotoShelter API Key (optional)
+     * @param  \PhotoShelter\APIv4\ApiKey $api_key2 Your PhotoShelter API Key (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function galleriesGetRequest($api_key, $page = null, $per_page = null, $sort_by = null, $sort_dir = null, $name = null, $parent = null, $portfolio = null, $recently_updated = null)
+    protected function galleriesGetRequest($page = null, $per_page = null, $sort_by = null, $sort_dir = null, $name = null, $parent = null, $portfolio = null, $recently_updated = null, $api_key = null, $api_key2 = null)
     {
-        // verify the required parameter 'api_key' is set
-        if ($api_key === null || (is_array($api_key) && count($api_key) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $api_key when calling galleriesGet'
-            );
-        }
 
         $resourcePath = '/galleries';
         $formParams = [];
@@ -389,6 +388,10 @@ class GalleryApi
         // query params
         if ($api_key !== null) {
             $queryParams['api_key'] = ObjectSerializer::toQueryValue($api_key);
+        }
+        // header params
+        if ($api_key2 !== null) {
+            $headerParams['api_key'] = ObjectSerializer::toHeaderValue($api_key2);
         }
 
 
