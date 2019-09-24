@@ -41,7 +41,7 @@
             "example" : 3,
             "default" : 1
           },
-          "example" : 3
+          "example" : 9
         }, {
           "name" : "per_page",
           "in" : "query",
