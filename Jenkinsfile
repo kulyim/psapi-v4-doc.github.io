@@ -1,6 +1,4 @@
 pipeline {
-
-
     agent any
 
     tools {nodejs "node"}
@@ -56,7 +54,7 @@ pipeline {
             steps {
 		echo 'Generating documentation'
 		sh 'ls -la'
-		sh 'cd /var/jenkins_home/workspace/pecifications-workflow-mp_master'
+	//	sh 'cd /var/jenkins_home/workspace/pecifications-workflow-mp_master'
 		sh 'ls -la'
 		sh 'chmod 755 run-redoc.exp'
 		sh 'ls -la'
