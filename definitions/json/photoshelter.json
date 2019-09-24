@@ -40,7 +40,8 @@
             "type" : "integer",
             "example" : 3,
             "default" : 1
-          }
+          },
+          "example" : 9
         }, {
           "name" : "per_page",
           "in" : "query",
@@ -277,7 +278,10 @@
               }
             }
           }
-        }
+        },
+        "security" : [ {
+          "https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/Final#/components/securitySchemes/PSApiKeyHeader" : [ ]
+        } ]
       }
     }
   },
