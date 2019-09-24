@@ -37,7 +37,7 @@ paths:
           default: 1
       - name: per_page
         in: query
-        description: Number of rows returned per page
+        description: Number of rows returned per page.
         required: false
         style: form
         explode: true
@@ -47,7 +47,7 @@ paths:
           default: 20
       - name: sort_by
         in: query
-        description: Sort by gallery property
+        description: Sort by gallery property.
         required: false
         style: form
         explode: true
