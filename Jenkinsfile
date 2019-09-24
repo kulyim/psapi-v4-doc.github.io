@@ -19,7 +19,7 @@ pipeline {
             sh 'npm install -g dredd'
 	    // adding some magic
 //	    sh 'npm install -g fury-cli'
-	    sh 'npm install openapi-to-postmanv2'
+	    sh 'npm install -g openapi-to-postmanv2'
 //	    sh 'wget https://github.com/bukalapak/vanadia/releases/download/v1.1.1/vanadia-v1.1.1.linux-amd64.tar.gz'
 //	    sh 'tar -xzf vanadia-v1.1.1.linux-amd64.tar.gz'
 //	    sh './vanadia -h'
