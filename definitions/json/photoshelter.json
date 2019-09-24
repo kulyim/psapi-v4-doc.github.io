@@ -38,7 +38,7 @@
           "explode" : true,
           "schema" : {
             "type" : "integer",
-            "example" : 1,
+            "example" : 3,
             "default" : 1
           }
         }, {
@@ -50,7 +50,7 @@
           "explode" : true,
           "schema" : {
             "type" : "integer",
-            "example" : 20,
+            "example" : 40,
             "default" : 20
           }
         }, {
