@@ -51,7 +51,7 @@ pipeline {
             }
         }
 
-	stage(/Additional Sugar')
+	stage('Additional Sugar')
 	{
 	    steps {
 //		sh 'fury --format text/vnd.apiblueprint definitions/json/photoshelter.json photoshelter.apib'
