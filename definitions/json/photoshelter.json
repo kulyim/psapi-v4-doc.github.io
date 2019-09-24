@@ -44,7 +44,7 @@
         }, {
           "name" : "per_page",
           "in" : "query",
-          "description" : "Number of rows returned per page",
+          "description" : "Number of rows returned per page.",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -56,7 +56,7 @@
         }, {
           "name" : "sort_by",
           "in" : "query",
-          "description" : "Sort by gallery property",
+          "description" : "Sort by gallery property.",
           "required" : false,
           "style" : "form",
           "explode" : true,
