@@ -24,8 +24,8 @@ $apiInstance = new PhotoShelter\APIv4Client\GalleryApi(
     new GuzzleHttp\Client()
 );
 $page = 56; // int | Page number
-$per_page = 56; // int | Number of rows returned per page
-$sort_by = "sort_by_example"; // string | Sort by gallery property
+$per_page = 56; // int | Number of rows returned per page.
+$sort_by = "sort_by_example"; // string | Sort by gallery property.
 $sort_dir = "sort_dir_example"; // string | Sorting result set direction (ascending or descending)
 $name = "name_example"; // string | Full or partial gallery name
 $parent = "parent_example"; // string | Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent.
@@ -46,8 +46,8 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **int**| Page number | [optional]
- **per_page** | **int**| Number of rows returned per page | [optional]
- **sort_by** | **string**| Sort by gallery property | [optional]
+ **per_page** | **int**| Number of rows returned per page. | [optional]
+ **sort_by** | **string**| Sort by gallery property. | [optional]
  **sort_dir** | **string**| Sorting result set direction (ascending or descending) | [optional]
  **name** | **string**| Full or partial gallery name | [optional]
  **parent** | **string**| Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent. | [optional]

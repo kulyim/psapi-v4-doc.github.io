@@ -92,8 +92,8 @@ class GalleryApi
      * Gets all the galleries for the account.
      *
      * @param  int $page Page number (optional)
-     * @param  int $per_page Number of rows returned per page (optional)
-     * @param  string $sort_by Sort by gallery property (optional)
+     * @param  int $per_page Number of rows returned per page. (optional)
+     * @param  string $sort_by Sort by gallery property. (optional)
      * @param  string $sort_dir Sorting result set direction (ascending or descending) (optional)
      * @param  string $name Full or partial gallery name (optional)
      * @param  string $parent Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent. (optional)
@@ -116,8 +116,8 @@ class GalleryApi
      * Gets all the galleries for the account.
      *
      * @param  int $page Page number (optional)
-     * @param  int $per_page Number of rows returned per page (optional)
-     * @param  string $sort_by Sort by gallery property (optional)
+     * @param  int $per_page Number of rows returned per page. (optional)
+     * @param  string $sort_by Sort by gallery property. (optional)
      * @param  string $sort_dir Sorting result set direction (ascending or descending) (optional)
      * @param  string $name Full or partial gallery name (optional)
      * @param  string $parent Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent. (optional)
@@ -238,8 +238,8 @@ class GalleryApi
      * Gets all the galleries for the account.
      *
      * @param  int $page Page number (optional)
-     * @param  int $per_page Number of rows returned per page (optional)
-     * @param  string $sort_by Sort by gallery property (optional)
+     * @param  int $per_page Number of rows returned per page. (optional)
+     * @param  string $sort_by Sort by gallery property. (optional)
      * @param  string $sort_dir Sorting result set direction (ascending or descending) (optional)
      * @param  string $name Full or partial gallery name (optional)
      * @param  string $parent Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent. (optional)
@@ -265,8 +265,8 @@ class GalleryApi
      * Gets all the galleries for the account.
      *
      * @param  int $page Page number (optional)
-     * @param  int $per_page Number of rows returned per page (optional)
-     * @param  string $sort_by Sort by gallery property (optional)
+     * @param  int $per_page Number of rows returned per page. (optional)
+     * @param  string $sort_by Sort by gallery property. (optional)
      * @param  string $sort_dir Sorting result set direction (ascending or descending) (optional)
      * @param  string $name Full or partial gallery name (optional)
      * @param  string $parent Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent. (optional)
@@ -322,8 +322,8 @@ class GalleryApi
      * Create request for operation 'galleriesGet'
      *
      * @param  int $page Page number (optional)
-     * @param  int $per_page Number of rows returned per page (optional)
-     * @param  string $sort_by Sort by gallery property (optional)
+     * @param  int $per_page Number of rows returned per page. (optional)
+     * @param  string $sort_by Sort by gallery property. (optional)
      * @param  string $sort_dir Sorting result set direction (ascending or descending) (optional)
      * @param  string $name Full or partial gallery name (optional)
      * @param  string $parent Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent. (optional)
