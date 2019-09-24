@@ -18,10 +18,11 @@ pipeline {
             sh 'npm install -g @stoplight/prism-cli'
             sh 'npm install -g dredd'
 	    // adding some magic
-	    sh 'npm install -g fury-cli'
-	    sh 'wget https://github.com/bukalapak/vanadia/releases/download/v1.1.1/vanadia-v1.1.1.linux-amd64.tar.gz'
-	    sh 'tar -xzf vanadia-v1.1.1.linux-amd64.tar.gz'
-	    sh './vanadia -h'
+//	    sh 'npm install -g fury-cli'
+	    sh 'npm install -g openapi-to-postmanv2'
+//	    sh 'wget https://github.com/bukalapak/vanadia/releases/download/v1.1.1/vanadia-v1.1.1.linux-amd64.tar.gz'
+//	    sh 'tar -xzf vanadia-v1.1.1.linux-amd64.tar.gz'
+//	    sh './vanadia -h'
 
           }
         }
@@ -53,9 +54,10 @@ pipeline {
 	stage(/Additional Sugar')
 	{
 	    steps {
-		sh 'fury --format text/vnd.apiblueprint definitions/json/photoshelter.json photoshelter.apib'
-		sh './vanadia --input photoshelter.apib --output API.postman_collection.json --config vanadia.yml'
-		sh 'echo vanadia.yml'
+//		sh 'fury --format text/vnd.apiblueprint definitions/json/photoshelter.json photoshelter.apib'
+//		sh './vanadia --input photoshelter.apib --output API.postman_collection.json --config vanadia.yml'
+//		sh 'echo vanadia.yml'
+		sh 'openapi2postmanv2 -spec definitions/json/photoshelter.json --output photoshelter-postman.json -pretty'
 	    }
 	}
 	// Documentation generation for master only, developers can replicate the steps to generate their own docs
