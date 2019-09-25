@@ -77,6 +77,9 @@ pipeline {
 	//	sh 'chmod 755 run-redoc.exp'
 		sh 'ls -la'
 		sh 'run-redoc.exp'
+		sh './run-redoc.exp'
+		sh '/var/jenkins_home/workspace/pecifications-workflow-mp_${JOB_BASE_NAME}/run-redoc.exp'
+		sh './var/jenkins_home/workspace/specifications-workflow-mp_${JOB_BASE_NAME}/run-redoc.exp'
                 echo 'Deploying....'
 		sh 'npm run gh-pages'
             }
