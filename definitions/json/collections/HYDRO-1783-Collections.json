@@ -273,6 +273,29 @@
             "$ref" : "#/components/schemas/CollectionId"
           },
           "example" : "C0000EXAMPLECOLL"
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "description" : "Collection name to query from",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "maxLength" : 100,
+            "type" : "string"
+          },
+          "example" : "EXAMPLE NAME"
+        }, {
+          "name" : "parent",
+          "in" : "query",
+          "description" : "Limit collections to children of the provided collection ID. Pass blank to find collections with no parent.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/CollectionId"
+          },
+          "example" : "C0000EXAMPLECOLL"
         } ],
         "responses" : {
           "200" : {
