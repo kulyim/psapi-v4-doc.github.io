@@ -69,12 +69,13 @@ pipeline {
 //	    } 
             steps {
 		echo 'Generating documentation'
+		sh 'pwd'
+	//	sh 'cd /var/jenkins_home/workspace/pecifications-workflow-mp_${JOB_BASE_NAME}'
+	//	sh 'pwd'
+	//	sh 'ls -la'
+	//	sh 'chmod 755 run-redoc.exp'
 		sh 'ls -la'
-		sh 'cd /var/jenkins_home/workspace/pecifications-workflow-mp_${JOB_BASE_NAME}'
-		sh 'ls -la'
-		sh 'chmod 755 run-redoc.exp'
-		sh 'ls -la'
-		sh './run-redoc.exp'
+		sh 'run-redoc.exp'
                 echo 'Deploying....'
 		sh 'npm run gh-pages'
             }
