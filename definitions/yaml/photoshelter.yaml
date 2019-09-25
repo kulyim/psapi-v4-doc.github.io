@@ -43,7 +43,7 @@ paths:
       - name: mode
         in: query
         description: token or cookie
-        required: false
+        required: true
         style: form
         explode: true
         schema:
