@@ -70,6 +70,7 @@ pipeline {
             steps {
 		echo 'Generating documentation'
 		sh 'pwd'
+		sh 'chmod 755 run-redoc.exp'
 	//	sh 'cd /var/jenkins_home/workspace/pecifications-workflow-mp_${JOB_BASE_NAME}'
 	//	sh 'pwd'
 	//	sh 'ls -la'
