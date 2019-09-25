@@ -129,7 +129,7 @@
             }
           },
           "401" : {
-            "description" : "401 Unauthorized Client Error",
+            "description" : "401 Unauthorized Client Error. $RESOURCE is the type of resource that was attempted to be retrieved.",
             "headers" : {
               "WWW-Authenticate" : {
                 "description" : "The HTTP WWW-Authenticate response header defines the authentication method that should be used to gain access to a resource.",
@@ -150,7 +150,7 @@
                   "errors" : {
                     "id" : "AcsPermissionException",
                     "status" : "401",
-                    "title" : "Invalid access to resource: Gallery",
+                    "title" : "Invalid access to resource: $RESOURCE",
                     "detail" : "You are not authorized to view this resource."
                   }
                 }
