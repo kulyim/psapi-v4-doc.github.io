@@ -332,7 +332,7 @@
         }
       },
       "body" : {
-        "required" : [ "email", "password" ],
+        "required" : [ "email", "mode", "password" ],
         "type" : "object",
         "properties" : {
           "email" : {
