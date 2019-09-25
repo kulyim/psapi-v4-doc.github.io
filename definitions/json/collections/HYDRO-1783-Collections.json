@@ -296,6 +296,29 @@
             "$ref" : "#/components/schemas/CollectionId"
           },
           "example" : "C0000EXAMPLECOLL"
+        }, {
+          "name" : "per_page",
+          "in" : "query",
+          "description" : "Results per page",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer",
+            "default" : 50
+          },
+          "example" : 50
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Page number",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          },
+          "example" : 1
         } ],
         "responses" : {
           "200" : {
