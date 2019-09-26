@@ -33,7 +33,9 @@ pipeline {
                 echo 'Linting...'
 		sh 'ls -la'
 		sh 'chmod 755 run-redoc.exp'
-		sh 'expect ${WORKSPACE}/run-redoc.exp'
+		echo 'test'
+		sh './myscript.sh'
+		//sh 'expect ${WORKSPACE}/run-redoc.exp'
                 sh 'npm config ls'
 		println('Speccy')
 		sh 'speccy lint -v definitions/json/photoshelter.json'
