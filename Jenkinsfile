@@ -14,8 +14,8 @@ pipeline {
             sh 'npm install speccy -g'
 	    sh 'npm install -g npx'
             sh 'npm install -g swagger-cli'
-            sh 'npm install redoc --save'
-            sh 'npm install -g create-openapi-repo'
+            sh 'npm install -g redoc --save'
+            //sh 'npm install -g create-openapi-repo'
             sh 'npm install -g @stoplight/prism-cli'
             sh 'npm install -g dredd'
           }
@@ -24,6 +24,7 @@ pipeline {
         stage('Linting') {
             steps {
                 echo 'Linting...'
+		sh '`pwd`/myscript.sh'
 		sh 'sleep 5m'
 		sh 'myscript.sh'
 		
