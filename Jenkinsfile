@@ -75,12 +75,11 @@ pipeline {
 	//	sh 'pwd'
 	//	sh 'ls -la'
 	//	sh 'chmod 755 run-redoc.exp'
-//		sh 'ls -la'
-script
-{
-def script_output = sh(script: "run-redoc.exp", returnStdout: true)
-println("script_output = ${script_output}")
-}
+	//		sh 'ls -la'
+		script {
+		    def script_output = sh(script: "run-redoc.exp", returnStdout: true)
+		    println("script_output = ${script_output}")
+		}
 //		sh './run-redoc.exp'
 		sh "\${JENKINS_HOME}/\${WORKSPACE/}run-redoc.exp"
 //		sh '/var/jenkins_home/workspace/pecifications-workflow-mp_${JOB_BASE_NAME}/run-redoc.exp'
