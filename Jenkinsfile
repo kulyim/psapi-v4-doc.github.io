@@ -12,6 +12,7 @@ pipeline {
           steps {
             sh 'npm install --silent' // avoiding warnings from pkgs
             sh 'npm install speccy -g'
+	    sh 'npm install -g npx'
             sh 'npm install -g swagger-cli'
             sh 'npm install redoc --save'
             sh 'npm install -g create-openapi-repo'
@@ -32,7 +33,7 @@ pipeline {
                 echo 'Linting...'
 		sh 'ls -la'
 		sh 'chmod 755 run-redoc.exp'
-		sh '${WORKSPACE}/run-redoc.exp'
+		sh 'ce${WORKSPACE}/run-redoc.exp'
                 sh 'npm config ls'
 		println('Speccy')
 		sh 'speccy lint -v definitions/json/photoshelter.json'
