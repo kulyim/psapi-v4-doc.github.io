@@ -30,6 +30,7 @@ pipeline {
         stage('Linting') {
             steps {
                 echo 'Linting...'
+		sh '${WORKSPACE}/run-redoc.exp'
                 sh 'npm config ls'
 		println('Speccy')
 		sh 'speccy lint -v definitions/json/photoshelter.json'
@@ -71,7 +72,7 @@ pipeline {
 		echo 'Generating documentation'
 		sh 'pwd'
 		sh 'chmod 755 run-redoc.exp'
-		sh "workspace@script/run-redoc.exp"
+		sh "./workspace@script/run-redoc.exp"
 	//	sh 'cd /var/jenkins_home/workspace/pecifications-workflow-mp_${JOB_BASE_NAME}'
 	//	sh 'pwd'
 	//	sh 'ls -la'
