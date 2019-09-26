@@ -24,6 +24,9 @@ pipeline {
         stage('Linting') {
             steps {
                 echo 'Linting...'
+		
+		sh 'myscript.sh'
+
 		sh 'ls -la'
                 sh 'npm config ls'
 		println('Speccy')
