@@ -25,8 +25,8 @@ pipeline {
             steps {
                 echo 'Linting...'
 		sh '`pwd`/myscript.sh'
-		sh 'sleep 5m'
-		sh 'myscript.sh'
+//		sh 'sleep 5m'
+//		sh 'myscript.sh'
 		
 		sh 'ls -la'
                 sh 'npm config ls'
