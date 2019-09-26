@@ -47,33 +47,6 @@ pipeline {
 		sh "dredd definitions/json/photoshelter.json \${VIEW} --loglevel error --method GET,POST,DELETE --sorted"
             }
         }
-
-	// Documentation generation for master only, developers can replicate the steps to generate their own docs
-        stage('Documentation Generation') {
-//	    when {
-//		branch 'master'
-//	    } 
-            steps {
-		echo 'Generating documentation'
-		sh 'pwd'
-		sh 'chmod 755 run-redoc.exp'
-		sh 'mkdir tmp-redoc'
-//		sh 'cd tmp-redoc'
-		sh 'chmod 755 tmp-redoc'
- 		sh "git clone https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/master/run-redoc.exp tmp-redoc"
-		dir("${WORKSPACE}/tmp-redoc") {
-		//    sh "git clone https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/ad62d27119ca05aadff980ab856b8d27104616c1/run-redoc.exp tmp-redoc"
-		    sh 'chmod 755 run-redoc.exp'
-		    sh 'run-redoc.exp'
-		}
-		//sh 'git clone https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/master/run-redoc.exp'
- 		//sh '${WORKSPACE}/run-redoc.exp'
-		//sh 'create-openapi-repo .'
-		
-                echo 'Deploying....'
-		sh 'npm run gh-pages'
-            }
-        }
     }
 }
 
