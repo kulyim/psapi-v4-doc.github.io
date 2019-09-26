@@ -58,9 +58,11 @@ pipeline {
 		sh 'pwd'
 		sh 'chmod 755 run-redoc.exp'
 		sh 'mkdir tmp-redoc'
-		sh 'cd tmp-redoc'
-		sh "git clone https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/ad62d27119ca05aadff980ab856b8d27104616c1/run-redoc.exp"
-		sh 'run-redoc.exp'
+//		sh 'cd tmp-redoc'
+		dir("${WORKSPACE}/tmp-redoc") {
+		    sh "git clone https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/ad62d27119ca05aadff980ab856b8d27104616c1/run-redoc.exp"
+		    sh 'run-redoc.exp'
+		}
 		//sh 'git clone https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/master/run-redoc.exp'
  		//sh '${WORKSPACE}/run-redoc.exp'
 		//sh 'create-openapi-repo .'
