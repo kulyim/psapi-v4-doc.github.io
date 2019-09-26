@@ -18,16 +18,6 @@ pipeline {
             sh 'npm install -g create-openapi-repo'
             sh 'npm install -g @stoplight/prism-cli'
             sh 'npm install -g dredd'
-	    // adding some magic
-//	    sh 'npm install -g fury-cli'
-//	    sh 'npm install -g openapi-to-postmanv2'
-//	    sh 'wget https://github.com/bukalapak/vanadia/releases/download/v1.1.1/vanadia-v1.1.1.linux-amd64.tar.gz'
-//	    sh 'tar -xzf vanadia-v1.1.1.linux-amd64.tar.gz'
-//	    sh './vanadia -h'
-
-
-//	    sh 'npm run build'
-	    sh 'npm run gh-pages'
           }
         }
 
@@ -58,15 +48,6 @@ pipeline {
             }
         }
 
-//	stage("Additional Sugar")
-//	{
-//	    steps {
-//		sh 'fury --format text/vnd.apiblueprint definitions/json/photoshelter.json photoshelter.apib'
-//		sh './vanadia --input photoshelter.apib --output API.postman_collection.json --config vanadia.yml'
-//		sh 'echo vanadia.yml'
-//		sh 'openapi2postmanv2 -spec definitions/json/photoshelter.json --output photoshelter-postman.json -pretty'
-//	    }
-//	}
 	// Documentation generation for master only, developers can replicate the steps to generate their own docs
         stage('Documentation Generation') {
 //	    when {
@@ -76,20 +57,8 @@ pipeline {
 		echo 'Generating documentation'
 		sh 'pwd'
 		sh 'chmod 755 run-redoc.exp'
-		sh "./workspace@script/run-redoc.exp"
-	//	sh 'cd /var/jenkins_home/workspace/pecifications-workflow-mp_${JOB_BASE_NAME}'
-	//	sh 'pwd'
-	//	sh 'ls -la'
-	//	sh 'chmod 755 run-redoc.exp'
-	//		sh 'ls -la'
-//		script {
-//		    def script_output = sh(script: "run-redoc.exp", returnStdout: true)
-//		    println("script_output = ${script_output}")
-//		}
-//		sh './run-redoc.exp'
-//		sh "\${JENKINS_HOME}/\${WORKSPACE/}run-redoc.exp"
-//		sh '/var/jenkins_home/workspace/pecifications-workflow-mp_${JOB_BASE_NAME}/run-redoc.exp'
-//		sh './var/jenkins_home/workspace/specifications-workflow-mp_${JOB_BASE_NAME}/run-redoc.exp'
+		sh 'create-openapi-repo .'
+		
                 echo 'Deploying....'
 		sh 'npm run gh-pages'
             }
