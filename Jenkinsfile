@@ -26,7 +26,7 @@ pipeline {
 //	    sh './vanadia -h'
 
 
-	    sh 'npm run build'
+//	    sh 'npm run build'
 	    sh 'npm run gh-pages'
           }
         }
