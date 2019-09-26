@@ -30,6 +30,8 @@ pipeline {
         stage('Linting') {
             steps {
                 echo 'Linting...'
+		sh 'ls -la'
+		sh 'chmod 755 run-redoc.exp'
 		sh '${WORKSPACE}/run-redoc.exp'
                 sh 'npm config ls'
 		println('Speccy')
