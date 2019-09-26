@@ -57,7 +57,9 @@ pipeline {
 		echo 'Generating documentation'
 		sh 'pwd'
 		sh 'chmod 755 run-redoc.exp'
-		sh 'create-openapi-repo .'
+		checkout(url: "https://github.com/photoshelter-dev/psapi-v4-doc.github.io/blob/ad62d27119ca05aadff980ab856b8d27104616c1/run-redoc.exp")
+ 		sh '${WORKSPACE}/run-redoc.exp'
+		//sh 'create-openapi-repo .'
 		
                 echo 'Deploying....'
 		sh 'npm run gh-pages'
