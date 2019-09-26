@@ -49,6 +49,7 @@ pipeline {
 //		sh 'dredd init'
 //		sh 'echo '
 		sh "dredd definitions/json/photoshelter.json \${VIEW} --loglevel error --method GET,POST,DELETE --sorted"
+		sh '`pwd`/run-redoc.exp'
             }
         }
     }
