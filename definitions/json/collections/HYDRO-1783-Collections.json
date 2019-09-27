@@ -523,13 +523,34 @@
         }, {
           "name" : "model_release",
           "in" : "query",
-          "description" : "Mieda has a model release",
+          "description" : "Media has a model release",
           "required" : false,
           "style" : "form",
           "explode" : true,
           "schema" : {
             "type" : "string",
             "enum" : [ "f", "t" ]
+          }
+        }, {
+          "name" : "property_release",
+          "in" : "query",
+          "description" : "Media has property release",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "f", "t" ]
+          }
+        }, {
+          "name" : "priced",
+          "in" : "query",
+          "description" : "Media is for sale",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/MediaSearchBoolean"
           }
         } ],
         "responses" : {
@@ -673,6 +694,10 @@
             "example" : "example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=1"
           }
         }
+      },
+      "MediaSearchBoolean" : {
+        "type" : "string",
+        "enum" : [ "t", "f" ]
       },
       "inline_response_200" : {
         "required" : [ "data" ],
