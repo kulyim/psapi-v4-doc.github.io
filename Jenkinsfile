@@ -18,12 +18,15 @@ pipeline {
             //sh 'npm install -g create-openapi-repo'
             sh 'npm install -g @stoplight/prism-cli'
             sh 'npm install -g dredd'
+	    sh 'npm install --save-dev redoc-cli'
+	    sh 'redoc-cli --help'	
           }
         }
 
         stage('Linting') {
             steps {
                 echo 'Linting...'
+	
 		sh '`pwd`/myscript.sh'
 //		sh 'sleep 5m'
 //		sh 'myscript.sh'
@@ -52,6 +55,7 @@ pipeline {
 //		sh 'echo '
 //		sh "dredd definitions/json/photoshelter.json \${VIEW} --loglevel error --method GET,POST,DELETE --sorted"
 		sh 'chmod 755 run-redoc.exp'
+		sh ''
 		sh '../../run-redoc.exp'
             }
         }
