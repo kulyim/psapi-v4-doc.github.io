@@ -207,11 +207,12 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "Generic HTTP 200 Ok Response",
+            "description" : "Download - HTTP OK",
             "content" : {
-              "application/json" : {
+              "application/octet-stream" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200"
+                  "type" : "string",
+                  "format" : "binary"
                 }
               }
             }
