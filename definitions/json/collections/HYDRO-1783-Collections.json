@@ -520,6 +520,17 @@
           "schema" : {
             "type" : "string"
           }
+        }, {
+          "name" : "model_release",
+          "in" : "query",
+          "description" : "Mieda has a model release",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "f", "t" ]
+          }
         } ],
         "responses" : {
           "200" : {
