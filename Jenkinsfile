@@ -47,16 +47,11 @@ pipeline {
 
 	// Each developer must have a .ps-api config file with the PROTOCOL:URL:PORT or their view
         stage('Contract Testing') {
-            steps {
-		
-		
+            steps {		
                 echo 'Contract Testing....'
-//		sh 'dredd init'
-//		sh 'echo '
-//		sh "dredd definitions/json/photoshelter.json \${VIEW} --loglevel error --method GET,POST,DELETE --sorted"
-		sh 'chmod 755 run-redoc.exp'
-		sh ''
-		sh '../../run-redoc.exp'
+		sh 'dredd init'
+		sh 'echo '
+		sh "dredd definitions/json/photoshelter.json \${VIEW} --loglevel error --method GET,POST,DELETE --sorted --details"
             }
         }
     }
