@@ -18,7 +18,7 @@ pipeline {
             //sh 'npm install -g create-openapi-repo'
             sh 'npm install -g @stoplight/prism-cli'
             sh 'npm install -g dredd'
-	    sh 'npm install --save-dev redoc-cli'
+	    sh 'npm install -g redoc-cli'
 	    sh 'redoc-cli --help'	
           }
         }
