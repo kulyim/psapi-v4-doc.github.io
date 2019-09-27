@@ -49,8 +49,8 @@ pipeline {
         stage('Contract Testing') {
             steps {		
                 echo 'Contract Testing....'
-		sh 'dredd init'
-		sh 'echo '
+	//	sh 'dredd init'
+	//	sh 'echo '
 		sh "dredd definitions/json/photoshelter.json \${VIEW} --loglevel error --method GET,POST,DELETE --sorted --details"
             }
         }
