@@ -129,7 +129,7 @@
             }
           },
           "401" : {
-            "description" : "401 Unauthorized Client Error. $RESOURCE is the type of resource that was attempted to be retrieved.",
+            "description" : "401 Unauthorized Client Error",
             "headers" : {
               "WWW-Authenticate" : {
                 "description" : "The HTTP WWW-Authenticate response header defines the authentication method that should be used to gain access to a resource.",
@@ -150,7 +150,7 @@
                   "errors" : {
                     "id" : "AcsPermissionException",
                     "status" : "401",
-                    "title" : "Invalid access to resource: $RESOURCE",
+                    "title" : "Invalid access to resource: Gallery",
                     "detail" : "You are not authorized to view this resource."
                   }
                 }
@@ -525,41 +525,6 @@
           }
         }
       },
-      "PaginationMetaTag" : {
-        "type" : "object",
-        "properties" : {
-          "total" : {
-            "type" : "integer",
-            "description" : "Total count of the resources that were retrieved",
-            "example" : 100
-          },
-          "page" : {
-            "type" : "integer",
-            "description" : "Current Page",
-            "example" : 1
-          },
-          "first" : {
-            "type" : "string",
-            "description" : "URL of the first page",
-            "example" : "example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=1"
-          },
-          "last" : {
-            "type" : "string",
-            "description" : "URL of the last page",
-            "example" : "example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=5"
-          },
-          "next" : {
-            "type" : "string",
-            "description" : "URL of the next page, if applicable",
-            "example" : "example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=2"
-          },
-          "prev" : {
-            "type" : "string",
-            "description" : "URL of the previous page, if applicable",
-            "example" : "example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=1"
-          }
-        }
-      },
       "inline_response_200" : {
         "required" : [ "data" ],
         "type" : "object",
@@ -583,7 +548,7 @@
             }
           },
           "meta" : {
-            "$ref" : "#/components/schemas/PaginationMetaTag"
+            "$ref" : "#/components/schemas/MetaTag"
           }
         }
       },
@@ -710,49 +675,9 @@
           },
           "name_url" : {
             "maxLength" : 100,
-            "type" : "string",
+            "type" : "stirng",
             "description" : "URL to the gallery",
             "nullable" : true
-          },
-          "description" : {
-            "maxLength" : 100,
-            "type" : "string",
-            "description" : "Description of the Gallery",
-            "nullable" : true,
-            "example" : "Trip to DR with my brothers and sisters"
-          },
-          "display_order" : {
-            "type" : "integer",
-            "description" : "Custom display order",
-            "example" : 1
-          },
-          "key_image_id" : {
-            "pattern" : "^GI000[a-zA-Z0-9._]{11}$",
-            "type" : "string",
-            "description" : "ID of the Image that is the key image",
-            "nullable" : true,
-            "example" : "GI000EXAMPLE_IMG"
-          },
-          "access_id" : {
-            "pattern" : "^A0000[a-zA-Z0-9._]{11}$",
-            "type" : "string",
-            "description" : "Access ID of the Gallery",
-            "example" : "A0000EXAMPLE_ACS"
-          },
-          "is_listed" : {
-            "type" : "boolean",
-            "description" : "Flag that denotes if it is listed on the public site",
-            "example" : false
-          },
-          "created_at" : {
-            "type" : "string",
-            "description" : "Creation date",
-            "example" : "2019-04-25T14:54:12.136828"
-          },
-          "modified_at" : {
-            "type" : "string",
-            "description" : "Last modified date",
-            "example" : "2019-04-25T14:54:12.136828"
           }
         }
       }
