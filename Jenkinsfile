@@ -16,9 +16,9 @@ pipeline {
             sh 'npm install -g swagger-cli'
             sh 'npm install -g redoc --save'
             //sh 'npm install -g create-openapi-repo'
-            sh 'npm install -g @stoplight/prism-cli'
+            //sh 'npm install -g @stoplight/prism-cli'
             sh 'npm install -g dredd'
-	    sh 'npm install -g redoc-cli'
+	    //sh 'npm install -g redoc-cli'
 	    sh 'redoc-cli --help'	
           }
         }
@@ -26,11 +26,8 @@ pipeline {
         stage('Linting') {
             steps {
                 echo 'Linting...'
-	
+		// keeping this for testing	
 		sh '`pwd`/myscript.sh'
-//		sh 'sleep 5m'
-//		sh 'myscript.sh'
-		
 		sh 'ls -la'
                 sh 'npm config ls'
 		println('Speccy')
@@ -49,9 +46,7 @@ pipeline {
         stage('Contract Testing') {
             steps {		
                 echo 'Contract Testing....'
-	//	sh 'dredd init'
-	//	sh 'echo '
-		sh "dredd definitions/json/photoshelter.json \${VIEW} --loglevel error --method GET,POST,DELETE --sorted --details"
+		sh "dredd definitions/json/photoshelter.json \${VIEW} --loglevel error --method GET,POST,DELETE --sorted --details --output ${BUILD_DISPLAY_NAME}.html --reporter html"
             }
         }
     }
