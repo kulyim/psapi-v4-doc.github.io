@@ -265,7 +265,7 @@
         }, {
           "name" : "collection_id",
           "in" : "query",
-          "description" : "Collection ID to query from",
+          "description" : "Collection ID to match in the query",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -276,7 +276,7 @@
         }, {
           "name" : "name",
           "in" : "query",
-          "description" : "Collection name to query from",
+          "description" : "Collection name to match in the query",
           "required" : false,
           "style" : "form",
           "explode" : true,
