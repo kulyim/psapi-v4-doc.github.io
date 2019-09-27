@@ -129,7 +129,7 @@
             }
           },
           "401" : {
-            "description" : "401 Unauthorized Client Error. $RESOURCE is the type of resource that was attempted to be retrieved.",
+            "description" : "401 Unauthorized Client Error",
             "headers" : {
               "WWW-Authenticate" : {
                 "description" : "The HTTP WWW-Authenticate response header defines the authentication method that should be used to gain access to a resource.",
@@ -150,7 +150,7 @@
                   "errors" : {
                     "id" : "AcsPermissionException",
                     "status" : "401",
-                    "title" : "Invalid access to resource: $RESOURCE",
+                    "title" : "Invalid access to resource: Gallery",
                     "detail" : "You are not authorized to view this resource."
                   }
                 }
@@ -265,7 +265,7 @@
         }, {
           "name" : "collection_id",
           "in" : "query",
-          "description" : "Collection ID to query from",
+          "description" : "Collection ID to match in the query",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -276,7 +276,7 @@
         }, {
           "name" : "name",
           "in" : "query",
-          "description" : "Collection name to query from",
+          "description" : "Collection name to match in the query",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -331,7 +331,7 @@
               },
               "application/xml" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_1"
+                  "$ref" : "#/components/schemas/inline_response_200_2"
                 }
               }
             }
@@ -530,32 +530,26 @@
         "properties" : {
           "total" : {
             "type" : "integer",
-            "description" : "Total count of the resources that were retrieved",
             "example" : 100
           },
           "page" : {
             "type" : "integer",
-            "description" : "Current Page",
             "example" : 1
           },
           "first" : {
             "type" : "string",
-            "description" : "URL of the first page",
             "example" : "example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=1"
           },
           "last" : {
             "type" : "string",
-            "description" : "URL of the last page",
             "example" : "example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=5"
           },
           "next" : {
             "type" : "string",
-            "description" : "URL of the next page, if applicable",
             "example" : "example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=2"
           },
           "prev" : {
             "type" : "string",
-            "description" : "URL of the previous page, if applicable",
             "example" : "example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=1"
           }
         }
@@ -584,6 +578,21 @@
           },
           "meta" : {
             "$ref" : "#/components/schemas/PaginationMetaTag"
+          }
+        }
+      },
+      "inline_response_200_2" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Collection"
+            }
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/MetaTag"
           }
         }
       },
@@ -715,33 +724,30 @@
             "nullable" : true
           },
           "description" : {
-            "maxLength" : 100,
             "type" : "string",
-            "description" : "Description of the Gallery",
-            "nullable" : true,
-            "example" : "Trip to DR with my brothers and sisters"
+            "description" : "Description of the colletion",
+            "example" : "My Trip to DR Collection"
           },
           "display_order" : {
             "type" : "integer",
-            "description" : "Custom display order",
+            "description" : "Display order",
             "example" : 1
           },
           "key_image_id" : {
             "pattern" : "^GI000[a-zA-Z0-9._]{11}$",
             "type" : "string",
-            "description" : "ID of the Image that is the key image",
-            "nullable" : true,
+            "description" : "Key Image ID",
             "example" : "GI000EXAMPLE_IMG"
           },
           "access_id" : {
             "pattern" : "^A0000[a-zA-Z0-9._]{11}$",
             "type" : "string",
-            "description" : "Access ID of the Gallery",
+            "description" : "Access ID",
             "example" : "A0000EXAMPLE_ACS"
           },
           "is_listed" : {
             "type" : "boolean",
-            "description" : "Flag that denotes if it is listed on the public site",
+            "description" : "Is listed on public site",
             "example" : false
           },
           "created_at" : {
@@ -751,7 +757,7 @@
           },
           "modified_at" : {
             "type" : "string",
-            "description" : "Last modified date",
+            "description" : "Modified Date",
             "example" : "2019-04-25T14:54:12.136828"
           }
         }
