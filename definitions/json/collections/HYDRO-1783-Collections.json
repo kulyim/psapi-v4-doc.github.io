@@ -331,7 +331,7 @@
               },
               "application/xml" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_1"
+                  "$ref" : "#/components/schemas/inline_response_200_2"
                 }
               }
             }
@@ -525,6 +525,35 @@
           }
         }
       },
+      "PaginationMetaTag" : {
+        "type" : "object",
+        "properties" : {
+          "total" : {
+            "type" : "integer",
+            "example" : 100
+          },
+          "page" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "first" : {
+            "type" : "string",
+            "example" : "example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=1"
+          },
+          "last" : {
+            "type" : "string",
+            "example" : "example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=5"
+          },
+          "next" : {
+            "type" : "string",
+            "example" : "example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=2"
+          },
+          "prev" : {
+            "type" : "string",
+            "example" : "example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=1"
+          }
+        }
+      },
       "inline_response_200" : {
         "required" : [ "data" ],
         "type" : "object",
@@ -538,6 +567,21 @@
         }
       },
       "inline_response_200_1" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Collection"
+            }
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/PaginationMetaTag"
+          }
+        }
+      },
+      "inline_response_200_2" : {
         "required" : [ "data" ],
         "type" : "object",
         "properties" : {
@@ -675,9 +719,46 @@
           },
           "name_url" : {
             "maxLength" : 100,
-            "type" : "stirng",
+            "type" : "string",
             "description" : "URL to the gallery",
             "nullable" : true
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Description of the colletion",
+            "example" : "My Trip to DR Collection"
+          },
+          "display_order" : {
+            "type" : "integer",
+            "description" : "Display order",
+            "example" : 1
+          },
+          "key_image_id" : {
+            "pattern" : "^GI000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Key Image ID",
+            "example" : "GI000EXAMPLE_IMG"
+          },
+          "access_id" : {
+            "pattern" : "^A0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Access ID",
+            "example" : "A0000EXAMPLE_ACS"
+          },
+          "is_listed" : {
+            "type" : "boolean",
+            "description" : "Is listed on public site",
+            "example" : false
+          },
+          "created_at" : {
+            "type" : "string",
+            "description" : "Creation date",
+            "example" : "2019-04-25T14:54:12.136828"
+          },
+          "modified_at" : {
+            "type" : "string",
+            "description" : "Modified Date",
+            "example" : "2019-04-25T14:54:12.136828"
           }
         }
       }
