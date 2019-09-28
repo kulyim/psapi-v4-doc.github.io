@@ -141,7 +141,7 @@
               },
               "application/xml" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200"
+                  "$ref" : "#/components/schemas/inline_response_200_1"
                 }
               }
             }
@@ -345,6 +345,35 @@
           }
         }
       },
+      "PaginationMetaTag" : {
+        "type" : "object",
+        "properties" : {
+          "total" : {
+            "type" : "integer",
+            "example" : 100
+          },
+          "page" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "first" : {
+            "type" : "string",
+            "example" : "example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=1"
+          },
+          "last" : {
+            "type" : "string",
+            "example" : "example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=5"
+          },
+          "next" : {
+            "type" : "string",
+            "example" : "example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=2"
+          },
+          "prev" : {
+            "type" : "string",
+            "example" : "example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=1"
+          }
+        }
+      },
       "Error" : {
         "required" : [ "errors" ],
         "type" : "object",
@@ -370,6 +399,21 @@
           },
           "meta" : {
             "$ref" : "#/components/schemas/MetaTag"
+          }
+        }
+      },
+      "inline_response_200_1" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Gallery"
+            }
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/PaginationMetaTag"
           }
         }
       },
