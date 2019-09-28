@@ -18,7 +18,7 @@ security:
 - https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/Final#/components/securitySchemes/PSApiKeyHeader: []
 - https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/Final#/security/PSApiKeyHeader: []
 tags:
-- name: PhotoShelter
+- name: PhotoShelters
 paths:
   /galleries:
     get:
@@ -26,7 +26,7 @@ paths:
       - Gallery
       summary: Gets all the galleries for the account.
       description: Gets all the galleries for the account!
-      operationId: GalleriesGet
+      operationId: galleriesGet
       parameters:
       - name: page
         in: query
@@ -124,7 +124,7 @@ paths:
                 $ref: '#/components/schemas/inline_response_200'
             application/xml:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_200_1'
         400:
           description: 400 Bad Request Error
           content:
@@ -268,6 +268,27 @@ components:
         rate_limit_expires:
           type: integer
           example: 60
+    PaginationMetaTag:
+      type: object
+      properties:
+        total:
+          type: integer
+          example: 100
+        page:
+          type: integer
+          example: 1
+        first:
+          type: string
+          example: example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=1
+        last:
+          type: string
+          example: example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=5
+        next:
+          type: string
+          example: example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=2
+        prev:
+          type: string
+          example: example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=1
     Error:
       required:
       - errors
@@ -289,6 +310,17 @@ components:
             $ref: '#/components/schemas/Gallery'
         meta:
           $ref: '#/components/schemas/MetaTag'
+    inline_response_200_1:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Gallery'
+        meta:
+          $ref: '#/components/schemas/PaginationMetaTag'
     Gallery_attributes:
       required:
       - access_id
