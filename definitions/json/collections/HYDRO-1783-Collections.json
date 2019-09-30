@@ -815,7 +815,7 @@
           "style" : "form",
           "explode" : false,
           "schema" : {
-            "type" : "string"
+            "$ref" : "#/components/schemas/contact_info"
           }
         }, {
           "name" : "ci_address_city",
@@ -1157,6 +1157,14 @@
           },
           "meta" : {
             "$ref" : "#/components/schemas/MetaTag"
+          }
+        }
+      },
+      "contact_info" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string"
           }
         }
       },
