@@ -25,7 +25,7 @@
     "https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/Final#/security/PSApiKeyHeader" : [ ]
   } ],
   "tags" : [ {
-    "name" : "PhotoShelters"
+    "name" : "PhotoShelter"
   } ],
   "paths" : {
     "/galleries" : {
