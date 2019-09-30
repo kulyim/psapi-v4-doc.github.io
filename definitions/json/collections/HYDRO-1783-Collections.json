@@ -495,7 +495,7 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "$ref" : "#/components/schemas/MediaSearchBoolean"
+            "type" : "boolean"
           }
         }, {
           "name" : "property_release",
@@ -505,7 +505,7 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "$ref" : "#/components/schemas/MediaSearchBoolean"
+            "type" : "boolean"
           }
         }, {
           "name" : "priced",
@@ -515,7 +515,7 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "$ref" : "#/components/schemas/MediaSearchBoolean"
+            "type" : "boolean"
           }
         }, {
           "name" : "searachble",
@@ -525,7 +525,7 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "$ref" : "#/components/schemas/MediaSearchBoolean"
+            "type" : "boolean"
           }
         }, {
           "name" : "print",
@@ -535,7 +535,7 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "$ref" : "#/components/schemas/MediaSearchBoolean"
+            "type" : "boolean"
           }
         }, {
           "name" : "personal_use",
@@ -545,7 +545,7 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "$ref" : "#/components/schemas/MediaSearchBoolean"
+            "type" : "boolean"
           }
         }, {
           "name" : "royalty_free",
@@ -555,7 +555,7 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "$ref" : "#/components/schemas/MediaSearchBoolean"
+            "type" : "boolean"
           }
         }, {
           "name" : "rights_managed",
@@ -565,7 +565,7 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "$ref" : "#/components/schemas/MediaSearchBoolean"
+            "type" : "boolean"
           }
         }, {
           "name" : "media_type",
@@ -810,7 +810,7 @@
         }, {
           "name" : "contact_info",
           "in" : "query",
-          "description" : "Contact info. Query string based on key-value pairs. For example, \"?contract_info=city,NYC,country,USA\" is equivalent to city being NYC and country being USA",
+          "description" : "Contact info. Query string based on key-value pairs. For example, \"?contract_info=city,NYC,country,USA\" is equivalent to city being NYC and country being USA.",
           "required" : false,
           "style" : "form",
           "explode" : false,
@@ -886,6 +886,58 @@
           "explode" : true,
           "schema" : {
             "$ref" : "#/components/schemas/MediaSearchEmpty"
+          }
+        }, {
+          "name" : "match_all_terms",
+          "in" : "query",
+          "description" : "Match all terms. Return all keywords specified in the terms parameter. Default to true.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "per_page",
+          "in" : "query",
+          "description" : "Results per page.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Page number.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "sort_by",
+          "in" : "query",
+          "description" : "Field to sort by.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "relevance", "date", "file_name", "upload_time" ]
+          }
+        }, {
+          "name" : "sort_dir",
+          "in" : "query",
+          "description" : "Direction to sort by.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "asc", "desc" ]
           }
         } ],
         "responses" : {
@@ -1026,10 +1078,6 @@
             "example" : "example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=1"
           }
         }
-      },
-      "MediaSearchBoolean" : {
-        "type" : "string",
-        "enum" : [ "t", "f" ]
       },
       "MediaSearchEmpty" : {
         "type" : "array",
