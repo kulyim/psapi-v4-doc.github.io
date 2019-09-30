@@ -27,7 +27,7 @@ pipeline {
             steps {
                 echo 'Linting...'
 		// keeping this for testing	
-		sh '`pwd`/myscript.sh'
+//		sh '`pwd`/myscript.sh'
 		sh 'ls -la'
                 sh 'npm config ls'
 		println('Speccy')
