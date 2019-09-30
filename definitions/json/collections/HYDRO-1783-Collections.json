@@ -40,17 +40,6 @@
             "$ref" : "#/components/schemas/GalleryId"
           },
           "example" : "G0000EXAMPLEGALL"
-        }, {
-          "name" : "api_key",
-          "in" : "query",
-          "description" : "The API Key. Can be requested if you do not have one.",
-          "required" : true,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "$ref" : "#/components/schemas/ApiKey"
-          },
-          "example" : "EXAMPLE_KEY"
         } ],
         "responses" : {
           "200" : {
@@ -252,17 +241,6 @@
         "description" : "Query the collections",
         "operationId" : "collectionsGet",
         "parameters" : [ {
-          "name" : "X-PS-Api-Key",
-          "in" : "query",
-          "description" : "The API Key. Can be requested if you do not have one.",
-          "required" : true,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "$ref" : "#/components/schemas/ApiKey"
-          },
-          "example" : "EXAMPLE_KEY"
-        }, {
           "name" : "collection_id",
           "in" : "query",
           "description" : "Collection ID to match in the query",
@@ -426,17 +404,6 @@
         "description" : "Media GET (aka media search). At least one of the following is required in order for the search to take place: (terms, custom_metadata, date_start, date_end, user_id, org_id, photographer_id, virtual_agency_id, orientation, state, country, country_iso). It is good practice to limit your page size when searching as callbacks for additional data can become expensive.",
         "operationId" : "mediaGet",
         "parameters" : [ {
-          "name" : "X-PS-Api-Key",
-          "in" : "header",
-          "description" : "The API Key. Can be requested if you do not have one",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "$ref" : "#/components/schemas/ApiKey"
-          },
-          "example" : "EXAMPLE_KEY"
-        }, {
           "name" : "media_id",
           "in" : "query",
           "description" : "ID of the media",
@@ -760,6 +727,236 @@
           "schema" : {
             "type" : "string"
           }
+        }, {
+          "name" : "author",
+          "in" : "query",
+          "description" : "Author",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "position",
+          "in" : "query",
+          "description" : "Author title/position",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "location",
+          "in" : "query",
+          "description" : "Location",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "trans_ref",
+          "in" : "query",
+          "description" : "Job ID/transmission reference",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "credit",
+          "in" : "query",
+          "description" : "Credit",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "source",
+          "in" : "query",
+          "description" : "Source",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "copyright",
+          "in" : "query",
+          "description" : "Copyright",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "caption",
+          "in" : "query",
+          "description" : "Caption writer",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "ci_address_city",
+          "in" : "query",
+          "description" : "Contact info address city",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "ci_address_country",
+          "in" : "query",
+          "description" : "Contact info address country",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "ci_address",
+          "in" : "query",
+          "description" : "Contact info address",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "ci_address_postal_code",
+          "in" : "query",
+          "description" : "Contact info address postal code",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "ci_address_region",
+          "in" : "query",
+          "description" : "Contact info region",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "ci_email",
+          "in" : "query",
+          "description" : "Contact info email",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "ci_phone",
+          "in" : "query",
+          "description" : "Contact info phone",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "ci_url",
+          "in" : "query",
+          "description" : "Contact info url",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "genre",
+          "in" : "query",
+          "description" : "Genre",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "rights",
+          "in" : "query",
+          "description" : "Usage rights",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "scene",
+          "in" : "query",
+          "description" : "Scene",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "subject_code",
+          "in" : "query",
+          "description" : "Subject Code",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "web_statement",
+          "in" : "query",
+          "description" : "Web statement",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "is_empty",
+          "in" : "query",
+          "description" : "Denotes which parameters must be empty. Comma-separated list.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "not_empty",
+          "in" : "query",
+          "description" : "Denotes which parameters must have a value. Comma separated list.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -778,9 +975,6 @@
         "type" : "string",
         "description" : "The Gallery ID",
         "example" : "G0000EXAMPLEGALL"
-      },
-      "ApiKey" : {
-        "type" : "string"
       },
       "Gallery" : {
         "required" : [ "attributes", "id", "type" ],
