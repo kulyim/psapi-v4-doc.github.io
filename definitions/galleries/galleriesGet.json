@@ -33,7 +33,7 @@
         "tags" : [ "Gallery" ],
         "summary" : "Gets all the galleries for the account.",
         "description" : "Gets all the galleries for the account!",
-        "operationId" : "GalleriesGet",
+        "operationId" : "galleriesGet",
         "parameters" : [ {
           "name" : "page",
           "in" : "query",

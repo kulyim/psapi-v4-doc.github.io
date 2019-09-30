@@ -13,136 +13,95 @@
       "name" : "PhotoShelter License",
       "url" : "https://www.photoshelter.com/support/license"
     },
-    "version" : "Anthony"
+    "version" : "Allan"
   },
   "servers" : [ {
-    "url" : "https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/anthony",
+    "url" : "https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4",
     "description" : "PhotoShelter Auto Mocking API"
   } ],
-  "security" : [ {
-    "https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/Final#/components/securitySchemes/PSApiKeyHeader" : [ ]
-  }, {
-    "https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/Final#/security/PSApiKeyHeader" : [ ]
-  } ],
   "tags" : [ {
-    "name" : "PhotoShelter"
+    "name" : "Gallery"
   } ],
   "paths" : {
-    "/galleries" : {
+    "/galleries/{gallery_id}" : {
       "get" : {
         "tags" : [ "Gallery" ],
-        "summary" : "Gets all the galleries for the account.",
-        "description" : "Gets all the galleries for the account!",
-        "operationId" : "galleriesGet",
+        "summary" : "GET /galleries/{gallery_id}.",
+        "description" : "Get a gallery by ID.",
+        "operationId" : "galleriesGetId",
         "parameters" : [ {
-          "name" : "page",
-          "in" : "query",
-          "description" : "Page number",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
+          "name" : "gallery_id",
+          "in" : "path",
+          "description" : "The ID of the gallery",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
           "schema" : {
-            "type" : "integer",
-            "example" : 3,
-            "default" : 1
+            "$ref" : "#/components/schemas/GalleryId"
           },
-          "example" : 9
+          "example" : "G0000EXAMPLEGALL"
         }, {
-          "name" : "per_page",
+          "name" : "api_key",
           "in" : "query",
-          "description" : "Number of rows returned per page.",
-          "required" : false,
+          "description" : "The API Key. Can be requested if you do not have one.",
+          "required" : true,
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "type" : "integer",
-            "example" : 40,
-            "default" : 20
-          }
-        }, {
-          "name" : "sort_by",
-          "in" : "query",
-          "description" : "Sort by gallery property.",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string",
-            "default" : "creation_time",
-            "enum" : [ "creation_time", "modification_time", "name", "display_order" ]
-          }
-        }, {
-          "name" : "sort_dir",
-          "in" : "query",
-          "description" : "Sorting result set direction (ascending or descending)",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string",
-            "default" : "asc",
-            "enum" : [ "asc", "desc" ]
-          }
-        }, {
-          "name" : "name",
-          "in" : "query",
-          "description" : "Full or partial gallery name",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string",
-            "description" : "Search galleries by partial name"
-          }
-        }, {
-          "name" : "parent",
-          "in" : "query",
-          "description" : "Limit galleries to children of the provided collection ID. Pass blank to find galleries with no parent.",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "pattern" : "^C0000[a-zA-Z0-9._]{11}$",
-            "type" : "string",
-            "description" : "Collection ID",
-            "example" : "C0000LYrqIr59eJI"
-          }
-        }, {
-          "name" : "portfolio",
-          "in" : "query",
-          "description" : "Filter the result set to return galleries listed on public site",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "boolean",
-            "default" : false
-          }
-        }, {
-          "name" : "recently_updated",
-          "in" : "query",
-          "description" : "Filter the result set to return galleries recently updated",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "boolean",
-            "default" : false
-          }
+            "$ref" : "#/components/schemas/ApiKey"
+          },
+          "example" : "EXAMPLE_KEY"
         } ],
         "responses" : {
           "200" : {
-            "description" : "/galleries - HTTP 200 OK Response.\n",
+            "description" : "/galleries/{gallery_id} - HTTP 200 OK Response.\n",
             "content" : {
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/inline_response_200"
+                },
+                "example" : {
+                  "data" : {
+                    "type" : "gallery",
+                    "id" : "G0000EXAMPLE_GAL",
+                    "attributes" : {
+                      "name" : "Example Name",
+                      "description" : "Example Description",
+                      "display_order" : 10,
+                      "key_image_id" : "GI000EXAMPLE_IMG",
+                      "access_id" : "A0000EXAMPLE_ACS",
+                      "is_listed" : false,
+                      "is_orig_enabled" : false,
+                      "is_watermark_disabled" : false,
+                      "created_at" : "2019-04-09T18:34:40-04:00",
+                      "modified_at" : "2019-09-06T16:24:24-04:00"
+                    },
+                    "links" : {
+                      "self" : "example.photoshelter.com/galleries/G0000EXAMPLE_GAL"
+                    }
+                  },
+                  "meta" : {
+                    "copyright" : "PhotoShelter 2019",
+                    "version" : "2019-05-01",
+                    "rate_limit_limit" : 10,
+                    "rate_limit_current" : 1,
+                    "rate_limit_expires" : 40
+                  }
                 }
               },
               "application/xml" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_1"
+                  "$ref" : "#/components/schemas/inline_response_200"
                 }
+              }
+            },
+            "links" : {
+              "GetGallery" : {
+                "operationId" : "galleryGetId",
+                "parameters" : {
+                  "gallery_id" : "$response.body#/data/id"
+                },
+                "description" : "Links to self"
               }
             }
           },
@@ -226,8 +185,8 @@
               }
             }
           },
-          "415" : {
-            "description" : "415 Unsupported Media Type Error",
+          "404" : {
+            "description" : "404 Not Found Client Error",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -236,7 +195,7 @@
                 "example" : {
                   "errors" : {
                     "id" : "ResourceNotFoundException",
-                    "status" : "415",
+                    "status" : "404",
                     "title" : "Resource not found",
                     "detail" : "The requested resource was not found."
                   }
@@ -283,17 +242,23 @@
               }
             }
           }
-        },
-        "security" : [ {
-          "https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/Final#/components/securitySchemes/PSApiKeyHeader" : [ ]
-        }, {
-          "https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/Final#/security/PSApiKeyHeader" : [ ]
-        } ]
+        }
       }
     }
   },
   "components" : {
     "schemas" : {
+      "GalleryId" : {
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
+        "type" : "string",
+        "description" : "The Gallery ID",
+        "example" : "G0000EXAMPLEGALL"
+      },
+      "ApiKey" : {
+        "type" : "string"
+      },
       "Gallery" : {
         "required" : [ "attributes", "id", "type" ],
         "type" : "object",
@@ -345,35 +310,6 @@
           }
         }
       },
-      "PaginationMetaTag" : {
-        "type" : "object",
-        "properties" : {
-          "total" : {
-            "type" : "integer",
-            "example" : 100
-          },
-          "page" : {
-            "type" : "integer",
-            "example" : 1
-          },
-          "first" : {
-            "type" : "string",
-            "example" : "example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=1"
-          },
-          "last" : {
-            "type" : "string",
-            "example" : "example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=5"
-          },
-          "next" : {
-            "type" : "string",
-            "example" : "example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=2"
-          },
-          "prev" : {
-            "type" : "string",
-            "example" : "example.photoshelter.com/psapi/v4.0/collection?api_key=EXAMPLE_KEY&page=1"
-          }
-        }
-      },
       "Error" : {
         "required" : [ "errors" ],
         "type" : "object",
@@ -392,28 +328,10 @@
         "type" : "object",
         "properties" : {
           "data" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/Gallery"
-            }
+            "$ref" : "#/components/schemas/Gallery"
           },
           "meta" : {
             "$ref" : "#/components/schemas/MetaTag"
-          }
-        }
-      },
-      "inline_response_200_1" : {
-        "required" : [ "data" ],
-        "type" : "object",
-        "properties" : {
-          "data" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/Gallery"
-            }
-          },
-          "meta" : {
-            "$ref" : "#/components/schemas/PaginationMetaTag"
           }
         }
       },
