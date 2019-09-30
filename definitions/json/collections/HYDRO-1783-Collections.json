@@ -943,9 +943,9 @@
           "description" : "Denotes which parameters must be empty. Comma-separated list.",
           "required" : false,
           "style" : "form",
-          "explode" : true,
+          "explode" : false,
           "schema" : {
-            "type" : "string"
+            "$ref" : "#/components/schemas/MediaSearchEmpty"
           }
         }, {
           "name" : "not_empty",
@@ -1100,6 +1100,13 @@
       "MediaSearchBoolean" : {
         "type" : "string",
         "enum" : [ "t", "f" ]
+      },
+      "MediaSearchEmpty" : {
+        "type" : "array",
+        "items" : {
+          "type" : "string",
+          "enum" : [ "title", "edit_status", "urgency", "category", "keywords", "instructions", "author", "position", "location", "city", "state", "country", "headline", "trans_ref", "credit", "source", "copyright", "caption", "caption_writer", "ci_address_city", "ci_address_country", "ci_address", "ci_address_postal_code", "ci_address_region", "ci_email", "ci_phone", "ci_url", "genre", "rights", "scene", "subject_code", "web_statement" ]
+        }
       },
       "inline_response_200" : {
         "required" : [ "data" ],
