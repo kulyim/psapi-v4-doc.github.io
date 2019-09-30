@@ -1163,7 +1163,28 @@
       "contact_info" : {
         "type" : "object",
         "properties" : {
-          "name" : {
+          "city" : {
+            "type" : "string"
+          },
+          "country" : {
+            "type" : "string"
+          },
+          "address" : {
+            "type" : "string"
+          },
+          "postal_code" : {
+            "type" : "string"
+          },
+          "region" : {
+            "type" : "string"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "phone" : {
+            "type" : "string"
+          },
+          "url" : {
             "type" : "string"
           }
         }
