@@ -808,6 +808,16 @@
             "type" : "string"
           }
         }, {
+          "name" : "contact_info",
+          "in" : "query",
+          "description" : "Contact info",
+          "required" : false,
+          "style" : "form",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
           "name" : "ci_address_city",
           "in" : "query",
           "description" : "Contact info address city",
@@ -955,7 +965,7 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "type" : "string"
+            "$ref" : "#/components/schemas/MediaSearchEmpty"
           }
         } ],
         "responses" : {
@@ -1105,7 +1115,7 @@
         "type" : "array",
         "items" : {
           "type" : "string",
-          "enum" : [ "title", "edit_status", "urgency", "category", "keywords", "instructions", "author", "position", "location", "city", "state", "country", "headline", "trans_ref", "credit", "source", "copyright", "caption", "caption_writer", "ci_address_city", "ci_address_country", "ci_address", "ci_address_postal_code", "ci_address_region", "ci_email", "ci_phone", "ci_url", "genre", "rights", "scene", "subject_code", "web_statement" ]
+          "enum" : [ "title", "edit_status", "urgency", "category", "keywords", "instructions", "author", "position", "location", "city", "state", "country", "headline", "trans_ref", "credit", "source", "copyright", "caption", "caption_writer", "ci_city", "ci_country", "ci_address", "ci_postal_code", "ci_region", "ci_email", "ci_phone", "ci_url", "genre", "rights", "scene", "subject_code", "web_statement" ]
         }
       },
       "inline_response_200" : {
