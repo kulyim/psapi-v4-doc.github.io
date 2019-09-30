@@ -810,92 +810,12 @@
         }, {
           "name" : "contact_info",
           "in" : "query",
-          "description" : "Contact info",
+          "description" : "Contact info. Query string based on key-value pairs. For example, \"?contract_info=city,NYC,country,USA\" is equivalent to city being NYC and country being USA",
           "required" : false,
           "style" : "form",
           "explode" : false,
           "schema" : {
             "$ref" : "#/components/schemas/contact_info"
-          }
-        }, {
-          "name" : "ci_address_city",
-          "in" : "query",
-          "description" : "Contact info address city",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "ci_address_country",
-          "in" : "query",
-          "description" : "Contact info address country",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "ci_address",
-          "in" : "query",
-          "description" : "Contact info address",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "ci_address_postal_code",
-          "in" : "query",
-          "description" : "Contact info address postal code",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "ci_address_region",
-          "in" : "query",
-          "description" : "Contact info region",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "ci_email",
-          "in" : "query",
-          "description" : "Contact info email",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "ci_phone",
-          "in" : "query",
-          "description" : "Contact info phone",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "ci_url",
-          "in" : "query",
-          "description" : "Contact info url",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
           }
         }, {
           "name" : "genre",
