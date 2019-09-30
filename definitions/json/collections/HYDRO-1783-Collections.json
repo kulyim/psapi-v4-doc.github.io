@@ -810,12 +810,12 @@
         }, {
           "name" : "contact_info",
           "in" : "query",
-          "description" : "Contact info. Query string based on key-value pairs. For example, \"?contract_info=city,NYC,country,USA\" is equivalent to city being NYC and country being USA.",
+          "description" : "Contact info. Query string based on key-value pairs. The available keys are - city, country, address, postal_code, region, email, phone, and url. For example, \"?contract_info=city,NYC,country,USA is equivalent to city being NYC and country being USA.",
           "required" : false,
           "style" : "form",
           "explode" : false,
           "schema" : {
-            "$ref" : "#/components/schemas/contact_info"
+            "type" : "string"
           }
         }, {
           "name" : "genre",
@@ -883,7 +883,7 @@
           "description" : "Denotes which parameters must have a value. Comma separated list.",
           "required" : false,
           "style" : "form",
-          "explode" : true,
+          "explode" : false,
           "schema" : {
             "$ref" : "#/components/schemas/MediaSearchEmpty"
           }
@@ -1125,35 +1125,6 @@
           },
           "meta" : {
             "$ref" : "#/components/schemas/MetaTag"
-          }
-        }
-      },
-      "contact_info" : {
-        "type" : "object",
-        "properties" : {
-          "city" : {
-            "type" : "string"
-          },
-          "country" : {
-            "type" : "string"
-          },
-          "address" : {
-            "type" : "string"
-          },
-          "postal_code" : {
-            "type" : "string"
-          },
-          "region" : {
-            "type" : "string"
-          },
-          "email" : {
-            "type" : "string"
-          },
-          "phone" : {
-            "type" : "string"
-          },
-          "url" : {
-            "type" : "string"
           }
         }
       },
