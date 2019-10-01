@@ -518,7 +518,7 @@
             "type" : "boolean"
           }
         }, {
-          "name" : "searachble",
+          "name" : "searchble",
           "in" : "query",
           "description" : "Media is publicly searchable",
           "required" : false,
