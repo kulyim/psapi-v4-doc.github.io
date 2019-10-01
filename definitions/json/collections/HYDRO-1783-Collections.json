@@ -635,7 +635,7 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "type" : "string"
+            "type" : "integer"
           }
         }, {
           "name" : "rating_maximum",
@@ -645,7 +645,7 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "type" : "string"
+            "type" : "integer"
           }
         }, {
           "name" : "date_start",
