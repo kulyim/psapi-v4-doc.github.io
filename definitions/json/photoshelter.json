@@ -363,6 +363,14 @@
         "summary" : "Retrieve library listing.",
         "description" : "Retrieve library listing.",
         "operationId" : "LibraryGet",
+        "parameters" : [ {
+          "name" : "listed",
+          "in" : "query",
+          "description" : "listed or unlisted",
+          "required" : false,
+          "style" : "form",
+          "explode" : true
+        } ],
         "responses" : {
           "200" : {
             "description" : "/library - HTTP 200 OK Response.\n",
