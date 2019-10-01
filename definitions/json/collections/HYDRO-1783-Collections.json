@@ -638,7 +638,7 @@
             "type" : "integer"
           }
         }, {
-          "name" : "rating_maximum",
+          "name" : "rating_max",
           "in" : "query",
           "description" : "Maximum rating",
           "required" : false,
