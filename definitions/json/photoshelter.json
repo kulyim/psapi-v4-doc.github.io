@@ -25,7 +25,7 @@
         "tags" : [ "Galleries" ],
         "summary" : "Delete a gallery.",
         "description" : "Delete a gallery.",
-        "operationId" : "GalleryDelete",
+        "operationId" : "galleryDelete",
         "parameters" : [ {
           "name" : "gallery_id",
           "in" : "path",
@@ -193,7 +193,7 @@
         "tags" : [ "Media" ],
         "summary" : "Get the media with the associated ID.",
         "description" : "Get the media with the associated ID.",
-        "operationId" : "MediaDownload",
+        "operationId" : "mediaDownloadGet",
         "parameters" : [ {
           "name" : "media_id",
           "in" : "path",
