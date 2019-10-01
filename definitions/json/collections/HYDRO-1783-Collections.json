@@ -550,7 +550,7 @@
         }, {
           "name" : "royalty_free",
           "in" : "query",
-          "description" : "Media is available as royality free.",
+          "description" : "Media is available as royalty free.",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -625,7 +625,7 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "type" : "string"
+            "type" : "integer"
           }
         }, {
           "name" : "rating_min",
