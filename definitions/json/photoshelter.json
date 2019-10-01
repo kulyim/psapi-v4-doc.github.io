@@ -369,7 +369,10 @@
           "description" : "listed or unlisted",
           "required" : false,
           "style" : "form",
-          "explode" : true
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema_2"
+          }
         } ],
         "responses" : {
           "200" : {
