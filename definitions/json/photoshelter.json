@@ -362,14 +362,17 @@
         "tags" : [ "Library" ],
         "summary" : "Retrieve library listing.",
         "description" : "Retrieve library listing.",
-        "operationId" : "LibraryGet",
+        "operationId" : "libraryGet",
         "parameters" : [ {
           "name" : "listed",
           "in" : "query",
           "description" : "listed or unlisted",
           "required" : false,
           "style" : "form",
-          "explode" : true
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema_2"
+          }
         } ],
         "responses" : {
           "200" : {
