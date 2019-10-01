@@ -264,8 +264,18 @@ paths:
       - Library
       summary: Retrieve library listing.
       description: Retrieve library listing.
-      operationId: GetLibrary
+      operationId: LibraryGet
       responses:
+        200:
+          description: |
+            /library - HTTP 200 OK Response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
         400:
           description: 400 Bad Request Error
           content:
@@ -373,10 +383,38 @@ components:
       title: Media ID
       maxLength: 16
       minLength: 16
-      pattern: ^(I[a-zA-Z0-9._]{15})|(VD[a-zA-Z0-9._]{14})|(AD[a-zA-Z0-9._]{14})|(DO[a-zA-Z0-9._]{14})$
+      pattern: ^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$
       type: string
       description: Media ID
       example: G0000EXAMPLE_GAL
+    ArrayOfGalleries:
+      type: array
+      items:
+        allOf:
+        - $ref: '#/components/schemas/Gallery'
+    ArrayOfCollections:
+      type: array
+      items:
+        allOf:
+        - $ref: '#/components/schemas/Collection'
+    MetaTag:
+      type: object
+      properties:
+        copyright:
+          type: string
+          example: PhotoShelter 2019
+        version:
+          type: string
+          example: 2019-05-01
+        rate_limit_limit:
+          type: integer
+          example: 10
+        rate_limit_current:
+          type: integer
+          example: 1
+        rate_limit_expires:
+          type: integer
+          example: 60
     inline_response_200_meta:
       required:
       - status
@@ -392,6 +430,18 @@ components:
       properties:
         meta:
           $ref: '#/components/schemas/inline_response_200_meta'
+    inline_response_200_1:
+      required:
+      - collections
+      - galleries
+      type: object
+      properties:
+        galleries:
+          $ref: '#/components/schemas/ArrayOfGalleries'
+        collections:
+          $ref: '#/components/schemas/ArrayOfCollections'
+        meta:
+          $ref: '#/components/schemas/MetaTag'
     Error_links:
       type: object
       properties:
