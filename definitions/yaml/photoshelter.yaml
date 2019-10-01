@@ -264,7 +264,7 @@ paths:
       - Library
       summary: Retrieve library listing.
       description: Retrieve library listing.
-      operationId: LibraryGet
+      operationId: libraryGet
       parameters:
       - name: listed
         in: query
@@ -272,6 +272,8 @@ paths:
         required: false
         style: form
         explode: true
+        schema:
+          $ref: '#/components/schemas/schema_2'
       responses:
         200:
           description: |
