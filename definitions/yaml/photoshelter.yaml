@@ -319,7 +319,7 @@ paths:
         schema:
           pattern: ^(VD|AD|I0|DO)000[a-zA-Z0-9._]{11}$
           type: string
-        example: I0000EXAMPLEGALL
+        example: I0000EXAMPLEIMAG
       - name: photographer_id
         in: query
         description: ID of photographer
@@ -347,6 +347,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: C0000EXAMPLECOLL, C0000EXAMPLECOL2
       - name: galleries
         in: query
         description: Limit search to files contained in given galleries. Comma separated
@@ -356,6 +357,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: G0000EXAMPLEGALL, G0000EXAMPLEGAL2
       - name: custom_metadata
         in: query
         description: Limit search to files containing custom metadata. Requires use
@@ -366,6 +368,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: '{"Foo_field_123":"Foo_tag"}'
       - name: file_name
         in: query
         description: Name of the file
@@ -374,6 +377,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: File name
       - name: terms
         in: query
         description: Search terms. Performs text search based on the terms across
@@ -383,6 +387,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Example Search Terms
       - name: model_release
         in: query
         description: Media has a model release
@@ -391,6 +396,7 @@ paths:
         explode: true
         schema:
           type: boolean
+        example: true
       - name: property_release
         in: query
         description: Media has property release
@@ -399,6 +405,7 @@ paths:
         explode: true
         schema:
           type: boolean
+        example: false
       - name: priced
         in: query
         description: Media is for sale
@@ -407,6 +414,7 @@ paths:
         explode: true
         schema:
           type: boolean
+        example: true
       - name: searchble
         in: query
         description: Media is publicly searchable
@@ -415,6 +423,7 @@ paths:
         explode: true
         schema:
           type: boolean
+        example: false
       - name: print
         in: query
         description: Media is available for prints
@@ -423,6 +432,7 @@ paths:
         explode: true
         schema:
           type: boolean
+        example: true
       - name: personal_use
         in: query
         description: Media is available for personal use.
@@ -431,6 +441,7 @@ paths:
         explode: true
         schema:
           type: boolean
+        example: false
       - name: royalty_free
         in: query
         description: Media is available as royalty free.
@@ -439,6 +450,7 @@ paths:
         explode: true
         schema:
           type: boolean
+        example: true
       - name: rights_managed
         in: query
         description: Media is available for license.
@@ -447,6 +459,7 @@ paths:
         explode: true
         schema:
           type: boolean
+        example: false
       - name: media_type
         in: query
         description: Type of media (image | video | audio | doc) or a comma separated
@@ -456,6 +469,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: image,audio
       - name: city
         in: query
         description: City parameter
@@ -464,6 +478,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample City
       - name: state
         in: query
         description: State/Province parameter
@@ -472,6 +487,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample State
       - name: country
         in: query
         description: Country Parameter
@@ -480,6 +496,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample Country
       - name: country_iso
         in: query
         description: Country ISO code
@@ -488,6 +505,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample Code
       - name: rating
         in: query
         description: Ratings are from -1 to 254
