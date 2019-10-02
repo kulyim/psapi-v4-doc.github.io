@@ -414,7 +414,7 @@
             "pattern" : "^(VD|AD|I0|DO)000[a-zA-Z0-9._]{11}$",
             "type" : "string"
           },
-          "example" : "I0000EXAMPLEGALL"
+          "example" : "I0000EXAMPLEIMAG"
         }, {
           "name" : "photographer_id",
           "in" : "query",
@@ -446,7 +446,8 @@
           "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "C0000EXAMPLECOLL, C0000EXAMPLECOL2"
         }, {
           "name" : "galleries",
           "in" : "query",
@@ -456,7 +457,8 @@
           "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "G0000EXAMPLEGALL, G0000EXAMPLEGAL2"
         }, {
           "name" : "custom_metadata",
           "in" : "query",
@@ -466,7 +468,8 @@
           "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "{\"Foo_field_123\":\"Foo_tag\"}"
         }, {
           "name" : "file_name",
           "in" : "query",
@@ -476,7 +479,8 @@
           "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "File name"
         }, {
           "name" : "terms",
           "in" : "query",
@@ -486,7 +490,8 @@
           "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "Example Search Terms"
         }, {
           "name" : "model_release",
           "in" : "query",
@@ -496,7 +501,8 @@
           "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "example" : true
         }, {
           "name" : "property_release",
           "in" : "query",
@@ -506,7 +512,8 @@
           "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "example" : false
         }, {
           "name" : "priced",
           "in" : "query",
@@ -516,7 +523,8 @@
           "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "example" : true
         }, {
           "name" : "searchble",
           "in" : "query",
@@ -526,7 +534,8 @@
           "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "example" : false
         }, {
           "name" : "print",
           "in" : "query",
@@ -536,7 +545,8 @@
           "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "example" : true
         }, {
           "name" : "personal_use",
           "in" : "query",
@@ -546,7 +556,8 @@
           "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "example" : false
         }, {
           "name" : "royalty_free",
           "in" : "query",
@@ -556,7 +567,8 @@
           "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "example" : true
         }, {
           "name" : "rights_managed",
           "in" : "query",
@@ -566,7 +578,8 @@
           "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "example" : false
         }, {
           "name" : "media_type",
           "in" : "query",
@@ -576,7 +589,8 @@
           "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "image,audio"
         }, {
           "name" : "city",
           "in" : "query",
@@ -586,7 +600,8 @@
           "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "Sample City"
         }, {
           "name" : "state",
           "in" : "query",
@@ -596,7 +611,8 @@
           "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "Sample State"
         }, {
           "name" : "country",
           "in" : "query",
@@ -606,7 +622,8 @@
           "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "Sample Country"
         }, {
           "name" : "country_iso",
           "in" : "query",
@@ -616,7 +633,8 @@
           "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "Sample Code"
         }, {
           "name" : "rating",
           "in" : "query",
