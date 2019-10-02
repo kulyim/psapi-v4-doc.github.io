@@ -514,6 +514,7 @@ paths:
         explode: true
         schema:
           type: integer
+        example: 1
       - name: rating_min
         in: query
         description: Minimum rating
@@ -522,6 +523,7 @@ paths:
         explode: true
         schema:
           type: integer
+        example: 1
       - name: rating_max
         in: query
         description: Maximum rating
@@ -530,6 +532,7 @@ paths:
         explode: true
         schema:
           type: integer
+        example: 10
       - name: date_start
         in: query
         description: Minimum date taken
@@ -538,6 +541,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: 2019-04-09T18:34:40-04:00
       - name: date_end
         in: query
         description: Maximum date taken
@@ -546,6 +550,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: 2019-04-09T18:34:40-04:00
       - name: title
         in: query
         description: Title
@@ -554,6 +559,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample Title
       - name: edit_status
         in: query
         description: Edit status
@@ -562,6 +568,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample status
       - name: urgency
         in: query
         description: Urgency
@@ -570,6 +577,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Urgency
       - name: category
         in: query
         description: Category
@@ -578,6 +586,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample Category
       - name: keywords
         in: query
         description: Keywords
@@ -586,6 +595,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Example Keywords
       - name: instructions
         in: query
         description: Instructions
@@ -594,6 +604,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample instructions
       - name: author
         in: query
         description: Author
@@ -602,6 +613,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample Author
       - name: position
         in: query
         description: Author title/position
@@ -610,6 +622,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample Title/Position
       - name: location
         in: query
         description: Location
@@ -618,6 +631,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample location
       - name: trans_ref
         in: query
         description: Job ID/transmission reference
@@ -626,6 +640,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample ID
       - name: credit
         in: query
         description: Credit
@@ -634,6 +649,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample Credit
       - name: source
         in: query
         description: Source
@@ -642,6 +658,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample Source
       - name: copyright
         in: query
         description: Copyright
@@ -650,6 +667,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample Copyright
       - name: caption
         in: query
         description: Caption writer
@@ -658,6 +676,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Caption writer
       - name: contact_info
         in: query
         description: Contact info. Query string based on key-value pairs. The available
@@ -669,6 +688,7 @@ paths:
         explode: false
         schema:
           type: string
+        example: city,NYC,country,USA
       - name: genre
         in: query
         description: Genre
@@ -677,6 +697,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample genre
       - name: rights
         in: query
         description: Usage rights
@@ -685,6 +706,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample usage rights
       - name: scene
         in: query
         description: Scene
