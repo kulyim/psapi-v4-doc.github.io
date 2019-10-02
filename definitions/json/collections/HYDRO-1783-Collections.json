@@ -810,7 +810,7 @@
         }, {
           "name" : "contact_info",
           "in" : "query",
-          "description" : "Contact info. Query string based on key-value pairs. The available keys are - city, country, address, postal_code, region, email, phone, and url. For example, \"?contract_info=city,NYC,country,USA is equivalent to city being NYC and country being USA.",
+          "description" : "Contact info. Query string based on key-value pairs. The available keys are - city, country, address, postal_code, region, email, phone, and url. For example, \"?contact_info=city,NYC,country,USA is equivalent to city being NYC and country being USA.",
           "required" : false,
           "style" : "form",
           "explode" : false,
