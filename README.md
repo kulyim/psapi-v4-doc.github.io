@@ -23,14 +23,15 @@ Currently tracking [v1.0]([https://jsonapi.org/format/1.0/](https://jsonapi.org/
 ## CI/CD Steps
 
 ### Linting 
-![enter image description here](https://avatars0.githubusercontent.com/u/4072897?s=200&v=4 =25x)
+![enter image description here](https://avatars0.githubusercontent.com/u/4072897?s=200&v=4=25x)
 [Speccy](https://github.com/wework/speccy)
 	
 "Make sure your OpenAPI 3.0 specifications are more than just valid, make sure they're useful!" 
 ### Validation
-![enter image description here](https://avatars1.githubusercontent.com/u/43750074?s=200&v=4 =25x)
+![enter image description here](https://avatars1.githubusercontent.com/u/43750074?s=200&v=4=25x)
 [Swagger-cli](https://github.com/APIDevTools/swagger-cli)
 ### Contract Testing
-![enter image description here](https://raw.githubusercontent.com/apiaryio/dredd/master/docs/_static/images/dredd.png =1280x)
+![enter image description here](https://raw.githubusercontent.com/apiaryio/dredd/master/docs/_static/images/dredd.png)
+
 :warning: Your .ps-api configuration file must be pointing to the right view URL:PORT
-:warning: Your test must be present as well
+
