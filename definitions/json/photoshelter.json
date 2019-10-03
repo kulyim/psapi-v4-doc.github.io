@@ -887,7 +887,8 @@
           "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "Sample scene"
         }, {
           "name" : "subject_code",
           "in" : "query",
