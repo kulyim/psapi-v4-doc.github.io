@@ -282,7 +282,8 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "default" : false
           },
           "example" : true
         }, {
