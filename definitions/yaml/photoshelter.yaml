@@ -218,6 +218,7 @@ paths:
         explode: true
         schema:
           type: boolean
+          default: false
         example: true
       - name: per_page
         in: query
