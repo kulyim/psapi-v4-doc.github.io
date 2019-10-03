@@ -71,6 +71,7 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
+            "default": false,
             "type" : "boolean"
           },
           "example" : true
