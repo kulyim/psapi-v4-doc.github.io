@@ -54,6 +54,16 @@ paths:
         schema:
           $ref: '#/components/schemas/CollectionId'
         example: C0000EXAMPLECOLL
+      - name: match
+        in: query
+        description: Flag denoting partial or complete collection name matching. False
+          for partial, true for complete.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+        example: true
       - name: per_page
         in: query
         description: Results per page
