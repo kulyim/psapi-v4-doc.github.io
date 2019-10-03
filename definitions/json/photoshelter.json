@@ -896,7 +896,8 @@
           "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "Sample Subject Code"
         }, {
           "name" : "web_statement",
           "in" : "query",
@@ -906,7 +907,8 @@
           "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "Sample Web Statement"
         }, {
           "name" : "is_empty",
           "in" : "query",
@@ -916,7 +918,8 @@
           "explode" : false,
           "schema" : {
             "$ref" : "#/components/schemas/MediaSearchEmpty"
-          }
+          },
+          "example" : "title, edit_status,urgency"
         }, {
           "name" : "not_empty",
           "in" : "query",
@@ -926,7 +929,8 @@
           "explode" : false,
           "schema" : {
             "$ref" : "#/components/schemas/MediaSearchEmpty"
-          }
+          },
+          "example" : "title,edit_status,urgency"
         }, {
           "name" : "match_all_terms",
           "in" : "query",
@@ -936,7 +940,8 @@
           "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "example" : true
         }, {
           "name" : "per_page",
           "in" : "query",
@@ -946,7 +951,8 @@
           "explode" : true,
           "schema" : {
             "type" : "integer"
-          }
+          },
+          "example" : 50
         }, {
           "name" : "page",
           "in" : "query",
@@ -956,7 +962,8 @@
           "explode" : true,
           "schema" : {
             "type" : "integer"
-          }
+          },
+          "example" : 1
         }, {
           "name" : "sort_by",
           "in" : "query",
@@ -967,7 +974,8 @@
           "schema" : {
             "type" : "string",
             "enum" : [ "relevance", "date", "file_name", "upload_time" ]
-          }
+          },
+          "example" : "relevance"
         }, {
           "name" : "sort_dir",
           "in" : "query",
@@ -978,7 +986,8 @@
           "schema" : {
             "type" : "string",
             "enum" : [ "asc", "desc" ]
-          }
+          },
+          "example" : "asc"
         } ],
         "responses" : {
           "200" : {
