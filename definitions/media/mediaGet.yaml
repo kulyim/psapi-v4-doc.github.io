@@ -14,6 +14,8 @@ info:
 servers:
 - url: https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4
   description: PhotoShelter Auto Mocking API
+tags:
+- name: Gallery
 paths:
   /media:
     get:
@@ -36,7 +38,7 @@ paths:
         schema:
           pattern: ^(VD|AD|I0|DO)000[a-zA-Z0-9._]{11}$
           type: string
-        example: I0000EXAMPLEGALL
+        example: I0000EXAMPLEIMAG
       - name: photographer_id
         in: query
         description: ID of photographer
@@ -55,6 +57,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: VA000____EXAMPLE
       - name: collections
         in: query
         description: Limit search to files within given collections. Comma separated
@@ -64,6 +67,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: C0000EXAMPLECOLL, C0000EXAMPLECOL2
       - name: galleries
         in: query
         description: Limit search to files contained in given galleries. Comma separated
@@ -73,6 +77,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: G0000EXAMPLEGALL, G0000EXAMPLEGAL2
       - name: custom_metadata
         in: query
         description: Limit search to files containing custom metadata. Requires use
@@ -83,6 +88,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: '{"Foo_field_123":"Foo_tag"}'
       - name: file_name
         in: query
         description: Name of the file
@@ -91,6 +97,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: File name
       - name: terms
         in: query
         description: Search terms. Performs text search based on the terms across
@@ -100,6 +107,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Example Search Terms
       - name: model_release
         in: query
         description: Media has a model release
@@ -108,6 +116,7 @@ paths:
         explode: true
         schema:
           type: boolean
+        example: true
       - name: property_release
         in: query
         description: Media has property release
@@ -116,6 +125,7 @@ paths:
         explode: true
         schema:
           type: boolean
+        example: false
       - name: priced
         in: query
         description: Media is for sale
@@ -124,6 +134,7 @@ paths:
         explode: true
         schema:
           type: boolean
+        example: true
       - name: searchble
         in: query
         description: Media is publicly searchable
@@ -132,6 +143,7 @@ paths:
         explode: true
         schema:
           type: boolean
+        example: false
       - name: print
         in: query
         description: Media is available for prints
@@ -140,6 +152,7 @@ paths:
         explode: true
         schema:
           type: boolean
+        example: true
       - name: personal_use
         in: query
         description: Media is available for personal use.
@@ -148,6 +161,7 @@ paths:
         explode: true
         schema:
           type: boolean
+        example: false
       - name: royalty_free
         in: query
         description: Media is available as royalty free.
@@ -156,6 +170,7 @@ paths:
         explode: true
         schema:
           type: boolean
+        example: true
       - name: rights_managed
         in: query
         description: Media is available for license.
@@ -164,6 +179,7 @@ paths:
         explode: true
         schema:
           type: boolean
+        example: false
       - name: media_type
         in: query
         description: Type of media (image | video | audio | doc) or a comma separated
@@ -173,6 +189,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: image,audio
       - name: city
         in: query
         description: City parameter
@@ -181,6 +198,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample City
       - name: state
         in: query
         description: State/Province parameter
@@ -189,6 +207,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample State
       - name: country
         in: query
         description: Country Parameter
@@ -197,6 +216,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample Country
       - name: country_iso
         in: query
         description: Country ISO code
@@ -205,6 +225,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample Code
       - name: rating
         in: query
         description: Ratings are from -1 to 254
@@ -213,6 +234,7 @@ paths:
         explode: true
         schema:
           type: integer
+        example: 1
       - name: rating_min
         in: query
         description: Minimum rating
@@ -221,6 +243,7 @@ paths:
         explode: true
         schema:
           type: integer
+        example: 1
       - name: rating_max
         in: query
         description: Maximum rating
@@ -229,6 +252,7 @@ paths:
         explode: true
         schema:
           type: integer
+        example: 10
       - name: date_start
         in: query
         description: Minimum date taken
@@ -237,6 +261,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: 2019-04-09T18:34:40-04:00
       - name: date_end
         in: query
         description: Maximum date taken
@@ -245,6 +270,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: 2019-04-09T18:34:40-04:00
       - name: title
         in: query
         description: Title
@@ -253,6 +279,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample Title
       - name: edit_status
         in: query
         description: Edit status
@@ -261,6 +288,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample status
       - name: urgency
         in: query
         description: Urgency
@@ -269,6 +297,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Urgency
       - name: category
         in: query
         description: Category
@@ -277,6 +306,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample Category
       - name: keywords
         in: query
         description: Keywords
@@ -285,6 +315,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Example Keywords
       - name: instructions
         in: query
         description: Instructions
@@ -293,6 +324,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample instructions
       - name: author
         in: query
         description: Author
@@ -301,6 +333,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample Author
       - name: position
         in: query
         description: Author title/position
@@ -309,6 +342,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample Title/Position
       - name: location
         in: query
         description: Location
@@ -317,6 +351,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample location
       - name: trans_ref
         in: query
         description: Job ID/transmission reference
@@ -325,6 +360,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample ID
       - name: credit
         in: query
         description: Credit
@@ -333,6 +369,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample Credit
       - name: source
         in: query
         description: Source
@@ -341,6 +378,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample Source
       - name: copyright
         in: query
         description: Copyright
@@ -349,6 +387,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample Copyright
       - name: caption
         in: query
         description: Caption writer
@@ -357,6 +396,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Caption writer
       - name: contact_info
         in: query
         description: Contact info. Query string based on key-value pairs. The available
@@ -368,6 +408,7 @@ paths:
         explode: false
         schema:
           type: string
+        example: city,NYC,country,USA
       - name: genre
         in: query
         description: Genre
@@ -376,6 +417,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample genre
       - name: rights
         in: query
         description: Usage rights
@@ -384,6 +426,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample usage rights
       - name: scene
         in: query
         description: Scene
@@ -392,6 +435,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample scene
       - name: subject_code
         in: query
         description: Subject Code
@@ -400,6 +444,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample Subject Code
       - name: web_statement
         in: query
         description: Web statement
@@ -408,6 +453,7 @@ paths:
         explode: true
         schema:
           type: string
+        example: Sample Web Statement
       - name: is_empty
         in: query
         description: Denotes which parameters must be empty. Comma-separated list.
@@ -416,6 +462,7 @@ paths:
         explode: false
         schema:
           $ref: '#/components/schemas/MediaSearchEmpty'
+        example: title, edit_status,urgency
       - name: not_empty
         in: query
         description: Denotes which parameters must have a value. Comma separated list.
@@ -424,6 +471,7 @@ paths:
         explode: false
         schema:
           $ref: '#/components/schemas/MediaSearchEmpty'
+        example: title,edit_status,urgency
       - name: match_all_terms
         in: query
         description: Match all terms. Return all keywords specified in the terms parameter.
@@ -433,6 +481,7 @@ paths:
         explode: true
         schema:
           type: boolean
+        example: true
       - name: per_page
         in: query
         description: Results per page.
@@ -441,6 +490,7 @@ paths:
         explode: true
         schema:
           type: integer
+        example: 50
       - name: page
         in: query
         description: Page number.
@@ -449,6 +499,7 @@ paths:
         explode: true
         schema:
           type: integer
+        example: 1
       - name: sort_by
         in: query
         description: Field to sort by.
@@ -462,6 +513,7 @@ paths:
           - date
           - file_name
           - upload_time
+        example: relevance
       - name: sort_dir
         in: query
         description: Direction to sort by.
@@ -473,6 +525,7 @@ paths:
           enum:
           - asc
           - desc
+        example: asc
       responses:
         200:
           description: |
@@ -574,8 +627,10 @@ components:
         id:
           pattern: ^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$
           type: string
+          example: I0000EXAMPLEIMAG
         type:
           type: string
+          example: image
           enum:
           - image
           - audio
@@ -633,6 +688,7 @@ components:
         owner_id:
           pattern: ^U0000[a-zA-Z0-9._]{11}$
           type: string
+          example: U0000EXAMPLEUSER
     Error_links:
       type: object
       properties:
