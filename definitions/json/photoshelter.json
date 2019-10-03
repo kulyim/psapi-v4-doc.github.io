@@ -436,7 +436,8 @@
           "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "VA000____EXAMPLE"
         }, {
           "name" : "collections",
           "in" : "query",
@@ -1205,10 +1206,12 @@
         "properties" : {
           "id" : {
             "pattern" : "^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$",
-            "type" : "string"
+            "type" : "string",
+            "example" : "I0000EXAMPLEIMAG"
           },
           "type" : {
             "type" : "string",
+            "example" : "image",
             "enum" : [ "image", "audio", "video", "document" ]
           },
           "attributes" : {
@@ -1445,7 +1448,8 @@
         "properties" : {
           "owner_id" : {
             "pattern" : "^U0000[a-zA-Z0-9._]{11}$",
-            "type" : "string"
+            "type" : "string",
+            "example" : "U0000EXAMPLEUSER"
           }
         }
       }
