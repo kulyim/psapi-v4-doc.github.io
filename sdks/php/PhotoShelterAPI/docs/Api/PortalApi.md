@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**portalGet**](PortalApi.md#portalget) | **GET** /portal | Gets all the collections and galleries for the accountat the root level.
 
 # **portalGet**
-> \PhotoShelter\APIv4\InlineResponse200 portalGet($page, $per_page, $sort_by, $sort_dir, $user_id, $org_id)
+> \PhotoShelter\APIv4\InlineResponse200 portalGet($page, $per_page, $sort_by, $sort_dir)
 
 Gets all the collections and galleries for the accountat the root level.
 
@@ -27,11 +27,9 @@ $page = 56; // int | Page number
 $per_page = 56; // int | Number of rows returned per page.
 $sort_by = "sort_by_example"; // string | Sort by gallery property.
 $sort_dir = "sort_dir_example"; // string | Sorting result set direction (ascending or descending)
-$user_id = "user_id_example"; // string | User ID, will attempt to derive from hostname if not provided optional.
-$org_id = "org_id_example"; // string | Organization ID, will attempt to derive from hostname if not provided optional
 
 try {
-    $result = $apiInstance->portalGet($page, $per_page, $sort_by, $sort_dir, $user_id, $org_id);
+    $result = $apiInstance->portalGet($page, $per_page, $sort_by, $sort_dir);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PortalApi->portalGet: ', $e->getMessage(), PHP_EOL;
@@ -47,8 +45,6 @@ Name | Type | Description  | Notes
  **per_page** | **int**| Number of rows returned per page. | [optional]
  **sort_by** | **string**| Sort by gallery property. | [optional]
  **sort_dir** | **string**| Sorting result set direction (ascending or descending) | [optional]
- **user_id** | **string**| User ID, will attempt to derive from hostname if not provided optional. | [optional]
- **org_id** | **string**| Organization ID, will attempt to derive from hostname if not provided optional | [optional]
 
 ### Return type
 
