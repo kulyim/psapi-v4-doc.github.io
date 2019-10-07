@@ -91,6 +91,8 @@ class PortalApi
      *
      * Gets all the collections and galleries for the accountat the root level.
      *
+     * @param  string $user_id User ID, will attempt to derive from hostname if not provided optional. (optional)
+     * @param  string $org_id Organization ID, will attempt to derive from hostname if not provided optional (optional)
      * @param  int $page Page number (optional)
      * @param  int $per_page Number of rows returned per page. (optional)
      * @param  string $sort_by Sort by gallery property. (optional)
@@ -100,9 +102,9 @@ class PortalApi
      * @throws \InvalidArgumentException
      * @return \PhotoShelter\APIv4\InlineResponse200
      */
-    public function portalGet($page = null, $per_page = null, $sort_by = null, $sort_dir = null)
+    public function portalGet($user_id = null, $org_id = null, $page = null, $per_page = null, $sort_by = null, $sort_dir = null)
     {
-        list($response) = $this->portalGetWithHttpInfo($page, $per_page, $sort_by, $sort_dir);
+        list($response) = $this->portalGetWithHttpInfo($user_id, $org_id, $page, $per_page, $sort_by, $sort_dir);
         return $response;
     }
 
@@ -111,6 +113,8 @@ class PortalApi
      *
      * Gets all the collections and galleries for the accountat the root level.
      *
+     * @param  string $user_id User ID, will attempt to derive from hostname if not provided optional. (optional)
+     * @param  string $org_id Organization ID, will attempt to derive from hostname if not provided optional (optional)
      * @param  int $page Page number (optional)
      * @param  int $per_page Number of rows returned per page. (optional)
      * @param  string $sort_by Sort by gallery property. (optional)
@@ -120,10 +124,10 @@ class PortalApi
      * @throws \InvalidArgumentException
      * @return array of \PhotoShelter\APIv4\InlineResponse200, HTTP status code, HTTP response headers (array of strings)
      */
-    public function portalGetWithHttpInfo($page = null, $per_page = null, $sort_by = null, $sort_dir = null)
+    public function portalGetWithHttpInfo($user_id = null, $org_id = null, $page = null, $per_page = null, $sort_by = null, $sort_dir = null)
     {
         $returnType = '\PhotoShelter\APIv4\InlineResponse200';
-        $request = $this->portalGetRequest($page, $per_page, $sort_by, $sort_dir);
+        $request = $this->portalGetRequest($user_id, $org_id, $page, $per_page, $sort_by, $sort_dir);
 
         try {
             $options = $this->createHttpClientOption();
@@ -229,6 +233,8 @@ class PortalApi
      *
      * Gets all the collections and galleries for the accountat the root level.
      *
+     * @param  string $user_id User ID, will attempt to derive from hostname if not provided optional. (optional)
+     * @param  string $org_id Organization ID, will attempt to derive from hostname if not provided optional (optional)
      * @param  int $page Page number (optional)
      * @param  int $per_page Number of rows returned per page. (optional)
      * @param  string $sort_by Sort by gallery property. (optional)
@@ -237,9 +243,9 @@ class PortalApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function portalGetAsync($page = null, $per_page = null, $sort_by = null, $sort_dir = null)
+    public function portalGetAsync($user_id = null, $org_id = null, $page = null, $per_page = null, $sort_by = null, $sort_dir = null)
     {
-        return $this->portalGetAsyncWithHttpInfo($page, $per_page, $sort_by, $sort_dir)
+        return $this->portalGetAsyncWithHttpInfo($user_id, $org_id, $page, $per_page, $sort_by, $sort_dir)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -252,6 +258,8 @@ class PortalApi
      *
      * Gets all the collections and galleries for the accountat the root level.
      *
+     * @param  string $user_id User ID, will attempt to derive from hostname if not provided optional. (optional)
+     * @param  string $org_id Organization ID, will attempt to derive from hostname if not provided optional (optional)
      * @param  int $page Page number (optional)
      * @param  int $per_page Number of rows returned per page. (optional)
      * @param  string $sort_by Sort by gallery property. (optional)
@@ -260,10 +268,10 @@ class PortalApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function portalGetAsyncWithHttpInfo($page = null, $per_page = null, $sort_by = null, $sort_dir = null)
+    public function portalGetAsyncWithHttpInfo($user_id = null, $org_id = null, $page = null, $per_page = null, $sort_by = null, $sort_dir = null)
     {
         $returnType = '\PhotoShelter\APIv4\InlineResponse200';
-        $request = $this->portalGetRequest($page, $per_page, $sort_by, $sort_dir);
+        $request = $this->portalGetRequest($user_id, $org_id, $page, $per_page, $sort_by, $sort_dir);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -305,6 +313,8 @@ class PortalApi
     /**
      * Create request for operation 'portalGet'
      *
+     * @param  string $user_id User ID, will attempt to derive from hostname if not provided optional. (optional)
+     * @param  string $org_id Organization ID, will attempt to derive from hostname if not provided optional (optional)
      * @param  int $page Page number (optional)
      * @param  int $per_page Number of rows returned per page. (optional)
      * @param  string $sort_by Sort by gallery property. (optional)
@@ -313,7 +323,7 @@ class PortalApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function portalGetRequest($page = null, $per_page = null, $sort_by = null, $sort_dir = null)
+    protected function portalGetRequest($user_id = null, $org_id = null, $page = null, $per_page = null, $sort_by = null, $sort_dir = null)
     {
 
         $resourcePath = '/portal';
@@ -323,6 +333,14 @@ class PortalApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        if ($user_id !== null) {
+            $queryParams['user_id'] = ObjectSerializer::toQueryValue($user_id);
+        }
+        // query params
+        if ($org_id !== null) {
+            $queryParams['org_id'] = ObjectSerializer::toQueryValue($org_id);
+        }
         // query params
         if ($page !== null) {
             $queryParams['page'] = ObjectSerializer::toQueryValue($page);

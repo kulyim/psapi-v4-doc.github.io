@@ -1,6 +1,6 @@
 <?php
 /**
- * InlineResponse200
+ * Collection
  *
  * PHP version 5
  *
@@ -32,14 +32,14 @@ use \ArrayAccess;
 use \PhotoShelter\ObjectSerializer;
 
 /**
- * InlineResponse200 Class Doc Comment
+ * Collection Class Doc Comment
  *
  * @category Class
  * @package  PhotoShelter
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class InlineResponse200 implements ModelInterface, ArrayAccess
+class Collection implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class InlineResponse200 implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'inline_response_200';
+    protected static $swaggerModelName = 'Collection';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,8 +56,9 @@ class InlineResponse200 implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'data' => '\PhotoShelter\APIv4\Collection[]',
-'meta' => '\PhotoShelter\APIv4\MetaTag'    ];
+        'id' => 'string',
+'type' => 'string',
+'attributes' => '\PhotoShelter\APIv4\CollectionAttributes'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -65,8 +66,9 @@ class InlineResponse200 implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'data' => null,
-'meta' => null    ];
+        'id' => null,
+'type' => null,
+'attributes' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -95,8 +97,9 @@ class InlineResponse200 implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'data' => 'data',
-'meta' => 'meta'    ];
+        'id' => 'id',
+'type' => 'type',
+'attributes' => 'attributes'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -104,8 +107,9 @@ class InlineResponse200 implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'data' => 'setData',
-'meta' => 'setMeta'    ];
+        'id' => 'setId',
+'type' => 'setType',
+'attributes' => 'setAttributes'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -113,8 +117,9 @@ class InlineResponse200 implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'data' => 'getData',
-'meta' => 'getMeta'    ];
+        'id' => 'getId',
+'type' => 'getType',
+'attributes' => 'getAttributes'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -174,8 +179,9 @@ class InlineResponse200 implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['data'] = isset($data['data']) ? $data['data'] : null;
-        $this->container['meta'] = isset($data['meta']) ? $data['meta'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        $this->container['attributes'] = isset($data['attributes']) ? $data['attributes'] : null;
     }
 
     /**
@@ -187,8 +193,14 @@ class InlineResponse200 implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['data'] === null) {
-            $invalidProperties[] = "'data' can't be null";
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['type'] === null) {
+            $invalidProperties[] = "'type' can't be null";
+        }
+        if ($this->container['attributes'] === null) {
+            $invalidProperties[] = "'attributes' can't be null";
         }
         return $invalidProperties;
     }
@@ -206,49 +218,73 @@ class InlineResponse200 implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets data
+     * Gets id
      *
-     * @return \PhotoShelter\APIv4\Collection[]
+     * @return string
      */
-    public function getData()
+    public function getId()
     {
-        return $this->container['data'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets data
+     * Sets id
      *
-     * @param \PhotoShelter\APIv4\Collection[] $data data
+     * @param string $id Collection Id
      *
      * @return $this
      */
-    public function setData($data)
+    public function setId($id)
     {
-        $this->container['data'] = $data;
+        $this->container['id'] = $id;
 
         return $this;
     }
 
     /**
-     * Gets meta
+     * Gets type
      *
-     * @return \PhotoShelter\APIv4\MetaTag
+     * @return string
      */
-    public function getMeta()
+    public function getType()
     {
-        return $this->container['meta'];
+        return $this->container['type'];
     }
 
     /**
-     * Sets meta
+     * Sets type
      *
-     * @param \PhotoShelter\APIv4\MetaTag $meta meta
+     * @param string $type type
      *
      * @return $this
      */
-    public function setMeta($meta)
+    public function setType($type)
     {
-        $this->container['meta'] = $meta;
+        $this->container['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets attributes
+     *
+     * @return \PhotoShelter\APIv4\CollectionAttributes
+     */
+    public function getAttributes()
+    {
+        return $this->container['attributes'];
+    }
+
+    /**
+     * Sets attributes
+     *
+     * @param \PhotoShelter\APIv4\CollectionAttributes $attributes attributes
+     *
+     * @return $this
+     */
+    public function setAttributes($attributes)
+    {
+        $this->container['attributes'] = $attributes;
 
         return $this;
     }

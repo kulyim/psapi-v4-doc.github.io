@@ -1,10 +1,11 @@
-# InlineResponse200
+# Collection
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | [**\PhotoShelter\APIv4\Collection[]**](Collection.md) |  | 
-**meta** | [**\PhotoShelter\APIv4\MetaTag**](MetaTag.md) |  | [optional] 
+**id** | **string** | Collection Id | 
+**type** | **string** |  | 
+**attributes** | [**\PhotoShelter\APIv4\CollectionAttributes**](CollectionAttributes.md) |  | 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 
