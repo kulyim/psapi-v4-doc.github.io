@@ -10,77 +10,105 @@ info:
   license:
     name: PhotoShelter License
     url: https://www.photoshelter.com/support/license
-  version: Allan
+  version: Anthony
 servers:
-- url: https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4
+- url: https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/anthony
   description: PhotoShelter Auto Mocking API
+security:
+- https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/Final#/components/securitySchemes/PSApiKeyHeader: []
+- https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/Final#/security/PSApiKeyHeader: []
 tags:
-- name: Gallery
+- name: PhotoShelter
 paths:
-  /galleries/{gallery_id}:
+  /portal:
     get:
       tags:
-      - Gallery
-      summary: GET /galleries/{gallery_id}.
-      description: Get a gallery by ID.
-      operationId: galleriesGetId
+      - Portal
+      summary: Gets all the collections and galleries for the accountat the root level.
+      description: Gets all the collections and galleries for the accountat the root
+        level.
+      operationId: portalGet
       parameters:
-      - name: gallery_id
-        in: path
-        description: The ID of the gallery
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/GalleryId'
-      - name: api_key
+      - name: page
         in: query
-        description: The API Key. Can be requested if you do not have one.
-        required: true
+        description: Page number
+        required: false
         style: form
         explode: true
         schema:
-          $ref: '#/components/schemas/ApiKey'
+          type: integer
+          example: 3
+          default: 1
+        example: 9
+      - name: per_page
+        in: query
+        description: Number of rows returned per page.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          example: 40
+          default: 20
+      - name: sort_by
+        in: query
+        description: Sort by gallery property.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: creation_time
+          enum:
+          - creation_time
+          - modification_time
+          - name
+          - display_order
+      - name: sort_dir
+        in: query
+        description: Sorting result set direction (ascending or descending)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: asc
+          enum:
+          - asc
+          - desc
+      - name: user_id
+        in: query
+        description: User ID, will attempt to derive from hostname if not provided
+          optional.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          description: User ID
+      - name: org_id
+        in: query
+        description: Organization ID, will attempt to derive from hostname if not
+          provided optional
+        required: false
+        style: form
+        explode: true
+        schema:
+          pattern: ^C0000[a-zA-Z0-9._]{11}$
+          type: string
+          description: Collection ID
+          example: C0000LYrqIr59eJI
       responses:
         200:
           description: |
-            /galleries/{gallery_id} - HTTP 200 OK Response.
+            /galleries - HTTP 200 OK Response.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/inline_response_200'
-              example:
-                data:
-                  type: gallery
-                  id: G0000EXAMPLE_GAL
-                  attributes:
-                    name: Example Name
-                    description: Example Description
-                    display_order: 10
-                    key_image_id: GI000EXAMPLE_IMG
-                    access_id: A0000EXAMPLE_ACS
-                    is_listed: false
-                    is_orig_enabled: false
-                    is_watermark_disabled: false
-                    created_at: 2019-04-09T18:34:40-04:00
-                    modified_at: 2019-09-06T16:24:24-04:00
-                  links:
-                    self: example.photoshelter.com/galleries/G0000EXAMPLE_GAL
-                meta:
-                  copyright: PhotoShelter 2019
-                  version: 2019-05-01
-                  rate_limit_limit: 10
-                  rate_limit_current: 1
-                  rate_limit_expires: 40
             application/xml:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
-          links:
-            GetGallery:
-              operationId: galleryGetId
-              parameters:
-                gallery_id: $response.body#/data/id
-              description: Links to self
+                $ref: '#/components/schemas/inline_response_200_1'
         400:
           description: 400 Bad Request Error
           content:
@@ -105,7 +133,7 @@ paths:
               style: simple
               explode: false
               schema:
-                type: integer
+                type: string
               example: 'WWW-Authenticate: Bearer'
           content:
             application/json:
@@ -138,8 +166,8 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/Error'
-        404:
-          description: 404 Not Found Client Error
+        415:
+          description: 415 Unsupported Media Type Error
           content:
             application/json:
               schema:
@@ -147,7 +175,7 @@ paths:
               example:
                 errors:
                   id: ResourceNotFoundException
-                  status: "404"
+                  status: "415"
                   title: Resource not found
                   detail: The requested resource was not found.
             application/xml:
@@ -179,19 +207,11 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+      - https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/Final#/components/securitySchemes/PSApiKeyHeader: []
+      - https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/Final#/security/PSApiKeyHeader: []
 components:
   schemas:
-    GalleryId:
-      maxLength: 16
-      minLength: 16
-      pattern: ^G0000[a-zA-Z0-9._]{11}$
-      type: string
-      description: The Gallery ID
-      example: G0000EXAMPLEGALL
-    ApiKey:
-      pattern: ^[a-zA-Z0-9._]{11}$
-      type: string
-      example: EXAMPLE_KEY
     Gallery:
       required:
       - attributes
@@ -232,6 +252,27 @@ components:
         rate_limit_expires:
           type: integer
           example: 60
+    PaginationMetaTag:
+      type: object
+      properties:
+        total:
+          type: integer
+          example: 100
+        page:
+          type: integer
+          example: 1
+        first:
+          type: string
+          example: example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1
+        last:
+          type: string
+          example: example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=5
+        next:
+          type: string
+          example: example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=2
+        prev:
+          type: string
+          example: example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1
     Error:
       required:
       - errors
@@ -248,9 +289,22 @@ components:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/Gallery'
+          type: array
+          items:
+            $ref: '#/components/schemas/Gallery'
         meta:
           $ref: '#/components/schemas/MetaTag'
+    inline_response_200_1:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Gallery'
+        meta:
+          $ref: '#/components/schemas/PaginationMetaTag'
     Gallery_attributes:
       required:
       - access_id
