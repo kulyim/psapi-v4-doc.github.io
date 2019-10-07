@@ -29,6 +29,28 @@ paths:
         level.
       operationId: portalGet
       parameters:
+      - name: user_id
+        in: query
+        description: User ID, will attempt to derive from hostname if not provided
+          optional.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          description: User ID
+      - name: org_id
+        in: query
+        description: Organization ID, will attempt to derive from hostname if not
+          provided optional
+        required: false
+        style: form
+        explode: true
+        schema:
+          pattern: ^C0000[a-zA-Z0-9._]{11}$
+          type: string
+          description: Collection ID
+          example: C0000LYrqIr59eJI
       - name: page
         in: query
         description: Page number
@@ -78,8 +100,7 @@ paths:
           - desc
       responses:
         200:
-          description: |
-            /galleries - HTTP 200 OK Response.
+          description: Public Collections and Galleries at the root level
           content:
             application/json:
               schema:
@@ -190,6 +211,42 @@ paths:
       - https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/Final#/security/PSApiKeyHeader: []
 components:
   schemas:
+    Collection:
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+      properties:
+        id:
+          pattern: ^C0000[a-zA-Z0-9._]{11}$
+          type: string
+          description: Collection Id
+          example: C0000EXAMPLECOLL
+        type:
+          pattern: collection
+          type: string
+          example: collection
+        attributes:
+          $ref: '#/components/schemas/Collection_attributes'
+    MetaTag:
+      type: object
+      properties:
+        copyright:
+          type: string
+          example: PhotoShelter 2019
+        version:
+          type: string
+          example: 2019-05-01
+        rate_limit_limit:
+          type: integer
+          example: 10
+        rate_limit_current:
+          type: integer
+          example: 1
+        rate_limit_expires:
+          type: integer
+          example: 60
     Gallery:
       required:
       - attributes
@@ -212,24 +269,6 @@ components:
           $ref: '#/components/schemas/Gallery_attributes'
         links:
           $ref: '#/components/schemas/Gallery_links'
-    MetaTag:
-      type: object
-      properties:
-        copyright:
-          type: string
-          example: PhotoShelter 2019
-        version:
-          type: string
-          example: 2019-05-01
-        rate_limit_limit:
-          type: integer
-          example: 10
-        rate_limit_current:
-          type: integer
-          example: 1
-        rate_limit_expires:
-          type: integer
-          example: 60
     PaginationMetaTag:
       type: object
       properties:
@@ -269,7 +308,7 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/Gallery'
+            $ref: '#/components/schemas/Collection'
         meta:
           $ref: '#/components/schemas/MetaTag'
     inline_response_200_1:
@@ -283,6 +322,59 @@ components:
             $ref: '#/components/schemas/Gallery'
         meta:
           $ref: '#/components/schemas/PaginationMetaTag'
+    Collection_attributes:
+      required:
+      - access_id
+      - created_at
+      - description
+      - display_order
+      - is_listed
+      - key_image_id
+      - modified_at
+      - name
+      - name_url
+      type: object
+      properties:
+        name:
+          maxLength: 100
+          type: string
+          description: Name of the collection
+          example: My Trip to DR
+        name_url:
+          maxLength: 100
+          type: string
+          description: URL to the gallery
+          nullable: true
+        description:
+          type: string
+          description: Description of the colletion
+          example: My Trip to DR Collection
+        display_order:
+          type: integer
+          description: Display order
+          example: 1
+        key_image_id:
+          pattern: ^GI000[a-zA-Z0-9._]{11}$
+          type: string
+          description: Key Image ID
+          example: GI000EXAMPLE_IMG
+        access_id:
+          pattern: ^A0000[a-zA-Z0-9._]{11}$
+          type: string
+          description: Access ID
+          example: A0000EXAMPLE_ACS
+        is_listed:
+          type: boolean
+          description: Is listed on public site
+          example: false
+        created_at:
+          type: string
+          description: Creation date
+          example: 2019-04-25T14:54:12.136828
+        modified_at:
+          type: string
+          description: Modified Date
+          example: 2019-04-25T14:54:12.136828
     Gallery_attributes:
       required:
       - access_id
