@@ -16,7 +16,7 @@
     "version" : "Anthony"
   },
   "servers" : [ {
-    "url" : "http://anthony.dev.bitshelter.com:8090/psapi/v4",
+    "url" : "http://anthony.dev.bitshelter.com/psapi/v4",
     "description" : "PhotoShelter Auto Mocking API"
   } ],
   "security" : [ {
