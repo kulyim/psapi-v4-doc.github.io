@@ -447,7 +447,7 @@
         "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
         "type" : "string",
         "description" : "My gallery description",
-        "example" : "G0000EXAMPLE_GAL"
+        "example" : "G0000c1x4UMGPvkY"
       },
       "Error" : {
         "required" : [ "errors" ],
@@ -469,7 +469,7 @@
         "pattern" : "^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$",
         "type" : "string",
         "description" : "Media ID",
-        "example" : "G0000EXAMPLE_GAL"
+        "example" : "I0000zCtew4UPbBw"
       },
       "ArrayOfGalleries" : {
         "type" : "array",
