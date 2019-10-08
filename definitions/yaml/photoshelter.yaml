@@ -229,24 +229,6 @@ components:
           example: collection
         attributes:
           $ref: '#/components/schemas/Collection_attributes'
-    MetaTag:
-      type: object
-      properties:
-        copyright:
-          type: string
-          example: PhotoShelter 2019
-        version:
-          type: string
-          example: 2019-05-01
-        rate_limit_limit:
-          type: integer
-          example: 10
-        rate_limit_current:
-          type: integer
-          example: 1
-        rate_limit_expires:
-          type: integer
-          example: 60
     Gallery:
       required:
       - attributes
@@ -269,6 +251,24 @@ components:
           $ref: '#/components/schemas/Gallery_attributes'
         links:
           $ref: '#/components/schemas/Gallery_links'
+    MetaTag:
+      type: object
+      properties:
+        copyright:
+          type: string
+          example: PhotoShelter 2019
+        version:
+          type: string
+          example: 2019-05-01
+        rate_limit_limit:
+          type: integer
+          example: 10
+        rate_limit_current:
+          type: integer
+          example: 1
+        rate_limit_expires:
+          type: integer
+          example: 60
     PaginationMetaTag:
       type: object
       properties:
@@ -308,7 +308,9 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/Collection'
+            anyOf:
+            - $ref: '#/components/schemas/Collection'
+            - $ref: '#/components/schemas/Gallery'
         meta:
           $ref: '#/components/schemas/MetaTag'
     inline_response_200_1:
@@ -319,7 +321,9 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/Gallery'
+            anyOf:
+            - $ref: '#/components/schemas/Collection'
+            - $ref: '#/components/schemas/Gallery'
         meta:
           $ref: '#/components/schemas/PaginationMetaTag'
     Collection_attributes:
