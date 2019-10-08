@@ -131,13 +131,8 @@
                 "schema" : {
                   "$ref" : "#/components/schemas/Error"
                 },
-                "example" : {
-                  "errors" : {
-                    "id" : "ThisShouldBeARealId",
-                    "status" : "400",
-                    "title" : "Bad Request / Syntax",
-                    "detail" : "Bad Request"
-                  }
+                "examples" : {
+                  "errors" : { }
                 }
               },
               "application/xml" : {
