@@ -136,12 +136,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example:
-                errors:
-                  id: AcsPermissionException
-                  status: "401"
-                  title: 'Invalid access to resource: Gallery'
-                  detail: You are not authorized to view this resource.
+              examples:
+                errors: {}
             application/xml:
               schema:
                 $ref: '#/components/schemas/Error'
@@ -151,15 +147,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example:
-                errors:
-                  id: ApiKeyInvalidException
-                  status: "403"
-                  title: Missing or invalid API key
-                  detail: |-
-                    Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or
-                    is invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.
-                    If you do not have an API key, you can request one on our website.
+              examples:
+                errors: {}
             application/xml:
               schema:
                 $ref: '#/components/schemas/Error'
@@ -169,12 +158,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example:
-                errors:
-                  id: ResourceNotFoundException
-                  status: "415"
-                  title: Resource not found
-                  detail: The requested resource was not found.
+              examples:
+                errors: {}
             application/xml:
               schema:
                 $ref: '#/components/schemas/Error'
