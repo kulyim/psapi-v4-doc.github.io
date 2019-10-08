@@ -41,8 +41,10 @@ paths:
         style: form
         explode: true
         schema:
+          pattern: ^U0000[a-zA-Z0-9._]{11}$
           type: string
           description: User ID
+          example: U0000KqsUW0Voex4
       - name: org_id
         in: query
         description: Organization ID, will attempt to derive from hostname if not
@@ -51,10 +53,10 @@ paths:
         style: form
         explode: true
         schema:
-          pattern: ^C0000[a-zA-Z0-9._]{11}$
+          pattern: ^O0000[a-zA-Z0-9._]{11}$
           type: string
-          description: Collection ID
-          example: C0000LYrqIr59eJI
+          description: Organization ID
+          example: O00001In9lBxVjBA
       - name: page
         in: query
         description: Page number
