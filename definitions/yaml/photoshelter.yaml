@@ -14,11 +14,6 @@ info:
 servers:
 - url: https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/anthony
   description: PhotoShelter Auto Mocking API
-security:
-- https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/Final#/components/securitySchemes/PSApiKeyHeader:
-  - admin
-- https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/Final#/security/PSApiKeyHeader:
-  - admin
 tags:
 - name: PhotoShelter
 paths:
@@ -179,13 +174,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example:
-                errors:
-                  id: TooManyRequestsException
-                  status: "429"
-                  title: Too Many Requests
-                  detail: The user has sent too many requests in a given amount of
-                    time see "rate limiting".
+              examples:
+                errors: {}
             application/xml:
               schema:
                 $ref: '#/components/schemas/Error'
