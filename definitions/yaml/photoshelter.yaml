@@ -206,6 +206,11 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+      - https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/Final#/components/securitySchemes/PSApiKeyHeader:
+        - read
+        - write
+      - https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/Final#/security/PSApiKeyHeader: []
 components:
   schemas:
     Collection:
