@@ -80,7 +80,7 @@ class Configuration
      *
      * @var string
      */
-    protected $host = 'http://anthony.dev.bitshelter.com:8090';
+    protected $host = 'http://anthony.dev.bitshelter.com:8090/psapi/v4';
 
     /**
      * User agent of the HTTP request, set to "PHP-Swagger" by default

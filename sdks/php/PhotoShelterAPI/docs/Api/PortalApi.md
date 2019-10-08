@@ -1,6 +1,6 @@
 # PhotoShelter\PortalApi
 
-All URIs are relative to *http://anthony.dev.bitshelter.com:8090*
+All URIs are relative to *http://anthony.dev.bitshelter.com:8090/psapi/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
