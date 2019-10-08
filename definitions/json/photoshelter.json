@@ -16,7 +16,7 @@
     "version" : "Anthony"
   },
   "servers" : [ {
-    "url" : "https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/anthony",
+    "url" : "http://anthony.dev.bitshelter.com:8090",
     "description" : "PhotoShelter Auto Mocking API"
   } ],
   "tags" : [ {
