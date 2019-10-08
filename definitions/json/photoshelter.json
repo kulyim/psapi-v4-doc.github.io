@@ -42,8 +42,10 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
+            "pattern" : "^U0000[a-zA-Z0-9._]{11}$",
             "type" : "string",
-            "description" : "User ID"
+            "description" : "User ID",
+            "example" : "U0000KqsUW0Voex4"
           }
         }, {
           "name" : "org_id",
@@ -53,10 +55,10 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "pattern" : "^C0000[a-zA-Z0-9._]{11}$",
+            "pattern" : "^O0000[a-zA-Z0-9._]{11}$",
             "type" : "string",
-            "description" : "Collection ID",
-            "example" : "C0000LYrqIr59eJI"
+            "description" : "Organization ID",
+            "example" : "O00001In9lBxVjBA"
           }
         }, {
           "name" : "page",
