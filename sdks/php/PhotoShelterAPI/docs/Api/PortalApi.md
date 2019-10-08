@@ -1,6 +1,6 @@
 # PhotoShelter\PortalApi
 
-All URIs are relative to *https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/anthony*
+All URIs are relative to *http://anthony.dev.bitshelter.com:8090*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

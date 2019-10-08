@@ -80,7 +80,7 @@ class Configuration
      *
      * @var string
      */
-    protected $host = 'https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/anthony';
+    protected $host = 'http://anthony.dev.bitshelter.com:8090';
 
     /**
      * User agent of the HTTP request, set to "PHP-Swagger" by default
