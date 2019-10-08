@@ -292,31 +292,6 @@
           }
         }
       },
-      "MetaTag" : {
-        "type" : "object",
-        "properties" : {
-          "copyright" : {
-            "type" : "string",
-            "example" : "PhotoShelter 2019"
-          },
-          "version" : {
-            "type" : "string",
-            "example" : "2019-05-01"
-          },
-          "rate_limit_limit" : {
-            "type" : "integer",
-            "example" : 10
-          },
-          "rate_limit_current" : {
-            "type" : "integer",
-            "example" : 1
-          },
-          "rate_limit_expires" : {
-            "type" : "integer",
-            "example" : 60
-          }
-        }
-      },
       "Gallery" : {
         "required" : [ "attributes", "id", "type" ],
         "type" : "object",
@@ -340,6 +315,31 @@
           },
           "links" : {
             "$ref" : "#/components/schemas/Gallery_links"
+          }
+        }
+      },
+      "MetaTag" : {
+        "type" : "object",
+        "properties" : {
+          "copyright" : {
+            "type" : "string",
+            "example" : "PhotoShelter 2019"
+          },
+          "version" : {
+            "type" : "string",
+            "example" : "2019-05-01"
+          },
+          "rate_limit_limit" : {
+            "type" : "integer",
+            "example" : 10
+          },
+          "rate_limit_current" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "rate_limit_expires" : {
+            "type" : "integer",
+            "example" : 60
           }
         }
       },
@@ -392,7 +392,11 @@
           "data" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/Collection"
+              "anyOf" : [ {
+                "$ref" : "#/components/schemas/Collection"
+              }, {
+                "$ref" : "#/components/schemas/Gallery"
+              } ]
             }
           },
           "meta" : {
@@ -407,7 +411,11 @@
           "data" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/Gallery"
+              "anyOf" : [ {
+                "$ref" : "#/components/schemas/Collection"
+              }, {
+                "$ref" : "#/components/schemas/Gallery"
+              } ]
             }
           },
           "meta" : {
