@@ -14,6 +14,12 @@ Currently tracking [v3.0.0](https://github.com/OAI/OpenAPI-Specification/blob/ma
 
 Currently tracking [v1.0]([https://jsonapi.org/format/1.0/](https://jsonapi.org/format/1.0/))
 
+
+## How-to
+
+[How to submit your Open API definitions for peer review?](http://wiki.corp.bitshelter.com/bin/view/Main/DeptDev/ApiV4/How%20to%20submit%20your%20Open%20API%20definitions%20for%20peer%20review%3F)
+
+
   
 
 ## Quality
