@@ -20,16 +20,16 @@
     "description" : "PhotoShelter Auto Mocking API"
   } ],
   "paths" : {
-    "/galleries/{gallery_id}" : {
-      "delete" : {
-        "tags" : [ "Galleries" ],
-        "summary" : "Delete a gallery.",
-        "description" : "Delete a gallery.",
-        "operationId" : "galleryDeleteId",
+    "/media/{media_id}/download" : {
+      "get" : {
+        "tags" : [ "Media" ],
+        "summary" : "Get the media with the associated ID.",
+        "description" : "Get the media with the associated ID.",
+        "operationId" : "mediaDownloadGetId",
         "parameters" : [ {
-          "name" : "gallery_id",
+          "name" : "media_id",
           "in" : "path",
-          "description" : "Gallery ID",
+          "description" : "Media ID",
           "required" : true,
           "style" : "simple",
           "explode" : false,
@@ -39,11 +39,12 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "Generic HTTP 200 Ok Response",
+            "description" : "Download - HTTP OK",
             "content" : {
-              "application/json" : {
+              "application/octet-stream" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200"
+                  "type" : "string",
+                  "format" : "binary"
                 }
               }
             }
@@ -167,13 +168,13 @@
   "components" : {
     "schemas" : {
       "schema" : {
-        "title" : "My Gallery Test",
+        "title" : "Media ID",
         "maxLength" : 16,
         "minLength" : 16,
-        "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
+        "pattern" : "^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$",
         "type" : "string",
-        "description" : "My gallery description",
-        "example" : "G0000c1x4UMGPvkY"
+        "description" : "Media ID",
+        "example" : "I0000zCtew4UPbBw"
       },
       "Error" : {
         "required" : [ "errors" ],
@@ -187,25 +188,6 @@
           }
         },
         "description" : "This object generates errors in compliance with RFC 7807 API Problem"
-      },
-      "inline_response_200_meta" : {
-        "required" : [ "status" ],
-        "type" : "object",
-        "properties" : {
-          "status" : {
-            "type" : "string",
-            "example" : "OK"
-          }
-        }
-      },
-      "inline_response_200" : {
-        "required" : [ "meta" ],
-        "type" : "object",
-        "properties" : {
-          "meta" : {
-            "$ref" : "#/components/schemas/inline_response_200_meta"
-          }
-        }
       },
       "Error_links" : {
         "type" : "object",
