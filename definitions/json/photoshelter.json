@@ -20,31 +20,35 @@
     "description" : "PhotoShelter Auto Mocking API"
   } ],
   "paths" : {
-    "/media/{media_id}/download" : {
+    "/library" : {
       "get" : {
-        "tags" : [ "Media" ],
-        "summary" : "Get the media with the associated ID.",
-        "description" : "Get the media with the associated ID.",
-        "operationId" : "mediaDownloadGetId",
+        "tags" : [ "Library" ],
+        "summary" : "Retrieve library listing.",
+        "description" : "Retrieve library listing.",
+        "operationId" : "libraryGet",
         "parameters" : [ {
-          "name" : "media_id",
-          "in" : "path",
-          "description" : "Media ID",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
+          "name" : "listed",
+          "in" : "query",
+          "description" : "listed or unlisted",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
           "schema" : {
             "$ref" : "#/components/schemas/schema"
           }
         } ],
         "responses" : {
           "200" : {
-            "description" : "Download - HTTP OK",
+            "description" : "/library - HTTP 200 OK Response.\n",
             "content" : {
-              "application/octet-stream" : {
+              "application/json" : {
                 "schema" : {
-                  "type" : "string",
-                  "format" : "binary"
+                  "$ref" : "#/components/schemas/inline_response_200"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200"
                 }
               }
             }
@@ -114,24 +118,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "404 Not Found Client Error",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Error"
-                },
-                "examples" : {
-                  "errors" : { }
-                }
-              },
-              "application/xml" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Error"
-                }
-              }
-            }
-          },
           "429" : {
             "description" : "429 Too Many Requests Error",
             "headers" : {
@@ -176,6 +162,47 @@
         "description" : "Media ID",
         "example" : "I0000zCtew4UPbBw"
       },
+      "ArrayOfGalleries" : {
+        "type" : "array",
+        "items" : {
+          "allOf" : [ {
+            "$ref" : "#/components/schemas/Gallery"
+          } ]
+        }
+      },
+      "ArrayOfCollections" : {
+        "type" : "array",
+        "items" : {
+          "allOf" : [ {
+            "$ref" : "#/components/schemas/Collection"
+          } ]
+        }
+      },
+      "MetaTag" : {
+        "type" : "object",
+        "properties" : {
+          "copyright" : {
+            "type" : "string",
+            "example" : "PhotoShelter 2019"
+          },
+          "version" : {
+            "type" : "string",
+            "example" : "2019-05-01"
+          },
+          "rate_limit_limit" : {
+            "type" : "integer",
+            "example" : 10
+          },
+          "rate_limit_current" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "rate_limit_expires" : {
+            "type" : "integer",
+            "example" : 60
+          }
+        }
+      },
       "Error" : {
         "required" : [ "errors" ],
         "type" : "object",
@@ -188,6 +215,21 @@
           }
         },
         "description" : "This object generates errors in compliance with RFC 7807 API Problem"
+      },
+      "inline_response_200" : {
+        "required" : [ "collections", "galleries" ],
+        "type" : "object",
+        "properties" : {
+          "galleries" : {
+            "$ref" : "#/components/schemas/ArrayOfGalleries"
+          },
+          "collections" : {
+            "$ref" : "#/components/schemas/ArrayOfCollections"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/MetaTag"
+          }
+        }
       },
       "Error_links" : {
         "type" : "object",
