@@ -1,4 +1,3 @@
-!README.md
-!/definitions/json/photoshelter.json
-!/definitions/yaml/photoshelter.yaml
-!/sdks
+README.md
+definitions/json/*
+definitions/yaml/*
