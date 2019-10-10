@@ -20,7 +20,7 @@ tags:
 paths:
   /register:
     post:
-      summary: Collect OAuth Client Metadata.
+      summary: Collect OAuth Client's Metadata.
       description: collect metadata
       operationId: clientRegister
       requestBody:
