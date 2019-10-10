@@ -1197,8 +1197,8 @@
           },
           "type" : {
             "type" : "string",
-            "example" : "image",
-            "enum" : [ "image", "audio", "video", "document" ]
+            "example" : "media",
+            "enum" : [ "media" ]
           },
           "attributes" : {
             "$ref" : "#/components/schemas/Media_attributes"
@@ -1432,10 +1432,13 @@
         "required" : [ "owner_id" ],
         "type" : "object",
         "properties" : {
-          "owner_id" : {
-            "pattern" : "^U0000[a-zA-Z0-9._]{11}$",
+          "file_name" : {
             "type" : "string",
-            "example" : "U0000EXAMPLEUSER"
+            "example" : "Sample File Name"
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "image", "audio", "video", "doc" ]
           }
         }
       }
