@@ -445,6 +445,29 @@ paths:
         schema:
           type: string
         example: Sample Subject Code
+      - name: caption_writer
+        in: query
+        description: Caption Writer
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Sample Writer
+      - name: orientation
+        in: query
+        description: Orientation
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - horizontal
+          - vertical
+          - panoramic
+          - square
+        example: horizontal
       - name: web_statement
         in: query
         description: Web statement
@@ -540,15 +563,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example:
-                errors:
-                  id: ApiKeyInvalidException
-                  status: "403"
-                  title: Missing or invalid API key
-                  detail: |-
-                    Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or
-                    is invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.
-                    If you do not have an API key, you can request one on our website.
+              examples:
+                errors: {}
             application/xml:
               schema:
                 $ref: '#/components/schemas/Error'
@@ -568,13 +584,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              example:
-                errors:
-                  id: TooManyRequestsException
-                  status: "429"
-                  title: Too Many Requests
-                  detail: The user has sent too many requests in a given amount of
-                    time see "rate limiting".
+              examples:
+                errors: {}
             application/xml:
               schema:
                 $ref: '#/components/schemas/Error'
@@ -627,15 +638,12 @@ components:
         id:
           pattern: ^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$
           type: string
-          example: I0000EXAMPLEIMAG
+          example: I0000zCtew4UPbBw
         type:
           type: string
-          example: image
+          example: media
           enum:
-          - image
-          - audio
-          - video
-          - document
+          - media
         attributes:
           $ref: '#/components/schemas/Media_attributes'
     PaginationMetaTag:
@@ -682,13 +690,20 @@ components:
           $ref: '#/components/schemas/PaginationMetaTag'
     Media_attributes:
       required:
-      - owner_id
+      - file_name
+      - type
       type: object
       properties:
-        owner_id:
-          pattern: ^U0000[a-zA-Z0-9._]{11}$
+        file_name:
           type: string
-          example: U0000EXAMPLEUSER
+          example: Sample File Name
+        type:
+          type: string
+          enum:
+          - image
+          - audio
+          - video
+          - doc
     Error_links:
       type: object
       properties:
