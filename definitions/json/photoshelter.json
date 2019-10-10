@@ -1429,7 +1429,7 @@
         }
       },
       "Media_attributes" : {
-        "required" : [ "owner_id" ],
+        "required" : [ "file_name", "type" ],
         "type" : "object",
         "properties" : {
           "file_name" : {
