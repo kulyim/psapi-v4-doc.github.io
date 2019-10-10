@@ -170,7 +170,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_200_2'
         400:
           description: 400 Bad Request Error
           content:
@@ -333,9 +333,28 @@ components:
     inline_response_200:
       type: object
       properties:
-        token:
+        CLIENT_ID:
           type: string
-          description: auth token
+        CLIENT_SECRET:
+          type: string
+        CLIENT_NAME:
+          type: string
+        CLIENT_CONTACT:
+          type: string
+        SOFTWARE_NAME:
+          type: string
+        SOFTWARE_DESC:
+          type: string
+        REDIRECT_URI:
+          type: string
+        HOMEPAGE_URI:
+          type: string
+        PRIVACY_POLICY_URL:
+          type: string
+        LOGO_URI:
+          type: string
+        SCOPES:
+          type: string
     inline_response_200_1:
       type: object
       properties:
@@ -357,6 +376,12 @@ components:
           type: string
         org_id:
           type: string
+    inline_response_200_2:
+      type: object
+      properties:
+        token:
+          type: string
+          description: auth token
     Error_links:
       type: object
       properties:
