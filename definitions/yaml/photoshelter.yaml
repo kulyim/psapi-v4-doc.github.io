@@ -21,7 +21,7 @@ paths:
       - Gallery
       summary: Retrieve gallery key image.
       description: Retrieve gallery key image.
-      operationId: galleriesIdKeyImageGet
+      operationId: galleriesGetIdKeyImage
       parameters:
       - name: gallery_id
         in: path
