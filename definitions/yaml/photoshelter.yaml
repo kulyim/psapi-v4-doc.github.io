@@ -15,13 +15,13 @@ servers:
 - url: https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4
   description: PhotoShelter Auto Mocking API
 paths:
-  /gallery/{gallery_id}/key_image:
+  /galleries/{gallery_id}/key_image:
     get:
       tags:
       - Gallery
       summary: Retrieve gallery key image.
       description: Retrieve gallery key image.
-      operationId: galleryIdKeyImageGet
+      operationId: galleriesIdKeyImageGet
       parameters:
       - name: gallery_id
         in: path
