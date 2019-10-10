@@ -22,7 +22,7 @@
   "tags" : [ {
     "name" : "Authenticate"
   }, {
-    "name" : "clientRegister"
+    "name" : "OAuthClientRegister"
   } ],
   "paths" : {
     "/register" : {
