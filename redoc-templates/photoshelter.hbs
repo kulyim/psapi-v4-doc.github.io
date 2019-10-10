@@ -15,8 +15,6 @@
     <!-- ReDoc uses font options from the parent element So override default browser styles -->
     <style>
 
-	@import url(//fonts.googleapis.com/css?family=Roboto:400,700);
-
       body {
         margin: 0;
         padding: 0;
@@ -27,24 +25,23 @@
     </style>
 
 
-
-    <script>
-	document.addEventListener("DOMContentLoaded", function(event) { 
-		Redoc.init('./definitions/json/photoshelter.json', {
-  			scrollYOffset: 5,
-			expandResponses: "200",
-			showExtensions: false,
-			hideDownloadButton: true,
-			requiredPropsFirst: true,
-			sortPropsAlphabetically: true,
-			pathInMiddlePanel:true,
-			jsonSampleExpandLevel: all
-		}, document.getElementById('redoc-container'));
-	});
+</head>
+<body>
+ <redoc id="redoc-container"></redoc>
+   <script src="https://cdn.jsdelivr.net/npm/redoc/bundles/redoc.standalone.js"></script>
+     <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+                Redoc.init('./definitions/json/photoshelter.json', {
+                        scrollYOffset: 5,
+                        expandResponses: "200",
+                        showExtensions: false,
+                        hideDownloadButton: true,
+                        requiredPropsFirst: true,
+                        sortPropsAlphabetically: true,
+                        pathInMiddlePanel:true,
+                        jsonSampleExpandLevel: 'all'
+                }, document.getElementById('redoc-container'));
+        });
      </script>
-  </head>
-  <body>
-	<redoc id="redoc-container"></redoc>
-	<script src="https://cdn.jsdelivr.net/npm/redoc/bundles/redoc.standalone.js"></script>
   </body>
 </html>
