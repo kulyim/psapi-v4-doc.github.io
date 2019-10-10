@@ -17,7 +17,7 @@ servers:
 tags:
 - name: Authenticate
 paths:
-  /client/register:
+  /register:
     post:
       summary: Collect OAuth Client Metadata.
       description: collect metadata
@@ -306,6 +306,7 @@ components:
       - CLIENT_NAME
       - HOMEPAGE_URI
       - PRIVACY_POLICY_URL
+      - REDIRECT_URI
       - SOFTWARE_DESC
       - SOFTWARE_NAME
       type: object
@@ -317,6 +318,8 @@ components:
         SOFTWARE_NAME:
           type: string
         SOFTWARE_DESC:
+          type: string
+        REDIRECT_URI:
           type: string
         HOMEPAGE_URI:
           type: string
