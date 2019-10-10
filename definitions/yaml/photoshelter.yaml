@@ -16,6 +16,7 @@ servers:
   description: PhotoShelter Auto Mocking API
 tags:
 - name: Authenticate
+- name: OAuthClientRegister
 paths:
   /register:
     post:
