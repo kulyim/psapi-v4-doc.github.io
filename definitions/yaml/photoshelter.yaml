@@ -1196,7 +1196,8 @@ components:
           example: 2019-04-25T14:54:12.136828
     Media_attributes:
       required:
-      - owner_id
+      - file_name
+      - type
       type: object
       properties:
         file_name:
