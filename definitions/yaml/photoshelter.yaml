@@ -38,6 +38,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/inline_response_200'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
         400:
           description: 400 Bad Request Error
           content:
