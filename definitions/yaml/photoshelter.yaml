@@ -15,13 +15,13 @@ servers:
 - url: https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4
   description: PhotoShelter Auto Mocking API
 paths:
-  /galleries/{gallery_id}/key_image:
+  /galleries/{gallery_id}/permission:
     get:
       tags:
       - Gallery
-      summary: Retrieve gallery key image.
-      description: Retrieve gallery key image.
-      operationId: galleriesGetIdKeyImage
+      summary: Retrieve the gallery's permissions.
+      description: Retrieve the gallery's permissions.
+      operationId: galleriesGetIdPermission
       parameters:
       - name: gallery_id
         in: path
@@ -33,13 +33,9 @@ paths:
           $ref: '#/components/schemas/schema'
       responses:
         200:
-          description: |
-            /gallery/{gallery_id}/key_image - HTTP 200 OK Response.
+          description: Permissions for the asset
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_200'
-            application/xml:
               schema:
                 $ref: '#/components/schemas/inline_response_200'
         400:
@@ -126,38 +122,32 @@ components:
       type: string
       description: My gallery description
       example: G0000c1x4UMGPvkY
-    ImageId:
-      maxLength: 16
-      minLength: 16
-      pattern: ^I0000[a-zA-Z0-9._]{11}$
-      type: string
-      description: The Image ID
-      example: I0000EXAMPLE_IMG
-    GalleryId:
-      maxLength: 16
-      minLength: 16
-      pattern: ^G0000[a-zA-Z0-9._]{11}$
-      type: string
-      description: The Gallery ID
-      example: G0000EXAMPLEGALL
-    MetaTag:
+    Permission:
+      required:
+      - attributes
+      - id
+      - type
       type: object
       properties:
-        copyright:
+        id:
+          pattern: ^AR000[a-zA-Z0-9._]{11}$
           type: string
-          example: PhotoShelter 2019
-        version:
+          description: Permission ID
+          example: AR000EXAMPLE_PMS
+        type:
+          pattern: permission
           type: string
-          example: 2019-05-01
-        rate_limit_limit:
-          type: integer
-          example: 10
-        rate_limit_current:
-          type: integer
-          example: 1
-        rate_limit_expires:
-          type: integer
-          example: 60
+          example: permission
+        attributes:
+          $ref: '#/components/schemas/Permission_attributes'
+    Mode:
+      type: string
+      description: Mode
+      example: everyone
+      enum:
+      - permission
+      - private
+      - everyone
     Error:
       required:
       - errors
@@ -168,16 +158,33 @@ components:
           items:
             $ref: '#/components/schemas/Error_errors'
       description: This object generates errors in compliance with RFC 7807 API Problem
-    inline_response_200_data:
+    inline_response_200_data_Permission:
       required:
-      - gallery_id
-      - image_id
+      - Inherit
+      - Native
+      - mode
+      - native_mode
       type: object
       properties:
-        image_id:
-          $ref: '#/components/schemas/ImageId'
-        gallery_id:
-          $ref: '#/components/schemas/GalleryId'
+        Native:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        Inherit:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        mode:
+          $ref: '#/components/schemas/Mode'
+        native_mode:
+          $ref: '#/components/schemas/Mode'
+    inline_response_200_data:
+      required:
+      - Permission
+      type: object
+      properties:
+        Permission:
+          $ref: '#/components/schemas/inline_response_200_data_Permission'
     inline_response_200:
       required:
       - data
@@ -185,8 +192,124 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/inline_response_200_data'
-        meta:
-          $ref: '#/components/schemas/MetaTag'
+    Permission_attributes:
+      required:
+      - access_level
+      - contact_id
+      - download_audio_filetype
+      - download_doc_filetype
+      - download_image_embed
+      - download_image_filetype
+      - download_image_size
+      - download_video_filetype
+      - download_video_format
+      - expires
+      - group_id
+      - max_downloads
+      - password
+      - permission_type
+      - token
+      type: object
+      properties:
+        expires:
+          type: string
+          description: Expiration Date
+          nullable: true
+          example: 2019-04-25T14:54:12.136828
+        contact_id:
+          pattern: ^CT000[a-zA-Z0-9._]{11}$
+          type: string
+          description: Contact ID
+          nullable: true
+          example: CT000EXAMPLE_CNT
+        group_id:
+          pattern: ^CTG00[a-zA-Z0-9._]{11}$
+          type: string
+          description: Contact Group ID
+          nullable: true
+          example: CTG00EXAMPLE_CTG
+        access_level:
+          maxLength: 10
+          type: string
+          description: Access Level (OPEN)
+          nullable: true
+          example: OPEN
+        password:
+          maxLength: 20
+          type: string
+          description: Password
+          nullable: true
+          example: Open Sesame
+        token:
+          maxLength: 32
+          type: string
+          description: Access Token
+          nullable: true
+          example: Token123456789
+        max_downloads:
+          type: integer
+          description: Max Downloads
+          nullable: true
+          example: 99
+        permission_type:
+          type: string
+          description: Permission Type (contact | group | password | token | access_level)
+          example: password
+          enum:
+          - contact
+          - group
+          - password
+          - token
+          - access_level
+        download_image_filetype:
+          type: string
+          description: Download Image FileType (original | jpeg)
+          nullable: true
+          example: original
+          enum:
+          - original
+          - jpeg
+        download_image_size:
+          type: integer
+          description: Download Image Size (number of pixels of longest dimension)
+          nullable: true
+          example: 1200
+        download_image_embed:
+          type: boolean
+          description: Download Image Embed (true | false)
+          nullable: true
+          example: true
+        download_video_filetype:
+          type: string
+          description: Download Video FileType (original | mp4)
+          nullable: true
+          example: original
+          enum:
+          - original
+          - mp4
+        download_video_format:
+          type: string
+          description: Download Video Format (hd1080 | hd720 | sd480)
+          nullable: true
+          example: hd1080
+          enum:
+          - hd1080
+          - hd720
+          - sd480
+        download_audio_filetype:
+          type: string
+          description: Download Audio FileType (original)
+          nullable: true
+          example: original
+          enum:
+          - original
+        download_doc_filetype:
+          type: string
+          description: Download Doc FileType (original)
+          nullable: true
+          example: original
+          enum:
+          - original
     Error_links:
       type: object
       properties:
