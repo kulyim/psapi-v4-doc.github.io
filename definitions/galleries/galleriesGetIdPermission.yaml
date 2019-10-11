@@ -151,6 +151,24 @@ components:
       - permission
       - private
       - everyone
+    MetaTag:
+      type: object
+      properties:
+        copyright:
+          type: string
+          example: PhotoShelter 2019
+        version:
+          type: string
+          example: 2019-05-01
+        rate_limit_limit:
+          type: integer
+          example: 10
+        rate_limit_current:
+          type: integer
+          example: 1
+        rate_limit_expires:
+          type: integer
+          example: 60
     Error:
       required:
       - errors
@@ -195,6 +213,8 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/inline_response_200_data'
+        meta:
+          $ref: '#/components/schemas/MetaTag'
     Permission_attributes:
       required:
       - access_level
