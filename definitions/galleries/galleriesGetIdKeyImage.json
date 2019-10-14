@@ -235,7 +235,7 @@
         "description" : "This object generates errors in compliance with RFC 7807 API Problem"
       },
       "inline_response_200_data" : {
-        "required" : [ "gallery_id", "image_id" ],
+        "required" : [ "gallery_id", "image_id", "explicit" ],
         "type" : "object",
         "properties" : {
           "image_id" : {
@@ -243,6 +243,11 @@
           },
           "gallery_id" : {
             "$ref" : "#/components/schemas/GalleryId"
+          },
+          "explicit" : {
+            "type" : "object",
+            "example" : true,
+            "description" : "If key image was assigned explicitly",
           }
         }
       },

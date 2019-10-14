@@ -172,12 +172,17 @@ components:
       required:
       - gallery_id
       - image_id
+      - explicit
       type: object
       properties:
         image_id:
           $ref: '#/components/schemas/ImageId'
         gallery_id:
           $ref: '#/components/schemas/GalleryId'
+        explicit:
+          type: boolean
+          example: true
+          description: "If key image was assigned explicitly"
     inline_response_200:
       required:
       - data
