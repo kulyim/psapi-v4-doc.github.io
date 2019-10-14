@@ -235,7 +235,7 @@
         "description" : "This object generates errors in compliance with RFC 7807 API Problem"
       },
       "inline_response_200_data" : {
-        "required" : [ "custom", "gallery_id", "image_id", "link" ],
+        "required" : [ "custom", "gallery_id", "image_id", "image_url" ],
         "type" : "object",
         "properties" : {
           "image_id" : {
@@ -249,7 +249,7 @@
             "description" : "If key image was designated by the user",
             "example" : true
           },
-          "link" : {
+          "image_url" : {
             "type" : "string",
             "description" : "Link to the image",
             "example" : "example.photoshelter.com/mem/img-get/I0000EXAMPLE_IMG"
