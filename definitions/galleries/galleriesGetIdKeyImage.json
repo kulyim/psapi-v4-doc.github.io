@@ -23,9 +23,9 @@
     "/galleries/{gallery_id}/key_image" : {
       "get" : {
         "tags" : [ "Gallery" ],
-        "summary" : "Retrieve gallery key image.",
-        "description" : "Retrieve gallery key image.",
-        "operationId" : "galleriesIdKeyImageGet",
+        "summary" : "Retrieves the gallery key image.",
+        "description" : "Retrieves the gallery key image.",
+        "operationId" : "galleriesGetIdKeyImage",
         "parameters" : [ {
           "name" : "gallery_id",
           "in" : "path",
@@ -39,7 +39,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "/gallery/{gallery_id}/key_image - HTTP 200 OK Response.\n",
+            "description" : "/galleries/{gallery_id}/key_image - HTTP 200 OK Response.\n",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -48,7 +48,7 @@
               },
               "application/xml" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200"
+                  "$ref" : "#/components/schemas/inline_response_200_1"
                 }
               }
             }
@@ -235,7 +235,7 @@
         "description" : "This object generates errors in compliance with RFC 7807 API Problem"
       },
       "inline_response_200_data" : {
-        "required" : [ "gallery_id", "image_id", "explicit" ],
+        "required" : [ "custom", "gallery_id", "image_id", "link" ],
         "type" : "object",
         "properties" : {
           "image_id" : {
@@ -245,9 +245,14 @@
             "$ref" : "#/components/schemas/GalleryId"
           },
           "explicit" : {
-            "type" : "object",
-            "example" : true,
-            "description" : "If key image was assigned explicitly",
+            "type" : "boolean",
+            "description" : "If key image was designated by the user",
+            "example" : true
+          },
+          "link" : {
+            "type" : "string",
+            "description" : "Link to the image",
+            "example" : "example.photoshelter.com/mem/img-get/I0000EXAMPLE_IMG"
           }
         }
       },
@@ -257,6 +262,40 @@
         "properties" : {
           "data" : {
             "$ref" : "#/components/schemas/inline_response_200_data"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/MetaTag"
+          }
+        }
+      },
+      "inline_response_200_1_data" : {
+        "required" : [ "custom", "gallery_id", "image_id", "link" ],
+        "type" : "object",
+        "properties" : {
+          "image_id" : {
+            "$ref" : "#/components/schemas/ImageId"
+          },
+          "gallery_id" : {
+            "$ref" : "#/components/schemas/GalleryId"
+          },
+          "custom" : {
+            "type" : "boolean",
+            "description" : "If key image was designated by the user",
+            "example" : true
+          },
+          "link" : {
+            "type" : "string",
+            "description" : "Link to the image",
+            "example" : "example.photoshelter.com/mem/img-get/I0000EXAMPLE_IMG"
+          }
+        }
+      },
+      "inline_response_200_1" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "$ref" : "#/components/schemas/inline_response_200_1_data"
           },
           "meta" : {
             "$ref" : "#/components/schemas/MetaTag"
