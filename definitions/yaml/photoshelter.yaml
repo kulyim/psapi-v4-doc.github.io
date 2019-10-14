@@ -19,8 +19,8 @@ paths:
     get:
       tags:
       - Gallery
-      summary: Retrieve gallery key image.
-      description: Retrieve gallery key image.
+      summary: Retrieves the gallery key image.
+      description: Retrieves the gallery key image.
       operationId: galleriesGetIdKeyImage
       parameters:
       - name: gallery_id
