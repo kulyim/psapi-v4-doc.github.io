@@ -202,7 +202,7 @@ components:
       - custom
       - gallery_id
       - image_id
-      - link
+      - image_url
       type: object
       properties:
         image_id:
@@ -213,7 +213,7 @@ components:
           type: boolean
           description: If key image was designated by the user
           example: true
-        link:
+        image_url:
           type: string
           description: Link to the image
           example: example.photoshelter.com/mem/img-get/I0000EXAMPLE_IMG
