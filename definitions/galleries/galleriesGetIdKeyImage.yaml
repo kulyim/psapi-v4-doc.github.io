@@ -126,7 +126,7 @@ components:
       type: string
       description: My gallery description
       example: G0000c1x4UMGPvkY
-    GalleryKeyImage:
+    KeyImage:
       required:
       - attributes
       - id
@@ -139,11 +139,11 @@ components:
           description: Gallery Key Image ID
           example: GI000EXAMPLE_GI0
         type:
-          pattern: galleryKeyImage
+          pattern: keyImage
           type: string
-          example: galleryKeyImage
+          example: keyImage
         attributes:
-          $ref: '#/components/schemas/GalleryKeyImage_attributes'
+          $ref: '#/components/schemas/KeyImage_attributes'
     MetaTag:
       type: object
       properties:
@@ -178,11 +178,12 @@ components:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/GalleryKeyImage'
+          $ref: '#/components/schemas/KeyImage'
         meta:
           $ref: '#/components/schemas/MetaTag'
-    GalleryKeyImage_attributes:
+    KeyImage_attributes:
       required:
+      - collection_id
       - custom
       - gallery_id
       - image_id
@@ -200,6 +201,12 @@ components:
           description: Gallery ID
           nullable: true
           example: G0000EXAMPLEGALL
+        collection_id:
+          pattern: ^C0000[a-zA-Z0-9._]{11}$
+          type: string
+          description: Collection ID
+          nullable: true
+          example: C0000EXAMPLE_COL
         custom:
           type: boolean
           description: Custom assigned gallery key image

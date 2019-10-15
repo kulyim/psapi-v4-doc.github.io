@@ -180,7 +180,7 @@
         "description" : "My gallery description",
         "example" : "G0000c1x4UMGPvkY"
       },
-      "GalleryKeyImage" : {
+      "KeyImage" : {
         "required" : [ "attributes", "id", "type" ],
         "type" : "object",
         "properties" : {
@@ -191,12 +191,12 @@
             "example" : "GI000EXAMPLE_GI0"
           },
           "type" : {
-            "pattern" : "galleryKeyImage",
+            "pattern" : "keyImage",
             "type" : "string",
-            "example" : "galleryKeyImage"
+            "example" : "keyImage"
           },
           "attributes" : {
-            "$ref" : "#/components/schemas/GalleryKeyImage_attributes"
+            "$ref" : "#/components/schemas/KeyImage_attributes"
           }
         }
       },
@@ -243,15 +243,15 @@
         "type" : "object",
         "properties" : {
           "data" : {
-            "$ref" : "#/components/schemas/GalleryKeyImage"
+            "$ref" : "#/components/schemas/KeyImage"
           },
           "meta" : {
             "$ref" : "#/components/schemas/MetaTag"
           }
         }
       },
-      "GalleryKeyImage_attributes" : {
-        "required" : [ "custom", "gallery_id", "image_id", "image_url" ],
+      "KeyImage_attributes" : {
+        "required" : [ "collection_id", "custom", "gallery_id", "image_id", "image_url" ],
         "type" : "object",
         "properties" : {
           "image_id" : {
@@ -266,6 +266,13 @@
             "description" : "Gallery ID",
             "nullable" : true,
             "example" : "G0000EXAMPLEGALL"
+          },
+          "collection_id" : {
+            "pattern" : "^C0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Collection ID",
+            "nullable" : true,
+            "example" : "C0000EXAMPLE_COL"
           },
           "custom" : {
             "type" : "boolean",
