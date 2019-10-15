@@ -48,7 +48,7 @@
               },
               "application/xml" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_1"
+                  "$ref" : "#/components/schemas/inline_response_200"
                 }
               }
             }
@@ -180,21 +180,25 @@
         "description" : "My gallery description",
         "example" : "G0000c1x4UMGPvkY"
       },
-      "ImageId" : {
-        "maxLength" : 16,
-        "minLength" : 16,
-        "pattern" : "^I0000[a-zA-Z0-9._]{11}$",
-        "type" : "string",
-        "description" : "The Image ID",
-        "example" : "I0000EXAMPLE_IMG"
-      },
-      "GalleryId" : {
-        "maxLength" : 16,
-        "minLength" : 16,
-        "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
-        "type" : "string",
-        "description" : "The Gallery ID",
-        "example" : "G0000EXAMPLEGALL"
+      "GalleryKeyImage" : {
+        "required" : [ "attributes", "id", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "pattern" : "^GI000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Gallery Key Image ID",
+            "example" : "GI000EXAMPLE_GI0"
+          },
+          "type" : {
+            "pattern" : "galleryKeyImage",
+            "type" : "string",
+            "example" : "galleryKeyImage"
+          },
+          "attributes" : {
+            "$ref" : "#/components/schemas/GalleryKeyImage_attributes"
+          }
+        }
       },
       "MetaTag" : {
         "type" : "object",
@@ -234,71 +238,45 @@
         },
         "description" : "This object generates errors in compliance with RFC 7807 API Problem"
       },
-      "inline_response_200_data" : {
-        "required" : [ "custom", "gallery_id", "image_id", "image_url" ],
-        "type" : "object",
-        "properties" : {
-          "image_id" : {
-            "$ref" : "#/components/schemas/ImageId"
-          },
-          "gallery_id" : {
-            "$ref" : "#/components/schemas/GalleryId"
-          },
-          "custom" : {
-            "type" : "boolean",
-            "description" : "If key image was designated by the user",
-            "example" : true
-          },
-          "image_url" : {
-            "type" : "string",
-            "description" : "Link to the image",
-            "example" : "example.photoshelter.com/mem/img-get/I0000EXAMPLE_IMG"
-          }
-        }
-      },
       "inline_response_200" : {
         "required" : [ "data" ],
         "type" : "object",
         "properties" : {
           "data" : {
-            "$ref" : "#/components/schemas/inline_response_200_data"
+            "$ref" : "#/components/schemas/GalleryKeyImage"
           },
           "meta" : {
             "$ref" : "#/components/schemas/MetaTag"
           }
         }
       },
-      "inline_response_200_1_data" : {
+      "GalleryKeyImage_attributes" : {
         "required" : [ "custom", "gallery_id", "image_id", "image_url" ],
         "type" : "object",
         "properties" : {
           "image_id" : {
-            "$ref" : "#/components/schemas/ImageId"
+            "type" : "string",
+            "description" : "Image ID",
+            "nullable" : true,
+            "example" : "I0000EXAMPLE_IMG"
           },
           "gallery_id" : {
-            "$ref" : "#/components/schemas/GalleryId"
+            "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Gallery ID",
+            "nullable" : true,
+            "example" : "G0000EXAMPLEGALL"
           },
           "custom" : {
             "type" : "boolean",
-            "description" : "If key image was designated by the user",
+            "description" : "Custom assigned gallery key image",
             "example" : true
           },
           "image_url" : {
             "type" : "string",
-            "description" : "Link to the image",
-            "example" : "example.photoshelter.com/mem/img-get/I0000EXAMPLE_IMG"
-          }
-        }
-      },
-      "inline_response_200_1" : {
-        "required" : [ "data" ],
-        "type" : "object",
-        "properties" : {
-          "data" : {
-            "$ref" : "#/components/schemas/inline_response_200_1_data"
-          },
-          "meta" : {
-            "$ref" : "#/components/schemas/MetaTag"
+            "description" : "Key image URL",
+            "nullable" : true,
+            "example" : "http://www.photoshelter.co/img-get/I0000EXAMPLE_IMG"
           }
         }
       },
