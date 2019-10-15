@@ -244,7 +244,7 @@
           "gallery_id" : {
             "$ref" : "#/components/schemas/GalleryId"
           },
-          "explicit" : {
+          "custom" : {
             "type" : "boolean",
             "description" : "If key image was designated by the user",
             "example" : true
