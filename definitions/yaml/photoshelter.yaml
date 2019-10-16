@@ -24,6 +24,7 @@ paths:
     get:
       tags:
       - Portal
+      - todel
       summary: Gets all the collections and galleries for the accountat the root level.
       description: Gets all the collections and galleries for the accountat the root
         level.
