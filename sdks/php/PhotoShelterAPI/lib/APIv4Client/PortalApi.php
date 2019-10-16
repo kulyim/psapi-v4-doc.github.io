@@ -100,7 +100,7 @@ class PortalApi
      *
      * @throws \PhotoShelter\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return string
+     * @return \PhotoShelter\APIv4\InlineResponse200
      */
     public function portalGet($user_id = null, $org_id = null, $page = null, $per_page = null, $sort_by = null, $sort_dir = null)
     {
@@ -122,11 +122,11 @@ class PortalApi
      *
      * @throws \PhotoShelter\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of string, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \PhotoShelter\APIv4\InlineResponse200, HTTP status code, HTTP response headers (array of strings)
      */
     public function portalGetWithHttpInfo($user_id = null, $org_id = null, $page = null, $per_page = null, $sort_by = null, $sort_dir = null)
     {
-        $returnType = 'string';
+        $returnType = '\PhotoShelter\APIv4\InlineResponse200';
         $request = $this->portalGetRequest($user_id, $org_id, $page, $per_page, $sort_by, $sort_dir);
 
         try {
@@ -178,7 +178,7 @@ class PortalApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'string',
+                        '\PhotoShelter\APIv4\InlineResponse200',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -270,7 +270,7 @@ class PortalApi
      */
     public function portalGetAsyncWithHttpInfo($user_id = null, $org_id = null, $page = null, $per_page = null, $sort_by = null, $sort_dir = null)
     {
-        $returnType = 'string';
+        $returnType = '\PhotoShelter\APIv4\InlineResponse200';
         $request = $this->portalGetRequest($user_id, $org_id, $page, $per_page, $sort_by, $sort_dir);
 
         return $this->client
@@ -364,11 +364,11 @@ class PortalApi
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['text/plain', 'application/json', 'application/xml']
+                ['application/json', 'application/xml']
             );
         } else {
             $headers = $this->headerSelector->selectHeaders(
-                ['text/plain', 'application/json', 'application/xml'],
+                ['application/json', 'application/xml'],
                 []
             );
         }

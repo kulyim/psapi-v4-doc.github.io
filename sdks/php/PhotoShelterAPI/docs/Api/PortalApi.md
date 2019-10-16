@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**portalGet**](PortalApi.md#portalget) | **GET** /portal | Gets all the collections and galleries for the accountat the root level.
 
 # **portalGet**
-> string portalGet($user_id, $org_id, $page, $per_page, $sort_by, $sort_dir)
+> \PhotoShelter\APIv4\InlineResponse200 portalGet($user_id, $org_id, $page, $per_page, $sort_by, $sort_dir)
 
 Gets all the collections and galleries for the accountat the root level.
 
@@ -52,7 +52,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**string**
+[**\PhotoShelter\APIv4\InlineResponse200**](../Model/InlineResponse200.md)
 
 ### Authorization
 
@@ -61,7 +61,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, application/xml
+ - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
