@@ -19,11 +19,6 @@
     "url" : "http://anthony.dev.bitshelter.com/psapi/v4",
     "description" : "PhotoShelter Auto Mocking API"
   } ],
-  "security" : [ {
-    "https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/Final#/components/securitySchemes/PSAuthToken" : [ ]
-  }, {
-    "https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/Final#/security/PSApiKeyHeader" : [ ]
-  } ],
   "tags" : [ {
     "name" : "PhotoShelter"
   } ],
