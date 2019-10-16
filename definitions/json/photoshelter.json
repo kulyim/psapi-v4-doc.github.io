@@ -107,7 +107,7 @@
           "schema" : {
             "type" : "string",
             "default" : "asc",
-            "enum" : [ "asc", "desc", "todel" ]
+            "enum" : [ "asc", "desc" ]
           }
         } ],
         "responses" : {
@@ -115,6 +115,11 @@
             "description" : "Public Collections and Galleries at the root level",
             "content" : {
               "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200"
+                }
+              },
+              "application/xml" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/inline_response_200"
                 }
