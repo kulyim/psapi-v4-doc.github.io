@@ -105,6 +105,12 @@ paths:
           - asc
           - desc
       responses:
+        200:
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
         400:
           description: 400 Bad Request Error
           content:
