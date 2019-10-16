@@ -104,6 +104,7 @@ paths:
           enum:
           - asc
           - desc
+          - test
       responses:
         200:
           description: Public Collections and Galleries at the root level
