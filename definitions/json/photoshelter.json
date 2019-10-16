@@ -107,7 +107,7 @@
           "schema" : {
             "type" : "string",
             "default" : "asc",
-            "enum" : [ "asc", "desc", "test" ]
+            "enum" : [ "asc", "desc" ]
           }
         } ],
         "responses" : {
