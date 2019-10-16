@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**portalGet**](PortalApi.md#portalget) | **GET** /portal | Gets all the collections and galleries for the accountat the root level.
 
 # **portalGet**
-> portalGet($user_id, $org_id, $page, $per_page, $sort_by, $sort_dir)
+> string portalGet($user_id, $org_id, $page, $per_page, $sort_by, $sort_dir)
 
 Gets all the collections and galleries for the accountat the root level.
 
@@ -31,7 +31,8 @@ $sort_by = "sort_by_example"; // string | Sort by gallery property.
 $sort_dir = "sort_dir_example"; // string | Sorting result set direction (ascending or descending)
 
 try {
-    $apiInstance->portalGet($user_id, $org_id, $page, $per_page, $sort_by, $sort_dir);
+    $result = $apiInstance->portalGet($user_id, $org_id, $page, $per_page, $sort_by, $sort_dir);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PortalApi->portalGet: ', $e->getMessage(), PHP_EOL;
 }
@@ -51,7 +52,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+**string**
 
 ### Authorization
 
@@ -60,7 +61,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json, application/xml
+ - **Accept**: text/plain, application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
