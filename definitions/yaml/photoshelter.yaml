@@ -47,7 +47,7 @@ paths:
       responses:
         200:
           description: |
-            /galleries/{gallery_id}/key_image - HTTP 200 OK Response.
+            /galleries/{gallery_id}/key-image - HTTP 200 OK Response.
           content:
             application/json:
               schema:
