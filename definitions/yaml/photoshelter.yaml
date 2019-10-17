@@ -1352,7 +1352,7 @@ components:
       properties:
         self:
           type: string
-          example: https://example.photoshelter.com
+          example: https://example.photoshelter.com/collections/C0000EXAMPLECOLL/links
         custom_url:
           type: string
           example: https://example.photoshelter.com/gallery-collection/name/C0000EXAMPLECOLL
