@@ -185,7 +185,7 @@ paths:
     get:
       tags:
       - Collection
-      summary: GET /collections/{collection
+      summary: GET /collections/{collection_id}.
       description: Get a collection by ID.
       operationId: collectionsGetId
       parameters:
