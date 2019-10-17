@@ -56,7 +56,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "/galleries/{gallery_id}/key_image - HTTP 200 OK Response.\n",
+            "description" : "/galleries/{gallery_id}/key-image - HTTP 200 OK Response.\n",
             "content" : {
               "application/json" : {
                 "schema" : {
