@@ -232,6 +232,7 @@
       },
       "schema_2" : {
         "type" : "string",
+        "description" : "Mode to use when resizing an image, values are fit and fill. fit - images is resized to fit in given dimensions without cropping. fill - image will be resized to fill given dimensions, center cropping if necessary.\nDefault mode: fit \nparameter is optional.",
         "example" : "fit",
         "enum" : [ "fit", "fill" ]
       },
