@@ -321,7 +321,7 @@
         }
       },
       "KeyImage_attributes" : {
-        "required" : [ "collection_id", "custom", "gallery_id", "image_id", "image_url" ],
+        "required" : [ "custom", "image_id", "image_url" ],
         "type" : "object",
         "properties" : {
           "image_id" : {
