@@ -42,7 +42,7 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "$ref" : "#/components/schemas/schema"
+            "$ref" : "#/components/schemas/schema_2"
           }
         } ],
         "responses" : {
@@ -220,6 +220,11 @@
         "type" : "string",
         "description" : "My gallery description",
         "example" : "G0000c1x4UMGPvkY"
+      },
+      "schema_2" : {
+        "type" : "string",
+        "example" : "fit",
+        "enum" : [ "fit", "fill" ]
       },
       "KeyImage" : {
         "required" : [ "attributes", "id", "type" ],
