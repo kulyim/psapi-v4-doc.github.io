@@ -1319,13 +1319,30 @@ components:
           $ref: '#/components/schemas/Collection'
         meta:
           $ref: '#/components/schemas/MetaTag'
+    inline_response_200_3_data_attributes:
+      type: object
+      properties:
+        custom_url:
+          type: string
+          example: https://example.photoshelter.com/gallery-collection/name/C0000EXAMPLECOLL
+    inline_response_200_3_data:
+      type: object
+      properties:
+        id:
+          type: string
+          example: C0000EXAMPLECOLL
+        type:
+          type: string
+          example: url
+        attributes:
+          $ref: '#/components/schemas/inline_response_200_3_data_attributes'
     inline_response_200_3:
       required:
       - data
       type: object
       properties:
         data:
-          type: object
+          $ref: '#/components/schemas/inline_response_200_3_data'
         meta:
           $ref: '#/components/schemas/MetaTag'
       example: '{"data":{"id":"C0000EXAMPLECOLL","type":"url","attributes":{"custom_url":"https://example.photoshelter.com/gallery-collection/name/C0000EXAMPLECOLL"}},"meta":{"copyright":"PhotoShelter
