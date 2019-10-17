@@ -1415,7 +1415,7 @@
     "/media/{media_id}" : {
       "get" : {
         "tags" : [ "Media" ],
-        "summary" : "GET /media/{media_id}",
+        "summary" : "GET /media/{media_id}.",
         "description" : "Get a media by Id.",
         "operationId" : "mediaGetId",
         "parameters" : [ {
