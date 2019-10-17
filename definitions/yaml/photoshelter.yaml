@@ -31,13 +31,6 @@ paths:
         explode: false
         schema:
           $ref: '#/components/schemas/schema'
-      - name: image_mode
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          $ref: '#/components/schemas/schema_2'
       responses:
         200:
           description: |
@@ -166,14 +159,6 @@ components:
       type: string
       description: My gallery description
       example: G0000c1x4UMGPvkY
-    schema_2:
-      title: TEST
-      type: string
-      description: TEST
-      example: landscape
-      enum:
-      - test
-      - test2
     KeyImage:
       required:
       - attributes
