@@ -35,6 +35,15 @@
           "schema" : {
             "$ref" : "#/components/schemas/schema"
           }
+        }, {
+          "name" : "image_mode",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema"
+          }
         } ],
         "responses" : {
           "200" : {
