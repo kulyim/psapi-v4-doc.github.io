@@ -217,7 +217,7 @@
             "$ref" : "#/components/schemas/MetaTag"
           }
         },
-        "example" : "{\"data\":{\"custom_url\":\"ok\"},\"meta\":{\"copyright\":\"PhotoShelter 2019\",\"version\":\"2019-05-01\",\"rate_limit\":{\"limit\":10,\"current\":1,\"expires\":40}}}"
+        "example" : "{\"data\":{\"custom_url\":\"https://example.photoshelter.com/gallery-collection/name/C0000EXAMPLECOLL\"},\"meta\":{\"copyright\":\"PhotoShelter 2019\",\"version\":\"2019-05-01\",\"rate_limit\":{\"limit\":10,\"current\":1,\"expires\":40}}}"
       },
       "MetaTag_rate_limit" : {
         "type" : "object",
