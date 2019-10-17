@@ -30,20 +30,6 @@ paths:
         explode: false
         schema:
           $ref: '#/components/schemas/schema'
-      - name: image_mode
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          $ref: '#/components/schemas/schema_2'
-      - name: image_size
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          $ref: '#/components/schemas/schema_2'
       responses:
         200:
           description: |
@@ -172,16 +158,6 @@ components:
       type: string
       description: My gallery description
       example: G0000c1x4UMGPvkY
-    schema_2:
-      type: string
-      description: "Mode to use when resizing an image, values are fit and fill. fit\
-        \ - images is resized to fit in given dimensions without cropping. fill -\
-        \ image will be resized to fill given dimensions, center cropping if necessary.\n\
-        Default mode: fit \nparameter is optional."
-      example: fit
-      enum:
-      - fit
-      - fill
     KeyImage:
       required:
       - attributes
