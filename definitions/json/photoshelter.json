@@ -34,7 +34,7 @@
           "style" : "simple",
           "explode" : false,
           "schema" : {
-            "$ref" : "#/components/schemas/s"
+            "$ref" : "#/components/schemas/schema"
           }
         }, {
           "name" : "image_mode",
@@ -43,7 +43,7 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "$ref" : "#/components/schemas/schema"
+            "$ref" : "#/components/schemas/schema_2"
           }
         } ],
         "responses" : {
@@ -214,6 +214,15 @@
   "components" : {
     "schemas" : {
       "schema" : {
+        "title" : "My Gallery Test",
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
+        "type" : "string",
+        "description" : "My gallery description",
+        "example" : "G0000c1x4UMGPvkY"
+      },
+      "schema_2" : {
         "title" : "TEST",
         "type" : "string",
         "description" : "TEST",
