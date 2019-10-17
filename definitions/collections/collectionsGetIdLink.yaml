@@ -15,7 +15,7 @@ servers:
 - url: https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4
   description: PhotoShelter Auto Mocking API
 tags:
-- name: PhotoShelterApi
+- name: PhotoShelter API
 paths:
   /collections/{collection_id}/link:
     get:
@@ -154,16 +154,34 @@ components:
           items:
             $ref: '#/components/schemas/Error_errors'
       description: This object generates errors in compliance with RFC 7807 API Problem
+    inline_response_200_data_attributes:
+      type: object
+      properties:
+        custom_url:
+          type: string
+          example: https://example.photoshelter.com/gallery-collection/name/C0000EXAMPLECOLL
+    inline_response_200_data:
+      type: object
+      properties:
+        id:
+          type: string
+          example: C0000EXAMPLECOLL
+        type:
+          type: string
+          example: url
+        attributes:
+          $ref: '#/components/schemas/inline_response_200_data_attributes'
     inline_response_200:
       required:
       - data
       type: object
       properties:
         data:
-          type: object
+          $ref: '#/components/schemas/inline_response_200_data'
         meta:
           $ref: '#/components/schemas/MetaTag'
-      example: '{"data":{"custom_url":"ok"},"meta":{"copyright":"PhotoShelter 2019","version":"2019-05-01","rate_limit":{"limit":10,"current":1,"expires":40}}}'
+      example: '{"data":{"id":"C0000EXAMPLECOLL","type":"url","attributes":{"custom_url":"https://example.photoshelter.com/gallery-collection/name/C0000EXAMPLECOLL"}},"meta":{"copyright":"PhotoShelter
+        2019","version":"2019-05-01","rate_limit":{"limit":10,"current":1,"expires":40}}}'
     MetaTag_rate_limit:
       type: object
       properties:
