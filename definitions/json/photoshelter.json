@@ -410,7 +410,14 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "ok"
+            "description" : "Custom Link Response - HTTP 200 OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_3"
+                }
+              }
+            }
           },
           "400" : {
             "description" : "400 Bad Request Error",
@@ -608,12 +615,12 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_3"
+                  "$ref" : "#/components/schemas/inline_response_200_4"
                 }
               },
               "application/xml" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_4"
+                  "$ref" : "#/components/schemas/inline_response_200_5"
                 }
               }
             }
@@ -1332,7 +1339,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_5"
+                  "$ref" : "#/components/schemas/inline_response_200_6"
                 }
               }
             }
@@ -1595,13 +1602,10 @@
         "type" : "object",
         "properties" : {
           "data" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/Collection"
-            }
+            "type" : "object"
           },
           "meta" : {
-            "$ref" : "#/components/schemas/PaginationMetaTag"
+            "$ref" : "#/components/schemas/MetaTag"
           }
         }
       },
@@ -1616,11 +1620,26 @@
             }
           },
           "meta" : {
-            "$ref" : "#/components/schemas/MetaTag"
+            "$ref" : "#/components/schemas/PaginationMetaTag"
           }
         }
       },
       "inline_response_200_5" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Collection"
+            }
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/MetaTag"
+          }
+        }
+      },
+      "inline_response_200_6" : {
         "required" : [ "data" ],
         "type" : "object",
         "properties" : {
