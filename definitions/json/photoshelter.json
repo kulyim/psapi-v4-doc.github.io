@@ -29,7 +29,7 @@
         "parameters" : [ {
           "name" : "gallery_id",
           "in" : "path",
-          "description" : "testgvbhgbnhj",
+          "description" : "testtttt",
           "required" : true,
           "style" : "simple",
           "explode" : false,
