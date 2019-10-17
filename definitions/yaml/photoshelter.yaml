@@ -30,6 +30,13 @@ paths:
         style: simple
         explode: false
         schema:
+          $ref: '#/components/schemas/s'
+      - name: image_mode
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
           $ref: '#/components/schemas/schema'
       responses:
         200:
@@ -152,13 +159,10 @@ paths:
 components:
   schemas:
     schema:
-      title: My Gallery Test
-      maxLength: 16
-      minLength: 16
-      pattern: ^G0000[a-zA-Z0-9._]{11}$
+      title: TEST
       type: string
-      description: My gallery description
-      example: G0000c1x4UMGPvkY
+      description: TEST
+      example: landscape
     KeyImage:
       required:
       - attributes
@@ -207,15 +211,8 @@ components:
         version:
           type: string
           example: 2019-05-01
-        rate_limit_limit:
-          type: integer
-          example: 10
-        rate_limit_current:
-          type: integer
-          example: 1
-        rate_limit_expires:
-          type: integer
-          example: 60
+        rate_limit:
+          $ref: '#/components/schemas/MetaTag_rate_limit'
     Error:
       required:
       - errors
@@ -259,6 +256,18 @@ components:
           description: Key image URL
           nullable: true
           example: http://www.photoshelter.co/img-get/I0000EXAMPLE_IMG
+    MetaTag_rate_limit:
+      type: object
+      properties:
+        limit:
+          type: integer
+          example: 10
+        current:
+          type: integer
+          example: 1
+        expires:
+          type: integer
+          example: 40
     Error_links:
       type: object
       properties:
