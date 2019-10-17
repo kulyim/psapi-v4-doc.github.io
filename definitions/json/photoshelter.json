@@ -34,7 +34,7 @@
           "style" : "simple",
           "explode" : false,
           "schema" : {
-            "$ref" : "#/components/schemas/schema"
+            "$ref" : "#/components/schemas/GalleryId"
           }
         } ],
         "responses" : {
@@ -60,8 +60,13 @@
                 "schema" : {
                   "$ref" : "#/components/schemas/Error"
                 },
-                "examples" : {
-                  "errors" : { }
+                "example" : {
+                  "errors" : {
+                    "id" : "ThisShouldBeARealId",
+                    "status" : "400",
+                    "title" : "Bad Request / Syntax",
+                    "detail" : "Bad Request"
+                  }
                 }
               },
               "application/xml" : {
@@ -89,8 +94,13 @@
                 "schema" : {
                   "$ref" : "#/components/schemas/Error"
                 },
-                "examples" : {
-                  "errors" : { }
+                "example" : {
+                  "errors" : {
+                    "id" : "AcsPermissionException",
+                    "status" : "401",
+                    "title" : "Invalid access to resource: Gallery",
+                    "detail" : "You are not authorized to view this resource."
+                  }
                 }
               },
               "application/xml" : {
@@ -107,13 +117,26 @@
                 "schema" : {
                   "$ref" : "#/components/schemas/Error"
                 },
-                "examples" : {
-                  "errors" : { }
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
                 }
               },
               "application/xml" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
                 }
               }
             }
@@ -125,8 +148,13 @@
                 "schema" : {
                   "$ref" : "#/components/schemas/Error"
                 },
-                "examples" : {
-                  "errors" : { }
+                "example" : {
+                  "errors" : {
+                    "id" : "ResourceNotFoundException",
+                    "status" : "404",
+                    "title" : "Resource not found",
+                    "detail" : "The requested resource was not found."
+                  }
                 }
               },
               "application/xml" : {
@@ -154,8 +182,13 @@
                 "schema" : {
                   "$ref" : "#/components/schemas/Error"
                 },
-                "examples" : {
-                  "errors" : { }
+                "example" : {
+                  "errors" : {
+                    "id" : "TooManyRequestsException",
+                    "status" : "429",
+                    "title" : "Too Many Requests",
+                    "detail" : "The user has sent too many requests in a given amount of time see \"rate limiting\"."
+                  }
                 }
               },
               "application/xml" : {
@@ -171,14 +204,13 @@
   },
   "components" : {
     "schemas" : {
-      "schema" : {
-        "title" : "My Gallery Test",
+      "GalleryId" : {
         "maxLength" : 16,
         "minLength" : 16,
         "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
         "type" : "string",
-        "description" : "My gallery description",
-        "example" : "G0000c1x4UMGPvkY"
+        "description" : "The Gallery ID",
+        "example" : "G0000EXAMPLEGALL"
       },
       "KeyImage" : {
         "required" : [ "attributes", "id", "type" ],
@@ -199,6 +231,22 @@
             "$ref" : "#/components/schemas/KeyImage_attributes"
           }
         }
+      },
+      "ImageId" : {
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^I0000[a-zA-Z0-9._]{11}$",
+        "type" : "string",
+        "description" : "The Image ID",
+        "example" : "I0000EXAMPLE_IMG"
+      },
+      "CollectionId" : {
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^C0000[a-zA-Z0-9._]{11}$",
+        "type" : "string",
+        "description" : "The Collection ID",
+        "example" : "C0000EXAMPLECOLL"
       },
       "MetaTag" : {
         "type" : "object",
@@ -255,24 +303,13 @@
         "type" : "object",
         "properties" : {
           "image_id" : {
-            "type" : "string",
-            "description" : "Image ID",
-            "nullable" : true,
-            "example" : "I0000EXAMPLE_IMG"
+            "$ref" : "#/components/schemas/ImageId"
           },
           "gallery_id" : {
-            "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
-            "type" : "string",
-            "description" : "Gallery ID",
-            "nullable" : true,
-            "example" : "G0000EXAMPLEGALL"
+            "$ref" : "#/components/schemas/GalleryId"
           },
           "collection_id" : {
-            "pattern" : "^C0000[a-zA-Z0-9._]{11}$",
-            "type" : "string",
-            "description" : "Collection ID",
-            "nullable" : true,
-            "example" : "C0000EXAMPLE_COL"
+            "$ref" : "#/components/schemas/CollectionId"
           },
           "custom" : {
             "type" : "boolean",
