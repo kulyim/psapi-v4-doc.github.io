@@ -226,7 +226,8 @@
         "title" : "TEST",
         "type" : "string",
         "description" : "TEST",
-        "example" : "landscape"
+        "example" : "landscape",
+        "enum" : [ "test", "test2" ]
       },
       "KeyImage" : {
         "required" : [ "attributes", "id", "type" ],
