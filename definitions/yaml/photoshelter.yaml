@@ -1137,6 +1137,26 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/Error'
+  /media/{media_id}:
+    get:
+      tags:
+      - Media
+      summary: GET /media/{media_id}
+      description: Get a media by Id.
+      operationId: mediaGetId
+      parameters:
+      - name: media_id
+        in: path
+        description: A media ID. Either a video, doc, audio, or image
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/schema'
+        example: I0000EXAMPLEIMAG
+      responses:
+        200:
+          description: ok
 components:
   schemas:
     GalleryId:
@@ -1289,6 +1309,14 @@ components:
           - media
         attributes:
           $ref: '#/components/schemas/Media_attributes'
+    schema:
+      title: Media ID
+      maxLength: 16
+      minLength: 16
+      pattern: ^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$
+      type: string
+      description: Media ID
+      example: I0000zCtew4UPbBw
     inline_response_200:
       required:
       - data
