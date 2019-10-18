@@ -154,26 +154,35 @@ components:
           items:
             $ref: '#/components/schemas/Error_errors'
       description: This object generates errors in compliance with RFC 7807 API Problem
-    inline_response_200_links:
+    inline_response_200_data_attributes:
       type: object
       properties:
-        self:
+        url:
           type: string
-          example: https://example.photoshelter.com/collections/C0000EXAMPLECOLL/links
-        custom_url:
+    inline_response_200_data:
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/CollectionId'
+        type:
           type: string
-          example: https://example.photoshelter.com/gallery-collection/name/C0000EXAMPLECOLL
+          example: link
+        attributes:
+          $ref: '#/components/schemas/inline_response_200_data_attributes'
     inline_response_200:
       required:
-      - links
-      - meta
+      - data
       type: object
       properties:
-        links:
-          $ref: '#/components/schemas/inline_response_200_links'
+        data:
+          $ref: '#/components/schemas/inline_response_200_data'
         meta:
           $ref: '#/components/schemas/MetaTag'
-      example: '{"links":{"self":"https://example.photoshelter.com","custom_url":"https://example.photoshelter.com/gallery-collection/name/C0000EXAMPLECOLL"},"meta":{"copyright":"PhotoShelter
+      example: '{"data":{"id":"C0000EXAMPLECOLL","type":"url","attributes":{"url":"https://example.photoshelter.com/gallery-collection/name/C0000EXAMPLECOLL"}},"meta":{"copyright":"PhotoShelter
         2019","version":"2019-05-01","rate_limit":{"limit":10,"current":1,"expires":40}}}'
     MetaTag_rate_limit:
       type: object
