@@ -394,7 +394,7 @@
       "get" : {
         "tags" : [ "Collection" ],
         "summary" : "GET /collections/{collection_id}/link.",
-        "description" : "Get a collection's link. This endpoint will generate a link to your collection with the name of the collection in the link and its id. The <name> in the example will be replaced with the collection name that was set for the collection if any.",
+        "description" : "Get a collection's link. This endpoint will generate a link to your collection with the name of the collection in the link and its id. The <name> in the example will be replaced with the collection name that was set for the collection.",
         "operationId" : "collectionsGetIdLink",
         "parameters" : [ {
           "name" : "collection_id",
