@@ -299,7 +299,7 @@ paths:
       description: Get a collection's link. This endpoint will generate a link to
         your collection with the name of the collection in the link and its id. The
         <name> in the example will be replaced with the collection name that was set
-        for the collection if any.
+        for the collection.
       operationId: collectionsGetIdLink
       parameters:
       - name: collection_id
