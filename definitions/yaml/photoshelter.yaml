@@ -297,7 +297,9 @@ paths:
       - Collection
       summary: GET /collections/{collection_id}/link.
       description: Get a collection's link. This endpoint will generate a link to
-        your collection with the name of the collection in the link and its id.
+        your collection with the name of the collection in the link and its id. The
+        <name> in the example will be replaced with the collection name that was set
+        for the collection if any.
       operationId: collectionsGetIdLink
       parameters:
       - name: collection_id
@@ -1376,7 +1378,7 @@ components:
           $ref: '#/components/schemas/inline_response_200_3_data'
         meta:
           $ref: '#/components/schemas/MetaTag'
-      example: '{"data":{"id":"C0000EXAMPLECOLL","type":"url","attributes":{"url":"https://example.photoshelter.com/gallery-collection/name/C0000EXAMPLECOLL"}},"meta":{"copyright":"PhotoShelter
+      example: '{"data":{"id":"C0000EXAMPLECOLL","type":"url","attributes":{"url":"https://example.photoshelter.com/gallery-collection/<name>/C0000EXAMPLECOLL"}},"meta":{"copyright":"PhotoShelter
         2019","version":"2019-05-01","rate_limit":{"limit":10,"current":1,"expires":40}}}'
     inline_response_200_4:
       required:
