@@ -51,6 +51,13 @@ paths:
         explode: true
         schema:
           $ref: '#/components/schemas/schema_2'
+      - name: download_filetype
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/schema_2'
       responses:
         200:
           description: Download - HTTP OK
