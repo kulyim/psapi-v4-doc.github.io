@@ -54,15 +54,6 @@
             "$ref" : "#/components/schemas/schema_2"
           }
         }, {
-          "name" : "password",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "$ref" : "#/components/schemas/schema_2"
-          }
-        }, {
           "name" : "token",
           "in" : "query",
           "required" : false,
