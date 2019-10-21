@@ -36,6 +36,15 @@
             "$ref" : "#/components/schemas/schema"
           }
         }, {
+          "name" : "image_mode",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema_2"
+          }
+        }, {
           "name" : "gallery_id",
           "in" : "query",
           "required" : false,
@@ -263,13 +272,10 @@
         "example" : "I0000zCtew4UPbBw"
       },
       "schema_2" : {
-        "title" : "My Gallery Test",
-        "maxLength" : 16,
-        "minLength" : 16,
-        "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
         "type" : "string",
-        "description" : "My gallery description",
-        "example" : "G0000c1x4UMGPvkY"
+        "description" : "Mode to use when resizing an image, values are fit and fill. fit - images is resized to fit in given dimensions without cropping. fill - image will be resized to fill given dimensions, center cropping if necessary.\nDefault mode: fit \nparameter is optional.",
+        "example" : "fit",
+        "enum" : [ "fit", "fill" ]
       },
       "Error" : {
         "required" : [ "errors" ],
