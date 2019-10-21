@@ -30,7 +30,7 @@ paths:
         explode: false
         schema:
           $ref: '#/components/schemas/schema'
-      - name: image_mode
+      - name: password
         in: query
         required: false
         style: form
