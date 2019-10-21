@@ -1416,7 +1416,7 @@
       "get" : {
         "tags" : [ "Media" ],
         "summary" : "GET /media/{media_id}.",
-        "description" : "Get a media by Id. Must provide a valid media id which can be a video, document, audio, or image id. Returns data regarding the media. A public user will receive less information about the returned media versus the owner of the media.",
+        "description" : "Get a media by Id. Must provide a valid media id which can be a video, document, audio, or image id. Returns data regarding the media. A public user will receive less information about the returned media versus the owner of the media. All required attributes are available to both public and authenticated users. Optional attributes are only available to authenticated users.",
         "operationId" : "mediaGetId",
         "parameters" : [ {
           "name" : "media_id",
