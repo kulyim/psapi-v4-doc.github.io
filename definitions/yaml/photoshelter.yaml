@@ -30,6 +30,20 @@ paths:
         explode: false
         schema:
           $ref: '#/components/schemas/schema'
+      - name: gallery_id
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/schema_2'
+      - name: collection_id
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/schema_2'
       responses:
         200:
           description: Download - HTTP OK
@@ -155,6 +169,14 @@ components:
       type: string
       description: Media ID
       example: I0000zCtew4UPbBw
+    schema_2:
+      title: My Gallery Test
+      maxLength: 16
+      minLength: 16
+      pattern: ^G0000[a-zA-Z0-9._]{11}$
+      type: string
+      description: My gallery description
+      example: G0000c1x4UMGPvkY
     Error:
       required:
       - errors
