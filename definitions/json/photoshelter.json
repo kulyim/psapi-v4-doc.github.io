@@ -1432,7 +1432,84 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "ok"
+            "description" : "/media/{media_id} - HTTP 200 OK Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_7"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_8"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "403 Forbidden Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              }
+            }
+          },
+          "429" : {
+            "description" : "429 Too Many Requests Error",
+            "headers" : {
+              "Retry-After" : {
+                "description" : "The Retry-After response HTTP header, expressed in seconds, indicates how long the user agent should wait before making a follow-up request.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                },
+                "example" : 180
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "TooManyRequestsException",
+                    "status" : "429",
+                    "title" : "Too Many Requests",
+                    "detail" : "The user has sent too many requests in a given amount of time see \"rate limiting\"."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
@@ -1594,6 +1671,405 @@
         "description" : "Media ID",
         "example" : "I0000zCtew4UPbBw"
       },
+      "MediaGetObject" : {
+        "required" : [ "attributes", "id", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "maxLength" : 16,
+            "minLength" : 16,
+            "pattern" : "^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "example" : "I0000zCtew4UPbBw"
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "image", "doc", "audio", "video" ]
+          },
+          "attributes" : {
+            "oneOf" : [ {
+              "$ref" : "#/components/schemas/MediaImage"
+            }, {
+              "$ref" : "#/components/schemas/MediaAudio"
+            }, {
+              "$ref" : "#/components/schemas/MediaDocument"
+            }, {
+              "$ref" : "#/components/schemas/MediaVideo"
+            } ]
+          }
+        }
+      },
+      "MediaImage" : {
+        "required" : [ "creator_id", "file_name", "file_size", "height", "image_id", "organization_id", "owner_id", "photographer_id", "rating", "width" ],
+        "type" : "object",
+        "properties" : {
+          "owner_id" : {
+            "$ref" : "#/components/schemas/UserIdNullable"
+          },
+          "organization_id" : {
+            "$ref" : "#/components/schemas/OrganizationId"
+          },
+          "creator_id" : {
+            "$ref" : "#/components/schemas/UserId"
+          },
+          "photographer_id" : {
+            "$ref" : "#/components/schemas/PhotographerId"
+          },
+          "file_name" : {
+            "type" : "string",
+            "description" : "The name of the file",
+            "example" : "File Name"
+          },
+          "file_size" : {
+            "type" : "integer",
+            "description" : "The size of the file in bytes",
+            "example" : 10000
+          },
+          "height" : {
+            "type" : "integer",
+            "description" : "Native image height in pixels",
+            "example" : 1000
+          },
+          "width" : {
+            "type" : "integer",
+            "description" : "Native image width in pixels",
+            "example" : 600
+          },
+          "rating" : {
+            "type" : "number",
+            "description" : "The image rating from -1 to 5",
+            "nullable" : true,
+            "example" : 3
+          },
+          "screen_height" : {
+            "type" : "integer",
+            "description" : "Screen image height in pixels",
+            "example" : 1000
+          },
+          "screen_width" : {
+            "type" : "integer",
+            "description" : "Screen image width in pixels",
+            "example" : 600
+          },
+          "screen_height_max" : {
+            "type" : "integer",
+            "description" : "Max screen image height in pixels",
+            "example" : 10000
+          },
+          "screen_width_max" : {
+            "type" : "integer",
+            "description" : "Max screen image width in pixels",
+            "example" : 6000
+          },
+          "thumbnail_height" : {
+            "type" : "integer",
+            "description" : "Thumbnail height in pixels",
+            "example" : 200
+          },
+          "thumbnail_width" : {
+            "type" : "integer",
+            "description" : "Thumbnail width in pixels",
+            "example" : 180
+          },
+          "views" : {
+            "type" : "integer",
+            "description" : "View counter for the image",
+            "example" : 0
+          },
+          "f_searchable" : {
+            "type" : "boolean",
+            "description" : "Boolean flag that denotes if the image is publicly searchable",
+            "nullable" : true,
+            "example" : true
+          },
+          "model_released" : {
+            "type" : "boolean",
+            "description" : "Boolean flag that denotes if the image model is released",
+            "nullable" : true,
+            "example" : true
+          },
+          "property_released" : {
+            "type" : "boolean",
+            "description" : "Boolean flag that denotes if the image property is released",
+            "nullable" : true,
+            "example" : true
+          },
+          "flagged" : {
+            "type" : "boolean",
+            "description" : "Boolean flag that denotes if the image has been flagged by the photographer",
+            "nullable" : true,
+            "example" : true
+          },
+          "focal_point_x" : {
+            "type" : "integer",
+            "description" : "Core product specific variable. Denotes the focal point of the image on the x-coordinate plane",
+            "nullable" : true,
+            "example" : 100
+          },
+          "focal_point_y" : {
+            "type" : "integer",
+            "description" : "Core product specific variabnle. Denotes the focal point of the image on the y-coordinate plane",
+            "nullable" : true,
+            "example" : 100
+          },
+          "updated_at" : {
+            "type" : "string",
+            "description" : "Date and time the image was last updated",
+            "example" : "2019-10-02 14:39:23 GMT"
+          },
+          "uploaded_at" : {
+            "type" : "string",
+            "description" : "Date and time the image was originally uploaded",
+            "example" : "2019-10-02 14:39:23 GMT"
+          }
+        }
+      },
+      "UserIdNullable" : {
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^U0000[a-zA-Z0-9._]{11}$",
+        "type" : "string",
+        "description" : "User Id",
+        "nullable" : true,
+        "example" : "U0000EXAMPLEUSER"
+      },
+      "OrganizationId" : {
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^O0000[a-zA-Z0-9._]{11}$",
+        "type" : "string",
+        "description" : "Organization Id",
+        "nullable" : true,
+        "example" : "O0000EXAMPLE_OWN"
+      },
+      "UserId" : {
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^U0000[a-zA-Z0-9._]{11}$",
+        "type" : "string",
+        "description" : "User Id",
+        "example" : "U0000EXAMPLEUSER"
+      },
+      "PhotographerId" : {
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^U0000[a-zA-Z0-9._]{11}$",
+        "type" : "string",
+        "description" : "Photographer Id",
+        "nullable" : true,
+        "example" : "U0000EXAMPLEUSER"
+      },
+      "MediaAudio" : {
+        "required" : [ "audio_id", "duration", "file_name", "file_size", "format", "owner_id", "start_time" ],
+        "type" : "object",
+        "properties" : {
+          "owner_id" : {
+            "$ref" : "#/components/schemas/UserIdNullable"
+          },
+          "file_name" : {
+            "type" : "string",
+            "description" : "The name of the file",
+            "example" : "File Name"
+          },
+          "file_size" : {
+            "type" : "integer",
+            "description" : "The size of the file in bytes",
+            "example" : 10000
+          },
+          "start_time" : {
+            "type" : "number",
+            "description" : "Start time of the audio",
+            "example" : 0.05
+          },
+          "duration" : {
+            "type" : "number",
+            "description" : "Duration of the audio file",
+            "example" : 25
+          },
+          "format" : {
+            "type" : "string",
+            "description" : "Format of the audio file",
+            "example" : "mp3"
+          },
+          "hash" : {
+            "type" : "string",
+            "description" : "Audio file SHA-1 hash",
+            "example" : "051a007701ae51921e2e5eec19dfeexamplehash"
+          },
+          "creator_id" : {
+            "$ref" : "#/components/schemas/UserId"
+          },
+          "model_released" : {
+            "type" : "boolean",
+            "description" : "Boolean denoting if the model is released",
+            "nullable" : true,
+            "example" : true
+          },
+          "property_released" : {
+            "type" : "boolean",
+            "description" : "Boolean denoting if the property is released",
+            "nullable" : true,
+            "example" : true
+          },
+          "rating" : {
+            "type" : "number",
+            "description" : "Rating",
+            "example" : 3
+          },
+          "updated_at" : {
+            "type" : "string",
+            "description" : "Date and time the audio was last updated",
+            "example" : "2019-10-02 14:39:23 GMT"
+          },
+          "uploaded_at" : {
+            "type" : "string",
+            "description" : "Date and time the audio was originally uploaded",
+            "example" : "2019-10-02 14:39:23 GMT"
+          }
+        }
+      },
+      "MediaDocument" : {
+        "required" : [ "creator_id", "doc_id", "file_name", "file_size", "format", "format_readable", "org_id", "owner_id" ],
+        "type" : "object",
+        "properties" : {
+          "owner_id" : {
+            "$ref" : "#/components/schemas/UserIdNullable"
+          },
+          "creator_id" : {
+            "$ref" : "#/components/schemas/UserId"
+          },
+          "org_id" : {
+            "$ref" : "#/components/schemas/OrganizationId"
+          },
+          "file_name" : {
+            "type" : "string",
+            "description" : "File Name",
+            "example" : "Example File Name"
+          },
+          "file_size" : {
+            "type" : "integer",
+            "description" : "File size in bytes",
+            "example" : 100000
+          },
+          "format" : {
+            "type" : "string",
+            "description" : "Describes the format of the file",
+            "example" : "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          },
+          "format_readable" : {
+            "type" : "string",
+            "description" : "Format Readable",
+            "example" : "Microsoft Word"
+          },
+          "hash" : {
+            "type" : "string",
+            "description" : "Hash encryption of the file"
+          },
+          "rating" : {
+            "type" : "number",
+            "description" : "Document rating",
+            "nullable" : true,
+            "example" : 1
+          },
+          "updated_at" : {
+            "type" : "string",
+            "description" : "Date and time the document was last updated",
+            "example" : "2019-10-02 14:39:23 GMT"
+          },
+          "uploaded_at" : {
+            "type" : "string",
+            "description" : "Date and time the document was originally uploaded",
+            "example" : "2019-10-02 14:39:23 GMT"
+          }
+        }
+      },
+      "MediaVideo" : {
+        "required" : [ "duration", "file_name", "file_size", "format", "height", "owner_id", "rotate", "start_time", "video_id", "width" ],
+        "type" : "object",
+        "properties" : {
+          "owner_id" : {
+            "$ref" : "#/components/schemas/UserIdNullable"
+          },
+          "file_name" : {
+            "type" : "string",
+            "description" : "File name",
+            "example" : "Sample file name"
+          },
+          "file_size" : {
+            "type" : "integer",
+            "description" : "File size in bytes",
+            "example" : 100000
+          },
+          "rotate" : {
+            "type" : "number",
+            "description" : "Video rotation in degrees",
+            "example" : 30.0
+          },
+          "height" : {
+            "type" : "integer",
+            "description" : "Video height in pixels",
+            "example" : 360
+          },
+          "width" : {
+            "type" : "integer",
+            "description" : "Video width in pixels",
+            "example" : 640
+          },
+          "start_time" : {
+            "type" : "number",
+            "description" : "Video start time",
+            "example" : 0
+          },
+          "duration" : {
+            "type" : "number",
+            "description" : "Duration of the video",
+            "example" : 30.0
+          },
+          "format" : {
+            "type" : "string",
+            "description" : "Video format",
+            "example" : "x-ms-asf"
+          },
+          "photographer_id" : {
+            "$ref" : "#/components/schemas/UserIdNullable"
+          },
+          "creator_id" : {
+            "$ref" : "#/components/schemas/UserId"
+          },
+          "hash" : {
+            "type" : "string",
+            "description" : "Hash Encryption of the file"
+          },
+          "model_released" : {
+            "type" : "boolean",
+            "description" : "Boolean flag denoting if the model is released",
+            "nullable" : true,
+            "example" : true
+          },
+          "property_released" : {
+            "type" : "boolean",
+            "description" : "Boolean flag denoting if the property is released",
+            "nullable" : true,
+            "example" : true
+          },
+          "rating" : {
+            "type" : "number",
+            "description" : "Rating",
+            "nullable" : true,
+            "example" : 1
+          },
+          "updated_at" : {
+            "type" : "string",
+            "description" : "Date and time the document was last updated",
+            "example" : "2019-10-02 14:39:23 GMT"
+          },
+          "uploaded_at" : {
+            "type" : "string",
+            "description" : "Date and time the document was originally uploaded",
+            "example" : "2019-10-02 14:39:23 GMT"
+          }
+        }
+      },
       "inline_response_200" : {
         "required" : [ "data" ],
         "type" : "object",
@@ -1710,6 +2186,31 @@
           },
           "meta" : {
             "$ref" : "#/components/schemas/PaginationMetaTag"
+          }
+        }
+      },
+      "inline_response_200_7" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "$ref" : "#/components/schemas/MediaGetObject"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/MetaTag"
+          }
+        },
+        "example" : "{\"data\":{\"id\":\"I0000EXAMPLEIMAG\",\"type\":\"image\",\"attributes\":{\"organization_id\":\"O0000EXAMPLE_ORG\",\"creator_id\":\"U0000EXAMPLEUSER\",\"file_name\":\"Sample Image\",\"file_size\":10000,\"height\":360,\"width\":640,\"rating\":1}},\"meta\":{\"copyright\":\"PhotoShelter 2019\",\"version\":\"2019-05-01\",\"rate_limit\":{\"limit\":10,\"current\":1,\"expires\":40}}}"
+      },
+      "inline_response_200_8" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "$ref" : "#/components/schemas/MediaGetObject"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/MetaTag"
           }
         }
       },
