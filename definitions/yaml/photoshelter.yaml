@@ -34,10 +34,7 @@ paths:
         style: form
         explode: true
         schema:
-          pattern: ^U0000[a-zA-Z0-9._]{11}$
-          type: string
-          description: User ID
-          example: U0000KqsUW0Voex4
+          $ref: '#/components/schemas/GalleryId'
       - name: org_id
         in: query
         description: Organization ID, will attempt to derive from hostname if not
@@ -216,6 +213,13 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    GalleryId:
+      maxLength: 16
+      minLength: 16
+      pattern: ^G0000[a-zA-Z0-9._]{11}$
+      type: string
+      description: The Gallery ID
+      example: G0000EXAMPLEGALL
     Collection:
       required:
       - attributes
