@@ -1,5 +1,5 @@
 {
-  "openapi" : "3.0.0",
+  "openapi" : "3.0.2",
   "info" : {
     "title" : "PhotoShelter API v4",
     "description" : "# PhotoShelter API v4 definition",
@@ -29,12 +29,74 @@
         "parameters" : [ {
           "name" : "media_id",
           "in" : "path",
-          "description" : "Media ID",
           "required" : true,
           "style" : "simple",
           "explode" : false,
           "schema" : {
             "$ref" : "#/components/schemas/schema"
+          }
+        }, {
+          "name" : "gallery_id",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema_2"
+          }
+        }, {
+          "name" : "collection_id",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema_2"
+          }
+        }, {
+          "name" : "password",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema_2"
+          }
+        }, {
+          "name" : "token",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema_2"
+          }
+        }, {
+          "name" : "download_filetype",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema_2"
+          }
+        }, {
+          "name" : "download_quality",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema_2"
+          }
+        }, {
+          "name" : "download_image_embed",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema_2"
           }
         } ],
         "responses" : {
@@ -56,8 +118,13 @@
                 "schema" : {
                   "$ref" : "#/components/schemas/Error"
                 },
-                "examples" : {
-                  "errors" : { }
+                "example" : {
+                  "errors" : {
+                    "id" : "ThisShouldBeARealId",
+                    "status" : "400",
+                    "title" : "Bad Request / Syntax",
+                    "detail" : "Bad Request"
+                  }
                 }
               },
               "application/xml" : {
@@ -85,8 +152,13 @@
                 "schema" : {
                   "$ref" : "#/components/schemas/Error"
                 },
-                "examples" : {
-                  "errors" : { }
+                "example" : {
+                  "errors" : {
+                    "id" : "AcsPermissionException",
+                    "status" : "401",
+                    "title" : "Invalid access to resource: Gallery",
+                    "detail" : "You are not authorized to view this resource."
+                  }
                 }
               },
               "application/xml" : {
@@ -103,13 +175,26 @@
                 "schema" : {
                   "$ref" : "#/components/schemas/Error"
                 },
-                "examples" : {
-                  "errors" : { }
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
                 }
               },
               "application/xml" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
                 }
               }
             }
@@ -121,8 +206,13 @@
                 "schema" : {
                   "$ref" : "#/components/schemas/Error"
                 },
-                "examples" : {
-                  "errors" : { }
+                "example" : {
+                  "errors" : {
+                    "id" : "ResourceNotFoundException",
+                    "status" : "404",
+                    "title" : "Resource not found",
+                    "detail" : "The requested resource was not found."
+                  }
                 }
               },
               "application/xml" : {
@@ -150,8 +240,13 @@
                 "schema" : {
                   "$ref" : "#/components/schemas/Error"
                 },
-                "examples" : {
-                  "errors" : { }
+                "example" : {
+                  "errors" : {
+                    "id" : "TooManyRequestsException",
+                    "status" : "429",
+                    "title" : "Too Many Requests",
+                    "detail" : "The user has sent too many requests in a given amount of time see \"rate limiting\"."
+                  }
                 }
               },
               "application/xml" : {
@@ -175,6 +270,15 @@
         "type" : "string",
         "description" : "Media ID",
         "example" : "I0000zCtew4UPbBw"
+      },
+      "schema_2" : {
+        "title" : "My Gallery Test",
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
+        "type" : "string",
+        "description" : "My gallery description",
+        "example" : "G0000c1x4UMGPvkY"
       },
       "Error" : {
         "required" : [ "errors" ],
