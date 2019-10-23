@@ -166,10 +166,10 @@ components:
       type: object
       properties:
         id:
-          pattern: ^GI000[a-zA-Z0-9._]{11}$
+          pattern: ^[GC]0000[a-zA-Z0-9._]{11}$
           type: string
-          description: Gallery Key Image ID
-          example: GI000EXAMPLE_GI0
+          description: Collection/Group ID
+          example: G0000EXAMPLE_GI0
         type:
           pattern: keyImage
           type: string
@@ -232,6 +232,7 @@ components:
       - custom
       - image_id
       - image_url
+      - public
       type: object
       properties:
         image_id:
@@ -249,6 +250,10 @@ components:
           description: Key image URL
           nullable: true
           example: http://www.photoshelter.co/img-get/I0000EXAMPLE_IMG
+        public:
+          type: boolean
+          description: Key Image is Public
+          example: true
     MetaTag_rate_limit:
       type: object
       properties:
