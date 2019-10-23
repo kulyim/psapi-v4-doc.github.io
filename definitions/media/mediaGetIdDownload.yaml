@@ -25,6 +25,7 @@ paths:
       parameters:
       - name: media_id
         in: path
+        description: Media ID
         required: true
         style: simple
         explode: false
@@ -32,6 +33,7 @@ paths:
           $ref: '#/components/schemas/schema'
       - name: gallery_id
         in: query
+        description: Gallery ID
         required: false
         style: form
         explode: true
@@ -39,6 +41,7 @@ paths:
           $ref: '#/components/schemas/schema_2'
       - name: collection_id
         in: query
+        description: Collection ID
         required: false
         style: form
         explode: true
@@ -46,6 +49,7 @@ paths:
           $ref: '#/components/schemas/schema_2'
       - name: password
         in: query
+        description: Password
         required: false
         style: form
         explode: true
@@ -53,6 +57,7 @@ paths:
           $ref: '#/components/schemas/schema_2'
       - name: token
         in: query
+        description: Access Token
         required: false
         style: form
         explode: true
@@ -60,6 +65,7 @@ paths:
           $ref: '#/components/schemas/schema_2'
       - name: download_filetype
         in: query
+        description: Download Filetype
         required: false
         style: form
         explode: true
@@ -67,6 +73,7 @@ paths:
           $ref: '#/components/schemas/schema_2'
       - name: download_quality
         in: query
+        description: Download Quality
         required: false
         style: form
         explode: true
@@ -74,6 +81,7 @@ paths:
           $ref: '#/components/schemas/schema_2'
       - name: download_image_embed
         in: query
+        description: Download Image Embed Metadata
         required: false
         style: form
         explode: true
