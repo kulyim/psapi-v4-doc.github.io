@@ -246,7 +246,7 @@
       "get" : {
         "tags" : [ "Collection" ],
         "summary" : "GET /collections/{collection_id}.",
-        "description" : "Get a collection by ID.",
+        "description" : "Get a collection by ID. The format of the collection id is defined by the regex : ^C0000[a-zA-Z0-9._]{11}$. (For example: 'COOOOEXAMPLECOLL')",
         "operationId" : "collectionsGetId",
         "parameters" : [ {
           "name" : "collection_id",
@@ -256,13 +256,7 @@
           "style" : "simple",
           "explode" : false,
           "schema" : {
-            "title" : "My Collection Test",
-            "maxLength" : 16,
-            "minLength" : 16,
-            "pattern" : "^C0000[a-zA-Z0-9._]{11}$",
-            "type" : "string",
-            "description" : "My collection description",
-            "example" : "C0000c1x4UMGPvkY"
+            "$ref" : "#/components/schemas/CollectionId"
           },
           "example" : "C0000EXAMPLECOLL"
         } ],
@@ -1666,6 +1660,14 @@
         },
         "description" : "This object generates errors in compliance with RFC 7807 API Problem"
       },
+      "CollectionId" : {
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^C0000[a-zA-Z0-9._]{11}$",
+        "type" : "string",
+        "description" : "The Collection ID",
+        "example" : "C0000EXAMPLECOLL"
+      },
       "Collection" : {
         "required" : [ "attributes", "id", "type" ],
         "type" : "object",
@@ -1684,14 +1686,6 @@
             "$ref" : "#/components/schemas/Collection_attributes"
           }
         }
-      },
-      "CollectionId" : {
-        "maxLength" : 16,
-        "minLength" : 16,
-        "pattern" : "^C0000[a-zA-Z0-9._]{11}$",
-        "type" : "string",
-        "description" : "The Collection ID",
-        "example" : "C0000EXAMPLECOLL"
       },
       "PaginationMetaTag" : {
         "type" : "object",
