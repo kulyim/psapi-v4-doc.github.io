@@ -232,6 +232,7 @@ components:
       - custom
       - image_id
       - image_url
+      - public
       type: object
       properties:
         image_id:
@@ -249,6 +250,10 @@ components:
           description: Key image URL
           nullable: true
           example: http://www.photoshelter.co/img-get/I0000EXAMPLE_IMG
+        public:
+          type: boolean
+          description: Key Image is Public
+          example: true
     MetaTag_rate_limit:
       type: object
       properties:
