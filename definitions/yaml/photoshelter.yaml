@@ -15,78 +15,32 @@ servers:
 - url: https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4
   description: PhotoShelter Auto Mocking API
 paths:
-  /media/{media_id}/download:
+  /galleries/{gallery_id}/key-image:
     get:
       tags:
-      - Media
-      summary: Get the media with the associated ID.
-      description: Get the media with the associated ID.
-      operationId: mediaDownloadGetId
+      - Gallery
+      summary: Retrieves the gallery key image.
+      description: Retrieves the gallery key image.
+      operationId: galleriesGetIdKeyImage
       parameters:
-      - name: media_id
+      - name: gallery_id
         in: path
         required: true
         style: simple
         explode: false
         schema:
           $ref: '#/components/schemas/schema'
-      - name: gallery_id
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          $ref: '#/components/schemas/schema_2'
-      - name: collection_id
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          $ref: '#/components/schemas/schema_2'
-      - name: password
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          $ref: '#/components/schemas/schema_2'
-      - name: token
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          $ref: '#/components/schemas/schema_2'
-      - name: download_filetype
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          $ref: '#/components/schemas/schema_2'
-      - name: download_quality
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          $ref: '#/components/schemas/schema_2'
-      - name: download_image_embed
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          $ref: '#/components/schemas/schema_2'
       responses:
         200:
-          description: Download - HTTP OK
+          description: |
+            /galleries/{gallery_id}/key-image - HTTP 200 OK Response.
           content:
-            application/octet-stream:
+            application/json:
               schema:
-                type: string
-                format: binary
+                $ref: '#/components/schemas/inline_response_200'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
         400:
           description: 400 Bad Request Error
           content:
@@ -197,14 +151,6 @@ paths:
 components:
   schemas:
     schema:
-      title: Media ID
-      maxLength: 16
-      minLength: 16
-      pattern: ^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$
-      type: string
-      description: Media ID
-      example: I0000zCtew4UPbBw
-    schema_2:
       title: My Gallery Test
       maxLength: 16
       minLength: 16
@@ -212,6 +158,56 @@ components:
       type: string
       description: My gallery description
       example: G0000c1x4UMGPvkY
+    KeyImage:
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+      properties:
+        id:
+          pattern: ^[GC]0000[a-zA-Z0-9._]{11}$
+          type: string
+          description: Collection/Group ID
+          example: G0000EXAMPLE_GI0
+        type:
+          pattern: keyImage
+          type: string
+          example: keyImage
+        attributes:
+          $ref: '#/components/schemas/KeyImage_attributes'
+    ImageId:
+      maxLength: 16
+      minLength: 16
+      pattern: ^I0000[a-zA-Z0-9._]{11}$
+      type: string
+      description: The Image ID
+      example: I0000EXAMPLE_IMG
+    GalleryId:
+      maxLength: 16
+      minLength: 16
+      pattern: ^G0000[a-zA-Z0-9._]{11}$
+      type: string
+      description: The Gallery ID
+      example: G0000EXAMPLEGALL
+    CollectionId:
+      maxLength: 16
+      minLength: 16
+      pattern: ^C0000[a-zA-Z0-9._]{11}$
+      type: string
+      description: The Collection ID
+      example: C0000EXAMPLECOLL
+    MetaTag:
+      type: object
+      properties:
+        copyright:
+          type: string
+          example: PhotoShelter 2019
+        version:
+          type: string
+          example: 2019-05-01
+        rate_limit:
+          $ref: '#/components/schemas/MetaTag_rate_limit'
     Error:
       required:
       - errors
@@ -222,6 +218,49 @@ components:
           items:
             $ref: '#/components/schemas/Error_errors'
       description: This object generates errors in compliance with RFC 7807 API Problem
+    inline_response_200:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/KeyImage'
+        meta:
+          $ref: '#/components/schemas/MetaTag'
+    KeyImage_attributes:
+      required:
+      - custom
+      - image_id
+      - image_url
+      type: object
+      properties:
+        image_id:
+          $ref: '#/components/schemas/ImageId'
+        gallery_id:
+          $ref: '#/components/schemas/GalleryId'
+        collection_id:
+          $ref: '#/components/schemas/CollectionId'
+        custom:
+          type: boolean
+          description: Custom assigned gallery key image
+          example: true
+        image_url:
+          type: string
+          description: Key image URL
+          nullable: true
+          example: http://www.photoshelter.co/img-get/I0000EXAMPLE_IMG
+    MetaTag_rate_limit:
+      type: object
+      properties:
+        limit:
+          type: integer
+          example: 10
+        current:
+          type: integer
+          example: 1
+        expires:
+          type: integer
+          example: 40
     Error_links:
       type: object
       properties:
