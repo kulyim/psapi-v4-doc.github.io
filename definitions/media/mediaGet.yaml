@@ -15,7 +15,7 @@ servers:
 - url: https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4
   description: PhotoShelter Auto Mocking API
 tags:
-- name: Gallery
+- name: PhotoShelter API
 paths:
   /media:
     get:
@@ -563,11 +563,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              examples:
-                errors: {}
+              example:
+                error:
+                  id: ApiKeyInvalidException
+                  status: "403"
+                  title: Missing or invalid API key
+                  detail: |-
+                    Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or
+                    is invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.
+                    If you do not have an API key, you can request one on our website.
             application/xml:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                error:
+                  id: ApiKeyInvalidException
+                  status: "403"
+                  title: Missing or invalid API key
+                  detail: |-
+                    Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or
+                    is invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.
+                    If you do not have an API key, you can request one on our website.
         429:
           description: 429 Too Many Requests Error
           headers:
@@ -584,8 +600,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              examples:
-                errors: {}
+              example:
+                errors:
+                  id: TooManyRequestsException
+                  status: "429"
+                  title: Too Many Requests
+                  detail: The user has sent too many requests in a given amount of
+                    time see "rate limiting".
             application/xml:
               schema:
                 $ref: '#/components/schemas/Error'
