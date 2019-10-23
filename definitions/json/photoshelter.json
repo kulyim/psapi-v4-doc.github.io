@@ -27,7 +27,7 @@
       "get" : {
         "tags" : [ "Collection" ],
         "summary" : "GET /collections/{collection_id}.",
-        "description" : "Get a collection by ID. This endpoint is available to both public and authenticated users. Certain fields are only returned a non-null value if the users is authenticated and has permissions. \n The format of the collection id is defined by the regex : ^C0000[a-zA-Z0-9._]{11}$ (For example: 'COOOOEXAMPLECOLL').",
+        "description" : "Get a collection by ID. This endpoint is available to both public and authenticated users. Certain fields are only returned a non-null value if the users is authenticated and has permissions. The format of the collection id is defined by the regex : ^C0000[a-zA-Z0-9._]{11}$ (For example: 'COOOOEXAMPLECOLL').",
         "operationId" : "collectionsGetId",
         "parameters" : [ {
           "name" : "collection_id",
