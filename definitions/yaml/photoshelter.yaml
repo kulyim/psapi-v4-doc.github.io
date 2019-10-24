@@ -409,7 +409,8 @@ paths:
       tags:
       - Collection
       summary: GET /collections.
-      description: Query the collections
+      description: Query the collections. This endpoint requires the user to be authenticated.
+        It will return a list of collections owned by the user.
       operationId: collectionsGet
       parameters:
       - name: collection_id
@@ -452,6 +453,32 @@ paths:
           type: boolean
           default: false
         example: true
+      - name: sort_by
+        in: query
+        description: Sort by column
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - creation_time
+          - modification_time
+          - name
+          - display_order
+        example: name
+      - name: sort_direction
+        in: query
+        description: Sort direction
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - ascending
+          - descending
+        example: ascending
       - name: per_page
         in: query
         description: Results per page
