@@ -1416,7 +1416,7 @@
       "get" : {
         "tags" : [ "Media" ],
         "summary" : "GET /media/{media_id}.",
-        "description" : "Get a media by Id. Must provide a valid media id which can be a video, document, audio, or image id. Returns data regarding the media. A public user will receive less information about the returned media versus the owner of the media. All required attributes are available to both public and authenticated users. Optional attributes are only available to authenticated users.",
+        "description" : "Get media by ID. This endpoint works for both public and authenticated users. Certain fields are non-null only if users have the permission to view them. Users must provide a valid media ID which can be a video, document, audio, or image id ( defined by this regex: ^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$ ). Image IDs start with 'I0', video IDs start with 'VD', audio IDs start with 'AD', and document IDs start with 'DO' in the regex. This endpoint will return data corresponding with the type of media that was retrieved.",
         "operationId" : "mediaGetId",
         "parameters" : [ {
           "name" : "media_id",
