@@ -22,7 +22,10 @@ paths:
       tags:
       - Collection
       summary: GET /collections/{collection_id}.
-      description: Get a collection by ID.
+      description: 'Get a collection by ID. This endpoint is available to both public
+        and authenticated users. Certain fields are only returned a non-null value
+        if the users is authenticated and has permissions. The format of the collection
+        id is defined by the regex : ^C0000[a-zA-Z0-9._]{11}$ (For example: ''COOOOEXAMPLECOLL'').'
       operationId: collectionsGetId
       parameters:
       - name: collection_id
@@ -202,10 +205,10 @@ components:
       - description
       - display_order
       - is_listed
-      - key_image_id
       - modified_at
       - name
       - name_url
+      - org_id
       type: object
       properties:
         name:
@@ -213,6 +216,11 @@ components:
           type: string
           description: Name of the collection
           example: My Trip to DR
+        org_id:
+          type: string
+          description: ID of the organization that the collection belongs to.
+          nullable: true
+          example: O0000EXAMPLE_ORG
         name_url:
           maxLength: 100
           type: string
@@ -221,20 +229,17 @@ components:
         description:
           type: string
           description: Description of the colletion
+          nullable: true
           example: My Trip to DR Collection
         display_order:
           type: integer
           description: Display order
           example: 1
-        key_image_id:
-          pattern: ^GI000[a-zA-Z0-9._]{11}$
-          type: string
-          description: Key Image ID
-          example: GI000EXAMPLE_IMG
         access_id:
           pattern: ^A0000[a-zA-Z0-9._]{11}$
           type: string
           description: Access ID
+          nullable: true
           example: A0000EXAMPLE_ACS
         is_listed:
           type: boolean
@@ -243,10 +248,12 @@ components:
         created_at:
           type: string
           description: Creation date
+          nullable: true
           example: 2019-04-25T14:54:12.136828
         modified_at:
           type: string
           description: Modified Date
+          nullable: true
           example: 2019-04-25T14:54:12.136828
     MetaTag_rate_limit:
       type: object
