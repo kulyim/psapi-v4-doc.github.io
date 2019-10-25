@@ -1505,7 +1505,6 @@ components:
       - focal_point_x
       - focal_point_y
       - height
-      - image_id
       - model_released
       - organization_id
       - owner_id
@@ -1664,7 +1663,6 @@ components:
       example: U0000EXAMPLEUSER
     MediaAudio:
       required:
-      - audio_id
       - creator_id
       - duration
       - file_name
@@ -1737,7 +1735,6 @@ components:
     MediaDocument:
       required:
       - creator_id
-      - doc_id
       - file_name
       - file_size
       - format
@@ -1810,7 +1807,6 @@ components:
       - start_time
       - updated_at
       - uploaded_at
-      - video_id
       - width
       type: object
       properties:
@@ -1984,8 +1980,9 @@ components:
           $ref: '#/components/schemas/MediaGetObject'
         meta:
           $ref: '#/components/schemas/MetaTag'
-      example: '{"data":{"id":"I0000EXAMPLEIMAG","type":"image","attributes":{"organization_id":"O0000EXAMPLE_ORG","creator_id":"U0000EXAMPLEUSER","file_name":"Sample
-        Image","file_size":10000,"height":360,"width":640,"rating":1}},"meta":{"copyright":"PhotoShelter
+      example: '{"data":{"id":"VD000EXAMPLE_VID","type":"video","attributes":{"file_name":"Sample
+        Video","file_size":10000,"rotate":0,"height":640,"width":360,"start_time":0,"duration":60,"creator_id":"U0000EXAMPLEUSER","hash":"051a007701ae51921e2e5eec19dfeexamplehash","model_released":true,"property_released":true,"rating":1,"updated_at":"2019-10-02
+        14:39:23 GMT","uploaded_at":"2019-10-02 14:39:23 GMT"}},"meta":{"copyright":"PhotoShelter
         2019","version":"2019-05-01","rate_limit":{"limit":10,"current":1,"expires":40}}}'
     inline_response_200_8:
       required:
