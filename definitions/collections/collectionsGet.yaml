@@ -27,7 +27,7 @@ paths:
         work, both per_page and page query parameters must be set.
       operationId: collectionsGet
       parameters:
-      - name: collection_id
+      - name: id
         in: query
         description: Collection ID to match in the query
         required: false
