@@ -1,0 +1,752 @@
+openapi: 3.0.0
+info:
+  title: PhotoShelter API v4
+  description: '# PhotoShelter API v4 definition'
+  termsOfService: https://www.photoshelter.com/support/terms/
+  contact:
+    name: PhotoShelter API Support Team
+    url: https://support.photoshelter.com
+    email: api-support@photoshelter.com
+  license:
+    name: PhotoShelter License
+    url: https://www.photoshelter.com/support/license
+  version: Allan
+servers:
+- url: https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4
+  description: PhotoShelter Auto Mocking API
+tags:
+- name: PhotoShelter API
+paths:
+  /media:
+    get:
+      tags:
+      - Media
+      summary: GET /media.
+      description: 'Media GET (aka media search). At least one of the following is
+        required in order for the search to take place: (terms, custom_metadata, date_start,
+        date_end, user_id, org_id, photographer_id, virtual_agency_id, orientation,
+        state, country, country_iso). It is good practice to limit your page size
+        when searching as callbacks for additional data can become expensive.'
+      operationId: mediaGet
+      parameters:
+      - name: media_id
+        in: query
+        description: ID of the media
+        required: false
+        style: form
+        explode: true
+        schema:
+          pattern: ^(VD|AD|I0|DO)000[a-zA-Z0-9._]{11}$
+          type: string
+        example: I0000EXAMPLEIMAG
+      - name: photographer_id
+        in: query
+        description: ID of photographer
+        required: false
+        style: form
+        explode: true
+        schema:
+          pattern: ^U0000[a-zA-Z0-9._]{11}$
+          type: string
+        example: U0000EXAMPLEUSER
+      - name: virtual_agency_id
+        in: query
+        description: Virtual Agency ID
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: VA000____EXAMPLE
+      - name: collections
+        in: query
+        description: Limit search to files within given collections. Comma separated
+          list of collection ids.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: C0000EXAMPLECOLL, C0000EXAMPLECOL2
+      - name: galleries
+        in: query
+        description: Limit search to files contained in given galleries. Comma separated
+          list of gallery ids.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: G0000EXAMPLEGALL, G0000EXAMPLEGAL2
+      - name: custom_metadata
+        in: query
+        description: Limit search to files containing custom metadata. Requires use
+          of the org_id parameter. Parameter format is a JSON object containing field_id
+          and option_id key-value pairs. e.g. {"Foo_field_123":"Foo_tag_abc","Bar_field_456":"Bar_tag_def"}.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: '{"Foo_field_123":"Foo_tag"}'
+      - name: file_name
+        in: query
+        description: Name of the file
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: File name
+      - name: terms
+        in: query
+        description: Search terms. Performs text search based on the terms across
+          a variety of attributes such as file name, keywords, caption, etc.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Example Search Terms
+      - name: model_release
+        in: query
+        description: Media has a model release
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+        example: true
+      - name: property_release
+        in: query
+        description: Media has property release
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+        example: false
+      - name: priced
+        in: query
+        description: Media is for sale
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+        example: true
+      - name: searchble
+        in: query
+        description: Media is publicly searchable
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+        example: false
+      - name: print
+        in: query
+        description: Media is available for prints
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+        example: true
+      - name: personal_use
+        in: query
+        description: Media is available for personal use.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+        example: false
+      - name: royalty_free
+        in: query
+        description: Media is available as royalty free.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+        example: true
+      - name: rights_managed
+        in: query
+        description: Media is available for license.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+        example: false
+      - name: media_type
+        in: query
+        description: Type of media (image | video | audio | doc) or a comma separated
+          list
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: image,audio
+      - name: city
+        in: query
+        description: City parameter
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Sample City
+      - name: state
+        in: query
+        description: State/Province parameter
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Sample State
+      - name: country
+        in: query
+        description: Country Parameter
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Sample Country
+      - name: country_iso
+        in: query
+        description: Country ISO code
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Sample Code
+      - name: rating
+        in: query
+        description: Ratings are from -1 to 254
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+        example: 1
+      - name: rating_min
+        in: query
+        description: Minimum rating
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+        example: 1
+      - name: rating_max
+        in: query
+        description: Maximum rating
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+        example: 10
+      - name: date_start
+        in: query
+        description: Minimum date taken
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: 2019-04-09T18:34:40-04:00
+      - name: date_end
+        in: query
+        description: Maximum date taken
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: 2019-04-09T18:34:40-04:00
+      - name: title
+        in: query
+        description: Title
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Sample Title
+      - name: edit_status
+        in: query
+        description: Edit status
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Sample status
+      - name: urgency
+        in: query
+        description: Urgency
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Urgency
+      - name: category
+        in: query
+        description: Category
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Sample Category
+      - name: keywords
+        in: query
+        description: Keywords
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Example Keywords
+      - name: instructions
+        in: query
+        description: Instructions
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Sample instructions
+      - name: author
+        in: query
+        description: Author
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Sample Author
+      - name: position
+        in: query
+        description: Author title/position
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Sample Title/Position
+      - name: location
+        in: query
+        description: Location
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Sample location
+      - name: trans_ref
+        in: query
+        description: Job ID/transmission reference
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Sample ID
+      - name: credit
+        in: query
+        description: Credit
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Sample Credit
+      - name: source
+        in: query
+        description: Source
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Sample Source
+      - name: copyright
+        in: query
+        description: Copyright
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Sample Copyright
+      - name: caption
+        in: query
+        description: Caption writer
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Caption writer
+      - name: contact_info
+        in: query
+        description: Contact info. Query string based on key-value pairs. The available
+          keys are - city, country, address, postal_code, region, email, phone, and
+          url. For example, "?contract_info=city,NYC,country,USA is equivalent to
+          city being NYC and country being USA.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+        example: city,NYC,country,USA
+      - name: genre
+        in: query
+        description: Genre
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Sample genre
+      - name: rights
+        in: query
+        description: Usage rights
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Sample usage rights
+      - name: scene
+        in: query
+        description: Scene
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Sample scene
+      - name: subject_code
+        in: query
+        description: Subject Code
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Sample Subject Code
+      - name: caption_writer
+        in: query
+        description: Caption Writer
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Sample Writer
+      - name: orientation
+        in: query
+        description: Orientation
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - horizontal
+          - vertical
+          - panoramic
+          - square
+        example: horizontal
+      - name: web_statement
+        in: query
+        description: Web statement
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Sample Web Statement
+      - name: is_empty
+        in: query
+        description: Denotes which parameters must be empty. Comma-separated list.
+        required: false
+        style: form
+        explode: false
+        schema:
+          $ref: '#/components/schemas/MediaSearchEmpty'
+        example: title, edit_status,urgency
+      - name: not_empty
+        in: query
+        description: Denotes which parameters must have a value. Comma separated list.
+        required: false
+        style: form
+        explode: false
+        schema:
+          $ref: '#/components/schemas/MediaSearchEmpty'
+        example: title,edit_status,urgency
+      - name: match_all_terms
+        in: query
+        description: Match all terms. Return all keywords specified in the terms parameter.
+          Default to true.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+        example: true
+      - name: per_page
+        in: query
+        description: Results per page.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+        example: 50
+      - name: page
+        in: query
+        description: Page number.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+        example: 1
+      - name: sort_by
+        in: query
+        description: Field to sort by.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - relevance
+          - date
+          - file_name
+          - upload_time
+        example: relevance
+      - name: sort_dir
+        in: query
+        description: Direction to sort by.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+        example: asc
+      responses:
+        200:
+          description: |
+            /media - HTTP 200 OK Response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        403:
+          description: 403 Forbidden Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error:
+                  id: ApiKeyInvalidException
+                  status: "403"
+                  title: Missing or invalid API key
+                  detail: |-
+                    Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or
+                    is invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.
+                    If you do not have an API key, you can request one on our website.
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error:
+                  id: ApiKeyInvalidException
+                  status: "403"
+                  title: Missing or invalid API key
+                  detail: |-
+                    Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or
+                    is invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.
+                    If you do not have an API key, you can request one on our website.
+        429:
+          description: 429 Too Many Requests Error
+          headers:
+            Retry-After:
+              description: The Retry-After response HTTP header, expressed in seconds,
+                indicates how long the user agent should wait before making a follow-up
+                request.
+              style: simple
+              explode: false
+              schema:
+                type: integer
+              example: 180
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                errors:
+                  id: TooManyRequestsException
+                  status: "429"
+                  title: Too Many Requests
+                  detail: The user has sent too many requests in a given amount of
+                    time see "rate limiting".
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    MediaSearchEmpty:
+      type: array
+      items:
+        type: string
+        enum:
+        - title
+        - edit_status
+        - urgency
+        - category
+        - keywords
+        - instructions
+        - author
+        - position
+        - location
+        - city
+        - state
+        - country
+        - headline
+        - trans_ref
+        - credit
+        - source
+        - copyright
+        - caption
+        - caption_writer
+        - ci_city
+        - ci_country
+        - ci_address
+        - ci_postal_code
+        - ci_region
+        - ci_email
+        - ci_phone
+        - ci_url
+        - genre
+        - rights
+        - scene
+        - subject_code
+        - web_statement
+    Media:
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+      properties:
+        id:
+          pattern: ^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$
+          type: string
+          example: I0000zCtew4UPbBw
+        type:
+          type: string
+          example: media
+          enum:
+          - media
+        attributes:
+          $ref: '#/components/schemas/Media_attributes'
+    PaginationMetaTag:
+      type: object
+      properties:
+        total:
+          type: integer
+          example: 100
+        page:
+          type: integer
+          example: 1
+        first:
+          type: string
+          example: example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1
+        last:
+          type: string
+          example: example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=5
+        next:
+          type: string
+          example: example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=2
+        prev:
+          type: string
+          example: example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1
+    Error:
+      required:
+      - errors
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error_errors'
+      description: This object generates errors in compliance with RFC 7807 API Problem
+    inline_response_200:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Media'
+        meta:
+          $ref: '#/components/schemas/PaginationMetaTag'
+    Media_attributes:
+      required:
+      - file_name
+      - type
+      type: object
+      properties:
+        file_name:
+          type: string
+          example: Sample File Name
+        type:
+          type: string
+          enum:
+          - image
+          - audio
+          - video
+          - doc
+    Error_links:
+      type: object
+      properties:
+        about:
+          type: string
+          example: http://api.developer.com/404.html
+    Error_errors:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique identifier for this occurrence of the problem
+        links:
+          $ref: '#/components/schemas/Error_links'
+        title:
+          type: string
+          description: A short, human-readable summary of the problem type
+        status:
+          type: string
+          description: The HTTP status code set by the origin server for this occurrence
+            of the problem.
+        detail:
+          type: string
+          description: An human readable explanation specific to this occurrence of
+            the problem.
