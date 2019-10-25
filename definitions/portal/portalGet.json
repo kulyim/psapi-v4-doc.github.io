@@ -1,5 +1,5 @@
 {
-  "openapi" : "3.0.0",
+  "openapi" : "3.0.2",
   "info" : {
     "title" : "PhotoShelter API v4",
     "description" : "# PhotoShelter API v4 definition",
@@ -13,104 +13,48 @@
       "name" : "PhotoShelter License",
       "url" : "https://www.photoshelter.com/support/license"
     },
-    "version" : "Allan"
+    "version" : "Anthony"
   },
   "servers" : [ {
-    "url" : "https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4",
+    "url" : "http://anthony.dev.bitshelter.com/psapi/v4",
     "description" : "PhotoShelter Auto Mocking API"
   } ],
   "tags" : [ {
-    "name" : "PhotoShelter API"
+    "name" : "PhotoShelter"
   } ],
   "paths" : {
-    "/collections" : {
+    "/portal" : {
       "get" : {
-        "tags" : [ "Collection" ],
-        "summary" : "GET /collections.",
-        "description" : "Search the collections. This endpoint requires the user to be authenticated. It will return a list of collections owned by the user. For pagination to work, both per_page and page query parameters must be set.",
-        "operationId" : "collectionsGet",
+        "tags" : [ "Portal" ],
+        "summary" : "Gets all the collections and galleries for the accountat the root level.",
+        "description" : "Gets all the collections and galleries for the accountat the root level.",
+        "operationId" : "portalGet",
         "parameters" : [ {
-          "name" : "collection_id",
+          "name" : "user_id",
           "in" : "query",
-          "description" : "Collection ID to match in the query",
+          "description" : "User ID, will attempt to derive from hostname if not provided optional.",
           "required" : false,
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "$ref" : "#/components/schemas/CollectionId"
-          },
-          "example" : "C0000EXAMPLECOLL"
-        }, {
-          "name" : "name",
-          "in" : "query",
-          "description" : "Collection name to match in the query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "maxLength" : 100,
-            "type" : "string"
-          },
-          "example" : "EXAMPLE NAME"
-        }, {
-          "name" : "parent",
-          "in" : "query",
-          "description" : "Limit collections to children of the provided collection ID. Pass blank to find collections with no parent.",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "$ref" : "#/components/schemas/CollectionId"
-          },
-          "example" : "C0000EXAMPLECOLL"
-        }, {
-          "name" : "match",
-          "in" : "query",
-          "description" : "Flag denoting partial or complete collection name matching. False for partial, true for complete.",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "boolean",
-            "default" : false
-          },
-          "example" : true
-        }, {
-          "name" : "sort_by",
-          "in" : "query",
-          "description" : "Sort by column",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
+            "pattern" : "^U0000[a-zA-Z0-9._]{11}$",
             "type" : "string",
-            "enum" : [ "creation_time", "modification_time", "name", "display_order" ]
-          },
-          "example" : "name"
+            "description" : "User ID",
+            "example" : "U0000KqsUW0Voex4"
+          }
         }, {
-          "name" : "sort_direction",
+          "name" : "org_id",
           "in" : "query",
-          "description" : "Sort direction",
+          "description" : "Organization ID, will attempt to derive from hostname if not provided optional",
           "required" : false,
           "style" : "form",
           "explode" : true,
           "schema" : {
+            "pattern" : "^O0000[a-zA-Z0-9._]{11}$",
             "type" : "string",
-            "enum" : [ "ascending", "descending" ]
-          },
-          "example" : "ascending"
-        }, {
-          "name" : "per_page",
-          "in" : "query",
-          "description" : "Results per page",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "integer",
-            "default" : 50
-          },
-          "example" : 50
+            "description" : "Organization ID",
+            "example" : "O00001In9lBxVjBA"
+          }
         }, {
           "name" : "page",
           "in" : "query",
@@ -119,13 +63,51 @@
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "type" : "integer"
+            "type" : "integer",
+            "example" : 3,
+            "default" : 1
           },
-          "example" : 1
+          "example" : 9
+        }, {
+          "name" : "per_page",
+          "in" : "query",
+          "description" : "Number of rows returned per page.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer",
+            "example" : 40,
+            "default" : 20
+          }
+        }, {
+          "name" : "sort_by",
+          "in" : "query",
+          "description" : "Sort by gallery property.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "default" : "creation_time",
+            "enum" : [ "creation_time", "modification_time", "name", "display_order" ]
+          }
+        }, {
+          "name" : "sort_dir",
+          "in" : "query",
+          "description" : "Sorting result set direction (ascending or descending)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "default" : "asc",
+            "enum" : [ "asc", "desc" ]
+          }
         } ],
         "responses" : {
           "200" : {
-            "description" : "/collections - HTTP 200 OK Response.\n",
+            "description" : "Public Collections and Galleries at the root level",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -134,7 +116,7 @@
               },
               "application/xml" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_1"
+                  "$ref" : "#/components/schemas/inline_response_200"
                 }
               }
             }
@@ -152,6 +134,40 @@
                     "status" : "400",
                     "title" : "Bad Request / Syntax",
                     "detail" : "Bad Request"
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "401 Unauthorized Client Error",
+            "headers" : {
+              "WWW-Authenticate" : {
+                "description" : "The HTTP WWW-Authenticate response header defines the authentication method that should be used to gain access to a resource.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "WWW-Authenticate: Bearer"
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "AcsPermissionException",
+                    "status" : "401",
+                    "title" : "Invalid access to resource: Gallery",
+                    "detail" : "You are not authorized to view this resource."
                   }
                 }
               },
@@ -189,6 +205,29 @@
                     "title" : "Missing or invalid API key",
                     "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
                   }
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 Unsupported Media Type Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ResourceNotFoundException",
+                    "status" : "415",
+                    "title" : "Resource not found",
+                    "detail" : "The requested resource was not found."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
                 }
               }
             }
@@ -233,14 +272,6 @@
   },
   "components" : {
     "schemas" : {
-      "CollectionId" : {
-        "maxLength" : 16,
-        "minLength" : 16,
-        "pattern" : "^C0000[a-zA-Z0-9._]{11}$",
-        "type" : "string",
-        "description" : "The Collection ID",
-        "example" : "C0000EXAMPLECOLL"
-      },
       "Collection" : {
         "required" : [ "attributes", "id", "type" ],
         "type" : "object",
@@ -260,32 +291,29 @@
           }
         }
       },
-      "PaginationMetaTag" : {
+      "Gallery" : {
+        "required" : [ "attributes", "id", "type" ],
         "type" : "object",
         "properties" : {
-          "total" : {
-            "type" : "integer",
-            "example" : 100
-          },
-          "page" : {
-            "type" : "integer",
-            "example" : 1
-          },
-          "first" : {
+          "id" : {
+            "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
             "type" : "string",
-            "example" : "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1"
+            "description" : "Gallery ID",
+            "example" : "G0000EXAMPLE_GAL",
+            "xml" : {
+              "attribute" : true
+            }
           },
-          "last" : {
+          "type" : {
+            "pattern" : "gallery",
             "type" : "string",
-            "example" : "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=5"
+            "example" : "gallery"
           },
-          "next" : {
-            "type" : "string",
-            "example" : "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=2"
+          "attributes" : {
+            "$ref" : "#/components/schemas/Gallery_attributes"
           },
-          "prev" : {
-            "type" : "string",
-            "example" : "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1"
+          "links" : {
+            "$ref" : "#/components/schemas/Gallery_links"
           }
         }
       },
@@ -300,8 +328,17 @@
             "type" : "string",
             "example" : "2019-05-01"
           },
-          "rate_limit" : {
-            "$ref" : "#/components/schemas/MetaTag_rate_limit"
+          "rate_limit_limit" : {
+            "type" : "integer",
+            "example" : 10
+          },
+          "rate_limit_current" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "rate_limit_expires" : {
+            "type" : "integer",
+            "example" : 60
           }
         }
       },
@@ -325,31 +362,22 @@
           "data" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/Collection"
+              "anyOf" : [ {
+                "$ref" : "#/components/schemas/Collection"
+              }, {
+                "$ref" : "#/components/schemas/Gallery"
+              } ]
             }
           },
           "meta" : {
-            "$ref" : "#/components/schemas/PaginationMetaTag"
-          }
-        }
-      },
-      "inline_response_200_1" : {
-        "required" : [ "data" ],
-        "type" : "object",
-        "properties" : {
-          "data" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/Collection"
-            }
-          },
-          "meta" : {
-            "$ref" : "#/components/schemas/MetaTag"
+            "oneOf" : [ {
+              "$ref" : "#/components/schemas/MetaTag"
+            } ]
           }
         }
       },
       "Collection_attributes" : {
-        "required" : [ "access_id", "created_at", "description", "display_order", "is_listed", "modified_at", "name", "name_url", "org_id" ],
+        "required" : [ "access_id", "created_at", "description", "display_order", "is_listed", "key_image_id", "modified_at", "name", "name_url" ],
         "type" : "object",
         "properties" : {
           "name" : {
@@ -357,12 +385,6 @@
             "type" : "string",
             "description" : "Name of the collection",
             "example" : "My Trip to DR"
-          },
-          "org_id" : {
-            "type" : "string",
-            "description" : "ID of the organization that the collection belongs to.",
-            "nullable" : true,
-            "example" : "O0000EXAMPLE_ORG"
           },
           "name_url" : {
             "maxLength" : 100,
@@ -373,7 +395,6 @@
           "description" : {
             "type" : "string",
             "description" : "Description of the colletion",
-            "nullable" : true,
             "example" : "My Trip to DR Collection"
           },
           "display_order" : {
@@ -381,11 +402,16 @@
             "description" : "Display order",
             "example" : 1
           },
+          "key_image_id" : {
+            "pattern" : "^GI000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Key Image ID",
+            "example" : "GI000EXAMPLE_IMG"
+          },
           "access_id" : {
             "pattern" : "^A0000[a-zA-Z0-9._]{11}$",
             "type" : "string",
             "description" : "Access ID",
-            "nullable" : true,
             "example" : "A0000EXAMPLE_ACS"
           },
           "is_listed" : {
@@ -396,31 +422,90 @@
           "created_at" : {
             "type" : "string",
             "description" : "Creation date",
-            "nullable" : true,
             "example" : "2019-04-25T14:54:12.136828"
           },
           "modified_at" : {
             "type" : "string",
             "description" : "Modified Date",
-            "nullable" : true,
             "example" : "2019-04-25T14:54:12.136828"
           }
         }
       },
-      "MetaTag_rate_limit" : {
+      "Gallery_attributes" : {
+        "required" : [ "access_id", "created_at", "description", "display_order", "is_listed", "is_orig_enabled", "is_watermark_disabled", "key_image_id", "modified_at", "name", "name_url" ],
         "type" : "object",
         "properties" : {
-          "limit" : {
-            "type" : "integer",
-            "example" : 10
+          "name" : {
+            "maxLength" : 100,
+            "type" : "string",
+            "description" : "Name of Gallery or Collection object (Whichever it is)",
+            "example" : "My trip to DR"
           },
-          "current" : {
+          "name_url" : {
+            "maxLength" : 100,
+            "type" : "string",
+            "description" : "URL to the gallery",
+            "nullable" : true
+          },
+          "description" : {
+            "maxLength" : 100,
+            "type" : "string",
+            "description" : "Description of the Gallery",
+            "nullable" : true,
+            "example" : "Trip to DR with my brothers and sisters"
+          },
+          "display_order" : {
             "type" : "integer",
+            "description" : "Custom display order",
             "example" : 1
           },
-          "expires" : {
-            "type" : "integer",
-            "example" : 40
+          "key_image_id" : {
+            "pattern" : "^GI000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "ID of the Image that is the key image",
+            "nullable" : true,
+            "example" : "GI000EXAMPLE_IMG"
+          },
+          "access_id" : {
+            "pattern" : "^A0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Access ID of the Gallery",
+            "example" : "A0000EXAMPLE_ACS"
+          },
+          "is_listed" : {
+            "type" : "boolean",
+            "description" : "Flag that denotes if it is listed on the public site",
+            "example" : false
+          },
+          "is_orig_enabled" : {
+            "type" : "boolean",
+            "description" : "Original enabled boolean value",
+            "example" : true
+          },
+          "is_watermark_disabled" : {
+            "type" : "boolean",
+            "description" : "Watermark disabled boolean value",
+            "example" : true
+          },
+          "created_at" : {
+            "type" : "string",
+            "description" : "Creation date",
+            "example" : "2019-04-25T14:54:12.136828"
+          },
+          "modified_at" : {
+            "type" : "string",
+            "description" : "Last modified date",
+            "example" : "2019-04-25T14:54:12.136828"
+          }
+        }
+      },
+      "Gallery_links" : {
+        "type" : "object",
+        "properties" : {
+          "self" : {
+            "type" : "string",
+            "description" : "Link to itself",
+            "example" : "https://api.photoshelter.com/psapi/v4/galleries/G0000ZJCk9LW4Zfc"
           }
         }
       },
