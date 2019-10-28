@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.0.2
 info:
   title: PhotoShelter API v4
   description: '# PhotoShelter API v4 definition'
@@ -19,18 +19,18 @@ paths:
     get:
       tags:
       - Gallery
-      summary: Retrieve the gallery's permissions.
-      description: Retrieve the gallery's permissions.
+      summary: Retrieves the gallery permissions.
+      description: Retrieves the gallery permissions.
       operationId: galleriesGetIdPermission
       parameters:
       - name: gallery_id
         in: path
-        description: gallery_id
         required: true
         style: simple
         explode: false
         schema:
           $ref: '#/components/schemas/schema'
+        example: G0000EXAMPLE_GAL
       responses:
         200:
           description: Permissions for the asset
@@ -47,8 +47,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              examples:
-                errors: {}
+              example:
+                errors:
+                  id: ThisShouldBeARealId
+                  status: "400"
+                  title: Bad Request / Syntax
+                  detail: Bad Request
             application/xml:
               schema:
                 $ref: '#/components/schemas/Error'
@@ -67,8 +71,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              examples:
-                errors: {}
+              example:
+                errors:
+                  id: AcsPermissionException
+                  status: "401"
+                  title: 'Invalid access to resource: Gallery'
+                  detail: You are not authorized to view this resource.
             application/xml:
               schema:
                 $ref: '#/components/schemas/Error'
@@ -78,19 +86,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              examples:
-                errors: {}
+              example:
+                error:
+                  id: ApiKeyInvalidException
+                  status: "403"
+                  title: Missing or invalid API key
+                  detail: |-
+                    Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or
+                    is invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.
+                    If you do not have an API key, you can request one on our website.
             application/xml:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                error:
+                  id: ApiKeyInvalidException
+                  status: "403"
+                  title: Missing or invalid API key
+                  detail: |-
+                    Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or
+                    is invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.
+                    If you do not have an API key, you can request one on our website.
         404:
           description: 404 Not Found Client Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              examples:
-                errors: {}
+              example:
+                errors:
+                  id: ResourceNotFoundException
+                  status: "404"
+                  title: Resource not found
+                  detail: The requested resource was not found.
             application/xml:
               schema:
                 $ref: '#/components/schemas/Error'
@@ -110,8 +138,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-              examples:
-                errors: {}
+              example:
+                errors:
+                  id: TooManyRequestsException
+                  status: "429"
+                  title: Too Many Requests
+                  detail: The user has sent too many requests in a given amount of
+                    time see "rate limiting".
             application/xml:
               schema:
                 $ref: '#/components/schemas/Error'
@@ -160,15 +193,8 @@ components:
         version:
           type: string
           example: 2019-05-01
-        rate_limit_limit:
-          type: integer
-          example: 10
-        rate_limit_current:
-          type: integer
-          example: 1
-        rate_limit_expires:
-          type: integer
-          example: 60
+        rate_limit:
+          $ref: '#/components/schemas/MetaTag_rate_limit'
     Error:
       required:
       - errors
@@ -333,6 +359,18 @@ components:
           example: original
           enum:
           - original
+    MetaTag_rate_limit:
+      type: object
+      properties:
+        limit:
+          type: integer
+          example: 10
+        current:
+          type: integer
+          example: 1
+        expires:
+          type: integer
+          example: 40
     Error_links:
       type: object
       properties:
