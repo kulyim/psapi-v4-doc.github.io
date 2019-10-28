@@ -270,7 +270,7 @@
         "description" : "This object generates errors in compliance with RFC 7807 API Problem"
       },
       "inline_response_200_data_attributes" : {
-        "required" : [ "mode", "native_mode" ],
+        "required" : [ "mode" ],
         "type" : "object",
         "properties" : {
           "native" : {
