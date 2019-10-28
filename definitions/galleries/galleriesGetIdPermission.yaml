@@ -41,7 +41,7 @@ paths:
                 $ref: '#/components/schemas/inline_response_200'
             application/xml:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_200_1'
         400:
           description: 400 Bad Request Error
           content:
@@ -208,6 +208,71 @@ components:
       description: This object generates errors in compliance with RFC 7807 API Problem
     inline_response_200_data_attributes:
       required:
+      - mode
+      - native_mode
+      type: object
+      properties:
+        native:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        inherit:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        contact:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        group:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        password:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        token:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        access_level:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        mode:
+          $ref: '#/components/schemas/Mode'
+        native_mode:
+          $ref: '#/components/schemas/Mode'
+    inline_response_200_data:
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+      properties:
+        id:
+          pattern: ^(G|C)0000[a-zA-Z0-9._]{11}$
+          type: string
+          description: Resource ID
+          example: G0000EXAMPLE_GAL
+        type:
+          pattern: permissions
+          type: string
+          example: permissions
+        attributes:
+          $ref: '#/components/schemas/inline_response_200_data_attributes'
+    inline_response_200:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/inline_response_200_data'
+        meta:
+          $ref: '#/components/schemas/MetaTag'
+    inline_response_200_1_data_attributes:
+      required:
       - Inherit
       - Native
       - mode
@@ -226,7 +291,7 @@ components:
           $ref: '#/components/schemas/Mode'
         native_mode:
           $ref: '#/components/schemas/Mode'
-    inline_response_200_data:
+    inline_response_200_1_data:
       required:
       - attributes
       - id
@@ -243,14 +308,14 @@ components:
           type: string
           example: permissions
         attributes:
-          $ref: '#/components/schemas/inline_response_200_data_attributes'
-    inline_response_200:
+          $ref: '#/components/schemas/inline_response_200_1_data_attributes'
+    inline_response_200_1:
       required:
       - data
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/inline_response_200_data'
+          $ref: '#/components/schemas/inline_response_200_1_data'
         meta:
           $ref: '#/components/schemas/MetaTag'
     Permission_attributes:
