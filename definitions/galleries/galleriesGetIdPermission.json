@@ -269,7 +269,7 @@
         },
         "description" : "This object generates errors in compliance with RFC 7807 API Problem"
       },
-      "inline_response_200_data_Permission" : {
+      "inline_response_200_data_attributes" : {
         "required" : [ "Inherit", "Native", "mode", "native_mode" ],
         "type" : "object",
         "properties" : {
@@ -294,11 +294,22 @@
         }
       },
       "inline_response_200_data" : {
-        "required" : [ "Permission" ],
+        "required" : [ "attributes", "id", "type" ],
         "type" : "object",
         "properties" : {
-          "Permission" : {
-            "$ref" : "#/components/schemas/inline_response_200_data_Permission"
+          "id" : {
+            "pattern" : "^(G|C|I)0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Resource ID",
+            "example" : "G0000EXAMPLE_GAL"
+          },
+          "type" : {
+            "pattern" : "permissions",
+            "type" : "string",
+            "example" : "permissions"
+          },
+          "attributes" : {
+            "$ref" : "#/components/schemas/inline_response_200_data_attributes"
           }
         }
       },
