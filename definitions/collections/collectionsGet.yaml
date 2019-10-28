@@ -27,7 +27,7 @@ paths:
         work, both per_page and page query parameters must be set.
       operationId: collectionsGet
       parameters:
-      - name: collection_id
+      - name: id
         in: query
         description: Collection ID to match in the query
         required: false
@@ -38,7 +38,9 @@ paths:
         example: C0000EXAMPLECOLL
       - name: name
         in: query
-        description: Collection name to match in the query
+        description: Collection name to match in the query. Having this parameter
+          set will always default to an exact name matching unless specified otherwise
+          by the usage of the match parameter
         required: false
         style: form
         explode: true
@@ -58,18 +60,25 @@ paths:
         example: C0000EXAMPLECOLL
       - name: match
         in: query
-        description: Flag denoting partial or complete collection name matching. False
-          for partial, true for complete.
+        description: Flag that denotes whether to perform a partial name match. This
+          parameter will only work if the name query parameter has been set and the
+          only value available for this parameter is false. Setting this parameter
+          to false will perform case insensitive partial name matching.
         required: false
         style: form
         explode: true
         schema:
           type: boolean
           default: false
-        example: true
+          enum:
+          - false
+        example: false
       - name: sort_by
         in: query
-        description: Sort by column
+        description: Sort by an attribute. The available attributes to sort by is
+          creation_time, modification_time, name, and display_order. The default behavior
+          is to sort the collections by the attribute in ascending order. This can
+          be changed with the usage of the 'sort_direction' query parameter.
         required: false
         style: form
         explode: true
@@ -83,7 +92,9 @@ paths:
         example: name
       - name: sort_direction
         in: query
-        description: Sort direction
+        description: Sort direction. This parameter requires the usage of the 'sort_by'
+          query parameter. Setting this parameter to one of the allowed values will
+          set the direction of the sort.
         required: false
         style: form
         explode: true
