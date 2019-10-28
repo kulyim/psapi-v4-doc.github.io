@@ -255,8 +255,6 @@ components:
           $ref: '#/components/schemas/MetaTag'
     Permission_attributes:
       required:
-      - access_level
-      - contact_id
       - download_audio_filetype
       - download_doc_filetype
       - download_image_embed
@@ -265,11 +263,7 @@ components:
       - download_video_filetype
       - download_video_format
       - expires
-      - group_id
       - max_downloads
-      - password
-      - permission_type
-      - token
       type: object
       properties:
         expires:
