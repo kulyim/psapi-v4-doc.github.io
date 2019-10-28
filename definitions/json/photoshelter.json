@@ -39,7 +39,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "Permissions for the asset",
+            "description" : "Gets lists of all native and inherited gallery permissions",
             "content" : {
               "application/json" : {
                 "schema" : {
