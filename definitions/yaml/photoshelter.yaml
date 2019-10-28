@@ -209,7 +209,6 @@ components:
     inline_response_200_data_attributes:
       required:
       - mode
-      - native_mode
       type: object
       properties:
         native:
