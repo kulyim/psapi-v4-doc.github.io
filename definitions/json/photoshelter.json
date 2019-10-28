@@ -34,7 +34,8 @@
           "explode" : false,
           "schema" : {
             "$ref" : "#/components/schemas/schema"
-          }
+          },
+          "example" : "G0000EXAMPLE_GAL"
         } ],
         "responses" : {
           "200" : {
