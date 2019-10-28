@@ -20,7 +20,11 @@ paths:
       tags:
       - Gallery
       summary: Retrieves the gallery permissions.
-      description: Retrieves the gallery permissions.
+      description: |-
+        Retrieves the gallery permissions.
+
+        When authenticated, retrieves all the native and inherited access rights along with their credentials.
+        When not authenticated, retrieves all the access rights without their associated credentials.
       operationId: galleriesGetIdPermission
       parameters:
       - name: gallery_id
