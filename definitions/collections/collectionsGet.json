@@ -20,17 +20,17 @@
     "description" : "PhotoShelter Auto Mocking API"
   } ],
   "tags" : [ {
-    "name" : "Gallery"
+    "name" : "PhotoShelter API"
   } ],
   "paths" : {
     "/collections" : {
       "get" : {
         "tags" : [ "Collection" ],
         "summary" : "GET /collections.",
-        "description" : "Query the collections",
+        "description" : "Search the collections. This endpoint requires the user to be authenticated. It will return a list of collections owned by the user. For pagination to work, both per_page and page query parameters must be set.",
         "operationId" : "collectionsGet",
         "parameters" : [ {
-          "name" : "collection_id",
+          "name" : "id",
           "in" : "query",
           "description" : "Collection ID to match in the query",
           "required" : false,
@@ -43,7 +43,7 @@
         }, {
           "name" : "name",
           "in" : "query",
-          "description" : "Collection name to match in the query",
+          "description" : "Collection name to match in the query. Having this parameter set will always default to an exact name matching unless specified otherwise by the usage of the match parameter",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -66,15 +66,40 @@
         }, {
           "name" : "match",
           "in" : "query",
-          "description" : "Flag denoting partial or complete collection name matching. False for partial, true for complete.",
+          "description" : "Flag that denotes whether to perform a partial name match. This parameter will only work if the name query parameter has been set and the only value available for this parameter is false. Setting this parameter to false will perform case insensitive partial name matching.",
           "required" : false,
           "style" : "form",
           "explode" : true,
           "schema" : {
-            "default": false,
-            "type" : "boolean"
+            "type" : "boolean",
+            "default" : false,
+            "enum" : [ false ]
           },
-          "example" : true
+          "example" : false
+        }, {
+          "name" : "sort_by",
+          "in" : "query",
+          "description" : "Sort by an attribute. The available attributes to sort by is creation_time, modification_time, name, and display_order. The default behavior is to sort the collections by the attribute in ascending order. This can be changed with the usage of the 'sort_direction' query parameter.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "creation_time", "modification_time", "name", "display_order" ]
+          },
+          "example" : "name"
+        }, {
+          "name" : "sort_direction",
+          "in" : "query",
+          "description" : "Sort direction. This parameter requires the usage of the 'sort_by' query parameter. Setting this parameter to one of the allowed values will set the direction of the sort.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "ascending", "descending" ]
+          },
+          "example" : "ascending"
         }, {
           "name" : "per_page",
           "in" : "query",
@@ -146,7 +171,7 @@
                   "$ref" : "#/components/schemas/Error"
                 },
                 "example" : {
-                  "errors" : {
+                  "error" : {
                     "id" : "ApiKeyInvalidException",
                     "status" : "403",
                     "title" : "Missing or invalid API key",
@@ -157,6 +182,14 @@
               "application/xml" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
                 }
               }
             }
@@ -220,9 +253,8 @@
             "example" : "C0000EXAMPLECOLL"
           },
           "type" : {
-            "pattern" : "collection",
             "type" : "string",
-            "example" : "collection"
+            "description" : "Type"
           },
           "attributes" : {
             "$ref" : "#/components/schemas/Collection_attributes"
@@ -269,17 +301,8 @@
             "type" : "string",
             "example" : "2019-05-01"
           },
-          "rate_limit_limit" : {
-            "type" : "integer",
-            "example" : 10
-          },
-          "rate_limit_current" : {
-            "type" : "integer",
-            "example" : 1
-          },
-          "rate_limit_expires" : {
-            "type" : "integer",
-            "example" : 60
+          "rate_limit" : {
+            "$ref" : "#/components/schemas/MetaTag_rate_limit"
           }
         }
       },
@@ -327,7 +350,7 @@
         }
       },
       "Collection_attributes" : {
-        "required" : [ "access_id", "created_at", "description", "display_order", "is_listed", "key_image_id", "modified_at", "name", "name_url" ],
+        "required" : [ "access_id", "created_at", "description", "display_order", "is_listed", "modified_at", "name", "name_url", "org_id" ],
         "type" : "object",
         "properties" : {
           "name" : {
@@ -335,6 +358,12 @@
             "type" : "string",
             "description" : "Name of the collection",
             "example" : "My Trip to DR"
+          },
+          "org_id" : {
+            "type" : "string",
+            "description" : "ID of the organization that the collection belongs to.",
+            "nullable" : true,
+            "example" : "O0000EXAMPLE_ORG"
           },
           "name_url" : {
             "maxLength" : 100,
@@ -345,6 +374,7 @@
           "description" : {
             "type" : "string",
             "description" : "Description of the colletion",
+            "nullable" : true,
             "example" : "My Trip to DR Collection"
           },
           "display_order" : {
@@ -352,16 +382,11 @@
             "description" : "Display order",
             "example" : 1
           },
-          "key_image_id" : {
-            "pattern" : "^GI000[a-zA-Z0-9._]{11}$",
-            "type" : "string",
-            "description" : "Key Image ID",
-            "example" : "GI000EXAMPLE_IMG"
-          },
           "access_id" : {
             "pattern" : "^A0000[a-zA-Z0-9._]{11}$",
             "type" : "string",
             "description" : "Access ID",
+            "nullable" : true,
             "example" : "A0000EXAMPLE_ACS"
           },
           "is_listed" : {
@@ -372,12 +397,31 @@
           "created_at" : {
             "type" : "string",
             "description" : "Creation date",
+            "nullable" : true,
             "example" : "2019-04-25T14:54:12.136828"
           },
           "modified_at" : {
             "type" : "string",
             "description" : "Modified Date",
+            "nullable" : true,
             "example" : "2019-04-25T14:54:12.136828"
+          }
+        }
+      },
+      "MetaTag_rate_limit" : {
+        "type" : "object",
+        "properties" : {
+          "limit" : {
+            "type" : "integer",
+            "example" : 10
+          },
+          "current" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "expires" : {
+            "type" : "integer",
+            "example" : 40
           }
         }
       },

@@ -17,116 +17,29 @@ servers:
 tags:
 - name: PhotoShelter API
 paths:
-  /collections:
+  /collections/{collection_id}:
     get:
       tags:
       - Collection
-      summary: GET /collections.
-      description: Search the collections. This endpoint requires the user to be authenticated.
-        It will return a list of collections owned by the user. For pagination to
-        work, both per_page and page query parameters must be set.
-      operationId: collectionsGet
+      summary: GET /collections/{collection_id}.
+      description: 'Get a collection by ID. This endpoint is available to both public
+        and authenticated users. Certain fields are only returned a non-null value
+        if the users is authenticated and has permissions. The format of the collection
+        id is defined by the regex : ^C0000[a-zA-Z0-9._]{11}$ (For example: ''COOOOEXAMPLECOLL'').'
+      operationId: collectionsGetId
       parameters:
-      - name: id
-        in: query
-        description: Collection ID to match in the query
-        required: false
-        style: form
-        explode: true
+      - name: collection_id
+        in: path
+        description: Collection ID to get
+        required: true
+        style: simple
+        explode: false
         schema:
           $ref: '#/components/schemas/CollectionId'
         example: C0000EXAMPLECOLL
-      - name: name
-        in: query
-        description: Collection name to match in the query. Having this parameter
-          set will always default to an exact name matching unless specified otherwise
-          by the usage of the match parameter
-        required: false
-        style: form
-        explode: true
-        schema:
-          maxLength: 100
-          type: string
-        example: EXAMPLE NAME
-      - name: parent
-        in: query
-        description: Limit collections to children of the provided collection ID.
-          Pass blank to find collections with no parent.
-        required: false
-        style: form
-        explode: true
-        schema:
-          $ref: '#/components/schemas/CollectionId'
-        example: C0000EXAMPLECOLL
-      - name: match
-        in: query
-        description: Flag that denotes whether to perform a partial name match. This
-          parameter will only work if the name query parameter has been set and the
-          only value available for this parameter is false. Setting this parameter
-          to false will perform case insensitive partial name matching.
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: boolean
-          default: false
-          enum:
-          - false
-        example: false
-      - name: sort_by
-        in: query
-        description: Sort by an attribute. The available attributes to sort by is
-          creation_time, modification_time, name, and display_order. The default behavior
-          is to sort the collections by the attribute in ascending order. This can
-          be changed with the usage of the 'sort_direction' query parameter.
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          enum:
-          - creation_time
-          - modification_time
-          - name
-          - display_order
-        example: name
-      - name: sort_direction
-        in: query
-        description: Sort direction. This parameter requires the usage of the 'sort_by'
-          query parameter. Setting this parameter to one of the allowed values will
-          set the direction of the sort.
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          enum:
-          - ascending
-          - descending
-        example: ascending
-      - name: per_page
-        in: query
-        description: Results per page
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-          default: 50
-        example: 50
-      - name: page
-        in: query
-        description: Page number
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-        example: 1
       responses:
         200:
-          description: |
-            /collections - HTTP 200 OK Response.
+          description: /collections/{collection_id} - HTTP 200 OK Response.
           content:
             application/json:
               schema:
@@ -176,6 +89,21 @@ paths:
                     Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or
                     is invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.
                     If you do not have an API key, you can request one on our website.
+        404:
+          description: 404 Not Found Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                errors:
+                  id: ResourceNotFoundException
+                  status: "404"
+                  title: Resource not found
+                  detail: The requested resource was not found.
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
         429:
           description: 429 Too Many Requests Error
           headers:
@@ -228,27 +156,6 @@ components:
           description: Type
         attributes:
           $ref: '#/components/schemas/Collection_attributes'
-    PaginationMetaTag:
-      type: object
-      properties:
-        total:
-          type: integer
-          example: 100
-        page:
-          type: integer
-          example: 1
-        first:
-          type: string
-          example: example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1
-        last:
-          type: string
-          example: example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=5
-        next:
-          type: string
-          example: example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=2
-        prev:
-          type: string
-          example: example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1
     MetaTag:
       type: object
       properties:
@@ -276,20 +183,19 @@ components:
       type: object
       properties:
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Collection'
+          $ref: '#/components/schemas/Collection'
         meta:
-          $ref: '#/components/schemas/PaginationMetaTag'
+          $ref: '#/components/schemas/MetaTag'
+      example: '{"data":{"type":"collection","id":"C0000EXAMPLECOLL","attributes":{"name":"Example
+        Name","description":"Example Description","display_order":1,"access_id":"A0000EXAMPLE_ACS","is_listed":true,"created_at":"2019-04-09T18:34:40-04:00","modified_at":"2019-04-09T18:34:40-04:00"},"links":{"self":"example.photoshelter.com/collections/C0000EXAMPLECOLL"}},"meta":{"copyright":"PhotoShelter
+        2019","version":"2019-05-01","rate_limit":{"limit":10,"current":1,"expires":40}}}'
     inline_response_200_1:
       required:
       - data
       type: object
       properties:
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Collection'
+          $ref: '#/components/schemas/Collection'
         meta:
           $ref: '#/components/schemas/MetaTag'
     Collection_attributes:

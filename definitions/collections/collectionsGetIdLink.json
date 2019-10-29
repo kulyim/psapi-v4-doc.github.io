@@ -1,5 +1,5 @@
 {
-  "openapi" : "3.0.2",
+  "openapi" : "3.0.0",
   "info" : {
     "title" : "PhotoShelter API v4",
     "description" : "# PhotoShelter API v4 definition",
@@ -13,108 +13,41 @@
       "name" : "PhotoShelter License",
       "url" : "https://www.photoshelter.com/support/license"
     },
-    "version" : "Chung"
+    "version" : "Allan"
   },
   "servers" : [ {
     "url" : "https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4",
     "description" : "PhotoShelter Auto Mocking API"
   } ],
+  "tags" : [ {
+    "name" : "PhotoShelter API"
+  } ],
   "paths" : {
-    "/media/{media_id}/download" : {
+    "/collections/{collection_id}/link" : {
       "get" : {
-        "tags" : [ "Media" ],
-        "summary" : "Get the media with the associated ID.",
-        "description" : "Get the media with the associated ID.",
-        "operationId" : "mediaDownloadGetId",
+        "tags" : [ "Collection" ],
+        "summary" : "GET /collections/{collection_id}/link.",
+        "description" : "Get a collection's link. This endpoint will generate a link to the user's collection with the name and id of the collection in the link. In the example, the {name} will be replaced with the collection's name.",
+        "operationId" : "collectionsGetIdLink",
         "parameters" : [ {
-          "name" : "media_id",
+          "name" : "collection_id",
           "in" : "path",
-          "description" : "Media ID",
+          "description" : "Collection ID to retrieve a link from",
           "required" : true,
           "style" : "simple",
           "explode" : false,
           "schema" : {
-            "$ref" : "#/components/schemas/schema"
-          }
-        }, {
-          "name" : "gallery_id",
-          "in" : "query",
-          "description" : "Gallery ID",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "$ref" : "#/components/schemas/schema_2"
-          }
-        }, {
-          "name" : "collection_id",
-          "in" : "query",
-          "description" : "Collection ID",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "$ref" : "#/components/schemas/schema_2"
-          }
-        }, {
-          "name" : "password",
-          "in" : "query",
-          "description" : "Password",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "$ref" : "#/components/schemas/schema_2"
-          }
-        }, {
-          "name" : "token",
-          "in" : "query",
-          "description" : "Access Token",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "$ref" : "#/components/schemas/schema_2"
-          }
-        }, {
-          "name" : "download_filetype",
-          "in" : "query",
-          "description" : "Download Filetype",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "$ref" : "#/components/schemas/schema_2"
-          }
-        }, {
-          "name" : "download_quality",
-          "in" : "query",
-          "description" : "Download Quality",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "$ref" : "#/components/schemas/schema_2"
-          }
-        }, {
-          "name" : "download_image_embed",
-          "in" : "query",
-          "description" : "Download Image Embed Metadata",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "$ref" : "#/components/schemas/schema_2"
-          }
+            "$ref" : "#/components/schemas/CollectionId"
+          },
+          "example" : "C0000EXAMPLECOLL"
         } ],
         "responses" : {
           "200" : {
-            "description" : "Download - HTTP OK",
+            "description" : "Custom Link Response - HTTP 200 OK",
             "content" : {
-              "application/octet-stream" : {
+              "application/json" : {
                 "schema" : {
-                  "type" : "string",
-                  "format" : "binary"
+                  "$ref" : "#/components/schemas/inline_response_200"
                 }
               }
             }
@@ -132,40 +65,6 @@
                     "status" : "400",
                     "title" : "Bad Request / Syntax",
                     "detail" : "Bad Request"
-                  }
-                }
-              },
-              "application/xml" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401" : {
-            "description" : "401 Unauthorized Client Error",
-            "headers" : {
-              "WWW-Authenticate" : {
-                "description" : "The HTTP WWW-Authenticate response header defines the authentication method that should be used to gain access to a resource.",
-                "style" : "simple",
-                "explode" : false,
-                "schema" : {
-                  "type" : "string"
-                },
-                "example" : "WWW-Authenticate: Bearer"
-              }
-            },
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Error"
-                },
-                "example" : {
-                  "errors" : {
-                    "id" : "AcsPermissionException",
-                    "status" : "401",
-                    "title" : "Invalid access to resource: Gallery",
-                    "detail" : "You are not authorized to view this resource."
                   }
                 }
               },
@@ -270,23 +169,29 @@
   },
   "components" : {
     "schemas" : {
-      "schema" : {
-        "title" : "Media ID",
+      "CollectionId" : {
         "maxLength" : 16,
         "minLength" : 16,
-        "pattern" : "^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$",
+        "pattern" : "^C0000[a-zA-Z0-9._]{11}$",
         "type" : "string",
-        "description" : "Media ID",
-        "example" : "I0000zCtew4UPbBw"
+        "description" : "The Collection ID",
+        "example" : "C0000EXAMPLECOLL"
       },
-      "schema_2" : {
-        "title" : "My Gallery Test",
-        "maxLength" : 16,
-        "minLength" : 16,
-        "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
-        "type" : "string",
-        "description" : "My gallery description",
-        "example" : "G0000c1x4UMGPvkY"
+      "MetaTag" : {
+        "type" : "object",
+        "properties" : {
+          "copyright" : {
+            "type" : "string",
+            "example" : "PhotoShelter 2019"
+          },
+          "version" : {
+            "type" : "string",
+            "example" : "2019-05-01"
+          },
+          "rate_limit" : {
+            "$ref" : "#/components/schemas/MetaTag_rate_limit"
+          }
+        }
       },
       "Error" : {
         "required" : [ "errors" ],
@@ -300,6 +205,60 @@
           }
         },
         "description" : "This object generates errors in compliance with RFC 7807 API Problem"
+      },
+      "inline_response_200_data_attributes" : {
+        "type" : "object",
+        "properties" : {
+          "url" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_200_data" : {
+        "required" : [ "attributes", "id", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "$ref" : "#/components/schemas/CollectionId"
+          },
+          "type" : {
+            "type" : "string",
+            "example" : "link"
+          },
+          "attributes" : {
+            "$ref" : "#/components/schemas/inline_response_200_data_attributes"
+          }
+        }
+      },
+      "inline_response_200" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "$ref" : "#/components/schemas/inline_response_200_data"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/MetaTag"
+          }
+        },
+        "example" : "{\"data\":{\"id\":\"C0000EXAMPLECOLL\",\"type\":\"url\",\"attributes\":{\"url\":\"https://example.photoshelter.com/gallery-collection/{name}/C0000EXAMPLECOLL\"}},\"meta\":{\"copyright\":\"PhotoShelter 2019\",\"version\":\"2019-05-01\",\"rate_limit\":{\"limit\":10,\"current\":1,\"expires\":40}}}"
+      },
+      "MetaTag_rate_limit" : {
+        "type" : "object",
+        "properties" : {
+          "limit" : {
+            "type" : "integer",
+            "example" : 10
+          },
+          "current" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "expires" : {
+            "type" : "integer",
+            "example" : 40
+          }
+        }
       },
       "Error_links" : {
         "type" : "object",
