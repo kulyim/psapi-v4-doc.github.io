@@ -37,6 +37,17 @@
             "$ref" : "#/components/schemas/schema"
           },
           "example" : "G0000EXAMPLE_GAL"
+        }, {
+          "name" : "collection_id",
+          "in" : "query",
+          "description" : "Collection ID",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema_2"
+          },
+          "example" : "C0000EXAMPLE_CLC"
         } ],
         "responses" : {
           "200" : {
@@ -213,6 +224,15 @@
         "type" : "string",
         "description" : "My gallery description",
         "example" : "G0000c1x4UMGPvkY"
+      },
+      "schema_2" : {
+        "title" : "My Collection Test",
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^C0000[a-zA-Z0-9._]{11}$",
+        "type" : "string",
+        "description" : "My collection description",
+        "example" : "C0000c1x4UMGPvkY"
       },
       "Permission" : {
         "required" : [ "attributes", "id", "type" ],
