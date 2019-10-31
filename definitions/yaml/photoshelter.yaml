@@ -122,10 +122,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ArrayOfGalleries'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/ArrayOfGalleries'
+                $ref: '#/components/schemas/'
         400:
           description: 400 Bad Request Error
           content:
@@ -237,11 +234,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ArrayOfGalleries:
-      type: array
-      items:
-        allOf:
-        - $ref: '#/components/schemas/Gallery'
     Error:
       required:
       - errors
