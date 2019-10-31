@@ -136,7 +136,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ArrayOfGalleries"
+                  "$ref" : "#/components/schemas/"
                 }
               },
               "application/xml" : {
