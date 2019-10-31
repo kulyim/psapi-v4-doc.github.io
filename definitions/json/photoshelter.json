@@ -141,7 +141,7 @@
               },
               "application/xml" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/"
+                  "$ref" : "#/components/schemas/ArrayOfGalleries"
                 }
               }
             }
