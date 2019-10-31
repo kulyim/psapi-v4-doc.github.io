@@ -136,12 +136,12 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/"
+                  "$ref" : "#/components/schemas/ArrayOfGalleries"
                 }
               },
               "application/xml" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ArrayOfGalleries"
+                  "$ref" : "#/components/schemas/"
                 }
               }
             }
