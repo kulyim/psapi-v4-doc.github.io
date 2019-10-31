@@ -125,7 +125,7 @@ paths:
                 $ref: '#/components/schemas/ArrayOfGalleries'
             application/xml:
               schema:
-                $ref: '#/components/schemas/'
+                $ref: '#/components/schemas/ArrayOfGalleries'
         400:
           description: 400 Bad Request Error
           content:
