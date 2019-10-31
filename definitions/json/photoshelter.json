@@ -136,12 +136,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ArrayOfGalleries"
-                }
-              },
-              "application/xml" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ArrayOfGalleries"
+                  "$ref" : "#/components/schemas/"
                 }
               }
             }
@@ -297,14 +292,6 @@
   },
   "components" : {
     "schemas" : {
-      "ArrayOfGalleries" : {
-        "type" : "array",
-        "items" : {
-          "allOf" : [ {
-            "$ref" : "#/components/schemas/Gallery"
-          } ]
-        }
-      },
       "Error" : {
         "required" : [ "errors" ],
         "type" : "object",
