@@ -8,7 +8,7 @@ info:
     url: https://support.photoshelter.com
     email: api-support@photoshelter.com
   license:
-    name: PhotoShelter License
+    name: PhotoShelter Licenses
     url: https://www.photoshelter.com/support/license
   version: Anthony
 servers:
