@@ -1,0 +1,250 @@
+openapi: 3.0.0
+info:
+  title: PhotoShelter API v4
+  description: '# PhotoShelter API v4 definition'
+  termsOfService: https://www.photoshelter.com/support/terms/
+  contact:
+    name: PhotoShelter API Support Team
+    url: https://support.photoshelter.com
+    email: api-support@photoshelter.com
+  license:
+    name: PhotoShelter License
+    url: https://www.photoshelter.com/support/license
+  version: Allan
+servers:
+- url: https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4
+  description: PhotoShelter Auto Mocking API
+tags:
+- name: PhotoShelter API
+paths:
+  /collections/{collection_id}/link:
+    get:
+      tags:
+      - Collection
+      summary: GET /collections/{collection_id}/link.
+      description: Get a collection's link. This endpoint requires authentication.
+        It will generate a link to the user's collection with the name and id of the
+        collection in the link. In the example, the {name} will be replaced with the
+        collection's name.
+      operationId: collectionsGetIdLink
+      parameters:
+      - name: collection_id
+        in: path
+        description: Collection ID to retrieve a link from
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/CollectionId'
+        example: C0000EXAMPLECOLL
+      responses:
+        200:
+          description: Custom Link Response - HTTP 200 OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        401:
+          description: 401 Unauthorized Client Error
+          headers:
+            WWW-Authenticate:
+              description: The HTTP WWW-Authenticate response header defines the authentication
+                method that should be used to gain access to a resource.
+              style: simple
+              explode: false
+              schema:
+                type: string
+              example: 'WWW-Authenticate: Bearer'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                errors:
+                  id: AcsPermissionException
+                  status: "401"
+                  title: 'Invalid access to resource: Gallery'
+                  detail: You are not authorized to view this resource.
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        400:
+          description: 400 Bad Request Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                errors:
+                  id: ThisShouldBeARealId
+                  status: "400"
+                  title: Bad Request / Syntax
+                  detail: Bad Request
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        403:
+          description: 403 Forbidden Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error:
+                  id: ApiKeyInvalidException
+                  status: "403"
+                  title: Missing or invalid API key
+                  detail: |-
+                    Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or
+                    is invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.
+                    If you do not have an API key, you can request one on our website.
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error:
+                  id: ApiKeyInvalidException
+                  status: "403"
+                  title: Missing or invalid API key
+                  detail: |-
+                    Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or
+                    is invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.
+                    If you do not have an API key, you can request one on our website.
+        404:
+          description: 404 Not Found Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                errors:
+                  id: ResourceNotFoundException
+                  status: "404"
+                  title: Resource not found
+                  detail: The requested resource was not found.
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+        429:
+          description: 429 Too Many Requests Error
+          headers:
+            Retry-After:
+              description: The Retry-After response HTTP header, expressed in seconds,
+                indicates how long the user agent should wait before making a follow-up
+                request.
+              style: simple
+              explode: false
+              schema:
+                type: integer
+              example: 180
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                errors:
+                  id: TooManyRequestsException
+                  status: "429"
+                  title: Too Many Requests
+                  detail: The user has sent too many requests in a given amount of
+                    time see "rate limiting".
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    CollectionId:
+      maxLength: 16
+      minLength: 16
+      pattern: ^C0000[a-zA-Z0-9._]{11}$
+      type: string
+      description: The Collection ID
+      example: C0000EXAMPLECOLL
+    MetaTag:
+      type: object
+      properties:
+        copyright:
+          type: string
+          example: PhotoShelter 2019
+        version:
+          type: string
+          example: 2019-05-01
+        rate_limit:
+          $ref: '#/components/schemas/MetaTag_rate_limit'
+    Error:
+      required:
+      - errors
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error_errors'
+      description: This object generates errors in compliance with RFC 7807 API Problem
+    inline_response_200_data_attributes:
+      type: object
+      properties:
+        url:
+          type: string
+    inline_response_200_data:
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/CollectionId'
+        type:
+          type: string
+          example: link
+        attributes:
+          $ref: '#/components/schemas/inline_response_200_data_attributes'
+    inline_response_200:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/inline_response_200_data'
+        meta:
+          $ref: '#/components/schemas/MetaTag'
+      example: '{"data":{"id":"C0000EXAMPLECOLL","type":"url","attributes":{"url":"https://example.photoshelter.com/gallery-collection/{name}/C0000EXAMPLECOLL"}},"meta":{"copyright":"PhotoShelter
+        2019","version":"2019-05-01","rate_limit":{"limit":10,"current":1,"expires":40}}}'
+    MetaTag_rate_limit:
+      type: object
+      properties:
+        limit:
+          type: integer
+          example: 10
+        current:
+          type: integer
+          example: 1
+        expires:
+          type: integer
+          example: 40
+    Error_links:
+      type: object
+      properties:
+        about:
+          type: string
+          example: http://api.developer.com/404.html
+    Error_errors:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique identifier for this occurrence of the problem
+        links:
+          $ref: '#/components/schemas/Error_links'
+        title:
+          type: string
+          description: A short, human-readable summary of the problem type
+        status:
+          type: string
+          description: The HTTP status code set by the origin server for this occurrence
+            of the problem.
+        detail:
+          type: string
+          description: An human readable explanation specific to this occurrence of
+            the problem.
