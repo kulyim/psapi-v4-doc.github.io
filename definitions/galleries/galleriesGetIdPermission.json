@@ -10,129 +10,37 @@
       "email" : "api-support@photoshelter.com"
     },
     "license" : {
-      "name" : "PhotoShelter Licenses",
+      "name" : "PhotoShelter License",
       "url" : "https://www.photoshelter.com/support/license"
     },
-    "version" : "Anthony"
+    "version" : "Chung"
   },
   "servers" : [ {
-    "url" : "https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/anthony",
+    "url" : "https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4",
     "description" : "PhotoShelter Auto Mocking API"
   } ],
-  "security" : [ {
-    "https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/Final#/components/securitySchemes/PSApiKeyHeader" : [ ]
-  }, {
-    "https://api.swaggerhub.com/domains/PhotoShelter/PhotoShelter-Domain/Final#/security/PSApiKeyHeader" : [ ]
-  } ],
-  "tags" : [ {
-    "name" : "PhotoShelter"
-  } ],
   "paths" : {
-    "/galleries" : {
+    "/galleries/{gallery_id}/permission" : {
       "get" : {
         "tags" : [ "Gallery" ],
-        "summary" : "Gets all the galleries for the account.",
-        "description" : "Gets all the galleries for the account!",
-        "operationId" : "galleriesGet",
+        "summary" : "Retrieves the gallery permissions.",
+        "description" : "Retrieves the gallery permissions.\n\nWhen authenticated, retrieves all the native and inherited access rights along with their credentials.\nWhen not authenticated, retrieves all the access rights without their associated credentials.",
+        "operationId" : "galleriesGetIdPermission",
         "parameters" : [ {
-          "name" : "page",
-          "in" : "query",
-          "description" : "Page number",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
+          "name" : "gallery_id",
+          "in" : "path",
+          "description" : "Gallery ID",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
           "schema" : {
-            "type" : "integer",
-            "example" : 3,
-            "default" : 1
+            "$ref" : "#/components/schemas/schema"
           },
-          "example" : 9
-        }, {
-          "name" : "per_page",
-          "in" : "query",
-          "description" : "Number of rows returned per page.",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "integer",
-            "example" : 40,
-            "default" : 20
-          }
-        }, {
-          "name" : "sort_by",
-          "in" : "query",
-          "description" : "Sort by gallery property.",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string",
-            "default" : "creation_time",
-            "enum" : [ "creation_time", "modification_time", "name", "display_order" ]
-          }
-        }, {
-          "name" : "sort_dir",
-          "in" : "query",
-          "description" : "Sorting result set direction (ascending or descending)",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string",
-            "default" : "asc",
-            "enum" : [ "asc", "desc" ]
-          }
-        }, {
-          "name" : "name",
-          "in" : "query",
-          "description" : "Full or partial gallery name",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string",
-            "description" : "Search galleries by partial name"
-          }
-        }, {
-          "name" : "parent",
-          "in" : "query",
-          "description" : "Limit galleries to children of the provided collection ID. Pass\nblank to find galleries with no parent.",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "pattern" : "^C0000[a-zA-Z0-9._]{11}$",
-            "type" : "string",
-            "description" : "Collection ID",
-            "example" : "C0000LYrqIr59eJI"
-          }
-        }, {
-          "name" : "portfolio",
-          "in" : "query",
-          "description" : "Filter the result set to return galleries listed on public site",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "boolean",
-            "default" : false
-          }
-        }, {
-          "name" : "recently_updated",
-          "in" : "query",
-          "description" : "Filter the result set to return galleries recently updated",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "boolean",
-            "default" : false
-          }
+          "example" : "G0000EXAMPLE_GAL"
         } ],
         "responses" : {
           "200" : {
-            "description" : "/galleries - HTTP 200 OK Response.\n",
+            "description" : "Gets lists of all native and inherited gallery permissions",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -234,8 +142,8 @@
               }
             }
           },
-          "415" : {
-            "description" : "415 Unsupported Media Type Error",
+          "404" : {
+            "description" : "404 Not Found Client Error",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -244,9 +152,9 @@
                 "example" : {
                   "errors" : {
                     "id" : "ResourceNotFoundException",
-                    "status" : "415",
-                    "title" : "Unsupported media type",
-                    "detail" : "The origin server is refusing to service the request because the payload is in a format not supported by this method on the target resource."
+                    "status" : "404",
+                    "title" : "Resource not found",
+                    "detail" : "The requested resource was not found."
                   }
                 }
               },
@@ -297,31 +205,40 @@
   },
   "components" : {
     "schemas" : {
-      "Gallery" : {
+      "schema" : {
+        "title" : "My Gallery Test",
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
+        "type" : "string",
+        "description" : "My gallery description",
+        "example" : "G0000c1x4UMGPvkY"
+      },
+      "Permission" : {
         "required" : [ "attributes", "id", "type" ],
         "type" : "object",
         "properties" : {
           "id" : {
-            "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
+            "pattern" : "^AR000[a-zA-Z0-9._]{11}$",
             "type" : "string",
-            "description" : "Gallery ID",
-            "example" : "G0000EXAMPLE_GAL",
-            "xml" : {
-              "attribute" : true
-            }
+            "description" : "Permission ID",
+            "example" : "AR000EXAMPLE_PMS"
           },
           "type" : {
-            "pattern" : "gallery",
+            "pattern" : "permission",
             "type" : "string",
-            "example" : "gallery"
+            "example" : "permission"
           },
           "attributes" : {
-            "$ref" : "#/components/schemas/Gallery_attributes"
-          },
-          "links" : {
-            "$ref" : "#/components/schemas/Gallery_links"
+            "$ref" : "#/components/schemas/Permission_attributes"
           }
         }
+      },
+      "Mode" : {
+        "type" : "string",
+        "description" : "Mode",
+        "example" : "everyone",
+        "enum" : [ "permission", "private", "everyone" ]
       },
       "MetaTag" : {
         "type" : "object",
@@ -339,14 +256,6 @@
           }
         }
       },
-      "PaginationMetaTag" : {
-        "type" : "object",
-        "properties" : {
-          "paging" : {
-            "$ref" : "#/components/schemas/PaginationMetaTag_paging"
-          }
-        }
-      },
       "Error" : {
         "required" : [ "errors" ],
         "type" : "object",
@@ -360,18 +269,133 @@
         },
         "description" : "This object generates errors in compliance with RFC 7807 API Problem"
       },
+      "inline_response_200_data_attributes" : {
+        "required" : [ "mode" ],
+        "type" : "object",
+        "properties" : {
+          "native" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Permission"
+            }
+          },
+          "inherit" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Permission"
+            }
+          },
+          "contact" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Permission"
+            }
+          },
+          "group" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Permission"
+            }
+          },
+          "password" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Permission"
+            }
+          },
+          "token" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Permission"
+            }
+          },
+          "access_level" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Permission"
+            }
+          },
+          "mode" : {
+            "$ref" : "#/components/schemas/Mode"
+          },
+          "native_mode" : {
+            "$ref" : "#/components/schemas/Mode"
+          }
+        }
+      },
+      "inline_response_200_data" : {
+        "required" : [ "attributes", "id", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "pattern" : "^(G|C)0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Resource ID",
+            "example" : "G0000EXAMPLE_GAL"
+          },
+          "type" : {
+            "pattern" : "permissions",
+            "type" : "string",
+            "example" : "permissions"
+          },
+          "attributes" : {
+            "$ref" : "#/components/schemas/inline_response_200_data_attributes"
+          }
+        }
+      },
       "inline_response_200" : {
         "required" : [ "data" ],
         "type" : "object",
         "properties" : {
           "data" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/Gallery"
-            }
+            "$ref" : "#/components/schemas/inline_response_200_data"
           },
           "meta" : {
             "$ref" : "#/components/schemas/MetaTag"
+          }
+        }
+      },
+      "inline_response_200_1_data_attributes" : {
+        "required" : [ "Inherit", "Native", "mode", "native_mode" ],
+        "type" : "object",
+        "properties" : {
+          "Native" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Permission"
+            }
+          },
+          "Inherit" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Permission"
+            }
+          },
+          "mode" : {
+            "$ref" : "#/components/schemas/Mode"
+          },
+          "native_mode" : {
+            "$ref" : "#/components/schemas/Mode"
+          }
+        }
+      },
+      "inline_response_200_1_data" : {
+        "required" : [ "attributes", "id", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "pattern" : "^(G|C|I)0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Resource ID",
+            "example" : "G0000EXAMPLE_GAL"
+          },
+          "type" : {
+            "pattern" : "permissions",
+            "type" : "string",
+            "example" : "permissions"
+          },
+          "attributes" : {
+            "$ref" : "#/components/schemas/inline_response_200_1_data_attributes"
           }
         }
       },
@@ -380,91 +404,116 @@
         "type" : "object",
         "properties" : {
           "data" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/Gallery"
-            }
+            "$ref" : "#/components/schemas/inline_response_200_1_data"
           },
           "meta" : {
-            "$ref" : "#/components/schemas/PaginationMetaTag"
+            "$ref" : "#/components/schemas/MetaTag"
           }
         }
       },
-      "Gallery_attributes" : {
-        "required" : [ "access_id", "created_at", "description", "display_order", "is_listed", "is_orig_enabled", "is_watermark_disabled", "key_image_id", "modified_at", "name", "name_url" ],
+      "Permission_attributes" : {
+        "required" : [ "download_audio_filetype", "download_doc_filetype", "download_image_embed", "download_image_filetype", "download_image_size", "download_video_filetype", "download_video_format", "expires", "max_downloads" ],
         "type" : "object",
         "properties" : {
-          "name" : {
-            "maxLength" : 100,
+          "expires" : {
             "type" : "string",
-            "description" : "Name of Gallery or Collection object (Whichever it is)",
-            "example" : "My trip to DR"
-          },
-          "name_url" : {
-            "maxLength" : 100,
-            "type" : "string",
-            "description" : "URL to the gallery",
-            "nullable" : true
-          },
-          "description" : {
-            "maxLength" : 100,
-            "type" : "string",
-            "description" : "Description of the Gallery",
+            "description" : "Expiration Date",
             "nullable" : true,
-            "example" : "Trip to DR with my brothers and sisters"
+            "example" : "2019-04-25T14:54:12.136828"
           },
-          "display_order" : {
+          "contact_id" : {
+            "pattern" : "^CT000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Contact ID",
+            "nullable" : true,
+            "example" : "CT000EXAMPLE_CNT"
+          },
+          "group_id" : {
+            "pattern" : "^CTG00[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Contact Group ID",
+            "nullable" : true,
+            "example" : "CTG00EXAMPLE_CTG"
+          },
+          "access_level" : {
+            "maxLength" : 10,
+            "type" : "string",
+            "description" : "Access Level (OPEN)",
+            "nullable" : true,
+            "example" : "OPEN"
+          },
+          "password" : {
+            "maxLength" : 20,
+            "type" : "string",
+            "description" : "Password",
+            "nullable" : true,
+            "example" : "Open Sesame"
+          },
+          "token" : {
+            "maxLength" : 32,
+            "type" : "string",
+            "description" : "Access Token",
+            "nullable" : true,
+            "example" : "Token123456789"
+          },
+          "max_downloads" : {
             "type" : "integer",
-            "description" : "Custom display order",
-            "example" : 1
-          },
-          "key_image_id" : {
-            "pattern" : "^GI000[a-zA-Z0-9._]{11}$",
-            "type" : "string",
-            "description" : "ID of the Image that is the key image",
+            "description" : "Max Downloads",
             "nullable" : true,
-            "example" : "GI000EXAMPLE_IMG"
+            "example" : 99
           },
-          "access_id" : {
-            "pattern" : "^A0000[a-zA-Z0-9._]{11}$",
+          "permission_type" : {
             "type" : "string",
-            "description" : "Access ID of the Gallery",
-            "example" : "A0000EXAMPLE_ACS"
+            "description" : "Permission Type (contact | group | password | token | access_level)",
+            "example" : "password",
+            "enum" : [ "contact", "group", "password", "token", "access_level" ]
           },
-          "is_listed" : {
-            "type" : "boolean",
-            "description" : "Flag that denotes if it is listed on the public site",
-            "example" : false
+          "download_image_filetype" : {
+            "type" : "string",
+            "description" : "Download Image FileType (original | jpeg)",
+            "nullable" : true,
+            "example" : "original",
+            "enum" : [ "original", "jpeg" ]
           },
-          "is_orig_enabled" : {
+          "download_image_size" : {
+            "type" : "integer",
+            "description" : "Download Image Size (number of pixels of longest dimension)",
+            "nullable" : true,
+            "example" : 1200
+          },
+          "download_image_embed" : {
             "type" : "boolean",
-            "description" : "Original enabled boolean value",
+            "description" : "Download Image Embed (true | false)",
+            "nullable" : true,
             "example" : true
           },
-          "is_watermark_disabled" : {
-            "type" : "boolean",
-            "description" : "Watermark disabled boolean value",
-            "example" : true
+          "download_video_filetype" : {
+            "type" : "string",
+            "description" : "Download Video FileType (original | mp4)",
+            "nullable" : true,
+            "example" : "original",
+            "enum" : [ "original", "mp4" ]
           },
-          "created_at" : {
+          "download_video_format" : {
             "type" : "string",
-            "description" : "Creation date",
-            "example" : "2019-04-25T14:54:12.136828"
+            "description" : "Download Video Format (hd1080 | hd720 | sd480)",
+            "nullable" : true,
+            "example" : "hd1080",
+            "enum" : [ "hd1080", "hd720", "sd480" ]
           },
-          "modified_at" : {
+          "download_audio_filetype" : {
             "type" : "string",
-            "description" : "Last modified date",
-            "example" : "2019-04-25T14:54:12.136828"
-          }
-        }
-      },
-      "Gallery_links" : {
-        "type" : "object",
-        "properties" : {
-          "self" : {
+            "description" : "Download Audio FileType (original)",
+            "nullable" : true,
+            "example" : "original",
+            "enum" : [ "original" ]
+          },
+          "download_doc_filetype" : {
             "type" : "string",
-            "description" : "Link to itself",
-            "example" : "https://api.photoshelter.com/psapi/v4/galleries/G0000ZJCk9LW4Zfc"
+            "description" : "Download Doc FileType (original)",
+            "nullable" : true,
+            "example" : "original",
+            "enum" : [ "original" ]
           }
         }
       },
@@ -482,35 +531,6 @@
           "expires" : {
             "type" : "integer",
             "example" : 40
-          }
-        }
-      },
-      "PaginationMetaTag_paging" : {
-        "type" : "object",
-        "properties" : {
-          "total" : {
-            "type" : "integer",
-            "example" : 100
-          },
-          "page" : {
-            "type" : "integer",
-            "example" : 1
-          },
-          "first" : {
-            "type" : "string",
-            "example" : "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1"
-          },
-          "last" : {
-            "type" : "string",
-            "example" : "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=5"
-          },
-          "next" : {
-            "type" : "string",
-            "example" : "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=2"
-          },
-          "prev" : {
-            "type" : "string",
-            "example" : "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1"
           }
         }
       },
