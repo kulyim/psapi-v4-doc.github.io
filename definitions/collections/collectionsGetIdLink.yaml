@@ -22,9 +22,10 @@ paths:
       tags:
       - Collection
       summary: GET /collections/{collection_id}/link.
-      description: Get a collection's link. This endpoint will generate a link to
-        the user's collection with the name and id of the collection in the link.
-        In the example, the {name} will be replaced with the collection's name.
+      description: Get a collection's link. This endpoint requires authentication.
+        It will generate a link to the user's collection with the name and id of the
+        collection in the link. In the example, the {name} will be replaced with the
+        collection's name.
       operationId: collectionsGetIdLink
       parameters:
       - name: collection_id
@@ -43,6 +44,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/inline_response_200'
+        401:
+          description: 401 Unauthorized Client Error
+          headers:
+            WWW-Authenticate:
+              description: The HTTP WWW-Authenticate response header defines the authentication
+                method that should be used to gain access to a resource.
+              style: simple
+              explode: false
+              schema:
+                type: string
+              example: 'WWW-Authenticate: Bearer'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                errors:
+                  id: AcsPermissionException
+                  status: "401"
+                  title: 'Invalid access to resource: Gallery'
+                  detail: You are not authorized to view this resource.
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
         400:
           description: 400 Bad Request Error
           content:
