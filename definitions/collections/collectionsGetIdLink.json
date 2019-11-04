@@ -43,7 +43,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "Custom Link Response - HTTP 200 OK",
+            "description" : "Custom Link Response - Returns a shareable link in the payload to the collection specified",
             "content" : {
               "application/json" : {
                 "schema" : {
