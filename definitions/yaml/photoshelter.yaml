@@ -299,10 +299,12 @@ paths:
       tags:
       - Collection
       summary: GET /collections/{collection_id}/link.
-      description: Get a collection's link. This endpoint requires authentication.
-        It will generate a link to the user's collection with the name and id of the
+      description: Get a collection's link. This endpoint is fully public. It will
+        generate a link to the user's/org's collection with the name and id of the
         collection in the link. In the example, the {name} will be replaced with the
-        collection's name.
+        collection's name. There is no restriction to generating the link, but viewing
+        the contents of the collection in the link is still subject to visibility
+        and access permissions.
       operationId: collectionsGetIdLink
       parameters:
       - name: collection_id
@@ -321,30 +323,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/inline_response_200_3'
-        401:
-          description: 401 Unauthorized Client Error
-          headers:
-            WWW-Authenticate:
-              description: The HTTP WWW-Authenticate response header defines the authentication
-                method that should be used to gain access to a resource.
-              style: simple
-              explode: false
-              schema:
-                type: string
-              example: 'WWW-Authenticate: Bearer'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                errors:
-                  id: AcsPermissionException
-                  status: "401"
-                  title: 'Invalid access to resource: Gallery'
-                  detail: You are not authorized to view this resource.
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
         400:
           description: 400 Bad Request Error
           content:
@@ -360,33 +338,6 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/Error'
-        403:
-          description: 403 Forbidden Client Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                error:
-                  id: ApiKeyInvalidException
-                  status: "403"
-                  title: Missing or invalid API key
-                  detail: |-
-                    Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or
-                    is invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.
-                    If you do not have an API key, you can request one on our website.
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                error:
-                  id: ApiKeyInvalidException
-                  status: "403"
-                  title: Missing or invalid API key
-                  detail: |-
-                    Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or
-                    is invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.
-                    If you do not have an API key, you can request one on our website.
         404:
           description: 404 Not Found Client Error
           content:
