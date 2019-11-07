@@ -259,6 +259,16 @@
             "$ref" : "#/components/schemas/schema"
           },
           "example" : "G0000EXAMPLE_GAL"
+        }, {
+          "name" : "collection_id",
+          "in" : "query",
+          "description" : "Optional collection_id parameter to retrieve inherited permissions from (if the gallery inherits from the collection)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema_2"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -1876,6 +1886,15 @@
         "description" : "My gallery description",
         "example" : "G0000c1x4UMGPvkY"
       },
+      "schema_2" : {
+        "title" : "My Collection Test",
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^C0000[a-zA-Z0-9._]{11}$",
+        "type" : "string",
+        "description" : "My collection description",
+        "example" : "C0000c1x4UMGPvkY"
+      },
       "Mode" : {
         "type" : "string",
         "description" : "Mode",
@@ -1983,15 +2002,6 @@
             "$ref" : "#/components/schemas/Media_attributes"
           }
         }
-      },
-      "schema_2" : {
-        "title" : "Media ID",
-        "maxLength" : 16,
-        "minLength" : 16,
-        "pattern" : "^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$",
-        "type" : "string",
-        "description" : "Media ID",
-        "example" : "I0000zCtew4UPbBw"
       },
       "MediaGetObject" : {
         "required" : [ "attributes", "id", "type" ],
@@ -2798,7 +2808,7 @@
         }
       },
       "Permission_attributes" : {
-        "required" : [ "download_audio_filetype", "download_doc_filetype", "download_image_embed", "download_image_filetype", "download_image_size", "download_video_filetype", "download_video_format", "expires", "max_downloads" ],
+        "required" : [ "access_level", "contact_id", "download_audio_filetype", "download_doc_filetype", "download_image_embed", "download_image_filetype", "download_image_size", "download_video_filetype", "download_video_format", "expires", "group_id", "max_downloads", "password", "token" ],
         "type" : "object",
         "properties" : {
           "expires" : {
