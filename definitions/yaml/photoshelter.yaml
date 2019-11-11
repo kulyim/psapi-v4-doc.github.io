@@ -993,7 +993,7 @@ paths:
     get:
       tags:
       - Collection
-      summary: GET /collections/{collection_id}/key-image
+      summary: GET /collections/{collection_id}/key-image.
       description: Get a collection's key image. This endpoint is fully public. Visibility
         and access permissions do not apply here. Any user should be able to retrieve
         the key image of any collection.
