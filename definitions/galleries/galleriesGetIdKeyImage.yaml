@@ -151,7 +151,7 @@ components:
       title: My Gallery Test
       maxLength: 16
       minLength: 16
-      pattern: '^G[''I''|0]000[a-zA-Z0-9._]{11}$'
+      pattern: '^G[I|0]000[a-zA-Z0-9._]{11}$'
       type: string
       description: My gallery description
       example: G0000c1x4UMGPvkY
@@ -163,7 +163,7 @@ components:
       type: object
       properties:
         id:
-          pattern: '^G[''I''|0]000[a-zA-Z0-9._]{11}$'
+          pattern: '^G[I|0]000[a-zA-Z0-9._]{11}$'
           type: string
           description: Collection/Group ID
           example: G0000EXAMPLE_GI0
@@ -182,7 +182,7 @@ components:
     GalleryId:
       maxLength: 16
       minLength: 16
-      pattern: '^G[''I''|0]000[a-zA-Z0-9._]{11}$'
+      pattern: '^G[I|0]000[a-zA-Z0-9._]{11}$'
       type: string
       description: The Gallery ID
       example: G0000EXAMPLEGALL
