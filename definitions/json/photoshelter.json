@@ -324,6 +324,7 @@
           "public" : {
             "type" : "boolean",
             "description" : "Key Image is Public",
+            "nullable" : true,
             "example" : true
           }
         }
