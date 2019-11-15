@@ -253,6 +253,7 @@ components:
         public:
           type: boolean
           description: Key Image is Public
+          nullable: true
           example: true
     MetaTag_rate_limit:
       type: object
