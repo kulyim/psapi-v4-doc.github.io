@@ -182,19 +182,19 @@ components:
           type: string
           enum:
           - image
-          - doc
+          - document
           - audio
           - video
         attributes:
-          oneOf:
+          anyOf:
           - $ref: '#/components/schemas/MediaImage'
           - $ref: '#/components/schemas/MediaAudio'
           - $ref: '#/components/schemas/MediaDocument'
           - $ref: '#/components/schemas/MediaVideo'
     MediaImage:
       required:
+      - created_at
       - creator_id
-      - f_searchable
       - file_name
       - file_size
       - flagged
@@ -202,6 +202,7 @@ components:
       - focal_point_y
       - height
       - model_released
+      - modified_at
       - organization_id
       - owner_id
       - photographer_id
@@ -211,10 +212,9 @@ components:
       - screen_height_max
       - screen_width
       - screen_width_max
+      - searchable
       - thumbnail_height
       - thumbnail_width
-      - updated_at
-      - uploaded_at
       - views
       - width
       type: object
@@ -283,7 +283,7 @@ components:
           description: View counter for the image
           nullable: true
           example: 0
-        f_searchable:
+        searchable:
           type: boolean
           description: Boolean flag that denotes if the image is publicly searchable
           nullable: true
@@ -316,12 +316,12 @@ components:
             the image on the y-coordinate plane
           nullable: true
           example: 100
-        updated_at:
+        created_at:
           type: string
           description: Date and time the image was last updated
           nullable: true
           example: 2019-10-02 14:39:23 GMT
-        uploaded_at:
+        modified_at:
           type: string
           description: Date and time the image was originally uploaded
           nullable: true
@@ -359,6 +359,7 @@ components:
       example: U0000EXAMPLEUSER
     MediaAudio:
       required:
+      - created_at
       - creator_id
       - duration
       - file_name
@@ -366,12 +367,11 @@ components:
       - format
       - hash
       - model_released
+      - modified_at
       - owner_id
       - property_released
       - rating
       - start_time
-      - updated_at
-      - uploaded_at
       type: object
       properties:
         owner_id:
@@ -418,36 +418,36 @@ components:
           description: Rating
           nullable: true
           example: 3
-        updated_at:
+        created_at:
           type: string
           description: Date and time the audio was last updated
           nullable: true
           example: 2019-10-02 14:39:23 GMT
-        uploaded_at:
+        modified_at:
           type: string
           description: Date and time the audio was originally uploaded
           nullable: true
           example: 2019-10-02 14:39:23 GMT
     MediaDocument:
       required:
+      - created_at
       - creator_id
       - file_name
       - file_size
       - format
       - format_readable
       - hash
-      - org_id
+      - modified_at
+      - organization_id
       - owner_id
       - rating
-      - updated_at
-      - uploaded_at
       type: object
       properties:
         owner_id:
           $ref: '#/components/schemas/UserIdNullable'
         creator_id:
           $ref: '#/components/schemas/UserId'
-        org_id:
+        organization_id:
           $ref: '#/components/schemas/OrganizationId'
         file_name:
           type: string
@@ -475,18 +475,19 @@ components:
           description: Document rating
           nullable: true
           example: 1
-        updated_at:
+        created_at:
           type: string
           description: Date and time the document was last updated
           nullable: true
           example: 2019-10-02 14:39:23 GMT
-        uploaded_at:
+        modified_at:
           type: string
           description: Date and time the document was originally uploaded
           nullable: true
           example: 2019-10-02 14:39:23 GMT
     MediaVideo:
       required:
+      - created_at
       - creator_id
       - duration
       - file_name
@@ -495,14 +496,13 @@ components:
       - hash
       - height
       - model_released
+      - modified_at
       - owner_id
       - photographer_id
       - property_released
       - rating
       - rotate
       - start_time
-      - updated_at
-      - uploaded_at
       - width
       type: object
       properties:
@@ -564,12 +564,12 @@ components:
           description: Rating
           nullable: true
           example: 1
-        updated_at:
+        created_at:
           type: string
           description: Date and time the document was last updated
           nullable: true
           example: 2019-10-02 14:39:23 GMT
-        uploaded_at:
+        modified_at:
           type: string
           description: Date and time the document was originally uploaded
           nullable: true
