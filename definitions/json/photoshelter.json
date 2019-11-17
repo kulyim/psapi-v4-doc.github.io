@@ -230,10 +230,10 @@
           },
           "type" : {
             "type" : "string",
-            "enum" : [ "image", "doc", "audio", "video" ]
+            "enum" : [ "image", "document", "audio", "video" ]
           },
           "attributes" : {
-            "oneOf" : [ {
+            "anyOf" : [ {
               "$ref" : "#/components/schemas/MediaImage"
             }, {
               "$ref" : "#/components/schemas/MediaAudio"
@@ -488,7 +488,7 @@
         }
       },
       "MediaDocument" : {
-        "required" : [ "created_at", "creator_id", "file_name", "file_size", "format", "format_readable", "hash", "modified_at", "org_id", "owner_id", "rating" ],
+        "required" : [ "created_at", "creator_id", "file_name", "file_size", "format", "format_readable", "hash", "modified_at", "organization_id", "owner_id", "rating" ],
         "type" : "object",
         "properties" : {
           "owner_id" : {
@@ -497,7 +497,7 @@
           "creator_id" : {
             "$ref" : "#/components/schemas/UserId"
           },
-          "org_id" : {
+          "organization_id" : {
             "$ref" : "#/components/schemas/OrganizationId"
           },
           "file_name" : {
