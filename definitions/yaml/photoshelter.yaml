@@ -182,11 +182,11 @@ components:
           type: string
           enum:
           - image
-          - doc
+          - document
           - audio
           - video
         attributes:
-          oneOf:
+          anyOf:
           - $ref: '#/components/schemas/MediaImage'
           - $ref: '#/components/schemas/MediaAudio'
           - $ref: '#/components/schemas/MediaDocument'
@@ -438,7 +438,7 @@ components:
       - format_readable
       - hash
       - modified_at
-      - org_id
+      - organization_id
       - owner_id
       - rating
       type: object
@@ -447,7 +447,7 @@ components:
           $ref: '#/components/schemas/UserIdNullable'
         creator_id:
           $ref: '#/components/schemas/UserId'
-        org_id:
+        organization_id:
           $ref: '#/components/schemas/OrganizationId'
         file_name:
           type: string
