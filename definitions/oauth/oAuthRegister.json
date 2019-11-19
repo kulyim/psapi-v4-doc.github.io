@@ -70,7 +70,7 @@
   "components" : {
     "schemas" : {
       "OAuthRegister" : {
-        "required" : [ "app_id", "client_id", "client_secret", "description", "name", "redirect_uri", "scopes" ],
+        "required" : [ "app_id", "callback_url", "client_id", "client_secret", "description", "name", "scopes" ],
         "type" : "object",
         "properties" : {
           "client_id" : {
@@ -93,9 +93,9 @@
             "type" : "string",
             "description" : "Description of the client app"
           },
-          "redirect_uri" : {
+          "callback_url" : {
             "type" : "string",
-            "description" : "Redirect Uri / Callback Url"
+            "description" : "Callback Url"
           },
           "scopes" : {
             "type" : "string",
@@ -156,7 +156,7 @@
         "content" : {
           "application/x-www-form-urlencoded" : {
             "schema" : {
-              "required" : [ "app_id", "description", "name", "redirect_uri", "scopes" ],
+              "required" : [ "app_id", "callback_url", "description", "name", "scopes" ],
               "type" : "object",
               "properties" : {
                 "app_id" : {
@@ -168,7 +168,7 @@
                 "description" : {
                   "type" : "string"
                 },
-                "redirect_uri" : {
+                "callback_url" : {
                   "type" : "string"
                 },
                 "scopes" : {
