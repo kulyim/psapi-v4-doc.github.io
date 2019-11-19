@@ -167,7 +167,7 @@ components:
         id:
           pattern: ^(GI|G0|C0)000[a-zA-Z0-9._]{11}$
           type: string
-          description: Collection/Group ID
+          description: Collection/Gallery/GalleryImage ID
           example: G0000EXAMPLE_GI0
         type:
           pattern: keyImage
