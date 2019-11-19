@@ -30,6 +30,30 @@
         "description" : "Media GET (aka media search). At least one of the following is required in order for the search to take place: (terms, custom_metadata, date_start, date_end, user_id, org_id, photographer_id, virtual_agency_id, orientation, state, country, country_iso). It is good practice to limit your page size when searching as callbacks for additional data can become expensive.",
         "operationId" : "mediaGet",
         "parameters" : [ {
+          "name" : "user_id",
+          "in" : "query",
+          "description" : "User id to perform the search on",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "pattern" : "^U0000[a-zA-Z0-9._]{11}$",
+            "type" : "string"
+          },
+          "example" : "U0000EXAMPLEUSER"
+        }, {
+          "name" : "org_id",
+          "in" : "query",
+          "description" : "Organization id to perform the search on",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "pattern" : "^O0000[a-zA-Z0-9._]{11}$",
+            "type" : "string"
+          },
+          "example" : "O0000EXAMPLE_ORG"
+        }, {
           "name" : "media_id",
           "in" : "query",
           "description" : "ID of the media",
@@ -310,6 +334,50 @@
           "name" : "date_end",
           "in" : "query",
           "description" : "Maximum date taken",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "2019-04-09T18:34:40-04:00"
+        }, {
+          "name" : "create_start",
+          "in" : "query",
+          "description" : "Minimum create date",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "2019-04-09T18:34:40-04:00"
+        }, {
+          "name" : "create_end",
+          "in" : "query",
+          "description" : "Maximum create date",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "2019-04-09T18:34:40-04:00"
+        }, {
+          "name" : "modify_start",
+          "in" : "query",
+          "description" : "Minimum modify date",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "2019-04-09T18:34:40-04:00"
+        }, {
+          "name" : "modify_end",
+          "in" : "query",
+          "description" : "Minimum modify date",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -751,29 +819,8 @@
       "PaginationMetaTag" : {
         "type" : "object",
         "properties" : {
-          "total" : {
-            "type" : "integer",
-            "example" : 100
-          },
-          "page" : {
-            "type" : "integer",
-            "example" : 1
-          },
-          "first" : {
-            "type" : "string",
-            "example" : "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1"
-          },
-          "last" : {
-            "type" : "string",
-            "example" : "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=5"
-          },
-          "next" : {
-            "type" : "string",
-            "example" : "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=2"
-          },
-          "prev" : {
-            "type" : "string",
-            "example" : "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1"
+          "paging" : {
+            "$ref" : "#/components/schemas/PaginationMetaTag_paging"
           }
         }
       },
@@ -816,6 +863,35 @@
           "type" : {
             "type" : "string",
             "enum" : [ "image", "audio", "video", "doc" ]
+          }
+        }
+      },
+      "PaginationMetaTag_paging" : {
+        "type" : "object",
+        "properties" : {
+          "total" : {
+            "type" : "integer",
+            "example" : 100
+          },
+          "page" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "first" : {
+            "type" : "string",
+            "example" : "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1"
+          },
+          "last" : {
+            "type" : "string",
+            "example" : "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=5"
+          },
+          "next" : {
+            "type" : "string",
+            "example" : "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=2"
+          },
+          "prev" : {
+            "type" : "string",
+            "example" : "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1"
           }
         }
       },
