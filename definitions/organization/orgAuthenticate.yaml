@@ -72,6 +72,21 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/Error'
+        404:
+          description: 404 Not Found Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                errors:
+                  id: ResourceNotFoundException
+                  status: "404"
+                  title: Resource not found
+                  detail: The requested resource was not found.
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
     Error:
