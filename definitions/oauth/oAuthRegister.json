@@ -91,11 +91,11 @@
           },
           "description" : {
             "type" : "string",
-            "description" : "Descrioption of the client app"
+            "description" : "Description of the client app"
           },
           "redirect_uri" : {
             "type" : "string",
-            "description" : "Redirect Uri"
+            "description" : "Redirect Uri / Callback Url"
           },
           "scopes" : {
             "type" : "string",
