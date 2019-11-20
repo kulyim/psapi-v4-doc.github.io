@@ -217,10 +217,10 @@
         "type" : "object",
         "properties" : {
           "id" : {
-            "pattern" : "^(GI|G0|C0)000[a-zA-Z0-9._]{11}$",
+            "pattern" : "^I0000[a-zA-Z0-9._]{11}$",
             "type" : "string",
-            "description" : "Collection/Gallery/GalleryImage ID",
-            "example" : "G0000EXAMPLE_GI0"
+            "description" : "Image ID",
+            "example" : "I0000EXAMPLE_IMG"
           },
           "type" : {
             "pattern" : "keyImage",
