@@ -1555,6 +1555,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/inline_response_200_10'
+              example:
+                data:
+                  id: C0000EXAMPLECOLL
+                  type: url
+                  attributes:
+                    url: https://example.photoshelter.com/gallery-collection/{name}/C0000EXAMPLECOLL
+                meta:
+                  copyright: PhotoShelter 2019
+                  version: 2019-05-01
+                  rate_limit:
+                    limit: 10
+                    current: 1
+                    expires: 40
         400:
           description: 400 Bad Request Error
           content:
@@ -3419,7 +3432,6 @@ components:
       properties:
         meta:
           $ref: '#/components/schemas/CollectionChildrenMetaTag'
-      example: '{"meta":{"children_count":{"total":10,"galleries":3,"collections":7}}}'
     inline_response_200_10_data_attributes:
       type: object
       properties:
@@ -3448,8 +3460,6 @@ components:
           $ref: '#/components/schemas/inline_response_200_10_data'
         meta:
           $ref: '#/components/schemas/MetaTag'
-      example: '{"data":{"id":"C0000EXAMPLECOLL","type":"url","attributes":{"url":"https://example.photoshelter.com/gallery-collection/{name}/C0000EXAMPLECOLL"}},"meta":{"copyright":"PhotoShelter
-        2019","version":"2019-05-01","rate_limit":{"limit":10,"current":1,"expires":40}}}'
     inline_response_200_11:
       required:
       - data
