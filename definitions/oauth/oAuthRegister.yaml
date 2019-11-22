@@ -55,14 +55,9 @@ components:
       - callback_url
       - client_id
       - client_secret
-      - company_name
       - description
       - email
-      - homepage_uri
-      - logo_uri
       - name
-      - privacy_policy_uri
-      - scopes
       type: object
       properties:
         client_id:
@@ -145,14 +140,9 @@ components:
             required:
             - application_name
             - callback_url
-            - company_name
             - description
             - email
-            - homepage_uri
-            - logo_uri
             - name
-            - privacy_policy_uri
-            - scopes
             type: object
             properties:
               name:
