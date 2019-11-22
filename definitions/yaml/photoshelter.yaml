@@ -1405,7 +1405,7 @@ paths:
     get:
       tags:
       - Collection
-      summary: GET /collections/{collection_id}/count
+      summary: GET /collections/{collection_id}/count.
       description: Get a collection's children count. This endpoint does not require
         authentication. A user will not be permitted to access the count of the children
         in a collection unless given access to the collection. Any user with insufficient
