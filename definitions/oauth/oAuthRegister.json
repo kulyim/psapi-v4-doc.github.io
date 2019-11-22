@@ -70,7 +70,7 @@
   "components" : {
     "schemas" : {
       "OAuthRegister" : {
-        "required" : [ "app_id", "callback_url", "client_id", "client_secret", "description", "name", "scopes" ],
+        "required" : [ "application_name", "callback_url", "client_id", "client_secret", "company_name", "description", "email", "homepage_uri", "logo_uri", "name", "privacy_policy_uri", "scopes" ],
         "type" : "object",
         "properties" : {
           "client_id" : {
@@ -80,10 +80,6 @@
           "client_secret" : {
             "type" : "string",
             "description" : "OAuth Client Secret"
-          },
-          "app_id" : {
-            "type" : "string",
-            "description" : "App ID to register"
           },
           "name" : {
             "type" : "string",
@@ -100,6 +96,30 @@
           "scopes" : {
             "type" : "string",
             "description" : "App scopes"
+          },
+          "email" : {
+            "type" : "string",
+            "description" : "Email"
+          },
+          "application_name" : {
+            "type" : "string",
+            "description" : "Application name"
+          },
+          "company_name" : {
+            "type" : "string",
+            "description" : "Company name"
+          },
+          "homepage_uri" : {
+            "type" : "string",
+            "description" : "Homepage uri"
+          },
+          "privacy_policy_uri" : {
+            "type" : "string",
+            "description" : "Privacy policy uri"
+          },
+          "logo_uri" : {
+            "type" : "string",
+            "description" : "Logo uri"
           }
         }
       },
@@ -156,12 +176,9 @@
         "content" : {
           "application/x-www-form-urlencoded" : {
             "schema" : {
-              "required" : [ "app_id", "callback_url", "description", "name", "scopes" ],
+              "required" : [ "application_name", "callback_url", "company_name", "description", "email", "homepage_uri", "logo_uri", "name", "privacy_policy_uri", "scopes" ],
               "type" : "object",
               "properties" : {
-                "app_id" : {
-                  "type" : "string"
-                },
                 "name" : {
                   "type" : "string"
                 },
@@ -172,6 +189,24 @@
                   "type" : "string"
                 },
                 "scopes" : {
+                  "type" : "string"
+                },
+                "email" : {
+                  "type" : "string"
+                },
+                "application_name" : {
+                  "type" : "string"
+                },
+                "company_name" : {
+                  "type" : "string"
+                },
+                "homepage_uri" : {
+                  "type" : "string"
+                },
+                "privacy_policy_uri" : {
+                  "type" : "string"
+                },
+                "logo_uri" : {
                   "type" : "string"
                 }
               }
