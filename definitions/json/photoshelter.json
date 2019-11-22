@@ -515,7 +515,7 @@
       "get" : {
         "tags" : [ "Gallery" ],
         "summary" : "GET /galleries/{gallery_id}/cover.",
-        "description" : "Retrieves the first four assets in a given gallery. This endpoint does not require authentication. The assets are returned only if the user has access to the gallery. Insufficient permissions will result in an error.",
+        "description" : "Retrieves the first four assets in a given gallery. This endpoint does not require authentication. The assets are returned only if the user has access to the gallery. Insufficient permissions will result in an error. An optional collection_id query parameter is available to set the context of the collection that the gallery is in. That is because a gallery can exist in multiple collections and if a gallery exists in both a private and a public collection then a user will always be thrown an error. Setting the query parameter to have the id of the public collection will allow the user to access the cover of the gallery.",
         "operationId" : "galleriesGetIdCover",
         "parameters" : [ {
           "name" : "gallery_id",
@@ -528,6 +528,17 @@
             "$ref" : "#/components/schemas/schema"
           },
           "example" : "G0000EXAMPLE_GAL"
+        }, {
+          "name" : "collection_id",
+          "in" : "query",
+          "description" : "Optional query parameter to set the context of the collection.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "example" : true
         } ],
         "responses" : {
           "200" : {
