@@ -968,7 +968,7 @@
               },
               "application/xml" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_7"
+                  "$ref" : "#/components/schemas/inline_response_200_6"
                 }
               }
             }
@@ -1200,12 +1200,12 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_8"
+                  "$ref" : "#/components/schemas/inline_response_200_7"
                 }
               },
               "application/xml" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_8"
+                  "$ref" : "#/components/schemas/inline_response_200_7"
                 }
               }
             }
@@ -1409,7 +1409,7 @@
               },
               "application/xml" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_7"
+                  "$ref" : "#/components/schemas/inline_response_200_6"
                 }
               }
             }
@@ -1622,12 +1622,12 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_9"
+                  "$ref" : "#/components/schemas/inline_response_200_8"
                 }
               },
               "application/xml" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_9"
+                  "$ref" : "#/components/schemas/inline_response_200_8"
                 }
               }
             }
@@ -1781,7 +1781,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_10"
+                  "$ref" : "#/components/schemas/inline_response_200_9"
                 }
               }
             }
@@ -1958,7 +1958,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_11"
+                  "$ref" : "#/components/schemas/inline_response_200_10"
                 }
               }
             }
@@ -2135,12 +2135,12 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_12"
+                  "$ref" : "#/components/schemas/inline_response_200_11"
                 }
               },
               "application/xml" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_12"
+                  "$ref" : "#/components/schemas/inline_response_200_11"
                 }
               }
             }
@@ -2950,7 +2950,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_13"
+                  "$ref" : "#/components/schemas/inline_response_200_12"
                 }
               }
             }
@@ -3047,12 +3047,12 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_14"
+                  "$ref" : "#/components/schemas/inline_response_200_13"
                 }
               },
               "application/xml" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_15"
+                  "$ref" : "#/components/schemas/inline_response_200_14"
                 }
               }
             }
@@ -4089,22 +4089,9 @@
           "meta" : {
             "$ref" : "#/components/schemas/MetaTag"
           }
-        },
-        "example" : "{\"data\":{\"type\":\"collection\",\"id\":\"C0000EXAMPLECOLL\",\"attributes\":{\"name\":\"Example Name\",\"org_id\":\"O0000EXAMPLE_ORG\",\"description\":\"Example Description\",\"display_order\":1,\"access_id\":\"A0000EXAMPLE_ACS\",\"is_listed\":true,\"created_at\":\"2019-04-09T18:34:40-04:00\",\"modified_at\":\"2019-04-09T18:34:40-04:00\"},\"links\":{\"self\":\"example.photoshelter.com/collections/C0000EXAMPLECOLL\"}},\"meta\":{\"copyright\":\"PhotoShelter 2019\",\"version\":\"2019-05-01\",\"rate_limit\":{\"limit\":10,\"current\":1,\"expires\":40}}}"
-      },
-      "inline_response_200_7" : {
-        "required" : [ "data" ],
-        "type" : "object",
-        "properties" : {
-          "data" : {
-            "$ref" : "#/components/schemas/Collection"
-          },
-          "meta" : {
-            "$ref" : "#/components/schemas/MetaTag"
-          }
         }
       },
-      "inline_response_200_8" : {
+      "inline_response_200_7" : {
         "required" : [ "data" ],
         "type" : "object",
         "properties" : {
@@ -4116,7 +4103,7 @@
           }
         }
       },
-      "inline_response_200_9" : {
+      "inline_response_200_8" : {
         "required" : [ "data" ],
         "type" : "object",
         "properties" : {
@@ -4132,7 +4119,7 @@
           }
         }
       },
-      "inline_response_200_10" : {
+      "inline_response_200_9" : {
         "required" : [ "meta" ],
         "type" : "object",
         "properties" : {
@@ -4142,7 +4129,7 @@
         },
         "example" : "{\"meta\":{\"children_count\":{\"total\":10,\"galleries\":3,\"collections\":7}}}"
       },
-      "inline_response_200_11_data_attributes" : {
+      "inline_response_200_10_data_attributes" : {
         "type" : "object",
         "properties" : {
           "url" : {
@@ -4150,7 +4137,7 @@
           }
         }
       },
-      "inline_response_200_11_data" : {
+      "inline_response_200_10_data" : {
         "required" : [ "attributes", "id", "type" ],
         "type" : "object",
         "properties" : {
@@ -4162,16 +4149,16 @@
             "example" : "link"
           },
           "attributes" : {
-            "$ref" : "#/components/schemas/inline_response_200_11_data_attributes"
+            "$ref" : "#/components/schemas/inline_response_200_10_data_attributes"
           }
         }
       },
-      "inline_response_200_11" : {
+      "inline_response_200_10" : {
         "required" : [ "data" ],
         "type" : "object",
         "properties" : {
           "data" : {
-            "$ref" : "#/components/schemas/inline_response_200_11_data"
+            "$ref" : "#/components/schemas/inline_response_200_10_data"
           },
           "meta" : {
             "$ref" : "#/components/schemas/MetaTag"
@@ -4179,7 +4166,7 @@
         },
         "example" : "{\"data\":{\"id\":\"C0000EXAMPLECOLL\",\"type\":\"url\",\"attributes\":{\"url\":\"https://example.photoshelter.com/gallery-collection/{name}/C0000EXAMPLECOLL\"}},\"meta\":{\"copyright\":\"PhotoShelter 2019\",\"version\":\"2019-05-01\",\"rate_limit\":{\"limit\":10,\"current\":1,\"expires\":40}}}"
       },
-      "inline_response_200_12" : {
+      "inline_response_200_11" : {
         "required" : [ "data" ],
         "type" : "object",
         "properties" : {
@@ -4191,7 +4178,7 @@
           }
         }
       },
-      "inline_response_200_13" : {
+      "inline_response_200_12" : {
         "required" : [ "data" ],
         "type" : "object",
         "properties" : {
@@ -4206,7 +4193,7 @@
           }
         }
       },
-      "inline_response_200_14" : {
+      "inline_response_200_13" : {
         "required" : [ "data" ],
         "type" : "object",
         "properties" : {
@@ -4219,7 +4206,7 @@
         },
         "example" : "{\"data\":{\"id\":\"VD000EXAMPLE_VID\",\"type\":\"video\",\"attributes\":{\"file_name\":\"Sample Video\",\"file_size\":10000,\"rotate\":0,\"height\":640,\"width\":360,\"start_time\":0,\"duration\":60,\"creator_id\":\"U0000EXAMPLEUSER\",\"hash\":\"051a007701ae51921e2e5eec19dfeexamplehash\",\"model_released\":true,\"property_released\":true,\"rating\":1,\"updated_at\":\"2019-10-02 14:39:23 GMT\",\"uploaded_at\":\"2019-10-02 14:39:23 GMT\"}},\"meta\":{\"copyright\":\"PhotoShelter 2019\",\"version\":\"2019-05-01\",\"rate_limit\":{\"limit\":10,\"current\":1,\"expires\":40}}}"
       },
-      "inline_response_200_15" : {
+      "inline_response_200_14" : {
         "required" : [ "data" ],
         "type" : "object",
         "properties" : {
