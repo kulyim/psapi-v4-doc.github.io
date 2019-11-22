@@ -511,6 +511,31 @@
         }
       }
     },
+    "/galleries/{gallery_id}/cover" : {
+      "get" : {
+        "tags" : [ "Gallery" ],
+        "summary" : "GET /galleries/{gallery_id}/cover.",
+        "description" : "Retrieves the first four assets in a given gallery. This endpoint does not require authentication. The assets are returned only if the user has access to the gallery. Insufficient permissions will result in an error.",
+        "operationId" : "galleriesGetIdCover",
+        "parameters" : [ {
+          "name" : "gallery_id",
+          "in" : "path",
+          "description" : "Gallery ID to get the cover of",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema"
+          },
+          "example" : "G0000EXAMPLE_GAL"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "yolo"
+          }
+        }
+      }
+    },
     "/galleries/{gallery_id}/permission" : {
       "get" : {
         "tags" : [ "Gallery" ],
