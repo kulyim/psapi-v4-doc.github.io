@@ -35,7 +35,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/OAuthRegister"
+                  "$ref" : "#/components/schemas/inline_response_200"
                 }
               }
             }
@@ -70,6 +70,49 @@
   "components" : {
     "schemas" : {
       "OAuthRegister" : {
+        "required" : [ "attributes", "id", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "pattern" : "^OAC00[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "OAuth Client ID",
+            "example" : "OAC00EXAMPLE_OAC"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "The type of object",
+            "example" : "oAuthClient",
+            "enum" : [ "oAuthClient" ]
+          },
+          "attributes" : {
+            "$ref" : "#/components/schemas/OAuthRegister_attributes"
+          }
+        }
+      },
+      "Error" : {
+        "required" : [ "errors" ],
+        "type" : "object",
+        "properties" : {
+          "errors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Error_errors"
+            }
+          }
+        },
+        "description" : "This object generates errors in compliance with RFC 7807 API Problem"
+      },
+      "inline_response_200" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "$ref" : "#/components/schemas/OAuthRegister"
+          }
+        }
+      },
+      "OAuthRegister_attributes" : {
         "required" : [ "application_name", "callback_url", "client_id", "client_secret", "description", "email", "name" ],
         "type" : "object",
         "properties" : {
@@ -122,19 +165,6 @@
             "description" : "Logo uri"
           }
         }
-      },
-      "Error" : {
-        "required" : [ "errors" ],
-        "type" : "object",
-        "properties" : {
-          "errors" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/Error_errors"
-            }
-          }
-        },
-        "description" : "This object generates errors in compliance with RFC 7807 API Problem"
       },
       "Error_links" : {
         "type" : "object",
