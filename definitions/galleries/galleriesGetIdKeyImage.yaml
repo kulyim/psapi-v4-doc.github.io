@@ -32,7 +32,7 @@ paths:
           $ref: '#/components/schemas/schema'
       responses:
         200:
-          description: Returns a gallery key image.
+          description: Returns the gallery key image.
           content:
             application/json:
               schema:
