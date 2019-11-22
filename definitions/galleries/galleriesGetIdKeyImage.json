@@ -38,7 +38,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "Returns a collection/gallery key image.",
+            "description" : "Returns the gallery key image.",
             "content" : {
               "application/json" : {
                 "schema" : {
