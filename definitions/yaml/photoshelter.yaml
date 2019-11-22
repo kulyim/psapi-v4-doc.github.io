@@ -790,28 +790,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/inline_response_200_6'
-              example:
-                data:
-                  type: collection
-                  id: C0000EXAMPLECOLL
-                  attributes:
-                    name: Example Name
-                    org_id: O0000EXAMPLE_ORG
-                    description: Example Description
-                    display_order: 1
-                    access_id: A0000EXAMPLE_ACS
-                    is_listed: true
-                    created_at: 2019-04-09T18:34:40-04:00
-                    modified_at: 2019-04-09T18:34:40-04:00
-                  links:
-                    self: example.photoshelter.com/collections/C0000EXAMPLECOLL
-                meta:
-                  copyright: PhotoShelter 2019
-                  version: 2019-05-01
-                  rate_limit:
-                    limit: 10
-                    current: 1
-                    expires: 40
             application/xml:
               schema:
                 $ref: '#/components/schemas/inline_response_200_6'
@@ -1159,28 +1137,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/inline_response_200_6'
-              example:
-                data:
-                  type: collection
-                  id: C0000EXAMPLECOLL
-                  attributes:
-                    name: Example Name
-                    org_id: O0000EXAMPLE_ORG
-                    description: Example Description
-                    display_order: 1
-                    access_id: A0000EXAMPLE_ACS
-                    is_listed: true
-                    created_at: 2019-04-09T18:34:40-04:00
-                    modified_at: 2019-04-09T18:34:40-04:00
-                  links:
-                    self: example.photoshelter.com/collections/C0000EXAMPLECOLL
-                meta:
-                  copyright: PhotoShelter 2019
-                  version: 2019-05-01
-                  rate_limit:
-                    limit: 10
-                    current: 1
-                    expires: 40
             application/xml:
               schema:
                 $ref: '#/components/schemas/inline_response_200_6'
