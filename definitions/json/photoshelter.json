@@ -1,0 +1,219 @@
+{
+  "openapi" : "3.0.2",
+  "info" : {
+    "title" : "PhotoShelter API v4",
+    "description" : "# PhotoShelter API v4 definition",
+    "termsOfService" : "https://www.photoshelter.com/support/terms/",
+    "contact" : {
+      "name" : "PhotoShelter API Support Team",
+      "url" : "https://support.photoshelter.com",
+      "email" : "api-support@photoshelter.com"
+    },
+    "license" : {
+      "name" : "PhotoShelter License",
+      "url" : "https://www.photoshelter.com/support/license"
+    },
+    "version" : "Chung"
+  },
+  "servers" : [ {
+    "url" : "https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4",
+    "description" : "PhotoShelter Auto Mocking API"
+  } ],
+  "paths" : {
+    "/oauth/register" : {
+      "post" : {
+        "tags" : [ "OAuth" ],
+        "summary" : "Registers an OAuth client.",
+        "description" : "Registration of the metadata for an OAuth client and returns back the submitted metadata along with the client_id and client_secret.",
+        "operationId" : "oAuthRegister",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/OAuthRegisterRequest"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "/oauth/register - HTTP OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/OAuthRegister"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 Bad Request Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ThisShouldBeARealId",
+                    "status" : "400",
+                    "title" : "Bad Request / Syntax",
+                    "detail" : "Bad Request"
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "OAuthRegister" : {
+        "required" : [ "application_name", "callback_url", "client_id", "client_secret", "description", "email", "name" ],
+        "type" : "object",
+        "properties" : {
+          "client_id" : {
+            "type" : "string",
+            "description" : "OAuth Client ID"
+          },
+          "client_secret" : {
+            "type" : "string",
+            "description" : "OAuth Client Secret"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Name of the client app"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Description of the client app"
+          },
+          "callback_url" : {
+            "type" : "string",
+            "description" : "Callback Url"
+          },
+          "scopes" : {
+            "type" : "string",
+            "description" : "App scopes"
+          },
+          "email" : {
+            "type" : "string",
+            "description" : "Email"
+          },
+          "application_name" : {
+            "type" : "string",
+            "description" : "Application name"
+          },
+          "company_name" : {
+            "type" : "string",
+            "description" : "Company name"
+          },
+          "homepage_uri" : {
+            "type" : "string",
+            "description" : "Homepage uri"
+          },
+          "privacy_policy_uri" : {
+            "type" : "string",
+            "description" : "Privacy policy uri"
+          },
+          "logo_uri" : {
+            "type" : "string",
+            "description" : "Logo uri"
+          }
+        }
+      },
+      "Error" : {
+        "required" : [ "errors" ],
+        "type" : "object",
+        "properties" : {
+          "errors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Error_errors"
+            }
+          }
+        },
+        "description" : "This object generates errors in compliance with RFC 7807 API Problem"
+      },
+      "Error_links" : {
+        "type" : "object",
+        "properties" : {
+          "about" : {
+            "type" : "string",
+            "example" : "http://api.developer.com/404.html"
+          }
+        }
+      },
+      "Error_errors" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "A unique identifier for this occurrence of the problem"
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/Error_links"
+          },
+          "title" : {
+            "type" : "string",
+            "description" : "A short, human-readable summary of the problem type"
+          },
+          "status" : {
+            "type" : "string",
+            "description" : "The HTTP status code set by the origin server for this occurrence of the problem."
+          },
+          "detail" : {
+            "type" : "string",
+            "description" : "An human readable explanation specific to this occurrence of the problem."
+          }
+        }
+      }
+    },
+    "requestBodies" : {
+      "OAuthRegisterRequest" : {
+        "description" : "OAuth Registration",
+        "content" : {
+          "application/x-www-form-urlencoded" : {
+            "schema" : {
+              "required" : [ "application_name", "callback_url", "description", "email", "name" ],
+              "type" : "object",
+              "properties" : {
+                "name" : {
+                  "type" : "string"
+                },
+                "description" : {
+                  "type" : "string"
+                },
+                "callback_url" : {
+                  "type" : "string"
+                },
+                "scopes" : {
+                  "type" : "string"
+                },
+                "email" : {
+                  "type" : "string"
+                },
+                "application_name" : {
+                  "type" : "string"
+                },
+                "company_name" : {
+                  "type" : "string"
+                },
+                "homepage_uri" : {
+                  "type" : "string"
+                },
+                "privacy_policy_uri" : {
+                  "type" : "string"
+                },
+                "logo_uri" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
