@@ -25,7 +25,7 @@
         "tags" : [ "Organization" ],
         "summary" : "Logs the user out of their current organization.",
         "description" : "Logs the user out of their current organization after they have called /organization/authenticate.",
-        "operationId" : "oAuthRegister",
+        "operationId" : "orgLogout",
         "responses" : {
           "200" : {
             "description" : "Generic HTTP 200 Ok Response",
