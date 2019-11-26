@@ -48,7 +48,7 @@
               },
               "application/xml" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_1"
+                  "$ref" : "#/components/schemas/inline_response_200_2"
                 }
               }
             }
@@ -264,6 +264,22 @@
           }
         }
       },
+      "MetaTag_2" : {
+        "type" : "object",
+        "properties" : {
+          "copyright" : {
+            "type" : "string",
+            "example" : "PhotoShelter 2019"
+          },
+          "version" : {
+            "type" : "string",
+            "example" : "2019-05-01"
+          },
+          "rate_limit" : {
+            "$ref" : "#/components/schemas/MetaTag_2_rate_limit"
+          }
+        }
+      },
       "Gallery" : {
         "required" : [ "attributes", "id", "type" ],
         "type" : "object",
@@ -290,22 +306,6 @@
           }
         }
       },
-      "MetaTag_2" : {
-        "type" : "object",
-        "properties" : {
-          "copyright" : {
-            "type" : "string",
-            "example" : "PhotoShelter 2019"
-          },
-          "version" : {
-            "type" : "string",
-            "example" : "2019-05-01"
-          },
-          "rate_limit" : {
-            "$ref" : "#/components/schemas/MetaTag_2_rate_limit"
-          }
-        }
-      },
       "ArrayOfEntities" : {
         "type" : "array",
         "items" : {
@@ -315,6 +315,25 @@
         }
       },
       "inline_response_200_1" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "type" : "array",
+            "items" : {
+              "anyOf" : [ {
+                "$ref" : "#/components/schemas/Collection"
+              } ]
+            }
+          },
+          "meta" : {
+            "oneOf" : [ {
+              "$ref" : "#/components/schemas/MetaTag_2"
+            } ]
+          }
+        }
+      },
+      "inline_response_200_2" : {
         "required" : [ "data" ],
         "type" : "object",
         "properties" : {
@@ -394,6 +413,23 @@
           }
         }
       },
+      "MetaTag_2_rate_limit" : {
+        "type" : "object",
+        "properties" : {
+          "limit" : {
+            "type" : "integer",
+            "example" : 10
+          },
+          "current" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "expires" : {
+            "type" : "integer",
+            "example" : 40
+          }
+        }
+      },
       "Gallery_attributes" : {
         "required" : [ "access_id", "created_at", "description", "display_order", "is_listed", "is_orig_enabled", "is_watermark_disabled", "key_image_id", "modified_at", "name", "name_url" ],
         "type" : "object",
@@ -469,23 +505,6 @@
             "type" : "string",
             "description" : "Link to itself",
             "example" : "https://api.photoshelter.com/psapi/v4/galleries/G0000ZJCk9LW4Zfc"
-          }
-        }
-      },
-      "MetaTag_2_rate_limit" : {
-        "type" : "object",
-        "properties" : {
-          "limit" : {
-            "type" : "integer",
-            "example" : 10
-          },
-          "current" : {
-            "type" : "integer",
-            "example" : 1
-          },
-          "expires" : {
-            "type" : "integer",
-            "example" : 40
           }
         }
       }
