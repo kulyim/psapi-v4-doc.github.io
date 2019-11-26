@@ -41,7 +41,7 @@ paths:
                 $ref: '#/components/schemas/inline_response_200_1'
             application/xml:
               schema:
-                $ref: '#/components/schemas/inline_response_200_1'
+                $ref: '#/components/schemas/inline_response_200_2'
         "400":
           description: 400 Bad Request Error
           content:
@@ -194,6 +194,17 @@ components:
           description: Type
         attributes:
           $ref: '#/components/schemas/Collection_attributes'
+    MetaTag_2:
+      type: object
+      properties:
+        copyright:
+          type: string
+          example: PhotoShelter 2019
+        version:
+          type: string
+          example: 2019-05-01
+        rate_limit:
+          $ref: '#/components/schemas/MetaTag_2_rate_limit'
     Gallery:
       required:
       - attributes
@@ -216,23 +227,25 @@ components:
           $ref: '#/components/schemas/Gallery_attributes'
         links:
           $ref: '#/components/schemas/Gallery_links'
-    MetaTag_2:
-      type: object
-      properties:
-        copyright:
-          type: string
-          example: PhotoShelter 2019
-        version:
-          type: string
-          example: 2019-05-01
-        rate_limit:
-          $ref: '#/components/schemas/MetaTag_2_rate_limit'
     ArrayOfEntities:
       type: array
       items:
         anyOf:
         - $ref: '#/components/schemas/Gallery'
     inline_response_200_1:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/Collection'
+        meta:
+          oneOf:
+          - $ref: '#/components/schemas/MetaTag_2'
+    inline_response_200_2:
       required:
       - data
       type: object
@@ -303,6 +316,18 @@ components:
           description: Modified Date
           nullable: true
           example: 2019-04-25T14:54:12.136828
+    MetaTag_2_rate_limit:
+      type: object
+      properties:
+        limit:
+          type: integer
+          example: 10
+        current:
+          type: integer
+          example: 1
+        expires:
+          type: integer
+          example: 40
     Gallery_attributes:
       required:
       - access_id
@@ -376,15 +401,3 @@ components:
           type: string
           description: Link to itself
           example: https://api.photoshelter.com/psapi/v4/galleries/G0000ZJCk9LW4Zfc
-    MetaTag_2_rate_limit:
-      type: object
-      properties:
-        limit:
-          type: integer
-          example: 10
-        current:
-          type: integer
-          example: 1
-        expires:
-          type: integer
-          example: 40
