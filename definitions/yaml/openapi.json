@@ -172,22 +172,6 @@
           } ]
         }
       },
-      "ArrayOfGalleries" : {
-        "type" : "array",
-        "items" : {
-          "allOf" : [ {
-            "$ref" : "#/components/schemas/Gallery"
-          } ]
-        }
-      },
-      "ArrayOfCollections" : {
-        "type" : "array",
-        "items" : {
-          "allOf" : [ {
-            "$ref" : "#/components/schemas/Collection"
-          } ]
-        }
-      },
       "MetaTag" : {
         "type" : "object",
         "properties" : {
@@ -230,11 +214,8 @@
         "required" : [ "collections", "galleries" ],
         "type" : "object",
         "properties" : {
-          "galleries" : {
-            "$ref" : "#/components/schemas/ArrayOfGalleries"
-          },
-          "collections" : {
-            "$ref" : "#/components/schemas/ArrayOfCollections"
+          "data" : {
+            "$ref" : "#/components/schemas/ArrayOfEntities"
           },
           "meta" : {
             "$ref" : "#/components/schemas/MetaTag"

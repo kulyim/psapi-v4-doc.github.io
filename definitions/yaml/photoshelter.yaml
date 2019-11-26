@@ -121,16 +121,6 @@ components:
         anyOf:
         - $ref: '#/components/schemas/Gallery'
         - $ref: '#/components/schemas/Collection'
-    ArrayOfGalleries:
-      type: array
-      items:
-        allOf:
-        - $ref: '#/components/schemas/Gallery'
-    ArrayOfCollections:
-      type: array
-      items:
-        allOf:
-        - $ref: '#/components/schemas/Collection'
     MetaTag:
       type: object
       properties:
@@ -165,10 +155,8 @@ components:
       - galleries
       type: object
       properties:
-        galleries:
-          $ref: '#/components/schemas/ArrayOfGalleries'
-        collections:
-          $ref: '#/components/schemas/ArrayOfCollections'
+        data:
+          $ref: '#/components/schemas/ArrayOfEntities'
         meta:
           $ref: '#/components/schemas/MetaTag'
     Error_links:
