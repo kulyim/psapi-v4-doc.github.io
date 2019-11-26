@@ -1,0 +1,5333 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "PhotoShelter API v4",
+    "description" : "# PhotoShelter API v4 definition",
+    "termsOfService" : "https://www.photoshelter.com/support/terms/",
+    "contact" : {
+      "name" : "PhotoShelter API Support Team",
+      "url" : "https://support.photoshelter.com",
+      "email" : "api-support@photoshelter.com"
+    },
+    "license" : {
+      "name" : "PhotoShelter License",
+      "url" : "https://www.photoshelter.com/support/license"
+    },
+    "version" : "Allan"
+  },
+  "servers" : [ {
+    "url" : "https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4",
+    "description" : "PhotoShelter Auto Mocking API"
+  } ],
+  "tags" : [ {
+    "name" : "PhotoShelter API"
+  } ],
+  "paths" : {
+    "/galleries/{gallery_id}" : {
+      "get" : {
+        "tags" : [ "Gallery" ],
+        "summary" : "GET /galleries/{gallery_id}.",
+        "description" : "Get a gallery by ID.",
+        "operationId" : "galleriesGetId",
+        "parameters" : [ {
+          "name" : "gallery_id",
+          "in" : "path",
+          "description" : "The ID of the gallery",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "$ref" : "#/components/schemas/GalleryId"
+          },
+          "example" : "G0000EXAMPLEGALL"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "/galleries/{gallery_id} - HTTP 200 OK Response.\n",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200"
+                }
+              }
+            },
+            "links" : {
+              "GetGallery" : {
+                "operationId" : "galleryGetId",
+                "parameters" : {
+                  "gallery_id" : "$response.body#/data/id"
+                },
+                "description" : "Links to self"
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 Bad Request Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ThisShouldBeARealId",
+                    "status" : "400",
+                    "title" : "Bad Request / Syntax",
+                    "detail" : "Bad Request"
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "401 Unauthorized Client Error",
+            "headers" : {
+              "WWW-Authenticate" : {
+                "description" : "The HTTP WWW-Authenticate response header defines the authentication method that should be used to gain access to a resource.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "WWW-Authenticate: Bearer"
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "AcsPermissionException",
+                    "status" : "401",
+                    "title" : "Invalid access to resource: Gallery",
+                    "detail" : "You are not authorized to view this resource."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "403 Forbidden Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "404 Not Found Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ResourceNotFoundException",
+                    "status" : "404",
+                    "title" : "Resource not found",
+                    "detail" : "The requested resource was not found."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 Unsupported Media Type Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ResourceNotFoundException",
+                    "status" : "415",
+                    "title" : "Unsupported media type",
+                    "detail" : "The origin server is refusing to service the request because the payload is in a format not supported by this method on the target resource."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429" : {
+            "description" : "429 Too Many Requests Error",
+            "headers" : {
+              "Retry-After" : {
+                "description" : "The Retry-After response HTTP header, expressed in seconds, indicates how long the user agent should wait before making a follow-up request.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                },
+                "example" : 180
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "TooManyRequestsException",
+                    "status" : "429",
+                    "title" : "Too Many Requests",
+                    "detail" : "The user has sent too many requests in a given amount of time see \"rate limiting\"."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/galleries/{gallery_id}/children" : {
+      "get" : {
+        "tags" : [ "Gallery" ],
+        "summary" : "GET /galleries/{gallery_id}/children.",
+        "description" : "This endpoint does not require authentication. It will retrieve all of the media contained in the gallery. Standard visibility and access permissions apply. If a user does not have access to the contents of the gallery then they will be thrown an error. If a gallery is contained in multiple collections then an optional collection_id query parameter can be used to specify the collection that the gallery is a child of. This way, you can still access the media of a gallery should you lack permissions due to the parent to child relationship in one collection versus another collection. (Ex. Collection A is completely private and Collection B is public. Gallery C exists in both collections. If you do not specify the collection_id then you will always be denied access. Passing in the collection_id of Collection B to this endpoint will now give you ability to access media in Gallery C because the context of Collection B is public.)",
+        "operationId" : "galleriesGetIdChildren",
+        "parameters" : [ {
+          "name" : "gallery_id",
+          "in" : "path",
+          "description" : "The ID of the gallery you are selecting children from",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "$ref" : "#/components/schemas/GalleryId"
+          },
+          "example" : "G0000EXAMPLEGALL"
+        }, {
+          "name" : "collection_id",
+          "in" : "query",
+          "description" : "The ID the collection the gallery is a child of. This parameter is used when a gallery exists in multiple collections and you need to specify the collection it exists under.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/CollectionId"
+          },
+          "example" : "C0000EXAMPLECOLL"
+        }, {
+          "name" : "password",
+          "in" : "query",
+          "description" : "Optional password parameter used to access the contents of a gallery with permissions set.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "maxLength" : 20,
+            "type" : "string"
+          },
+          "example" : "PASSWORD"
+        }, {
+          "name" : "per_page",
+          "in" : "query",
+          "description" : "Denotes the amount of results per page",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          },
+          "example" : 10
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Denotes the page to get",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          },
+          "example" : 1
+        }, {
+          "name" : "sort_by",
+          "in" : "query",
+          "description" : "The field to sort by",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "creation_time", "modification_time", "added_at", "file_name", "date_taken", "display_order" ]
+          },
+          "example" : "file_name"
+        }, {
+          "name" : "sort_direction",
+          "in" : "query",
+          "description" : "Sort direction",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "ascending", "descending" ]
+          },
+          "example" : "ascending"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Returns a gallery's media. Only returns the ID, type, display order, creation time, and modification time of each media.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_1"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 Bad Request Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ThisShouldBeARealId",
+                    "status" : "400",
+                    "title" : "Bad Request / Syntax",
+                    "detail" : "Bad Request"
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "401 Unauthorized Client Error",
+            "headers" : {
+              "WWW-Authenticate" : {
+                "description" : "The HTTP WWW-Authenticate response header defines the authentication method that should be used to gain access to a resource.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "WWW-Authenticate: Bearer"
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "AcsPermissionException",
+                    "status" : "401",
+                    "title" : "Invalid access to resource: Gallery",
+                    "detail" : "You are not authorized to view this resource."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "403 Forbidden Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "404 Not Found Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ResourceNotFoundException",
+                    "status" : "404",
+                    "title" : "Resource not found",
+                    "detail" : "The requested resource was not found."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 Unsupported Media Type Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ResourceNotFoundException",
+                    "status" : "415",
+                    "title" : "Unsupported media type",
+                    "detail" : "The origin server is refusing to service the request because the payload is in a format not supported by this method on the target resource."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429" : {
+            "description" : "429 Too Many Requests Error",
+            "headers" : {
+              "Retry-After" : {
+                "description" : "The Retry-After response HTTP header, expressed in seconds, indicates how long the user agent should wait before making a follow-up request.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                },
+                "example" : 180
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "TooManyRequestsException",
+                    "status" : "429",
+                    "title" : "Too Many Requests",
+                    "detail" : "The user has sent too many requests in a given amount of time see \"rate limiting\"."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/galleries/{gallery_id}/cover" : {
+      "get" : {
+        "tags" : [ "Gallery" ],
+        "summary" : "GET /galleries/{gallery_id}/cover.",
+        "description" : "Retrieves the first four assets in a given gallery. This endpoint does not require authentication. The assets are returned only if the user has access to the gallery. Insufficient permissions will result in an error. An optional collection_id query parameter is available to set the context of the collection that the gallery is in. That is because a gallery can exist in multiple collections and if a gallery exists in both a private and a public collection then a user will always be thrown an error. Setting the query parameter to have the id of the public collection will allow the user to access the cover of the gallery.",
+        "operationId" : "galleriesGetIdCover",
+        "parameters" : [ {
+          "name" : "gallery_id",
+          "in" : "path",
+          "description" : "Gallery ID to get the cover of",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema"
+          },
+          "example" : "G0000EXAMPLE_GAL"
+        }, {
+          "name" : "collection_id",
+          "in" : "query",
+          "description" : "Optional query parameter to set the context of the collection.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "example" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 Bad Request Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ThisShouldBeARealId",
+                    "status" : "400",
+                    "title" : "Bad Request / Syntax",
+                    "detail" : "Bad Request"
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "401 Unauthorized Client Error",
+            "headers" : {
+              "WWW-Authenticate" : {
+                "description" : "The HTTP WWW-Authenticate response header defines the authentication method that should be used to gain access to a resource.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "WWW-Authenticate: Bearer"
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "AcsPermissionException",
+                    "status" : "401",
+                    "title" : "Invalid access to resource: Gallery",
+                    "detail" : "You are not authorized to view this resource."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "403 Forbidden Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "404 Not Found Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ResourceNotFoundException",
+                    "status" : "404",
+                    "title" : "Resource not found",
+                    "detail" : "The requested resource was not found."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 Unsupported Media Type Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ResourceNotFoundException",
+                    "status" : "415",
+                    "title" : "Unsupported media type",
+                    "detail" : "The origin server is refusing to service the request because the payload is in a format not supported by this method on the target resource."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429" : {
+            "description" : "429 Too Many Requests Error",
+            "headers" : {
+              "Retry-After" : {
+                "description" : "The Retry-After response HTTP header, expressed in seconds, indicates how long the user agent should wait before making a follow-up request.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                },
+                "example" : 180
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "TooManyRequestsException",
+                    "status" : "429",
+                    "title" : "Too Many Requests",
+                    "detail" : "The user has sent too many requests in a given amount of time see \"rate limiting\"."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/galleries/{gallery_id}/children/count" : {
+      "get" : {
+        "tags" : [ "Gallery" ],
+        "summary" : "GET /galleries/{gallery_id}/children/count",
+        "description" : "Retrieve the children count of a gallery. This endpoint does not require authentication. It only requires the user using the endpoint to have access to the gallery they are trying to get the count of. Any unauthenticated user to the gallery will be thrown an error.",
+        "operationId" : "galleriesGetIdChildrenCount",
+        "parameters" : [ {
+          "name" : "gallery_id",
+          "in" : "path",
+          "description" : "Gallery ID",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema"
+          },
+          "example" : "G0000EXAMPLE_GAL"
+        }, {
+          "name" : "collection_id",
+          "in" : "query",
+          "description" : "Optional collection_id parameter to retrieve inherited permissions from (if the gallery inherits from the collection)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema_2"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Returns the children count for a gallery in the meta object of the payload",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_3"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_3"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 Bad Request Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ThisShouldBeARealId",
+                    "status" : "400",
+                    "title" : "Bad Request / Syntax",
+                    "detail" : "Bad Request"
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "401 Unauthorized Client Error",
+            "headers" : {
+              "WWW-Authenticate" : {
+                "description" : "The HTTP WWW-Authenticate response header defines the authentication method that should be used to gain access to a resource.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "WWW-Authenticate: Bearer"
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "AcsPermissionException",
+                    "status" : "401",
+                    "title" : "Invalid access to resource: Gallery",
+                    "detail" : "You are not authorized to view this resource."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "403 Forbidden Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "404 Not Found Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ResourceNotFoundException",
+                    "status" : "404",
+                    "title" : "Resource not found",
+                    "detail" : "The requested resource was not found."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 Unsupported Media Type Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ResourceNotFoundException",
+                    "status" : "415",
+                    "title" : "Unsupported media type",
+                    "detail" : "The origin server is refusing to service the request because the payload is in a format not supported by this method on the target resource."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429" : {
+            "description" : "429 Too Many Requests Error",
+            "headers" : {
+              "Retry-After" : {
+                "description" : "The Retry-After response HTTP header, expressed in seconds, indicates how long the user agent should wait before making a follow-up request.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                },
+                "example" : 180
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "TooManyRequestsException",
+                    "status" : "429",
+                    "title" : "Too Many Requests",
+                    "detail" : "The user has sent too many requests in a given amount of time see \"rate limiting\"."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/galleries/{gallery_id}/permission" : {
+      "get" : {
+        "tags" : [ "Gallery" ],
+        "summary" : "GET /galleries/{gallery_id}/permission",
+        "description" : "Retrieves the gallery permissions.\n\nWhen authenticated, retrieves all the native and inherited access rights along with their credentials.\nWhen not authenticated, retrieves all the access rights without their associated credentials.",
+        "operationId" : "galleriesGetIdPermission",
+        "parameters" : [ {
+          "name" : "gallery_id",
+          "in" : "path",
+          "description" : "Gallery ID",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema"
+          },
+          "example" : "G0000EXAMPLE_GAL"
+        }, {
+          "name" : "collection_id",
+          "in" : "query",
+          "description" : "Optional collection_id parameter to retrieve inherited permissions from (if the gallery inherits from the collection)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema_2"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Gets lists of native and inherited gallery permissions depending on access level",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_4"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_5"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 Bad Request Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ThisShouldBeARealId",
+                    "status" : "400",
+                    "title" : "Bad Request / Syntax",
+                    "detail" : "Bad Request"
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "401 Unauthorized Client Error",
+            "headers" : {
+              "WWW-Authenticate" : {
+                "description" : "The HTTP WWW-Authenticate response header defines the authentication method that should be used to gain access to a resource.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "WWW-Authenticate: Bearer"
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "AcsPermissionException",
+                    "status" : "401",
+                    "title" : "Invalid access to resource: Gallery",
+                    "detail" : "You are not authorized to view this resource."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "403 Forbidden Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "404 Not Found Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ResourceNotFoundException",
+                    "status" : "404",
+                    "title" : "Resource not found",
+                    "detail" : "The requested resource was not found."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429" : {
+            "description" : "429 Too Many Requests Error",
+            "headers" : {
+              "Retry-After" : {
+                "description" : "The Retry-After response HTTP header, expressed in seconds, indicates how long the user agent should wait before making a follow-up request.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                },
+                "example" : 180
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "TooManyRequestsException",
+                    "status" : "429",
+                    "title" : "Too Many Requests",
+                    "detail" : "The user has sent too many requests in a given amount of time see \"rate limiting\"."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/collections" : {
+      "get" : {
+        "tags" : [ "Collection" ],
+        "summary" : "GET /collections.",
+        "description" : "Search the collections. This endpoint requires the user to be authenticated. It will return a list of collections owned by the user. For pagination to work, both per_page and page query parameters must be set.",
+        "operationId" : "collectionsGet",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "query",
+          "description" : "Collection ID to match in the query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/CollectionId"
+          },
+          "example" : "C0000EXAMPLECOLL"
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "description" : "Collection name to match in the query. Having this parameter set will always default to an exact name matching unless specified otherwise by the usage of the match parameter",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "maxLength" : 100,
+            "type" : "string"
+          },
+          "example" : "EXAMPLE NAME"
+        }, {
+          "name" : "parent",
+          "in" : "query",
+          "description" : "Limit collections to children of the provided collection ID. Pass blank to find collections with no parent.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/CollectionId"
+          },
+          "example" : "C0000EXAMPLECOLL"
+        }, {
+          "name" : "match",
+          "in" : "query",
+          "description" : "Flag that denotes whether to perform a partial name match. This parameter will only work if the name query parameter has been set and the only value available for this parameter is false. Setting this parameter to false will perform case insensitive partial name matching.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "boolean",
+            "default" : false,
+            "enum" : [ false ]
+          },
+          "example" : false
+        }, {
+          "name" : "sort_by",
+          "in" : "query",
+          "description" : "Sort by an attribute. The available attributes to sort by is creation_time, modification_time, name, and display_order. The default behavior is to sort the collections by the attribute in ascending order. This can be changed with the usage of the 'sort_direction' query parameter.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "creation_time", "modification_time", "name", "display_order" ]
+          },
+          "example" : "name"
+        }, {
+          "name" : "sort_direction",
+          "in" : "query",
+          "description" : "Sort direction. This parameter requires the usage of the 'sort_by' query parameter. Setting this parameter to one of the allowed values will set the direction of the sort.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "ascending", "descending" ]
+          },
+          "example" : "ascending"
+        }, {
+          "name" : "per_page",
+          "in" : "query",
+          "description" : "Results per page",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer",
+            "default" : 50
+          },
+          "example" : 50
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Page number",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          },
+          "example" : 1
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "/collections - HTTP 200 OK Response.\n",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_6"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_7"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 Bad Request Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ThisShouldBeARealId",
+                    "status" : "400",
+                    "title" : "Bad Request / Syntax",
+                    "detail" : "Bad Request"
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "403 Forbidden Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              }
+            }
+          },
+          "429" : {
+            "description" : "429 Too Many Requests Error",
+            "headers" : {
+              "Retry-After" : {
+                "description" : "The Retry-After response HTTP header, expressed in seconds, indicates how long the user agent should wait before making a follow-up request.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                },
+                "example" : 180
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "TooManyRequestsException",
+                    "status" : "429",
+                    "title" : "Too Many Requests",
+                    "detail" : "The user has sent too many requests in a given amount of time see \"rate limiting\"."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/collections/{collection_id}" : {
+      "get" : {
+        "tags" : [ "Collection" ],
+        "summary" : "GET /collections/{collection_id}.",
+        "description" : "Get a collection by ID. This endpoint is available to both public and authenticated users. Certain fields are only returned a non-null value if the users is authenticated and has permissions. The format of the collection id is defined by the regex : ^C0000[a-zA-Z0-9._]{11}$ (For example: 'COOOOEXAMPLECOLL').",
+        "operationId" : "collectionsGetId",
+        "parameters" : [ {
+          "name" : "collection_id",
+          "in" : "path",
+          "description" : "Collection ID to get",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "$ref" : "#/components/schemas/CollectionId"
+          },
+          "example" : "C0000EXAMPLECOLL"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "/collections/{collection_id} - HTTP 200 OK Response.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_8"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_8"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 Bad Request Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ThisShouldBeARealId",
+                    "status" : "400",
+                    "title" : "Bad Request / Syntax",
+                    "detail" : "Bad Request"
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "401 Unauthorized Client Error",
+            "headers" : {
+              "WWW-Authenticate" : {
+                "description" : "The HTTP WWW-Authenticate response header defines the authentication method that should be used to gain access to a resource.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "WWW-Authenticate: Bearer"
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "AcsPermissionException",
+                    "status" : "401",
+                    "title" : "Invalid access to resource: Gallery",
+                    "detail" : "You are not authorized to view this resource."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "403 Forbidden Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "404 Not Found Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ResourceNotFoundException",
+                    "status" : "404",
+                    "title" : "Resource not found",
+                    "detail" : "The requested resource was not found."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429" : {
+            "description" : "429 Too Many Requests Error",
+            "headers" : {
+              "Retry-After" : {
+                "description" : "The Retry-After response HTTP header, expressed in seconds, indicates how long the user agent should wait before making a follow-up request.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                },
+                "example" : 180
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "TooManyRequestsException",
+                    "status" : "429",
+                    "title" : "Too Many Requests",
+                    "detail" : "The user has sent too many requests in a given amount of time see \"rate limiting\"."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/collections/{collection_id}/children" : {
+      "get" : {
+        "tags" : [ "Collection" ],
+        "summary" : "GET /collections/{collection_id}/children.",
+        "description" : "Get a collection's children. This endpoint does not require authentication. Accessing a collection's children depends on the visibility and access rights of the collection and if the user has permissions to view it. If a user does not have permission to access the children then a permission error will be thrown. The endpoint will return all galleries and collections contained in the specified collection. Certain fields will be returned back as null if the user does not have ownership access. Unlike getting the children of a gallery, collections can only exist under ONE collection and not multiple collections. Per_page and page MUST BOTH be set in order for pagination to work.",
+        "operationId" : "collectionsGetIdChildren",
+        "parameters" : [ {
+          "name" : "collection_id",
+          "in" : "path",
+          "description" : "Collection ID to query the children of",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "$ref" : "#/components/schemas/CollectionId"
+          },
+          "example" : "C0000EXAMPLECOLL"
+        }, {
+          "name" : "password",
+          "in" : "query",
+          "description" : "Optional password parameter that can be used for collections that allow passwords for access",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "MYSUPERSECRETPASSWORD"
+        }, {
+          "name" : "token",
+          "in" : "query",
+          "description" : "Optional token parameter that can be used for collections with token access",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "MYTOKEN"
+        }, {
+          "name" : "visibile",
+          "in" : "query",
+          "description" : "Set to true to only return items that are visible to all users",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "example" : true
+        }, {
+          "name" : "per_page",
+          "in" : "query",
+          "description" : "Number of items to return per page",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          },
+          "example" : 50
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Page that you are on",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          },
+          "example" : 1
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Returns a collection's children which contains either galleries or collections.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_9"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_9"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 Bad Request Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ThisShouldBeARealId",
+                    "status" : "400",
+                    "title" : "Bad Request / Syntax",
+                    "detail" : "Bad Request"
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "401 Unauthorized Client Error",
+            "headers" : {
+              "WWW-Authenticate" : {
+                "description" : "The HTTP WWW-Authenticate response header defines the authentication method that should be used to gain access to a resource.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "WWW-Authenticate: Bearer"
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "AcsPermissionException",
+                    "status" : "401",
+                    "title" : "Invalid access to resource: Gallery",
+                    "detail" : "You are not authorized to view this resource."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "403 Forbidden Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "404 Not Found Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ResourceNotFoundException",
+                    "status" : "404",
+                    "title" : "Resource not found",
+                    "detail" : "The requested resource was not found."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429" : {
+            "description" : "429 Too Many Requests Error",
+            "headers" : {
+              "Retry-After" : {
+                "description" : "The Retry-After response HTTP header, expressed in seconds, indicates how long the user agent should wait before making a follow-up request.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                },
+                "example" : 180
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "TooManyRequestsException",
+                    "status" : "429",
+                    "title" : "Too Many Requests",
+                    "detail" : "The user has sent too many requests in a given amount of time see \"rate limiting\"."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/collections/{collection_id}/parent" : {
+      "get" : {
+        "tags" : [ "Collection" ],
+        "summary" : "GET /collections/{collection_id}/parent.",
+        "description" : "Get a collection's parent. This endpoint does not require authentication. The ability to view a collection's parent is dependent on whether or not the user has access to the collection. Some fields will be returned as null if the user does not have ownership access. The fields are 'created_at' and 'modified_at', and 'access_id'. If a parent is not found then the data object will be empty.",
+        "operationId" : "collectionsGetIdParent",
+        "parameters" : [ {
+          "name" : "collection_id",
+          "in" : "path",
+          "description" : "Collection ID to query for its parent",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "$ref" : "#/components/schemas/CollectionId"
+          },
+          "example" : "C0000EXAMPLECOLL"
+        }, {
+          "name" : "password",
+          "in" : "query",
+          "description" : "Password for collections that have password access",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "SUPERDUPERSECRETPASSWORD"
+        }, {
+          "name" : "token",
+          "in" : "query",
+          "description" : "Token for collectiond thst have token access",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "MYTOKEN"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "/collections/{collection_id} - HTTP 200 OK Response.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_8"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_8"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 Bad Request Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ThisShouldBeARealId",
+                    "status" : "400",
+                    "title" : "Bad Request / Syntax",
+                    "detail" : "Bad Request"
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "401 Unauthorized Client Error",
+            "headers" : {
+              "WWW-Authenticate" : {
+                "description" : "The HTTP WWW-Authenticate response header defines the authentication method that should be used to gain access to a resource.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "WWW-Authenticate: Bearer"
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "AcsPermissionException",
+                    "status" : "401",
+                    "title" : "Invalid access to resource: Gallery",
+                    "detail" : "You are not authorized to view this resource."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "403 Forbidden Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "404 Not Found Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ResourceNotFoundException",
+                    "status" : "404",
+                    "title" : "Resource not found",
+                    "detail" : "The requested resource was not found."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429" : {
+            "description" : "429 Too Many Requests Error",
+            "headers" : {
+              "Retry-After" : {
+                "description" : "The Retry-After response HTTP header, expressed in seconds, indicates how long the user agent should wait before making a follow-up request.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                },
+                "example" : 180
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "TooManyRequestsException",
+                    "status" : "429",
+                    "title" : "Too Many Requests",
+                    "detail" : "The user has sent too many requests in a given amount of time see \"rate limiting\"."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/collections/{collection_id}/children/{child_id}" : {
+      "get" : {
+        "tags" : [ "Collection" ],
+        "summary" : "GET /collections/{collection_id}/children/{id}.",
+        "description" : "Get information on a specific child of a collection. This endpoint does not require authentication. The ability to retrieve a specific child of a collection is dependent on the visibility and access options set to the parent collection. If a user does not have access to the collection then they will not be able to view a specific child of a collection. Some fields will be returned as null if the user does not have ownership access. The fields that are impacted are 'created_at', 'access_id', modified_at'. If a child is not found with the id then a 404 error will be thrown.",
+        "operationId" : "collectionsGetIdChildrenId",
+        "parameters" : [ {
+          "name" : "collection_id",
+          "in" : "path",
+          "description" : "Parent collection ID",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "$ref" : "#/components/schemas/CollectionId"
+          },
+          "example" : "C0000EXAMPLECOLL"
+        }, {
+          "name" : "child_id",
+          "in" : "path",
+          "description" : "Child collection or gallery id",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "pattern" : "^(G|C)0000[a-zA-Z0-9._]{11}$",
+            "type" : "string"
+          },
+          "example" : "G0000EXAMPLE_GAL"
+        }, {
+          "name" : "sort_by",
+          "in" : "query",
+          "description" : "Field to sort by",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "last_modified", "name", "created_at", "added_at", "display_order" ]
+          },
+          "example" : "name"
+        }, {
+          "name" : "sort_direction",
+          "in" : "query",
+          "description" : "Direction to sort in",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "ascending", "descending" ]
+          },
+          "example" : "ascending"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Returns information about a single child of a collection",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_10"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_10"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 Bad Request Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ThisShouldBeARealId",
+                    "status" : "400",
+                    "title" : "Bad Request / Syntax",
+                    "detail" : "Bad Request"
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "403 Forbidden Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "404 Not Found Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ResourceNotFoundException",
+                    "status" : "404",
+                    "title" : "Resource not found",
+                    "detail" : "The requested resource was not found."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429" : {
+            "description" : "429 Too Many Requests Error",
+            "headers" : {
+              "Retry-After" : {
+                "description" : "The Retry-After response HTTP header, expressed in seconds, indicates how long the user agent should wait before making a follow-up request.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                },
+                "example" : 180
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "TooManyRequestsException",
+                    "status" : "429",
+                    "title" : "Too Many Requests",
+                    "detail" : "The user has sent too many requests in a given amount of time see \"rate limiting\"."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/collections/{collection_id}/count" : {
+      "get" : {
+        "tags" : [ "Collection" ],
+        "summary" : "GET /collections/{collection_id}/count.",
+        "description" : "Get a collection's children count. This endpoint does not require authentication. A user will not be permitted to access the count of the children in a collection unless given access to the collection. Any user with insufficient permissions to a collection will be thrown an error. An optional parameter 'visibile' can be passed in to retrieve the count of only publicly visible children of a collection.",
+        "operationId" : "collectionsGetIdCount",
+        "parameters" : [ {
+          "name" : "collection_id",
+          "in" : "path",
+          "description" : "Collection ID to retrieve the children count from",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "$ref" : "#/components/schemas/CollectionId"
+          },
+          "example" : "C0000EXAMPLECOLL"
+        }, {
+          "name" : "visibile",
+          "in" : "query",
+          "description" : "Boolean value to denote if only publicly viewable children of a collection is returned in the count.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "example" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Returns the children count for a collection in the meta object of the payload",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_11"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 Bad Request Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ThisShouldBeARealId",
+                    "status" : "400",
+                    "title" : "Bad Request / Syntax",
+                    "detail" : "Bad Request"
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "401 Unauthorized Client Error",
+            "headers" : {
+              "WWW-Authenticate" : {
+                "description" : "The HTTP WWW-Authenticate response header defines the authentication method that should be used to gain access to a resource.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "WWW-Authenticate: Bearer"
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "AcsPermissionException",
+                    "status" : "401",
+                    "title" : "Invalid access to resource: Gallery",
+                    "detail" : "You are not authorized to view this resource."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "403 Forbidden Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "404 Not Found Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ResourceNotFoundException",
+                    "status" : "404",
+                    "title" : "Resource not found",
+                    "detail" : "The requested resource was not found."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429" : {
+            "description" : "429 Too Many Requests Error",
+            "headers" : {
+              "Retry-After" : {
+                "description" : "The Retry-After response HTTP header, expressed in seconds, indicates how long the user agent should wait before making a follow-up request.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                },
+                "example" : 180
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "TooManyRequestsException",
+                    "status" : "429",
+                    "title" : "Too Many Requests",
+                    "detail" : "The user has sent too many requests in a given amount of time see \"rate limiting\"."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/collections/{collection_id}/link" : {
+      "get" : {
+        "tags" : [ "Collection" ],
+        "summary" : "GET /collections/{collection_id}/link.",
+        "description" : "Get a collection's link. This endpoint is fully public. It will generate a link to the user's/org's collection with the name and id of the collection in the link. In the example, the {name} will be replaced with the collection's name. There is no restriction to generating the link, but viewing the contents of the collection in the link is still subject to visibility and access permissions.",
+        "operationId" : "collectionsGetIdLink",
+        "parameters" : [ {
+          "name" : "collection_id",
+          "in" : "path",
+          "description" : "Collection ID to retrieve a link from",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "$ref" : "#/components/schemas/CollectionId"
+          },
+          "example" : "C0000EXAMPLECOLL"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Custom Link Response - Returns a shareable link in the payload to the collection specified",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_12"
+                },
+                "example" : {
+                  "data" : {
+                    "id" : "C0000EXAMPLECOLL",
+                    "type" : "url",
+                    "attributes" : {
+                      "url" : "https://example.photoshelter.com/gallery-collection/{name}/C0000EXAMPLECOLL"
+                    }
+                  },
+                  "meta" : {
+                    "copyright" : "PhotoShelter 2019",
+                    "version" : "2019-05-01",
+                    "rate_limit" : {
+                      "limit" : 10,
+                      "current" : 1,
+                      "expires" : 40
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 Bad Request Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ThisShouldBeARealId",
+                    "status" : "400",
+                    "title" : "Bad Request / Syntax",
+                    "detail" : "Bad Request"
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "401 Unauthorized Client Error",
+            "headers" : {
+              "WWW-Authenticate" : {
+                "description" : "The HTTP WWW-Authenticate response header defines the authentication method that should be used to gain access to a resource.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "WWW-Authenticate: Bearer"
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "AcsPermissionException",
+                    "status" : "401",
+                    "title" : "Invalid access to resource: Gallery",
+                    "detail" : "You are not authorized to view this resource."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "403 Forbidden Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "404 Not Found Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ResourceNotFoundException",
+                    "status" : "404",
+                    "title" : "Resource not found",
+                    "detail" : "The requested resource was not found."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429" : {
+            "description" : "429 Too Many Requests Error",
+            "headers" : {
+              "Retry-After" : {
+                "description" : "The Retry-After response HTTP header, expressed in seconds, indicates how long the user agent should wait before making a follow-up request.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                },
+                "example" : 180
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "TooManyRequestsException",
+                    "status" : "429",
+                    "title" : "Too Many Requests",
+                    "detail" : "The user has sent too many requests in a given amount of time see \"rate limiting\"."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/collections/{collection_id}/key-image" : {
+      "get" : {
+        "tags" : [ "Collection" ],
+        "summary" : "GET /collections/{collection_id}/key-image.",
+        "description" : "Get a collection's key image. This endpoint is fully public. Visibility and access permissions do not apply here. Any user should be able to retrieve the key image of any collection.",
+        "operationId" : "collectionsGetIdKeyImage",
+        "parameters" : [ {
+          "name" : "collection_id",
+          "in" : "path",
+          "description" : "Collection ID to get the key image of",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "$ref" : "#/components/schemas/CollectionId"
+          },
+          "example" : "C0000EXAMPLECOLL"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Returns a collection/gallery key image.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_13"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_13"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 Bad Request Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ThisShouldBeARealId",
+                    "status" : "400",
+                    "title" : "Bad Request / Syntax",
+                    "detail" : "Bad Request"
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "403 Forbidden Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "404 Not Found Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ResourceNotFoundException",
+                    "status" : "404",
+                    "title" : "Resource not found",
+                    "detail" : "The requested resource was not found."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429" : {
+            "description" : "429 Too Many Requests Error",
+            "headers" : {
+              "Retry-After" : {
+                "description" : "The Retry-After response HTTP header, expressed in seconds, indicates how long the user agent should wait before making a follow-up request.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                },
+                "example" : 180
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "TooManyRequestsException",
+                    "status" : "429",
+                    "title" : "Too Many Requests",
+                    "detail" : "The user has sent too many requests in a given amount of time see \"rate limiting\"."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/media" : {
+      "get" : {
+        "tags" : [ "Media" ],
+        "summary" : "GET /media.",
+        "description" : "Media GET (aka media search). At least one of the following is required in order for the search to take place: (terms, custom_metadata, date_start, date_end, user_id, org_id, photographer_id, virtual_agency_id, orientation, state, country, country_iso). It is good practice to limit your page size when searching as callbacks for additional data can become expensive.",
+        "operationId" : "mediaGet",
+        "parameters" : [ {
+          "name" : "user_id",
+          "in" : "query",
+          "description" : "User id to perform the search on",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "pattern" : "^U0000[a-zA-Z0-9._]{11}$",
+            "type" : "string"
+          },
+          "example" : "U0000EXAMPLEUSER"
+        }, {
+          "name" : "org_id",
+          "in" : "query",
+          "description" : "Organization id to perform the search on",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "pattern" : "^O0000[a-zA-Z0-9._]{11}$",
+            "type" : "string"
+          },
+          "example" : "O0000EXAMPLE_ORG"
+        }, {
+          "name" : "media_id",
+          "in" : "query",
+          "description" : "ID of the media",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "pattern" : "^(VD|AD|I0|DO)000[a-zA-Z0-9._]{11}$",
+            "type" : "string"
+          },
+          "example" : "I0000EXAMPLEIMAG"
+        }, {
+          "name" : "photographer_id",
+          "in" : "query",
+          "description" : "ID of photographer",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "pattern" : "^U0000[a-zA-Z0-9._]{11}$",
+            "type" : "string"
+          },
+          "example" : "U0000EXAMPLEUSER"
+        }, {
+          "name" : "virtual_agency_id",
+          "in" : "query",
+          "description" : "Virtual Agency ID",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "VA000____EXAMPLE"
+        }, {
+          "name" : "collections",
+          "in" : "query",
+          "description" : "Limit search to files within given collections. Comma separated list of collection ids.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "C0000EXAMPLECOLL, C0000EXAMPLECOL2"
+        }, {
+          "name" : "galleries",
+          "in" : "query",
+          "description" : "Limit search to files contained in given galleries. Comma separated list of gallery ids.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "G0000EXAMPLEGALL, G0000EXAMPLEGAL2"
+        }, {
+          "name" : "custom_metadata",
+          "in" : "query",
+          "description" : "Limit search to files containing custom metadata. Requires use of the org_id parameter. Parameter format is a JSON object containing field_id and option_id key-value pairs. e.g. {\"Foo_field_123\":\"Foo_tag_abc\",\"Bar_field_456\":\"Bar_tag_def\"}.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "{\"Foo_field_123\":\"Foo_tag\"}"
+        }, {
+          "name" : "file_name",
+          "in" : "query",
+          "description" : "Name of the file",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "File name"
+        }, {
+          "name" : "terms",
+          "in" : "query",
+          "description" : "Search terms. Performs text search based on the terms across a variety of attributes such as file name, keywords, caption, etc.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Example Search Terms"
+        }, {
+          "name" : "model_release",
+          "in" : "query",
+          "description" : "Media has a model release",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "example" : true
+        }, {
+          "name" : "property_release",
+          "in" : "query",
+          "description" : "Media has property release",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "example" : false
+        }, {
+          "name" : "priced",
+          "in" : "query",
+          "description" : "Media is for sale",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "example" : true
+        }, {
+          "name" : "searchble",
+          "in" : "query",
+          "description" : "Media is publicly searchable",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "example" : false
+        }, {
+          "name" : "print",
+          "in" : "query",
+          "description" : "Media is available for prints",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "example" : true
+        }, {
+          "name" : "personal_use",
+          "in" : "query",
+          "description" : "Media is available for personal use.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "example" : false
+        }, {
+          "name" : "royalty_free",
+          "in" : "query",
+          "description" : "Media is available as royalty free.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "example" : true
+        }, {
+          "name" : "rights_managed",
+          "in" : "query",
+          "description" : "Media is available for license.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "example" : false
+        }, {
+          "name" : "media_type",
+          "in" : "query",
+          "description" : "Type of media (image | video | audio | doc) or a comma separated list",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "image,audio"
+        }, {
+          "name" : "city",
+          "in" : "query",
+          "description" : "City parameter",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Sample City"
+        }, {
+          "name" : "state",
+          "in" : "query",
+          "description" : "State/Province parameter",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Sample State"
+        }, {
+          "name" : "country",
+          "in" : "query",
+          "description" : "Country Parameter",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Sample Country"
+        }, {
+          "name" : "country_iso",
+          "in" : "query",
+          "description" : "Country ISO code",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Sample Code"
+        }, {
+          "name" : "rating",
+          "in" : "query",
+          "description" : "Ratings are from -1 to 254",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          },
+          "example" : 1
+        }, {
+          "name" : "rating_min",
+          "in" : "query",
+          "description" : "Minimum rating",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          },
+          "example" : 1
+        }, {
+          "name" : "rating_max",
+          "in" : "query",
+          "description" : "Maximum rating",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          },
+          "example" : 10
+        }, {
+          "name" : "date_start",
+          "in" : "query",
+          "description" : "Minimum date taken",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "2019-04-09T18:34:40-04:00"
+        }, {
+          "name" : "date_end",
+          "in" : "query",
+          "description" : "Maximum date taken",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "2019-04-09T18:34:40-04:00"
+        }, {
+          "name" : "create_start",
+          "in" : "query",
+          "description" : "Minimum create date",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "2019-04-09T18:34:40-04:00"
+        }, {
+          "name" : "create_end",
+          "in" : "query",
+          "description" : "Maximum create date",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "2019-04-09T18:34:40-04:00"
+        }, {
+          "name" : "modify_start",
+          "in" : "query",
+          "description" : "Minimum modify date",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "2019-04-09T18:34:40-04:00"
+        }, {
+          "name" : "modify_end",
+          "in" : "query",
+          "description" : "Minimum modify date",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "2019-04-09T18:34:40-04:00"
+        }, {
+          "name" : "title",
+          "in" : "query",
+          "description" : "Title",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Sample Title"
+        }, {
+          "name" : "edit_status",
+          "in" : "query",
+          "description" : "Edit status",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Sample status"
+        }, {
+          "name" : "urgency",
+          "in" : "query",
+          "description" : "Urgency",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Urgency"
+        }, {
+          "name" : "category",
+          "in" : "query",
+          "description" : "Category",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Sample Category"
+        }, {
+          "name" : "keywords",
+          "in" : "query",
+          "description" : "Keywords",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Example Keywords"
+        }, {
+          "name" : "instructions",
+          "in" : "query",
+          "description" : "Instructions",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Sample instructions"
+        }, {
+          "name" : "author",
+          "in" : "query",
+          "description" : "Author",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Sample Author"
+        }, {
+          "name" : "position",
+          "in" : "query",
+          "description" : "Author title/position",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Sample Title/Position"
+        }, {
+          "name" : "location",
+          "in" : "query",
+          "description" : "Location",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Sample location"
+        }, {
+          "name" : "trans_ref",
+          "in" : "query",
+          "description" : "Job ID/transmission reference",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Sample ID"
+        }, {
+          "name" : "credit",
+          "in" : "query",
+          "description" : "Credit",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Sample Credit"
+        }, {
+          "name" : "source",
+          "in" : "query",
+          "description" : "Source",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Sample Source"
+        }, {
+          "name" : "copyright",
+          "in" : "query",
+          "description" : "Copyright",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Sample Copyright"
+        }, {
+          "name" : "caption",
+          "in" : "query",
+          "description" : "Caption writer",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Caption writer"
+        }, {
+          "name" : "contact_info",
+          "in" : "query",
+          "description" : "Contact info. Query string based on key-value pairs. The available keys are - city, country, address, postal_code, region, email, phone, and url. For example, \"?contract_info=city,NYC,country,USA is equivalent to city being NYC and country being USA.",
+          "required" : false,
+          "style" : "form",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "city,NYC,country,USA"
+        }, {
+          "name" : "genre",
+          "in" : "query",
+          "description" : "Genre",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Sample genre"
+        }, {
+          "name" : "rights",
+          "in" : "query",
+          "description" : "Usage rights",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Sample usage rights"
+        }, {
+          "name" : "scene",
+          "in" : "query",
+          "description" : "Scene",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Sample scene"
+        }, {
+          "name" : "subject_code",
+          "in" : "query",
+          "description" : "Subject Code",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Sample Subject Code"
+        }, {
+          "name" : "caption_writer",
+          "in" : "query",
+          "description" : "Caption Writer",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Sample Writer"
+        }, {
+          "name" : "orientation",
+          "in" : "query",
+          "description" : "Orientation",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "horizontal", "vertical", "panoramic", "square" ]
+          },
+          "example" : "horizontal"
+        }, {
+          "name" : "web_statement",
+          "in" : "query",
+          "description" : "Web statement",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "Sample Web Statement"
+        }, {
+          "name" : "is_empty",
+          "in" : "query",
+          "description" : "Denotes which parameters must be empty. Comma-separated list.",
+          "required" : false,
+          "style" : "form",
+          "explode" : false,
+          "schema" : {
+            "$ref" : "#/components/schemas/MediaSearchEmpty"
+          },
+          "example" : "title, edit_status,urgency"
+        }, {
+          "name" : "not_empty",
+          "in" : "query",
+          "description" : "Denotes which parameters must have a value. Comma separated list.",
+          "required" : false,
+          "style" : "form",
+          "explode" : false,
+          "schema" : {
+            "$ref" : "#/components/schemas/MediaSearchEmpty"
+          },
+          "example" : "title,edit_status,urgency"
+        }, {
+          "name" : "match_all_terms",
+          "in" : "query",
+          "description" : "Match all terms. Return all keywords specified in the terms parameter. Default to true.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "example" : true
+        }, {
+          "name" : "per_page",
+          "in" : "query",
+          "description" : "Results per page.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          },
+          "example" : 50
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Page number.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          },
+          "example" : 1
+        }, {
+          "name" : "sort_by",
+          "in" : "query",
+          "description" : "Field to sort by.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "relevance", "date", "file_name", "upload_time" ]
+          },
+          "example" : "relevance"
+        }, {
+          "name" : "sort_dir",
+          "in" : "query",
+          "description" : "Direction to sort by.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "asc", "desc" ]
+          },
+          "example" : "asc"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "/media - HTTP 200 OK Response.\n",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_14"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "403 Forbidden Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              }
+            }
+          },
+          "429" : {
+            "description" : "429 Too Many Requests Error",
+            "headers" : {
+              "Retry-After" : {
+                "description" : "The Retry-After response HTTP header, expressed in seconds, indicates how long the user agent should wait before making a follow-up request.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                },
+                "example" : 180
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "TooManyRequestsException",
+                    "status" : "429",
+                    "title" : "Too Many Requests",
+                    "detail" : "The user has sent too many requests in a given amount of time see \"rate limiting\"."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/media/{media_id}" : {
+      "get" : {
+        "tags" : [ "Media" ],
+        "summary" : "GET /media/{media_id}.",
+        "description" : "Get media by ID. This endpoint works for both public and authenticated users. Certain fields are non-null only if users have the permission to view them. Users must provide a valid media ID which can be a video, document, audio, or image id. This endpoint will return data corresponding with the type of media that was retrieved.",
+        "operationId" : "mediaGetId",
+        "parameters" : [ {
+          "name" : "media_id",
+          "in" : "path",
+          "description" : "A media ID. Either a video, doc, audio, or image",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "$ref" : "#/components/schemas/schema_2"
+          },
+          "example" : "I0000EXAMPLEIMAG"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "/media/{media_id} - HTTP 200 OK Response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_15"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_16"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 Bad Request Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ThisShouldBeARealId",
+                    "status" : "400",
+                    "title" : "Bad Request / Syntax",
+                    "detail" : "Bad Request"
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "401 Unauthorized Client Error",
+            "headers" : {
+              "WWW-Authenticate" : {
+                "description" : "The HTTP WWW-Authenticate response header defines the authentication method that should be used to gain access to a resource.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "WWW-Authenticate: Bearer"
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "AcsPermissionException",
+                    "status" : "401",
+                    "title" : "Invalid access to resource: Gallery",
+                    "detail" : "You are not authorized to view this resource."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "403 Forbidden Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "error" : {
+                    "id" : "ApiKeyInvalidException",
+                    "status" : "403",
+                    "title" : "Missing or invalid API key",
+                    "detail" : "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "404 Not Found Client Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "ResourceNotFoundException",
+                    "status" : "404",
+                    "title" : "Resource not found",
+                    "detail" : "The requested resource was not found."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429" : {
+            "description" : "429 Too Many Requests Error",
+            "headers" : {
+              "Retry-After" : {
+                "description" : "The Retry-After response HTTP header, expressed in seconds, indicates how long the user agent should wait before making a follow-up request.",
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "integer"
+                },
+                "example" : 180
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "example" : {
+                  "errors" : {
+                    "id" : "TooManyRequestsException",
+                    "status" : "429",
+                    "title" : "Too Many Requests",
+                    "detail" : "The user has sent too many requests in a given amount of time see \"rate limiting\"."
+                  }
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "GalleryId" : {
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
+        "type" : "string",
+        "description" : "The Gallery ID",
+        "example" : "G0000EXAMPLEGALL"
+      },
+      "Gallery" : {
+        "required" : [ "attributes", "id", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Gallery ID",
+            "example" : "G0000EXAMPLE_GAL",
+            "xml" : {
+              "attribute" : true
+            }
+          },
+          "type" : {
+            "pattern" : "gallery",
+            "type" : "string",
+            "example" : "gallery"
+          },
+          "attributes" : {
+            "$ref" : "#/components/schemas/Gallery_attributes"
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/Gallery_links"
+          }
+        }
+      },
+      "MetaTag" : {
+        "type" : "object",
+        "properties" : {
+          "copyright" : {
+            "type" : "string",
+            "example" : "PhotoShelter 2019"
+          },
+          "version" : {
+            "type" : "string",
+            "example" : "2019-05-01"
+          },
+          "rate_limit" : {
+            "$ref" : "#/components/schemas/MetaTag_rate_limit"
+          }
+        }
+      },
+      "Error" : {
+        "required" : [ "errors" ],
+        "type" : "object",
+        "properties" : {
+          "errors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Error_errors"
+            }
+          }
+        },
+        "description" : "This object generates errors in compliance with RFC 7807 API Problem"
+      },
+      "CollectionId" : {
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^C0000[a-zA-Z0-9._]{11}$",
+        "type" : "string",
+        "description" : "The Collection ID",
+        "example" : "C0000EXAMPLECOLL"
+      },
+      "GalleryChildren" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/GalleryChildren_inner"
+        }
+      },
+      "PaginationMetaTag" : {
+        "type" : "object",
+        "properties" : {
+          "paging" : {
+            "$ref" : "#/components/schemas/PaginationMetaTag_paging"
+          }
+        }
+      },
+      "schema" : {
+        "title" : "My Gallery Test",
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
+        "type" : "string",
+        "description" : "My gallery description",
+        "example" : "G0000c1x4UMGPvkY"
+      },
+      "GalleryCover" : {
+        "required" : [ "id", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "maxLength" : 16,
+            "minLength" : 16,
+            "pattern" : "^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Any media id",
+            "example" : "I0000zCtew4UPbBw"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "The type of media",
+            "enum" : [ "image", "video", "document", "audio" ]
+          }
+        }
+      },
+      "schema_2" : {
+        "title" : "My Collection Test",
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^C0000[a-zA-Z0-9._]{11}$",
+        "type" : "string",
+        "description" : "My collection description",
+        "example" : "C0000c1x4UMGPvkY"
+      },
+      "GalleryChildrenMetaTag" : {
+        "type" : "object",
+        "properties" : {
+          "children_count" : {
+            "$ref" : "#/components/schemas/GalleryChildrenMetaTag_children_count"
+          },
+          "paging" : {
+            "$ref" : "#/components/schemas/PaginationMetaTag_paging"
+          }
+        }
+      },
+      "Mode" : {
+        "type" : "string",
+        "description" : "Mode",
+        "example" : "everyone",
+        "enum" : [ "permission", "private", "everyone" ]
+      },
+      "Permission" : {
+        "required" : [ "attributes", "id", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "pattern" : "^AR000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Permission ID",
+            "example" : "AR000EXAMPLE_PMS"
+          },
+          "type" : {
+            "type" : "string",
+            "example" : "token",
+            "enum" : [ "contact", "group", "token", "access_level", "password" ]
+          },
+          "attributes" : {
+            "$ref" : "#/components/schemas/Permission_attributes"
+          }
+        }
+      },
+      "InheritedPermissions" : {
+        "required" : [ "collection_id", "mode", "native_mode", "permissions" ],
+        "type" : "object",
+        "properties" : {
+          "mode" : {
+            "$ref" : "#/components/schemas/Mode"
+          },
+          "native_mode" : {
+            "$ref" : "#/components/schemas/Mode"
+          },
+          "collection_id" : {
+            "$ref" : "#/components/schemas/CollectionId"
+          },
+          "permissions" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Permission"
+            }
+          }
+        }
+      },
+      "Collection" : {
+        "required" : [ "attributes", "id", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "pattern" : "^C0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Collection Id",
+            "example" : "C0000EXAMPLECOLL"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "Type"
+          },
+          "attributes" : {
+            "$ref" : "#/components/schemas/Collection_attributes"
+          }
+        }
+      },
+      "CollectionChildren" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/CollectionChildren_inner"
+        }
+      },
+      "CollectionChildrenMetaTag" : {
+        "type" : "object",
+        "properties" : {
+          "children_count" : {
+            "$ref" : "#/components/schemas/CollectionChildrenMetaTag_children_count"
+          },
+          "paging" : {
+            "$ref" : "#/components/schemas/PaginationMetaTag_paging"
+          }
+        }
+      },
+      "ChildGallery" : {
+        "required" : [ "attributes", "id", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Gallery ID",
+            "example" : "G0000EXAMPLE_GAL",
+            "xml" : {
+              "attribute" : true
+            }
+          },
+          "type" : {
+            "pattern" : "gallery",
+            "type" : "string",
+            "example" : "gallery"
+          },
+          "attributes" : {
+            "$ref" : "#/components/schemas/ChildGallery_attributes"
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/Gallery_links"
+          }
+        }
+      },
+      "ChildCollection" : {
+        "required" : [ "attributes", "id", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "pattern" : "^C0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Collection Id",
+            "example" : "C0000EXAMPLECOLL"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "Type"
+          },
+          "attributes" : {
+            "$ref" : "#/components/schemas/ChildCollection_attributes"
+          }
+        }
+      },
+      "KeyImage" : {
+        "required" : [ "attributes", "id", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "pattern" : "^I0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Image ID",
+            "example" : "I0000EXAMPLE_IMG"
+          },
+          "type" : {
+            "pattern" : "keyImage",
+            "type" : "string",
+            "example" : "keyImage"
+          },
+          "attributes" : {
+            "$ref" : "#/components/schemas/KeyImage_attributes"
+          }
+        }
+      },
+      "ImageId" : {
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^I0000[a-zA-Z0-9._]{11}$",
+        "type" : "string",
+        "description" : "The Image ID",
+        "example" : "I0000EXAMPLE_IMG"
+      },
+      "MediaSearchEmpty" : {
+        "type" : "array",
+        "items" : {
+          "type" : "string",
+          "enum" : [ "title", "edit_status", "urgency", "category", "keywords", "instructions", "author", "position", "location", "city", "state", "country", "headline", "trans_ref", "credit", "source", "copyright", "caption", "caption_writer", "ci_city", "ci_country", "ci_address", "ci_postal_code", "ci_region", "ci_email", "ci_phone", "ci_url", "genre", "rights", "scene", "subject_code", "web_statement" ]
+        }
+      },
+      "Media" : {
+        "required" : [ "attributes", "id", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "pattern" : "^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "example" : "I0000zCtew4UPbBw"
+          },
+          "type" : {
+            "type" : "string",
+            "example" : "media",
+            "enum" : [ "media" ]
+          },
+          "attributes" : {
+            "$ref" : "#/components/schemas/Media_attributes"
+          }
+        }
+      },
+      "MediaGetObject" : {
+        "required" : [ "attributes", "id", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "maxLength" : 16,
+            "minLength" : 16,
+            "pattern" : "^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "example" : "I0000zCtew4UPbBw"
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "image", "document", "audio", "video" ]
+          },
+          "attributes" : {
+            "anyOf" : [ {
+              "$ref" : "#/components/schemas/MediaImage"
+            }, {
+              "$ref" : "#/components/schemas/MediaAudio"
+            }, {
+              "$ref" : "#/components/schemas/MediaDocument"
+            }, {
+              "$ref" : "#/components/schemas/MediaVideo"
+            } ]
+          }
+        }
+      },
+      "MediaImage" : {
+        "required" : [ "created_at", "creator_id", "file_name", "file_size", "flagged", "focal_point_x", "focal_point_y", "height", "model_released", "modified_at", "organization_id", "owner_id", "photographer_id", "property_released", "rating", "screen_height", "screen_height_max", "screen_width", "screen_width_max", "searchable", "thumbnail_height", "thumbnail_width", "views", "width" ],
+        "type" : "object",
+        "properties" : {
+          "owner_id" : {
+            "$ref" : "#/components/schemas/UserIdNullable"
+          },
+          "organization_id" : {
+            "$ref" : "#/components/schemas/OrganizationId"
+          },
+          "creator_id" : {
+            "$ref" : "#/components/schemas/UserId"
+          },
+          "photographer_id" : {
+            "$ref" : "#/components/schemas/PhotographerId"
+          },
+          "file_name" : {
+            "type" : "string",
+            "description" : "The name of the file",
+            "example" : "File Name"
+          },
+          "file_size" : {
+            "type" : "integer",
+            "description" : "The size of the file in bytes",
+            "example" : 10000
+          },
+          "height" : {
+            "type" : "integer",
+            "description" : "Native image height in pixels",
+            "example" : 1000
+          },
+          "width" : {
+            "type" : "integer",
+            "description" : "Native image width in pixels",
+            "example" : 600
+          },
+          "rating" : {
+            "type" : "number",
+            "description" : "The image rating from -1 to 5",
+            "nullable" : true,
+            "example" : 3
+          },
+          "screen_height" : {
+            "type" : "integer",
+            "description" : "Screen image height in pixels",
+            "nullable" : true,
+            "example" : 1000
+          },
+          "screen_width" : {
+            "type" : "integer",
+            "description" : "Screen image width in pixels",
+            "nullable" : true,
+            "example" : 600
+          },
+          "screen_height_max" : {
+            "type" : "integer",
+            "description" : "Max screen image height in pixels",
+            "nullable" : true,
+            "example" : 10000
+          },
+          "screen_width_max" : {
+            "type" : "integer",
+            "description" : "Max screen image width in pixels",
+            "nullable" : true,
+            "example" : 6000
+          },
+          "thumbnail_height" : {
+            "type" : "integer",
+            "description" : "Thumbnail height in pixels",
+            "nullable" : true,
+            "example" : 200
+          },
+          "thumbnail_width" : {
+            "type" : "integer",
+            "description" : "Thumbnail width in pixels",
+            "nullable" : true,
+            "example" : 180
+          },
+          "views" : {
+            "type" : "integer",
+            "description" : "View counter for the image",
+            "nullable" : true,
+            "example" : 0
+          },
+          "searchable" : {
+            "type" : "boolean",
+            "description" : "Boolean flag that denotes if the image is publicly searchable",
+            "nullable" : true,
+            "example" : true
+          },
+          "model_released" : {
+            "type" : "boolean",
+            "description" : "Boolean flag that denotes if the image model is released",
+            "nullable" : true,
+            "example" : true
+          },
+          "property_released" : {
+            "type" : "boolean",
+            "description" : "Boolean flag that denotes if the image property is released",
+            "nullable" : true,
+            "example" : true
+          },
+          "flagged" : {
+            "type" : "boolean",
+            "description" : "Boolean flag that denotes if the image has been flagged by the photographer",
+            "nullable" : true,
+            "example" : true
+          },
+          "focal_point_x" : {
+            "type" : "integer",
+            "description" : "Core product specific variable. Denotes the focal point of the image on the x-coordinate plane",
+            "nullable" : true,
+            "example" : 100
+          },
+          "focal_point_y" : {
+            "type" : "integer",
+            "description" : "Core product specific variabnle. Denotes the focal point of the image on the y-coordinate plane",
+            "nullable" : true,
+            "example" : 100
+          },
+          "created_at" : {
+            "type" : "string",
+            "description" : "Date and time the image was last updated",
+            "nullable" : true,
+            "example" : "2019-10-02 14:39:23 GMT"
+          },
+          "modified_at" : {
+            "type" : "string",
+            "description" : "Date and time the image was originally uploaded",
+            "nullable" : true,
+            "example" : "2019-10-02 14:39:23 GMT"
+          }
+        }
+      },
+      "UserIdNullable" : {
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^U0000[a-zA-Z0-9._]{11}$",
+        "type" : "string",
+        "description" : "User Id",
+        "nullable" : true,
+        "example" : "U0000EXAMPLEUSER"
+      },
+      "OrganizationId" : {
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^O0000[a-zA-Z0-9._]{11}$",
+        "type" : "string",
+        "description" : "Organization Id",
+        "nullable" : true,
+        "example" : "O0000EXAMPLE_OWN"
+      },
+      "UserId" : {
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^U0000[a-zA-Z0-9._]{11}$",
+        "type" : "string",
+        "description" : "User Id",
+        "example" : "U0000EXAMPLEUSER"
+      },
+      "PhotographerId" : {
+        "maxLength" : 16,
+        "minLength" : 16,
+        "pattern" : "^U0000[a-zA-Z0-9._]{11}$",
+        "type" : "string",
+        "description" : "Photographer Id",
+        "nullable" : true,
+        "example" : "U0000EXAMPLEUSER"
+      },
+      "MediaAudio" : {
+        "required" : [ "created_at", "creator_id", "duration", "file_name", "file_size", "format", "hash", "model_released", "modified_at", "owner_id", "property_released", "rating", "start_time" ],
+        "type" : "object",
+        "properties" : {
+          "owner_id" : {
+            "$ref" : "#/components/schemas/UserIdNullable"
+          },
+          "file_name" : {
+            "type" : "string",
+            "description" : "The name of the file",
+            "example" : "File Name"
+          },
+          "file_size" : {
+            "type" : "integer",
+            "description" : "The size of the file in bytes",
+            "example" : 10000
+          },
+          "start_time" : {
+            "type" : "number",
+            "description" : "Start time of the audio",
+            "example" : 0.05
+          },
+          "duration" : {
+            "type" : "number",
+            "description" : "Duration of the audio file",
+            "example" : 25
+          },
+          "format" : {
+            "type" : "string",
+            "description" : "Format of the audio file",
+            "example" : "mp3"
+          },
+          "hash" : {
+            "type" : "string",
+            "description" : "Audio file SHA-1 hash",
+            "nullable" : true,
+            "example" : "051a007701ae51921e2e5eec19dfeexamplehash"
+          },
+          "creator_id" : {
+            "$ref" : "#/components/schemas/UserIdNullable"
+          },
+          "model_released" : {
+            "type" : "boolean",
+            "description" : "Boolean denoting if the model is released",
+            "nullable" : true,
+            "example" : true
+          },
+          "property_released" : {
+            "type" : "boolean",
+            "description" : "Boolean denoting if the property is released",
+            "nullable" : true,
+            "example" : true
+          },
+          "rating" : {
+            "type" : "number",
+            "description" : "Rating",
+            "nullable" : true,
+            "example" : 3
+          },
+          "created_at" : {
+            "type" : "string",
+            "description" : "Date and time the audio was last updated",
+            "nullable" : true,
+            "example" : "2019-10-02 14:39:23 GMT"
+          },
+          "modified_at" : {
+            "type" : "string",
+            "description" : "Date and time the audio was originally uploaded",
+            "nullable" : true,
+            "example" : "2019-10-02 14:39:23 GMT"
+          }
+        }
+      },
+      "MediaDocument" : {
+        "required" : [ "created_at", "creator_id", "file_name", "file_size", "format", "format_readable", "hash", "modified_at", "organization_id", "owner_id", "rating" ],
+        "type" : "object",
+        "properties" : {
+          "owner_id" : {
+            "$ref" : "#/components/schemas/UserIdNullable"
+          },
+          "creator_id" : {
+            "$ref" : "#/components/schemas/UserId"
+          },
+          "organization_id" : {
+            "$ref" : "#/components/schemas/OrganizationId"
+          },
+          "file_name" : {
+            "type" : "string",
+            "description" : "File Name",
+            "example" : "Example File Name"
+          },
+          "file_size" : {
+            "type" : "integer",
+            "description" : "File size in bytes",
+            "example" : 100000
+          },
+          "format" : {
+            "type" : "string",
+            "description" : "Describes the format of the file",
+            "example" : "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          },
+          "format_readable" : {
+            "type" : "string",
+            "description" : "Format Readable",
+            "example" : "Microsoft Word"
+          },
+          "hash" : {
+            "type" : "string",
+            "description" : "Hash encryption of the file",
+            "nullable" : true,
+            "example" : "051a007701ae51921e2e5eec19dfeexamplehash"
+          },
+          "rating" : {
+            "type" : "number",
+            "description" : "Document rating",
+            "nullable" : true,
+            "example" : 1
+          },
+          "created_at" : {
+            "type" : "string",
+            "description" : "Date and time the document was last updated",
+            "nullable" : true,
+            "example" : "2019-10-02 14:39:23 GMT"
+          },
+          "modified_at" : {
+            "type" : "string",
+            "description" : "Date and time the document was originally uploaded",
+            "nullable" : true,
+            "example" : "2019-10-02 14:39:23 GMT"
+          }
+        }
+      },
+      "MediaVideo" : {
+        "required" : [ "created_at", "creator_id", "duration", "file_name", "file_size", "format", "hash", "height", "model_released", "modified_at", "owner_id", "photographer_id", "property_released", "rating", "rotate", "start_time", "width" ],
+        "type" : "object",
+        "properties" : {
+          "owner_id" : {
+            "$ref" : "#/components/schemas/UserIdNullable"
+          },
+          "file_name" : {
+            "type" : "string",
+            "description" : "File name",
+            "example" : "Sample file name"
+          },
+          "file_size" : {
+            "type" : "integer",
+            "description" : "File size in bytes",
+            "example" : 100000
+          },
+          "rotate" : {
+            "type" : "number",
+            "description" : "Video rotation in degrees",
+            "example" : 30.0
+          },
+          "height" : {
+            "type" : "integer",
+            "description" : "Video height in pixels",
+            "example" : 360
+          },
+          "width" : {
+            "type" : "integer",
+            "description" : "Video width in pixels",
+            "example" : 640
+          },
+          "start_time" : {
+            "type" : "number",
+            "description" : "Video start time",
+            "example" : 0
+          },
+          "duration" : {
+            "type" : "number",
+            "description" : "Duration of the video",
+            "example" : 30.0
+          },
+          "format" : {
+            "type" : "string",
+            "description" : "Video format",
+            "example" : "x-ms-asf"
+          },
+          "photographer_id" : {
+            "$ref" : "#/components/schemas/UserIdNullable"
+          },
+          "creator_id" : {
+            "$ref" : "#/components/schemas/UserIdNullable"
+          },
+          "hash" : {
+            "type" : "string",
+            "description" : "Hash Encryption of the file",
+            "nullable" : true,
+            "example" : "051a007701ae51921e2e5eec19dfeexamplehash"
+          },
+          "model_released" : {
+            "type" : "boolean",
+            "description" : "Boolean flag denoting if the model is released",
+            "nullable" : true,
+            "example" : true
+          },
+          "property_released" : {
+            "type" : "boolean",
+            "description" : "Boolean flag denoting if the property is released",
+            "nullable" : true,
+            "example" : true
+          },
+          "rating" : {
+            "type" : "number",
+            "description" : "Rating",
+            "nullable" : true,
+            "example" : 1
+          },
+          "created_at" : {
+            "type" : "string",
+            "description" : "Date and time the document was last updated",
+            "nullable" : true,
+            "example" : "2019-10-02 14:39:23 GMT"
+          },
+          "modified_at" : {
+            "type" : "string",
+            "description" : "Date and time the document was originally uploaded",
+            "nullable" : true,
+            "example" : "2019-10-02 14:39:23 GMT"
+          }
+        }
+      },
+      "inline_response_200" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "$ref" : "#/components/schemas/Gallery"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/MetaTag"
+          }
+        }
+      },
+      "inline_response_200_1" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "$ref" : "#/components/schemas/GalleryChildren"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/PaginationMetaTag"
+          }
+        }
+      },
+      "inline_response_200_2" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/GalleryCover"
+            }
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/MetaTag"
+          }
+        }
+      },
+      "inline_response_200_3" : {
+        "required" : [ "meta" ],
+        "type" : "object",
+        "properties" : {
+          "meta" : {
+            "$ref" : "#/components/schemas/GalleryChildrenMetaTag"
+          }
+        }
+      },
+      "inline_response_200_4" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "$ref" : "#/components/schemas/inline_response_200_4_data"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/MetaTag"
+          }
+        }
+      },
+      "inline_response_200_5" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "$ref" : "#/components/schemas/inline_response_200_5_data"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/MetaTag"
+          }
+        }
+      },
+      "inline_response_200_6" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Collection"
+            }
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/PaginationMetaTag"
+          }
+        }
+      },
+      "inline_response_200_7" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Collection"
+            }
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/MetaTag"
+          }
+        }
+      },
+      "inline_response_200_8" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "$ref" : "#/components/schemas/Collection"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/MetaTag"
+          }
+        }
+      },
+      "inline_response_200_9" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "$ref" : "#/components/schemas/CollectionChildren"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/CollectionChildrenMetaTag"
+          }
+        }
+      },
+      "inline_response_200_10" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "oneOf" : [ {
+              "$ref" : "#/components/schemas/ChildGallery"
+            }, {
+              "$ref" : "#/components/schemas/ChildCollection"
+            } ]
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/MetaTag"
+          }
+        }
+      },
+      "inline_response_200_11" : {
+        "required" : [ "meta" ],
+        "type" : "object",
+        "properties" : {
+          "meta" : {
+            "$ref" : "#/components/schemas/CollectionChildrenMetaTag"
+          }
+        }
+      },
+      "inline_response_200_12" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "$ref" : "#/components/schemas/inline_response_200_12_data"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/MetaTag"
+          }
+        }
+      },
+      "inline_response_200_13" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "$ref" : "#/components/schemas/KeyImage"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/MetaTag"
+          }
+        }
+      },
+      "inline_response_200_14" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Media"
+            }
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/PaginationMetaTag"
+          }
+        }
+      },
+      "inline_response_200_15" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "$ref" : "#/components/schemas/MediaGetObject"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/MetaTag"
+          }
+        },
+        "example" : {
+          "data" : {
+            "id" : "VD000EXAMPLE_VID",
+            "type" : "video",
+            "attributes" : {
+              "file_name" : "Sample Video",
+              "file_size" : 10000,
+              "rotate" : 0,
+              "height" : 640,
+              "width" : 360,
+              "start_time" : 0,
+              "duration" : 60,
+              "creator_id" : "U0000EXAMPLEUSER",
+              "hash" : "051a007701ae51921e2e5eec19dfeexamplehash",
+              "model_released" : true,
+              "property_released" : true,
+              "rating" : 1,
+              "updated_at" : "2019-10-02 14:39:23 GMT",
+              "uploaded_at" : "2019-10-02 14:39:23 GMT"
+            }
+          },
+          "meta" : {
+            "copyright" : "PhotoShelter 2019",
+            "version" : "2019-05-01",
+            "rate_limit" : {
+              "limit" : 10,
+              "current" : 1,
+              "expires" : 40
+            }
+          }
+        }
+      },
+      "inline_response_200_16" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "$ref" : "#/components/schemas/MediaGetObject"
+          },
+          "meta" : {
+            "$ref" : "#/components/schemas/MetaTag"
+          }
+        }
+      },
+      "Gallery_attributes" : {
+        "required" : [ "access_id", "created_at", "description", "display_order", "is_listed", "is_orig_enabled", "is_watermark_disabled", "key_image_id", "modified_at", "name", "name_url" ],
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "maxLength" : 100,
+            "type" : "string",
+            "description" : "Name of Gallery or Collection object (Whichever it is)",
+            "example" : "My trip to DR"
+          },
+          "name_url" : {
+            "maxLength" : 100,
+            "type" : "string",
+            "description" : "URL to the gallery",
+            "nullable" : true
+          },
+          "description" : {
+            "maxLength" : 100,
+            "type" : "string",
+            "description" : "Description of the Gallery",
+            "nullable" : true,
+            "example" : "Trip to DR with my brothers and sisters"
+          },
+          "display_order" : {
+            "type" : "integer",
+            "description" : "Custom display order",
+            "example" : 1
+          },
+          "key_image_id" : {
+            "pattern" : "^GI000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "ID of the Image that is the key image",
+            "nullable" : true,
+            "example" : "GI000EXAMPLE_IMG"
+          },
+          "access_id" : {
+            "pattern" : "^A0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Access ID of the Gallery",
+            "example" : "A0000EXAMPLE_ACS"
+          },
+          "is_listed" : {
+            "type" : "boolean",
+            "description" : "Flag that denotes if it is listed on the public site",
+            "example" : false
+          },
+          "is_orig_enabled" : {
+            "type" : "boolean",
+            "description" : "Original enabled boolean value",
+            "example" : true
+          },
+          "is_watermark_disabled" : {
+            "type" : "boolean",
+            "description" : "Watermark disabled boolean value",
+            "example" : true
+          },
+          "created_at" : {
+            "type" : "string",
+            "description" : "Creation date",
+            "example" : "2019-04-25T14:54:12.136828"
+          },
+          "modified_at" : {
+            "type" : "string",
+            "description" : "Last modified date",
+            "example" : "2019-04-25T14:54:12.136828"
+          }
+        }
+      },
+      "Gallery_links" : {
+        "type" : "object",
+        "properties" : {
+          "self" : {
+            "type" : "string",
+            "description" : "Link to itself",
+            "example" : "https://api.photoshelter.com/psapi/v4/galleries/G0000ZJCk9LW4Zfc"
+          }
+        }
+      },
+      "MetaTag_rate_limit" : {
+        "type" : "object",
+        "properties" : {
+          "limit" : {
+            "type" : "integer",
+            "example" : 10
+          },
+          "current" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "expires" : {
+            "type" : "integer",
+            "example" : 40
+          }
+        }
+      },
+      "Error_links" : {
+        "type" : "object",
+        "properties" : {
+          "about" : {
+            "type" : "string",
+            "example" : "http://api.developer.com/404.html"
+          }
+        }
+      },
+      "Error_errors" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "A unique identifier for this occurrence of the problem"
+          },
+          "links" : {
+            "$ref" : "#/components/schemas/Error_links"
+          },
+          "title" : {
+            "type" : "string",
+            "description" : "A short, human-readable summary of the problem type"
+          },
+          "status" : {
+            "type" : "string",
+            "description" : "The HTTP status code set by the origin server for this occurrence of the problem."
+          },
+          "detail" : {
+            "type" : "string",
+            "description" : "An human readable explanation specific to this occurrence of the problem."
+          }
+        }
+      },
+      "GalleryChildren_inner" : {
+        "required" : [ "attributes", "id", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "pattern" : "^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Media ID. Can be an audio, video, image, or document ID.",
+            "example" : "I0000EXAMPLEIMAG"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "The type of media",
+            "example" : "image",
+            "enum" : [ "video", "image", "document", "audio" ]
+          },
+          "attributes" : {
+            "required" : [ "display_order" ],
+            "type" : "object",
+            "properties" : {
+              "display_order" : {
+                "type" : "integer",
+                "nullable" : true,
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "PaginationMetaTag_paging" : {
+        "type" : "object",
+        "properties" : {
+          "total" : {
+            "type" : "integer",
+            "example" : 100
+          },
+          "page" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "first" : {
+            "type" : "string",
+            "example" : "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1"
+          },
+          "last" : {
+            "type" : "string",
+            "example" : "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=5"
+          },
+          "next" : {
+            "type" : "string",
+            "example" : "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=2"
+          },
+          "prev" : {
+            "type" : "string",
+            "example" : "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1"
+          }
+        }
+      },
+      "GalleryChildrenMetaTag_children_count" : {
+        "type" : "object",
+        "properties" : {
+          "total" : {
+            "type" : "integer",
+            "description" : "Total children count",
+            "example" : 10
+          },
+          "audio" : {
+            "type" : "integer",
+            "description" : "Audio count",
+            "example" : 2
+          },
+          "video" : {
+            "type" : "integer",
+            "description" : "Video count",
+            "example" : 3
+          },
+          "document" : {
+            "type" : "integer",
+            "description" : "Document count",
+            "example" : 1
+          },
+          "image" : {
+            "type" : "integer",
+            "description" : "Image count",
+            "example" : 4
+          }
+        }
+      },
+      "Permission_attributes" : {
+        "required" : [ "access_level", "contact_id", "download_audio_filetype", "download_doc_filetype", "download_image_embed", "download_image_filetype", "download_image_size", "download_video_filetype", "download_video_format", "expires", "group_id", "max_downloads", "password", "token" ],
+        "type" : "object",
+        "properties" : {
+          "expires" : {
+            "type" : "string",
+            "description" : "Expiration Date",
+            "nullable" : true,
+            "example" : "2019-04-25T14:54:12.136828"
+          },
+          "contact_id" : {
+            "pattern" : "^CT000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Contact ID",
+            "nullable" : true,
+            "example" : "CT000EXAMPLE_CNT"
+          },
+          "group_id" : {
+            "pattern" : "^CTG00[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Contact Group ID",
+            "nullable" : true,
+            "example" : "CTG00EXAMPLE_CTG"
+          },
+          "access_level" : {
+            "maxLength" : 10,
+            "type" : "string",
+            "description" : "Access Level (OPEN)",
+            "nullable" : true,
+            "example" : "OPEN"
+          },
+          "password" : {
+            "maxLength" : 20,
+            "type" : "string",
+            "description" : "Password",
+            "nullable" : true,
+            "example" : "Open Sesame"
+          },
+          "token" : {
+            "maxLength" : 32,
+            "type" : "string",
+            "description" : "Access Token",
+            "nullable" : true,
+            "example" : "Token123456789"
+          },
+          "max_downloads" : {
+            "type" : "integer",
+            "description" : "Max Downloads",
+            "nullable" : true,
+            "example" : 99
+          },
+          "download_image_filetype" : {
+            "type" : "string",
+            "description" : "Download Image FileType (original | jpeg)",
+            "nullable" : true,
+            "example" : "original",
+            "enum" : [ "original", "jpeg" ]
+          },
+          "download_image_size" : {
+            "type" : "integer",
+            "description" : "Download Image Size (number of pixels of longest dimension)",
+            "nullable" : true,
+            "example" : 1200
+          },
+          "download_image_embed" : {
+            "type" : "boolean",
+            "description" : "Download Image Embed (true | false)",
+            "nullable" : true,
+            "example" : true
+          },
+          "download_video_filetype" : {
+            "type" : "string",
+            "description" : "Download Video FileType (original | mp4)",
+            "nullable" : true,
+            "example" : "original",
+            "enum" : [ "original", "mp4" ]
+          },
+          "download_video_format" : {
+            "type" : "string",
+            "description" : "Download Video Format (hd1080 | hd720 | sd480)",
+            "nullable" : true,
+            "example" : "hd1080",
+            "enum" : [ "hd1080", "hd720", "sd480" ]
+          },
+          "download_audio_filetype" : {
+            "type" : "string",
+            "description" : "Download Audio FileType (original)",
+            "nullable" : true,
+            "example" : "original",
+            "enum" : [ "original" ]
+          },
+          "download_doc_filetype" : {
+            "type" : "string",
+            "description" : "Download Doc FileType (original)",
+            "nullable" : true,
+            "example" : "original",
+            "enum" : [ "original" ]
+          }
+        }
+      },
+      "Collection_attributes" : {
+        "required" : [ "access_id", "created_at", "description", "display_order", "is_listed", "modified_at", "name", "name_url", "org_id" ],
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "maxLength" : 100,
+            "type" : "string",
+            "description" : "Name of the collection",
+            "example" : "My Trip to DR"
+          },
+          "org_id" : {
+            "type" : "string",
+            "description" : "ID of the organization that the collection belongs to.",
+            "nullable" : true,
+            "example" : "O0000EXAMPLE_ORG"
+          },
+          "name_url" : {
+            "maxLength" : 100,
+            "type" : "string",
+            "description" : "URL to the gallery",
+            "nullable" : true
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Description of the colletion",
+            "nullable" : true,
+            "example" : "My Trip to DR Collection"
+          },
+          "display_order" : {
+            "type" : "integer",
+            "description" : "Display order",
+            "example" : 1
+          },
+          "access_id" : {
+            "pattern" : "^A0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Access ID",
+            "nullable" : true,
+            "example" : "A0000EXAMPLE_ACS"
+          },
+          "is_listed" : {
+            "type" : "boolean",
+            "description" : "Is listed on public site",
+            "example" : false
+          },
+          "created_at" : {
+            "type" : "string",
+            "description" : "Creation date",
+            "nullable" : true,
+            "example" : "2019-04-25T14:54:12.136828"
+          },
+          "modified_at" : {
+            "type" : "string",
+            "description" : "Modified Date",
+            "nullable" : true,
+            "example" : "2019-04-25T14:54:12.136828"
+          }
+        }
+      },
+      "CollectionChildren_inner" : {
+        "required" : [ "attributes", "id", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "pattern" : "^(G|C)0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Gallery or collection id",
+            "example" : "G0000EXAMPLE_GAL"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "Gallery or collection",
+            "example" : "gallery",
+            "enum" : [ "gallery", "collection" ]
+          },
+          "attributes" : {
+            "required" : [ "access_inherit", "effective_mode", "mode" ],
+            "type" : "object",
+            "properties" : {
+              "mode" : {
+                "type" : "string",
+                "example" : "private"
+              },
+              "effective_mode" : {
+                "type" : "string",
+                "example" : "private"
+              },
+              "access_inherit" : {
+                "type" : "boolean",
+                "example" : true
+              }
+            }
+          }
+        }
+      },
+      "CollectionChildrenMetaTag_children_count" : {
+        "type" : "object",
+        "properties" : {
+          "total" : {
+            "type" : "integer",
+            "description" : "Total children count"
+          },
+          "galleries" : {
+            "type" : "integer",
+            "description" : "Gallery count",
+            "example" : 10
+          },
+          "collections" : {
+            "type" : "integer",
+            "description" : "Collection count",
+            "example" : 10
+          }
+        }
+      },
+      "ChildGallery_attributes" : {
+        "required" : [ "access_id", "created_at", "description", "display_order", "is_listed", "is_orig_enabled", "is_watermark_disabled", "key_image_id", "modified_at", "name", "name_url", "sort_order" ],
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "maxLength" : 100,
+            "type" : "string",
+            "description" : "Name of Gallery or Collection object (Whichever it is)",
+            "example" : "My trip to DR"
+          },
+          "name_url" : {
+            "maxLength" : 100,
+            "type" : "string",
+            "description" : "URL to the gallery",
+            "nullable" : true
+          },
+          "description" : {
+            "maxLength" : 100,
+            "type" : "string",
+            "description" : "Description of the Gallery",
+            "nullable" : true,
+            "example" : "Trip to DR with my brothers and sisters"
+          },
+          "display_order" : {
+            "type" : "integer",
+            "description" : "Custom display order",
+            "example" : 1
+          },
+          "key_image_id" : {
+            "pattern" : "^GI000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "ID of the Image that is the key image",
+            "nullable" : true,
+            "example" : "GI000EXAMPLE_IMG"
+          },
+          "access_id" : {
+            "pattern" : "^A0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Access ID of the Gallery",
+            "example" : "A0000EXAMPLE_ACS"
+          },
+          "is_listed" : {
+            "type" : "boolean",
+            "description" : "Flag that denotes if it is listed on the public site",
+            "example" : false
+          },
+          "is_orig_enabled" : {
+            "type" : "boolean",
+            "description" : "Original enabled boolean value",
+            "example" : true
+          },
+          "is_watermark_disabled" : {
+            "type" : "boolean",
+            "description" : "Watermark disabled boolean value",
+            "example" : true
+          },
+          "sort_order" : {
+            "type" : "integer",
+            "description" : "Sort order",
+            "example" : 1
+          },
+          "created_at" : {
+            "type" : "string",
+            "description" : "Creation date",
+            "example" : "2019-04-25T14:54:12.136828"
+          },
+          "modified_at" : {
+            "type" : "string",
+            "description" : "Last modified date",
+            "example" : "2019-04-25T14:54:12.136828"
+          }
+        }
+      },
+      "ChildCollection_attributes" : {
+        "required" : [ "access_id", "created_at", "description", "display_order", "is_listed", "modified_at", "name", "name_url", "org_id", "sort_order" ],
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "maxLength" : 100,
+            "type" : "string",
+            "description" : "Name of the collection",
+            "example" : "My Trip to DR"
+          },
+          "org_id" : {
+            "type" : "string",
+            "description" : "ID of the organization that the collection belongs to.",
+            "nullable" : true,
+            "example" : "O0000EXAMPLE_ORG"
+          },
+          "name_url" : {
+            "maxLength" : 100,
+            "type" : "string",
+            "description" : "URL to the gallery",
+            "nullable" : true
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Description of the colletion",
+            "nullable" : true,
+            "example" : "My Trip to DR Collection"
+          },
+          "display_order" : {
+            "type" : "integer",
+            "description" : "Display order",
+            "example" : 1
+          },
+          "access_id" : {
+            "pattern" : "^A0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Access ID",
+            "nullable" : true,
+            "example" : "A0000EXAMPLE_ACS"
+          },
+          "is_listed" : {
+            "type" : "boolean",
+            "description" : "Is listed on public site",
+            "example" : false
+          },
+          "sort_order" : {
+            "type" : "integer",
+            "description" : "Sort order",
+            "example" : 1
+          },
+          "created_at" : {
+            "type" : "string",
+            "description" : "Creation date",
+            "nullable" : true,
+            "example" : "2019-04-25T14:54:12.136828"
+          },
+          "modified_at" : {
+            "type" : "string",
+            "description" : "Modified Date",
+            "nullable" : true,
+            "example" : "2019-04-25T14:54:12.136828"
+          }
+        }
+      },
+      "KeyImage_attributes" : {
+        "required" : [ "custom", "image_id", "image_url", "public" ],
+        "type" : "object",
+        "properties" : {
+          "image_id" : {
+            "$ref" : "#/components/schemas/ImageId"
+          },
+          "gallery_id" : {
+            "$ref" : "#/components/schemas/GalleryId"
+          },
+          "collection_id" : {
+            "$ref" : "#/components/schemas/CollectionId"
+          },
+          "custom" : {
+            "type" : "boolean",
+            "description" : "Custom assigned gallery key image",
+            "example" : true
+          },
+          "image_url" : {
+            "type" : "string",
+            "description" : "Key image URL",
+            "nullable" : true,
+            "example" : "http://www.photoshelter.co/img-get/I0000EXAMPLE_IMG"
+          },
+          "public" : {
+            "type" : "boolean",
+            "description" : "Key Image is Public",
+            "nullable" : true,
+            "example" : true
+          }
+        }
+      },
+      "Media_attributes" : {
+        "required" : [ "file_name", "type" ],
+        "type" : "object",
+        "properties" : {
+          "file_name" : {
+            "type" : "string",
+            "example" : "Sample File Name"
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "image", "audio", "video", "doc" ]
+          }
+        }
+      },
+      "inline_response_200_4_data_attributes" : {
+        "required" : [ "mode", "native", "native_mode" ],
+        "type" : "object",
+        "properties" : {
+          "mode" : {
+            "$ref" : "#/components/schemas/Mode"
+          },
+          "native_mode" : {
+            "$ref" : "#/components/schemas/Mode"
+          },
+          "native" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Permission"
+            }
+          },
+          "inherited" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/InheritedPermissions"
+            }
+          }
+        }
+      },
+      "inline_response_200_4_data" : {
+        "required" : [ "attributes", "id", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "pattern" : "^(G|C)0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Resource ID",
+            "example" : "G0000EXAMPLE_GAL"
+          },
+          "type" : {
+            "pattern" : "permissions",
+            "type" : "string",
+            "example" : "permissions"
+          },
+          "attributes" : {
+            "$ref" : "#/components/schemas/inline_response_200_4_data_attributes"
+          }
+        }
+      },
+      "inline_response_200_5_data_attributes" : {
+        "required" : [ "Inherit", "Native", "mode", "native_mode" ],
+        "type" : "object",
+        "properties" : {
+          "Native" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Permission"
+            }
+          },
+          "Inherit" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Permission"
+            }
+          },
+          "mode" : {
+            "$ref" : "#/components/schemas/Mode"
+          },
+          "native_mode" : {
+            "$ref" : "#/components/schemas/Mode"
+          }
+        }
+      },
+      "inline_response_200_5_data" : {
+        "required" : [ "attributes", "id", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "pattern" : "^(G|C|I)0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Resource ID",
+            "example" : "G0000EXAMPLE_GAL"
+          },
+          "type" : {
+            "pattern" : "permissions",
+            "type" : "string",
+            "example" : "permissions"
+          },
+          "attributes" : {
+            "$ref" : "#/components/schemas/inline_response_200_5_data_attributes"
+          }
+        }
+      },
+      "inline_response_200_12_data_attributes" : {
+        "type" : "object",
+        "properties" : {
+          "url" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_200_12_data" : {
+        "required" : [ "attributes", "id", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "$ref" : "#/components/schemas/CollectionId"
+          },
+          "type" : {
+            "type" : "string",
+            "example" : "link"
+          },
+          "attributes" : {
+            "$ref" : "#/components/schemas/inline_response_200_12_data_attributes"
+          }
+        }
+      }
+    }
+  }
+}
