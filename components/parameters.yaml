@@ -1,0 +1,184 @@
+include:
+  in: query
+  name: include
+  schema:
+    type: string
+  required: false
+  description: Includes
+date_format:
+  name: date_format
+  in: query
+  schema: null
+  title: string
+  description: 'The date formart to be returned for all date fields, defaults to iso8601ps_.'
+  pattern: '[a-zA-Z]'
+  example:
+    dateFormat:
+      description: 'Available date formats: ISO 8601 PS, ISO 8601 and Unix Timestamp'
+      summary: 'The date format returned'
+      value:
+        - iso8601ps
+        - iso8601
+        - unix
+gallery_id:
+  name: gallery_id
+  in: path
+  required: true
+  schema:
+    description: 'My gallery description'
+    title: 'My Gallery Test'
+    type: string
+    minLength: 16
+    maxLength: 16
+    pattern: '^G0000[a-zA-Z0-9._]{11}$'
+    example: G0000c1x4UMGPvkY
+  description: 'The Gallery ID'
+collection_id:
+  name: collection_id
+  in: path
+  required: true
+  schema:
+    description: 'My collection description'
+    title: 'My Collection Test'
+    type: string
+    minLength: 16
+    maxLength: 16
+    pattern: '^C0000[a-zA-Z0-9._]{11}$'
+    example: C0000c1x4UMGPvkY
+  description: 'The Collection ID'
+media_id:
+  name: media_id
+  in: path
+  required: true
+  schema:
+    description: 'Media ID'
+    title: 'Media ID'
+    type: string
+    minLength: 16
+    maxLength: 16
+    pattern: '^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$'
+    example: I0000zCtew4UPbBw
+  description: 'The Media ID (Image/Video/Audio/Doc)'
+image_id:
+  name: image_id
+  in: query
+  schema:
+    type: string
+    minLength: 16
+    maxLength: 16
+page:
+  example: 1
+  name: page
+  in: query
+  schema:
+    type: integer
+    minimum: 0
+    maximum: 999
+    default: 0
+    required: false
+  description: 'The number of items to skip before returning the results'
+per_page:
+  example: 20
+  in: query
+  name: per_page
+  schema:
+    type: integer
+    format: int32
+    minimum: 50
+    maximum: 500
+    default: 50
+    required: false
+  description: 'The number of items to return'
+api_key:
+  in: query
+  name: api_key
+  example: 'i.e: QF3Oai9Wk6'
+  schema:
+    type: string
+    required: false
+  description: 'Your API Key'
+email:
+  in: query
+  name: email
+  schema:
+    type: string
+    format: email
+    required: true
+  description: 'Email Address'
+password:
+  name: password
+  in: query
+  schema:
+    type: string
+  description: 'Password'
+  required: true
+mode:
+  in: query
+  name: mode
+  schema:
+    type: string
+    required: true
+  description: 'token or cookie'
+listed:
+  in: query
+  name: listed
+  schema:
+    type: boolean
+    required: false
+  description: 'listed or unlisted'
+image_mode:
+  in: query
+  name: image_mode
+  required: false
+  description: "fit or fill"
+  schema:
+    type: string
+    example: "fit"
+    enum: 
+      - fit
+      - fill
+    description: "Mode to use when resizing an image, values are fit and fill. fit - images is resized to fit in given dimensions without cropping. fill - image will be resized to fill given dimensions, center cropping if necessary.\nDefault mode: fit \nparameter is optional."
+image_size:
+  in: query
+  name: image_size
+  required: false
+  description: "image size"
+  schema:
+    type: string
+    example: "800x600"
+    description: "Specifies dimensions which the image will be scaled to based on image_mode. Fit supports formats of <width>x<height>, <width>x, or x<height> Fill only supports <width>x<height>\nDefault size: 500x500\nparameter - optional."
+download_filetype:
+  in: query
+  name: download_filetype
+  required: false
+  description: "download filetype"
+  schema:
+    type: string
+    example: "original"
+    enum:
+      - original
+      - jpeg
+      - mp4
+download_quality:
+  in: query
+  name: download_quality
+  required: false
+  description: "download quality"
+  schema:
+    type: string
+    example: "original"
+    description: "Images (800x600, 1920x1080, etc.)\nVideo (hd1080|hd720|sd480)"
+download_image_embed:
+  in: query
+  name: download_image_embed
+  required: false
+  description: "embed metadata if not original file (true|false)"
+  schema:
+    type: boolean
+token:
+  in: query
+  name: token
+  required: false
+  description: "access token"
+  schema:
+    type: string

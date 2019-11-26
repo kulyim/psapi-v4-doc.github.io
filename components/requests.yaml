@@ -1,0 +1,69 @@
+AuthenticateRequest:
+  description: 'Authenticate to the system'
+  content:
+    application/x-www-form-urlencoded:
+      schema:
+        type: object
+        properties:
+          email:
+            type: string
+            format: email
+          password:
+            type: string
+          mode:
+            type: string
+            enum:
+              - token
+              - cookie
+        required:
+          - email
+          - password
+          - mode
+OrgAuthenticateRequest:
+  description: 'Authenticate an organization'
+  content:
+    application/x-www-form-urlencoded:
+      schema:
+        type: object
+        properties:
+          org_id:
+            type: string
+            minLength: 16
+            maxLength: 16
+            pattern: '^O0000[a-zA-Z0-9._]{11}$'
+            example: O0000c1x4UMGPvkY
+        required:
+          - org_id
+OAuthRegisterRequest:
+  description: 'OAuth Registration'
+  content:
+    application/x-www-form-urlencoded:
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+          description:
+            type: string
+          callback_url:
+            type: string
+          scopes:
+            type: string
+          email:
+            type: string
+          application_name:
+            type: string
+          company_name:
+            type: string
+          homepage_uri:
+            type: string
+          privacy_policy_uri:
+            type: string
+          logo_uri:
+            type: string
+        required:
+          - name
+          - description
+          - callback_url
+          - email
+          - application_name

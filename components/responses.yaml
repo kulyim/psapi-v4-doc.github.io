@@ -1,0 +1,643 @@
+PermissionsResponse:
+  description: "Gets lists of native and inherited gallery permissions depending on access level"
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: object
+            required:
+              - id
+              - type
+              - attributes
+            properties:
+              id:
+                type: string
+                description: 'Resource ID'
+                pattern: '^(G|C)0000[a-zA-Z0-9._]{11}$'
+                example: G0000EXAMPLE_GAL
+              type:
+                type: string
+                pattern: permissions
+                example: permissions
+              attributes:
+                type: object
+                required:
+                  - mode
+                  - native_mode
+                  - native
+                properties:
+                  mode:
+                    $ref: '#/components/schemas/Mode'
+                  native_mode:
+                    $ref: '#/components/schemas/Mode'
+                  native:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Permission'
+                  inherited:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/InheritedPermissions'
+          meta:
+            $ref: '#/components/schemas/MetaTag'
+    application/xml:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: object
+            required:
+              - id
+              - type
+              - attributes
+            properties:
+              id:
+                type: string
+                description: 'Resource ID'
+                pattern: '^(G|C|I)0000[a-zA-Z0-9._]{11}$'
+                example: G0000EXAMPLE_GAL
+              type:
+                type: string
+                pattern: permissions
+                example: permissions
+              attributes:
+                type: object
+                required:
+                  - Native
+                  - Inherit
+                  - mode
+                  - native_mode
+                properties:
+                  Native:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Permission'
+                  Inherit:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Permission'
+                  mode:
+                      $ref: '#/components/schemas/Mode'
+                  native_mode:
+                      $ref: '#/components/schemas/Mode'
+          meta:
+            $ref: '#/components/schemas/MetaTag'
+PortalResponse:
+  description: "Public Collections and Galleries at the root level"
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: array
+            items:
+              anyOf:
+                - $ref: '#/components/schemas/Collection'
+                - $ref: '#/components/schemas/Gallery'
+          meta:
+            oneOf:
+              - $ref: '#/components/schemas/MetaTag'
+    application/xml:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: array
+            items:
+              anyOf:
+                - $ref: '#/components/schemas/Collection'
+                - $ref: '#/components/schemas/Gallery'
+          meta:
+            oneOf:
+              - $ref: '#/components/schemas/MetaTag'
+ArrayOfGalleryResponse:
+  description: "/galleries - HTTP 200 OK Response.\n"
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/Gallery'
+          meta:
+            $ref: '#/components/schemas/MetaTag'
+    application/xml:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/Gallery'
+          meta:
+            $ref: '#/components/schemas/PaginationMetaTag'
+MediaSearchResponse:
+  description: "/media - HTTP 200 OK Response.\n"
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/Media'
+          meta:
+            $ref: '#/components/schemas/PaginationMetaTag'
+KeyImageResponse:
+  description: "Returns a collection/gallery key image."
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            $ref: '#/components/schemas/KeyImage'
+          meta:
+            $ref: '#/components/schemas/MetaTag'
+    application/xml:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            $ref: '#/components/schemas/KeyImage'
+          meta:
+            $ref: '#/components/schemas/MetaTag'
+GalleryCoverResponse:
+  decription: "Returns a gallery's cover - the first four assets."
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/GalleryCover'
+          meta:
+            $ref: '#/components/schemas/MetaTag'
+GalleryChildrenResponse:
+  description: "Returns a gallery's media. Only returns the ID, type, display order, creation time, and modification time of each media."
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            $ref: '#/components/schemas/GalleryChildren'
+          meta:
+            $ref: '#/components/schemas/PaginationMetaTag'
+    application/xml:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data: 
+            $ref: '#/components/schemas/GalleryChildren'
+          meta:
+            $ref: '#/components/schemas/PaginationMetaTag'
+CollectionChildrenResponse:
+  description: "Returns a collection's children which contains either galleries or collections."
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data: 
+            $ref: '#/components/schemas/CollectionChildren'
+          meta:
+            $ref: '#/components/schemas/CollectionChildrenMetaTag'
+    application/xml:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data: 
+            $ref: '#/components/schemas/CollectionChildren'
+          meta:
+            $ref: '#/components/schemas/CollectionChildrenMetaTag'
+CollectionChildrenIdResponse:
+  description: "Returns information about a single child of a collection"
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            oneOf:
+              - $ref: '#/components/schemas/ChildGallery'
+              - $ref: '#/components/schemas/ChildCollection'
+          meta:
+            $ref: '#/components/schemas/MetaTag'
+    application/xml:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            oneOf:
+              - $ref: '#/components/schemas/ChildGallery'
+              - $ref: '#/components/schemas/ChildCollection'
+          meta:
+            $ref: '#/components/schemas/MetaTag'
+CollectionChildrenCountResponse:
+  description: "Returns the children count for a collection in the meta object of the payload"
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - meta
+        properties:
+          meta:
+            $ref: '#/components/schemas/CollectionChildrenMetaTag'
+ArrayOfCollectionResponse:
+  description: "/collections - HTTP 200 OK Response.\n"
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/Collection'
+          meta:
+            $ref: '#/components/schemas/PaginationMetaTag'
+    application/xml:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/Collection'
+          meta:
+            $ref: '#/components/schemas/MetaTag'
+LibraryResponse:
+  description: "/library - HTTP 200 OK Response.\n"
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: array
+            items:
+              anyOf:
+                - $ref: '#/components/schemas/Collection'
+                - $ref: '#/components/schemas/Gallery'
+          meta:
+            oneOf:
+              - $ref: '#/components/schemas/MetaTag'
+    application/xml:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: array
+            items:
+              anyOf:
+                - $ref: '#/components/schemas/Collection'
+                - $ref: '#/components/schemas/Gallery'
+          meta:
+            oneOf:
+              - $ref: '#/components/schemas/MetaTag'
+GalleryResponse:
+  description: "/galleries/{gallery_id} - HTTP 200 OK Response.\n"
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            $ref: '#/components/schemas/Gallery'
+          meta:
+            $ref: '#/components/schemas/MetaTag'
+    application/xml:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            $ref: '#/components/schemas/Gallery'
+          meta:
+            $ref: '#/components/schemas/MetaTag'
+  links:
+    GetGallery:
+      description: 'Links to self'
+      operationId: galleryGetId
+      parameters:
+        gallery_id: '$response.body#/data/id'
+CollectionResponse:
+  description: "/collections/{collection_id} - HTTP 200 OK Response."
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            $ref: '#/components/schemas/Collection'
+          meta:
+            $ref: '#/components/schemas/MetaTag'
+    application/xml:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            $ref: '#/components/schemas/Collection'
+          meta:
+            $ref: '#/components/schemas/MetaTag'
+MediaResponse:
+  description: "/media/{media_id} - HTTP 200 OK Response"
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            $ref: '#/components/schemas/MediaGetObject'
+          meta:
+            $ref: '#/components/schemas/MetaTag'
+        example:
+          data:
+            id: "VD000EXAMPLE_VID"
+            type: "video"
+            attributes:
+              owner_id: null
+              file_name: "Sample Video"
+              file_size: 10000
+              rotate: 0
+              height: 640
+              width: 360
+              start_time: 0
+              duration: 60
+              format:
+              photographer_id: null
+              creator_id: "U0000EXAMPLEUSER"
+              hash: '051a007701ae51921e2e5eec19dfeexamplehash'
+              model_released: true
+              property_released: true
+              rating: 1
+              updated_at: "2019-10-02 14:39:23 GMT"
+              uploaded_at: "2019-10-02 14:39:23 GMT"
+          meta:
+            copyright: 'PhotoShelter 2019'
+            version: '2019-05-01'
+            rate_limit:
+              limit: 10
+              current: 1
+              expires: 40
+    application/xml:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            $ref: '#/components/schemas/MediaGetObject'
+          meta:
+            $ref: '#/components/schemas/MetaTag'
+GenericOkResponse:
+  description: 'Generic HTTP 200 Ok Response'
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - meta
+        properties:
+          meta:
+            type: object
+            required:
+              - status
+            properties:
+              status:
+                type: string
+                example: OK
+AuthenticateResponse:
+  description: '/authenticate - HTTP OK'
+  content:
+    application/json:
+      schema:
+        $ref: '#/components/schemas/AuthToken'
+OAuthRegisterResponse:
+  description: '/oauth/register - HTTP OK'
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            $ref: '#/components/schemas/OAuthRegister'
+DownloadResponse:
+  description: 'Download - HTTP OK'
+  content:
+    application/octet-stream:
+      schema:
+        type: string
+        format: binary
+CustomLinkResponse:
+  description: 'Custom Link Response - Returns a shareable link in the payload to the collection specified'
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: object
+            required:
+              - id
+              - type
+              - attributes
+            properties:
+              id: 
+                $ref: '#/components/schemas/CollectionId'
+              type:
+                type: string
+                example: 'link'
+              attributes:
+                type: object
+                properties:
+                  url:
+                    type: string
+          meta:
+            $ref: '#/components/schemas/MetaTag'
+      example:
+        data:
+          id: 'C0000EXAMPLECOLL'
+          type: 'url'
+          attributes:
+            url: 'https://example.photoshelter.com/gallery-collection/{name}/C0000EXAMPLECOLL'
+        meta:
+          copyright: 'PhotoShelter 2019'
+          version: '2019-05-01'
+          rate_limit:
+            limit: 10
+            current: 1
+            expires: 40
+BadRequestErrorResponse:
+  description: '400 Bad Request Error'
+  content:
+    application/json:
+      schema:
+        $ref: '#/components/schemas/Error'
+      example:
+        errors:
+          id: ThisShouldBeARealId
+          status: '400'
+          title: 'Bad Request / Syntax'
+          detail: 'Bad Request'
+    application/xml:
+      schema:
+        $ref: '#/components/schemas/Error'
+UnauthorizedErrorResponse:
+  description: '401 Unauthorized Client Error'
+  headers:
+    WWW-Authenticate:
+      description: 'The HTTP WWW-Authenticate response header defines the authentication method that should be used to gain access to a resource.'
+      style: simple
+      explode: false
+      schema:
+        type: string
+      example: 'WWW-Authenticate: Bearer'
+  content:
+    application/json:
+      schema:
+        $ref: '#/components/schemas/Error'
+      example:
+        errors:
+          id: AcsPermissionException
+          status: '401'
+          title: 'Invalid access to resource: Gallery'
+          detail: 'You are not authorized to view this resource.'
+    application/xml:
+      schema:
+        $ref: '#/components/schemas/Error'
+ForbiddenErrorResponse:
+  description: '403 Forbidden Client Error'
+  content:
+    'application/json':
+      schema:
+        $ref: '#/components/schemas/Error'
+      example:
+        error:
+          id: ApiKeyInvalidException
+          status: '403'
+          title: 'Missing or invalid API key'
+          detail: "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+    application/xml:
+      schema:
+        $ref: '#/components/schemas/Error'
+      example:
+        error:
+          id: ApiKeyInvalidException
+          status: '403'
+          title: 'Missing or invalid API key'
+          detail: "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+NotFoundErrorResponse:
+  description: '404 Not Found Client Error'
+  content:
+    application/json:
+      schema:
+        $ref: '#/components/schemas/Error'
+      example:
+        errors:
+          id: ResourceNotFoundException
+          status: '404'
+          title: 'Resource not found'
+          detail: 'The requested resource was not found.'
+    application/xml:
+      schema:
+        $ref: '#/components/schemas/Error'
+UnsupportedMediaTypeErrorResponse:
+  description: '415 Unsupported Media Type Error'
+  content:
+    application/json:
+      schema:
+        $ref: '#/components/schemas/Error'
+      example:
+        errors:
+          id: ResourceNotFoundException
+          status: '415'
+          title: 'Unsupported media type'
+          detail: 'The origin server is refusing to service the request because the payload is in a format not supported by this method on the target resource.'
+    application/xml:
+      schema:
+        $ref: '#/components/schemas/Error'
+TooManyRequestsErrorResponse:
+  headers:
+    Retry-After:
+      schema:
+        type: integer
+      description: 'The Retry-After response HTTP header, expressed in seconds, indicates how long the user agent should wait before making a follow-up request.'
+      example: 180
+  description: '429 Too Many Requests Error'
+  content:
+    application/json:
+      schema:
+        $ref: '#/components/schemas/Error'
+      example:
+        errors:
+          id: TooManyRequestsException
+          status: '429'
+          title: 'Too Many Requests'
+          detail: 'The user has sent too many requests in a given amount of time see "rate limiting".'
+    application/xml:
+      schema:
+        $ref: '#/components/schemas/Error'

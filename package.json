@@ -1,0 +1,22 @@
+{
+  "name": "psapi-doc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "./node_modules/.bin/multi-file-swagger -o yaml api.yaml > compiled.yaml"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/photoshelter-dev/psapi-v4-doc.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/photoshelter-dev/psapi-v4-doc.github.io/issues"
+  },
+  "homepage": "https://github.com/photoshelter-dev/psapi-v4-doc.github.io#readme",
+  "dependencies": {
+    "multi-file-swagger": "^2.3.0"
+  }
+}

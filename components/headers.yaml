@@ -1,0 +1,11 @@
+X-PS-Api-Version:
+  description: 'Version of the API endpoint'
+  schema:
+    type: string
+  example: 2019_05_01
+X-PS-Api-Key:
+  description: 'PS supplied, opaque string value'
+  required: true
+  example: 'i.e: QF3Oai9Wk6'
+X-PS-Auth-Token:
+  description: 'PS supplied, opaque string'
