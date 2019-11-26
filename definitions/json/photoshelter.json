@@ -17,7 +17,7 @@
   },
   "servers" : [ {
     "url" : "https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4",
-    "description" : "PhotoShelter Auto Mocking APIs"
+    "description" : "PhotoShelter Auto Mocking API"
   } ],
   "paths" : {
     "/library" : {
