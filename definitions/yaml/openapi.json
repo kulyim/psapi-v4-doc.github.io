@@ -87,7 +87,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "/media/{media_id} - HTTP 200 OK Response",
+            "description" : "/library - HTTP 200 OK Response.\n",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -96,7 +96,7 @@
               },
               "application/xml" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_1"
+                  "$ref" : "#/components/schemas/inline_response_200"
                 }
               }
             }
@@ -252,423 +252,48 @@
   },
   "components" : {
     "schemas" : {
-      "MediaGetObject" : {
+      "Collection" : {
         "required" : [ "attributes", "id", "type" ],
         "type" : "object",
         "properties" : {
           "id" : {
-            "maxLength" : 16,
-            "minLength" : 16,
-            "pattern" : "^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$",
+            "pattern" : "^C0000[a-zA-Z0-9._]{11}$",
             "type" : "string",
-            "example" : "I0000zCtew4UPbBw"
+            "description" : "Collection Id",
+            "example" : "C0000EXAMPLECOLL"
           },
           "type" : {
             "type" : "string",
-            "enum" : [ "image", "document", "audio", "video" ]
+            "description" : "Type"
           },
           "attributes" : {
-            "anyOf" : [ {
-              "$ref" : "#/components/schemas/MediaImage"
-            }, {
-              "$ref" : "#/components/schemas/MediaAudio"
-            }, {
-              "$ref" : "#/components/schemas/MediaDocument"
-            }, {
-              "$ref" : "#/components/schemas/MediaVideo"
-            } ]
+            "$ref" : "#/components/schemas/Collection_attributes"
           }
         }
       },
-      "MediaImage" : {
-        "required" : [ "created_at", "creator_id", "file_name", "file_size", "flagged", "focal_point_x", "focal_point_y", "height", "model_released", "modified_at", "organization_id", "owner_id", "photographer_id", "property_released", "rating", "screen_height", "screen_height_max", "screen_width", "screen_width_max", "searchable", "thumbnail_height", "thumbnail_width", "views", "width" ],
+      "Gallery" : {
+        "required" : [ "attributes", "id", "type" ],
         "type" : "object",
         "properties" : {
-          "owner_id" : {
-            "$ref" : "#/components/schemas/UserIdNullable"
-          },
-          "organization_id" : {
-            "$ref" : "#/components/schemas/OrganizationId"
-          },
-          "creator_id" : {
-            "$ref" : "#/components/schemas/UserId"
-          },
-          "photographer_id" : {
-            "$ref" : "#/components/schemas/PhotographerId"
-          },
-          "file_name" : {
+          "id" : {
+            "pattern" : "^G0000[a-zA-Z0-9._]{11}$",
             "type" : "string",
-            "description" : "The name of the file",
-            "example" : "File Name"
+            "description" : "Gallery ID",
+            "example" : "G0000EXAMPLE_GAL",
+            "xml" : {
+              "attribute" : true
+            }
           },
-          "file_size" : {
-            "type" : "integer",
-            "description" : "The size of the file in bytes",
-            "example" : 10000
-          },
-          "height" : {
-            "type" : "integer",
-            "description" : "Native image height in pixels",
-            "example" : 1000
-          },
-          "width" : {
-            "type" : "integer",
-            "description" : "Native image width in pixels",
-            "example" : 600
-          },
-          "rating" : {
-            "type" : "number",
-            "description" : "The image rating from -1 to 5",
-            "nullable" : true,
-            "example" : 3
-          },
-          "screen_height" : {
-            "type" : "integer",
-            "description" : "Screen image height in pixels",
-            "nullable" : true,
-            "example" : 1000
-          },
-          "screen_width" : {
-            "type" : "integer",
-            "description" : "Screen image width in pixels",
-            "nullable" : true,
-            "example" : 600
-          },
-          "screen_height_max" : {
-            "type" : "integer",
-            "description" : "Max screen image height in pixels",
-            "nullable" : true,
-            "example" : 10000
-          },
-          "screen_width_max" : {
-            "type" : "integer",
-            "description" : "Max screen image width in pixels",
-            "nullable" : true,
-            "example" : 6000
-          },
-          "thumbnail_height" : {
-            "type" : "integer",
-            "description" : "Thumbnail height in pixels",
-            "nullable" : true,
-            "example" : 200
-          },
-          "thumbnail_width" : {
-            "type" : "integer",
-            "description" : "Thumbnail width in pixels",
-            "nullable" : true,
-            "example" : 180
-          },
-          "views" : {
-            "type" : "integer",
-            "description" : "View counter for the image",
-            "nullable" : true,
-            "example" : 0
-          },
-          "searchable" : {
-            "type" : "boolean",
-            "description" : "Boolean flag that denotes if the image is publicly searchable",
-            "nullable" : true,
-            "example" : true
-          },
-          "model_released" : {
-            "type" : "boolean",
-            "description" : "Boolean flag that denotes if the image model is released",
-            "nullable" : true,
-            "example" : true
-          },
-          "property_released" : {
-            "type" : "boolean",
-            "description" : "Boolean flag that denotes if the image property is released",
-            "nullable" : true,
-            "example" : true
-          },
-          "flagged" : {
-            "type" : "boolean",
-            "description" : "Boolean flag that denotes if the image has been flagged by the photographer",
-            "nullable" : true,
-            "example" : true
-          },
-          "focal_point_x" : {
-            "type" : "integer",
-            "description" : "Core product specific variable. Denotes the focal point of the image on the x-coordinate plane",
-            "nullable" : true,
-            "example" : 100
-          },
-          "focal_point_y" : {
-            "type" : "integer",
-            "description" : "Core product specific variabnle. Denotes the focal point of the image on the y-coordinate plane",
-            "nullable" : true,
-            "example" : 100
-          },
-          "created_at" : {
+          "type" : {
+            "pattern" : "gallery",
             "type" : "string",
-            "description" : "Date and time the image was last updated",
-            "nullable" : true,
-            "example" : "2019-10-02 14:39:23 GMT"
+            "example" : "gallery"
           },
-          "modified_at" : {
-            "type" : "string",
-            "description" : "Date and time the image was originally uploaded",
-            "nullable" : true,
-            "example" : "2019-10-02 14:39:23 GMT"
-          }
-        }
-      },
-      "UserIdNullable" : {
-        "maxLength" : 16,
-        "minLength" : 16,
-        "pattern" : "^U0000[a-zA-Z0-9._]{11}$",
-        "type" : "string",
-        "description" : "User Id",
-        "nullable" : true,
-        "example" : "U0000EXAMPLEUSER"
-      },
-      "OrganizationId" : {
-        "maxLength" : 16,
-        "minLength" : 16,
-        "pattern" : "^O0000[a-zA-Z0-9._]{11}$",
-        "type" : "string",
-        "description" : "Organization Id",
-        "nullable" : true,
-        "example" : "O0000EXAMPLE_OWN"
-      },
-      "UserId" : {
-        "maxLength" : 16,
-        "minLength" : 16,
-        "pattern" : "^U0000[a-zA-Z0-9._]{11}$",
-        "type" : "string",
-        "description" : "User Id",
-        "example" : "U0000EXAMPLEUSER"
-      },
-      "PhotographerId" : {
-        "maxLength" : 16,
-        "minLength" : 16,
-        "pattern" : "^U0000[a-zA-Z0-9._]{11}$",
-        "type" : "string",
-        "description" : "Photographer Id",
-        "nullable" : true,
-        "example" : "U0000EXAMPLEUSER"
-      },
-      "MediaAudio" : {
-        "required" : [ "created_at", "creator_id", "duration", "file_name", "file_size", "format", "hash", "model_released", "modified_at", "owner_id", "property_released", "rating", "start_time" ],
-        "type" : "object",
-        "properties" : {
-          "owner_id" : {
-            "$ref" : "#/components/schemas/UserIdNullable"
+          "attributes" : {
+            "$ref" : "#/components/schemas/Gallery_attributes"
           },
-          "file_name" : {
-            "type" : "string",
-            "description" : "The name of the file",
-            "example" : "File Name"
-          },
-          "file_size" : {
-            "type" : "integer",
-            "description" : "The size of the file in bytes",
-            "example" : 10000
-          },
-          "start_time" : {
-            "type" : "number",
-            "description" : "Start time of the audio",
-            "example" : 0.05
-          },
-          "duration" : {
-            "type" : "number",
-            "description" : "Duration of the audio file",
-            "example" : 25
-          },
-          "format" : {
-            "type" : "string",
-            "description" : "Format of the audio file",
-            "example" : "mp3"
-          },
-          "hash" : {
-            "type" : "string",
-            "description" : "Audio file SHA-1 hash",
-            "nullable" : true,
-            "example" : "051a007701ae51921e2e5eec19dfeexamplehash"
-          },
-          "creator_id" : {
-            "$ref" : "#/components/schemas/UserIdNullable"
-          },
-          "model_released" : {
-            "type" : "boolean",
-            "description" : "Boolean denoting if the model is released",
-            "nullable" : true,
-            "example" : true
-          },
-          "property_released" : {
-            "type" : "boolean",
-            "description" : "Boolean denoting if the property is released",
-            "nullable" : true,
-            "example" : true
-          },
-          "rating" : {
-            "type" : "number",
-            "description" : "Rating",
-            "nullable" : true,
-            "example" : 3
-          },
-          "created_at" : {
-            "type" : "string",
-            "description" : "Date and time the audio was last updated",
-            "nullable" : true,
-            "example" : "2019-10-02 14:39:23 GMT"
-          },
-          "modified_at" : {
-            "type" : "string",
-            "description" : "Date and time the audio was originally uploaded",
-            "nullable" : true,
-            "example" : "2019-10-02 14:39:23 GMT"
-          }
-        }
-      },
-      "MediaDocument" : {
-        "required" : [ "created_at", "creator_id", "file_name", "file_size", "format", "format_readable", "hash", "modified_at", "organization_id", "owner_id", "rating" ],
-        "type" : "object",
-        "properties" : {
-          "owner_id" : {
-            "$ref" : "#/components/schemas/UserIdNullable"
-          },
-          "creator_id" : {
-            "$ref" : "#/components/schemas/UserId"
-          },
-          "organization_id" : {
-            "$ref" : "#/components/schemas/OrganizationId"
-          },
-          "file_name" : {
-            "type" : "string",
-            "description" : "File Name",
-            "example" : "Example File Name"
-          },
-          "file_size" : {
-            "type" : "integer",
-            "description" : "File size in bytes",
-            "example" : 100000
-          },
-          "format" : {
-            "type" : "string",
-            "description" : "Describes the format of the file",
-            "example" : "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-          },
-          "format_readable" : {
-            "type" : "string",
-            "description" : "Format Readable",
-            "example" : "Microsoft Word"
-          },
-          "hash" : {
-            "type" : "string",
-            "description" : "Hash encryption of the file",
-            "nullable" : true,
-            "example" : "051a007701ae51921e2e5eec19dfeexamplehash"
-          },
-          "rating" : {
-            "type" : "number",
-            "description" : "Document rating",
-            "nullable" : true,
-            "example" : 1
-          },
-          "created_at" : {
-            "type" : "string",
-            "description" : "Date and time the document was last updated",
-            "nullable" : true,
-            "example" : "2019-10-02 14:39:23 GMT"
-          },
-          "modified_at" : {
-            "type" : "string",
-            "description" : "Date and time the document was originally uploaded",
-            "nullable" : true,
-            "example" : "2019-10-02 14:39:23 GMT"
-          }
-        }
-      },
-      "MediaVideo" : {
-        "required" : [ "created_at", "creator_id", "duration", "file_name", "file_size", "format", "hash", "height", "model_released", "modified_at", "owner_id", "photographer_id", "property_released", "rating", "rotate", "start_time", "width" ],
-        "type" : "object",
-        "properties" : {
-          "owner_id" : {
-            "$ref" : "#/components/schemas/UserIdNullable"
-          },
-          "file_name" : {
-            "type" : "string",
-            "description" : "File name",
-            "example" : "Sample file name"
-          },
-          "file_size" : {
-            "type" : "integer",
-            "description" : "File size in bytes",
-            "example" : 100000
-          },
-          "rotate" : {
-            "type" : "number",
-            "description" : "Video rotation in degrees",
-            "example" : 30.0
-          },
-          "height" : {
-            "type" : "integer",
-            "description" : "Video height in pixels",
-            "example" : 360
-          },
-          "width" : {
-            "type" : "integer",
-            "description" : "Video width in pixels",
-            "example" : 640
-          },
-          "start_time" : {
-            "type" : "number",
-            "description" : "Video start time",
-            "example" : 0
-          },
-          "duration" : {
-            "type" : "number",
-            "description" : "Duration of the video",
-            "example" : 30.0
-          },
-          "format" : {
-            "type" : "string",
-            "description" : "Video format",
-            "example" : "x-ms-asf"
-          },
-          "photographer_id" : {
-            "$ref" : "#/components/schemas/UserIdNullable"
-          },
-          "creator_id" : {
-            "$ref" : "#/components/schemas/UserIdNullable"
-          },
-          "hash" : {
-            "type" : "string",
-            "description" : "Hash Encryption of the file",
-            "nullable" : true,
-            "example" : "051a007701ae51921e2e5eec19dfeexamplehash"
-          },
-          "model_released" : {
-            "type" : "boolean",
-            "description" : "Boolean flag denoting if the model is released",
-            "nullable" : true,
-            "example" : true
-          },
-          "property_released" : {
-            "type" : "boolean",
-            "description" : "Boolean flag denoting if the property is released",
-            "nullable" : true,
-            "example" : true
-          },
-          "rating" : {
-            "type" : "number",
-            "description" : "Rating",
-            "nullable" : true,
-            "example" : 1
-          },
-          "created_at" : {
-            "type" : "string",
-            "description" : "Date and time the document was last updated",
-            "nullable" : true,
-            "example" : "2019-10-02 14:39:23 GMT"
-          },
-          "modified_at" : {
-            "type" : "string",
-            "description" : "Date and time the document was originally uploaded",
-            "nullable" : true,
-            "example" : "2019-10-02 14:39:23 GMT"
+          "links" : {
+            "$ref" : "#/components/schemas/Gallery_links"
           }
         }
       },
@@ -706,53 +331,156 @@
         "type" : "object",
         "properties" : {
           "data" : {
-            "$ref" : "#/components/schemas/MediaGetObject"
-          },
-          "meta" : {
-            "$ref" : "#/components/schemas/MetaTag"
-          }
-        },
-        "example" : {
-          "data" : {
-            "id" : "VD000EXAMPLE_VID",
-            "type" : "video",
-            "attributes" : {
-              "file_name" : "Sample Video",
-              "file_size" : 10000,
-              "rotate" : 0,
-              "height" : 640,
-              "width" : 360,
-              "start_time" : 0,
-              "duration" : 60,
-              "creator_id" : "U0000EXAMPLEUSER",
-              "hash" : "051a007701ae51921e2e5eec19dfeexamplehash",
-              "model_released" : true,
-              "property_released" : true,
-              "rating" : 1,
-              "updated_at" : "2019-10-02 14:39:23 GMT",
-              "uploaded_at" : "2019-10-02 14:39:23 GMT"
+            "type" : "array",
+            "items" : {
+              "anyOf" : [ {
+                "$ref" : "#/components/schemas/Collection"
+              }, {
+                "$ref" : "#/components/schemas/Gallery"
+              } ]
             }
           },
           "meta" : {
-            "copyright" : "PhotoShelter 2019",
-            "version" : "2019-05-01",
-            "rate_limit" : {
-              "limit" : 10,
-              "current" : 1,
-              "expires" : 40
-            }
+            "oneOf" : [ {
+              "$ref" : "#/components/schemas/MetaTag"
+            } ]
           }
         }
       },
-      "inline_response_200_1" : {
-        "required" : [ "data" ],
+      "Collection_attributes" : {
+        "required" : [ "access_id", "created_at", "description", "display_order", "is_listed", "modified_at", "name", "name_url", "org_id" ],
         "type" : "object",
         "properties" : {
-          "data" : {
-            "$ref" : "#/components/schemas/MediaGetObject"
+          "name" : {
+            "maxLength" : 100,
+            "type" : "string",
+            "description" : "Name of the collection",
+            "example" : "My Trip to DR"
           },
-          "meta" : {
-            "$ref" : "#/components/schemas/MetaTag"
+          "org_id" : {
+            "type" : "string",
+            "description" : "ID of the organization that the collection belongs to.",
+            "nullable" : true,
+            "example" : "O0000EXAMPLE_ORG"
+          },
+          "name_url" : {
+            "maxLength" : 100,
+            "type" : "string",
+            "description" : "URL to the gallery",
+            "nullable" : true
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Description of the colletion",
+            "nullable" : true,
+            "example" : "My Trip to DR Collection"
+          },
+          "display_order" : {
+            "type" : "integer",
+            "description" : "Display order",
+            "example" : 1
+          },
+          "access_id" : {
+            "pattern" : "^A0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Access ID",
+            "nullable" : true,
+            "example" : "A0000EXAMPLE_ACS"
+          },
+          "is_listed" : {
+            "type" : "boolean",
+            "description" : "Is listed on public site",
+            "example" : false
+          },
+          "created_at" : {
+            "type" : "string",
+            "description" : "Creation date",
+            "nullable" : true,
+            "example" : "2019-04-25T14:54:12.136828"
+          },
+          "modified_at" : {
+            "type" : "string",
+            "description" : "Modified Date",
+            "nullable" : true,
+            "example" : "2019-04-25T14:54:12.136828"
+          }
+        }
+      },
+      "Gallery_attributes" : {
+        "required" : [ "access_id", "created_at", "description", "display_order", "is_listed", "is_orig_enabled", "is_watermark_disabled", "key_image_id", "modified_at", "name", "name_url" ],
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "maxLength" : 100,
+            "type" : "string",
+            "description" : "Name of Gallery or Collection object (Whichever it is)",
+            "example" : "My trip to DR"
+          },
+          "name_url" : {
+            "maxLength" : 100,
+            "type" : "string",
+            "description" : "URL to the gallery",
+            "nullable" : true
+          },
+          "description" : {
+            "maxLength" : 100,
+            "type" : "string",
+            "description" : "Description of the Gallery",
+            "nullable" : true,
+            "example" : "Trip to DR with my brothers and sisters"
+          },
+          "display_order" : {
+            "type" : "integer",
+            "description" : "Custom display order",
+            "example" : 1
+          },
+          "key_image_id" : {
+            "pattern" : "^GI000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "ID of the Image that is the key image",
+            "nullable" : true,
+            "example" : "GI000EXAMPLE_IMG"
+          },
+          "access_id" : {
+            "pattern" : "^A0000[a-zA-Z0-9._]{11}$",
+            "type" : "string",
+            "description" : "Access ID of the Gallery",
+            "example" : "A0000EXAMPLE_ACS"
+          },
+          "is_listed" : {
+            "type" : "boolean",
+            "description" : "Flag that denotes if it is listed on the public site",
+            "example" : false
+          },
+          "is_orig_enabled" : {
+            "type" : "boolean",
+            "description" : "Original enabled boolean value",
+            "example" : true
+          },
+          "is_watermark_disabled" : {
+            "type" : "boolean",
+            "description" : "Watermark disabled boolean value",
+            "example" : true
+          },
+          "created_at" : {
+            "type" : "string",
+            "description" : "Creation date",
+            "example" : "2019-04-25T14:54:12.136828"
+          },
+          "modified_at" : {
+            "type" : "string",
+            "description" : "Last modified date",
+            "example" : "2019-04-25T14:54:12.136828"
+          }
+        }
+      },
+      "Gallery_links" : {
+        "type" : "object",
+        "properties" : {
+          "self" : {
+            "type" : "string",
+            "description" : "Link to itself",
+            "example" : "https://api.photoshelter.com/psapi/v4/galleries/G0000ZJCk9LW4Zfc"
           }
         }
       },
