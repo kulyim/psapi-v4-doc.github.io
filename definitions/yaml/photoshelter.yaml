@@ -151,8 +151,7 @@ components:
       description: This object generates errors in compliance with RFC 7807 API Problem
     inline_response_200:
       required:
-      - collections
-      - galleries
+      - data
       type: object
       properties:
         data:
