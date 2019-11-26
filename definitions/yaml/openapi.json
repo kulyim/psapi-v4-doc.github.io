@@ -26,65 +26,6 @@
         "summary" : "Retrieve library listing.",
         "description" : "Retrieve library listing.",
         "operationId" : "libraryGet",
-        "parameters" : [ {
-          "name" : "listed",
-          "in" : "query",
-          "description" : "Listed",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "boolean"
-          },
-          "example" : true
-        }, {
-          "name" : "sort_by",
-          "in" : "query",
-          "description" : "Sort by an attribute. The available attributes to sort by is creation_time, modification_time, name, and display_order. The default behavior is to sort the collections by the attribute in ascending order. This can be changed with the usage of the 'sort_direction' query parameter.",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string",
-            "enum" : [ "creation_time", "modification_time", "name", "display_order" ]
-          },
-          "example" : "name"
-        }, {
-          "name" : "sort_direction",
-          "in" : "query",
-          "description" : "Sort direction. This parameter requires the usage of the 'sort_by' query parameter. Setting this parameter to one of the allowed values will set the direction of the sort.",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string",
-            "enum" : [ "ascending", "descending" ]
-          },
-          "example" : "ascending"
-        }, {
-          "name" : "per_page",
-          "in" : "query",
-          "description" : "Results per page",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "integer",
-            "default" : 50
-          },
-          "example" : 50
-        }, {
-          "name" : "page",
-          "in" : "query",
-          "description" : "Page number",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "integer"
-          },
-          "example" : 1
-        } ],
         "responses" : {
           "200" : {
             "description" : "/library - HTTP 200 OK Response.\n",
@@ -96,7 +37,7 @@
               },
               "application/xml" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_1"
+                  "$ref" : "#/components/schemas/inline_response_200"
                 }
               }
             }
@@ -126,22 +67,6 @@
           }
         }
       },
-      "MetaTag" : {
-        "type" : "object",
-        "properties" : {
-          "copyright" : {
-            "type" : "string",
-            "example" : "PhotoShelter 2019"
-          },
-          "version" : {
-            "type" : "string",
-            "example" : "2019-05-01"
-          },
-          "rate_limit" : {
-            "$ref" : "#/components/schemas/MetaTag_rate_limit"
-          }
-        }
-      },
       "Gallery" : {
         "required" : [ "attributes", "id", "type" ],
         "type" : "object",
@@ -168,26 +93,23 @@
           }
         }
       },
-      "inline_response_200" : {
-        "required" : [ "data" ],
+      "MetaTag" : {
         "type" : "object",
         "properties" : {
-          "data" : {
-            "type" : "array",
-            "items" : {
-              "anyOf" : [ {
-                "$ref" : "#/components/schemas/Collection"
-              } ]
-            }
+          "copyright" : {
+            "type" : "string",
+            "example" : "PhotoShelter 2019"
           },
-          "meta" : {
-            "oneOf" : [ {
-              "$ref" : "#/components/schemas/MetaTag"
-            } ]
+          "version" : {
+            "type" : "string",
+            "example" : "2019-05-01"
+          },
+          "rate_limit" : {
+            "$ref" : "#/components/schemas/MetaTag_rate_limit"
           }
         }
       },
-      "inline_response_200_1" : {
+      "inline_response_200" : {
         "required" : [ "data" ],
         "type" : "object",
         "properties" : {
@@ -267,23 +189,6 @@
           }
         }
       },
-      "MetaTag_rate_limit" : {
-        "type" : "object",
-        "properties" : {
-          "limit" : {
-            "type" : "integer",
-            "example" : 10
-          },
-          "current" : {
-            "type" : "integer",
-            "example" : 1
-          },
-          "expires" : {
-            "type" : "integer",
-            "example" : 40
-          }
-        }
-      },
       "Gallery_attributes" : {
         "required" : [ "access_id", "created_at", "description", "display_order", "is_listed", "is_orig_enabled", "is_watermark_disabled", "key_image_id", "modified_at", "name", "name_url" ],
         "type" : "object",
@@ -359,6 +264,23 @@
             "type" : "string",
             "description" : "Link to itself",
             "example" : "https://api.photoshelter.com/psapi/v4/galleries/G0000ZJCk9LW4Zfc"
+          }
+        }
+      },
+      "MetaTag_rate_limit" : {
+        "type" : "object",
+        "properties" : {
+          "limit" : {
+            "type" : "integer",
+            "example" : 10
+          },
+          "current" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "expires" : {
+            "type" : "integer",
+            "example" : 40
           }
         }
       }

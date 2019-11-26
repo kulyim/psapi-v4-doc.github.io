@@ -22,66 +22,6 @@ paths:
       summary: Retrieve library listing.
       description: Retrieve library listing.
       operationId: libraryGet
-      parameters:
-      - name: listed
-        in: query
-        description: Listed
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: boolean
-        example: true
-      - name: sort_by
-        in: query
-        description: Sort by an attribute. The available attributes to sort by is
-          creation_time, modification_time, name, and display_order. The default behavior
-          is to sort the collections by the attribute in ascending order. This can
-          be changed with the usage of the 'sort_direction' query parameter.
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          enum:
-          - creation_time
-          - modification_time
-          - name
-          - display_order
-        example: name
-      - name: sort_direction
-        in: query
-        description: Sort direction. This parameter requires the usage of the 'sort_by'
-          query parameter. Setting this parameter to one of the allowed values will
-          set the direction of the sort.
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          enum:
-          - ascending
-          - descending
-        example: ascending
-      - name: per_page
-        in: query
-        description: Results per page
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-          default: 50
-        example: 50
-      - name: page
-        in: query
-        description: Page number
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-        example: 1
       responses:
         "200":
           description: |
@@ -92,7 +32,7 @@ paths:
                 $ref: '#/components/schemas/inline_response_200'
             application/xml:
               schema:
-                $ref: '#/components/schemas/inline_response_200_1'
+                $ref: '#/components/schemas/inline_response_200'
 components:
   schemas:
     Collection:
@@ -112,17 +52,6 @@ components:
           description: Type
         attributes:
           $ref: '#/components/schemas/Collection_attributes'
-    MetaTag:
-      type: object
-      properties:
-        copyright:
-          type: string
-          example: PhotoShelter 2019
-        version:
-          type: string
-          example: 2019-05-01
-        rate_limit:
-          $ref: '#/components/schemas/MetaTag_rate_limit'
     Gallery:
       required:
       - attributes
@@ -145,20 +74,18 @@ components:
           $ref: '#/components/schemas/Gallery_attributes'
         links:
           $ref: '#/components/schemas/Gallery_links'
-    inline_response_200:
-      required:
-      - data
+    MetaTag:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            anyOf:
-            - $ref: '#/components/schemas/Collection'
-        meta:
-          oneOf:
-          - $ref: '#/components/schemas/MetaTag'
-    inline_response_200_1:
+        copyright:
+          type: string
+          example: PhotoShelter 2019
+        version:
+          type: string
+          example: 2019-05-01
+        rate_limit:
+          $ref: '#/components/schemas/MetaTag_rate_limit'
+    inline_response_200:
       required:
       - data
       type: object
@@ -229,18 +156,6 @@ components:
           description: Modified Date
           nullable: true
           example: 2019-04-25T14:54:12.136828
-    MetaTag_rate_limit:
-      type: object
-      properties:
-        limit:
-          type: integer
-          example: 10
-        current:
-          type: integer
-          example: 1
-        expires:
-          type: integer
-          example: 40
     Gallery_attributes:
       required:
       - access_id
@@ -314,3 +229,15 @@ components:
           type: string
           description: Link to itself
           example: https://api.photoshelter.com/psapi/v4/galleries/G0000ZJCk9LW4Zfc
+    MetaTag_rate_limit:
+      type: object
+      properties:
+        limit:
+          type: integer
+          example: 10
+        current:
+          type: integer
+          example: 1
+        expires:
+          type: integer
+          example: 40
