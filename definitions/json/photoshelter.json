@@ -162,6 +162,16 @@
         "description" : "Media ID",
         "example" : "I0000zCtew4UPbBw"
       },
+      "ArrayOfEntities" : {
+        "type" : "array",
+        "items" : {
+          "anyOf" : [ {
+            "$ref" : "#/components/schemas/Gallery"
+          }, {
+            "$ref" : "#/components/schemas/Collection"
+          } ]
+        }
+      },
       "ArrayOfGalleries" : {
         "type" : "array",
         "items" : {
