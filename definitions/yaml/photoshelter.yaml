@@ -575,7 +575,7 @@ paths:
     get:
       tags:
       - Gallery
-      summary: GET /galleries/{gallery_id}/children/count
+      summary: GET /galleries/{gallery_id}/children/count.
       description: Retrieve the children count of a gallery. This endpoint does not
         require authentication. It only requires the user using the endpoint to have
         access to the gallery they are trying to get the count of. Any unauthenticated
@@ -739,7 +739,7 @@ paths:
     get:
       tags:
       - Gallery
-      summary: GET /galleries/{gallery_id}/permission
+      summary: GET /galleries/{gallery_id}/permission.
       description: |-
         Retrieves the gallery permissions.
 
