@@ -250,10 +250,6 @@
         "items" : {
           "anyOf" : [ {
             "$ref" : "#/components/schemas/Gallery"
-          }, {
-            "$ref" : "#/components/schemas/Collection"
-          }, {
-            "$ref" : "#/components/schemas/Media"
           } ]
         }
       }
