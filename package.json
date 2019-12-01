@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/photoshelter-dev/psapi-v4-doc.github.io#readme",
   "dependencies": {
-    "multi-file-swagger": "^2.3.0"
+    "gulp": "^4.0.2",
+    "gulp-run": "^1.7.1",
+    "gulp-run-command": "0.0.10",
+    "multi-file-swagger": "^2.3.0",
+    "require": "^2.4.20"
   }
 }
