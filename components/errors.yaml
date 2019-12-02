@@ -57,3 +57,27 @@ TooManyRequestsErrorResponse:
     application/xml:
       schema:
         $ref: ./schemas.yaml#/Error
+
+UnauthorizedErrorResponse:
+  description: '401 Unauthorized Client Error'
+  headers:
+    WWW-Authenticate:
+      description: 'The HTTP WWW-Authenticate response header defines the authentication method that should be used to gain access to a resource.'
+      style: simple
+      explode: false
+      schema:
+        type: string
+      example: 'WWW-Authenticate: Bearer'
+  content:
+    application/json:
+      schema:
+        $ref: ./schemas.yaml#/Error
+      example:
+        errors:
+          id: AcsPermissionException
+          status: '401'
+          title: 'Invalid access to resource: Gallery'
+          detail: 'You are not authorized to view this resource.'
+    application/xml:
+      schema:
+        $ref: ./schemas.yaml#/Error

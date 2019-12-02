@@ -1,0 +1,29 @@
+get:
+  tags:
+  - Library
+  summary: Retrieve library listing.
+  description: Retrieve library listing.
+  operationId: libraryGet
+  parameters:
+    - name: is_listed
+      in: query
+      description: listed or unlisted
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: boolean
+        default: false
+        enum: [false, true]
+      example: false
+  responses:
+    200:
+      $ref: ../components/responses.yaml#/ArrayOfContainerResponse
+    400:
+      $ref: ../components/errors.yaml#/BadRequestErrorResponse
+    401:
+      $ref: ../components/errors.yaml#/UnauthorizedErrorResponse
+    403:
+      $ref: ../components/errors.yaml#/ForbiddenErrorResponse
+    429:
+      $ref: ../components/errors.yaml#/TooManyRequestsErrorResponse
