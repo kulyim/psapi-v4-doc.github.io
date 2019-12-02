@@ -67,3 +67,12 @@ get:
     $ref: ../components/parameters.yaml#/per_page
   - name: page
     $ref: ../components/parameters.yaml#/page
+  responses:
+    200:
+      $ref: ../components/responses.yaml#/CollectionResponse
+    400:
+      $ref: ../components/errors.yaml#/BadRequestErrorResponse
+    403:
+      $ref: ../components/errors.yaml#/ForbiddenErrorResponse
+    429:
+      $ref: ../components/errors.yaml#/TooManyRequestsErrorResponse

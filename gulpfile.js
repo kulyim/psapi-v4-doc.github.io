@@ -1,10 +1,10 @@
 const gulp = require('gulp');
-//const run = require('gulp-run-command').default;
 const cp = require('child_process');
 
 function createApiYaml(cb)
 {
-	console.log('createApiYaml');
+	compileYaml(cb);
+	compileJson(cb);
 	cb();
 }
 

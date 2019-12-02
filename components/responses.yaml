@@ -1,0 +1,23 @@
+CollectionResponse:
+  description: "/collections/{collection_id} - HTTP 200 OK Response."
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            $ref: ./schemas.yaml#/Collection
+          meta:
+            $ref: ./schemas.yaml#/MetaTag
+    application/xml:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            $ref: ./schemas.yaml#/Collection
+          meta:
+            $ref: ./schemas.yaml#/MetaTag
