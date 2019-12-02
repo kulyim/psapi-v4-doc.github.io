@@ -1,0 +1,129 @@
+Collection:
+  type: object
+  required:
+    - id
+    - type
+    - attributes
+  properties:
+    id:
+      $ref: '#/CollectionId' #example of how to link within the same YAML
+    type:
+      type: string
+      description: "Type"
+    attributes:
+      type: object
+      required:
+        - name
+        - org_id
+        - name_url
+        - description
+        - display_order
+        - access_id
+        - is_listed
+        - created_at
+        - modified_at
+      properties:
+        name:
+          type: string
+          description: "Name of the collection"
+          example: "My Trip to DR"
+          maxLength: 100
+        org_id:
+          type: string
+          description: "ID of the organization that the collection belongs to."
+          example: "O0000EXAMPLE_ORG"
+          nullable: true
+        name_url:
+          type: string
+          description: "URL to the collection"
+          nullable: true
+          maxLength: 100
+        description:
+          type: string
+          description: "Description of the colletion"
+          example: "My Trip to DR Collection"
+          nullable: true
+        display_order:
+          type: integer
+          description: "Display order"
+          example: 1
+        access_id:
+          type: string
+          description: "Access ID"
+          pattern: '^A0000[a-zA-Z0-9._]{11}$'
+          example: "A0000EXAMPLE_ACS"
+          nullable: true
+        is_listed:
+          type: boolean
+          description: "Is listed on public site"
+          example: false
+        created_at:
+          type: string
+          description: "Creation date"
+          example: '2019-04-25T14:54:12.136828'
+          nullable: true
+        modified_at:
+          type: string
+          description: "Modified Date"
+          example: '2019-04-25T14:54:12.136828'
+          nullable: true
+
+CollectionId:
+  type: string
+  minLength: 16
+  maxLength: 16
+  pattern: '^C0000[a-zA-Z0-9._]{11}$'
+  example: 'C0000EXAMPLECOLL'
+  description: 'The Collection ID'
+
+Error:
+  description: 'This object generates errors in compliance with RFC 7807 API Problem'
+  type: object
+  required:
+    - errors
+  properties:
+    errors:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            description: 'A unique identifier for this occurrence of the problem'
+            type: string
+          links:
+            type: object
+            properties:
+              about:
+                type: string
+                example: 'http://api.developer.com/404.html'
+          title:
+            description: 'A short, human-readable summary of the problem type'
+            type: string
+          status:
+            description: 'The HTTP status code set by the origin server for this occurrence of the problem.'
+            type: string
+          detail:
+            description: 'An human readable explanation specific to this occurrence of the problem.'
+            type: string
+
+MetaTag:
+  type: object
+  properties:
+    copyright:
+      type: string
+      example: 'PhotoShelter 2019'
+    version:
+      type: string
+      example: '2019-05-01'
+    rate_limit:
+      type: object
+      properties:
+        limit:
+          type: integer
+          example: 10
+        current:
+          type: integer
+          example: 1
+        expires:
+          type: integer
+          example: 40

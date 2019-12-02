@@ -1,0 +1,7 @@
+openapi: 3.0.0
+info:
+  $ref: ./info/info.yaml
+servers:
+  $ref: ./info/server.yaml
+paths:
+  $ref: ./paths/index.yaml

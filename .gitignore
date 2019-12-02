@@ -1,3 +1,5 @@
 README.md
 !definitions/json/*
 !definitions/yaml/*
+node_modules
+compiled.*

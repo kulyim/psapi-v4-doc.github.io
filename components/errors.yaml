@@ -1,0 +1,59 @@
+BadRequestErrorResponse:
+  description: '400 Bad Request Error'
+  content:
+    application/json:
+      schema:
+        $ref: ./schemas.yaml#/Error
+      example:
+        errors:
+          id: ThisShouldBeARealId
+          status: '400'
+          title: 'Bad Request / Syntax'
+          detail: 'Bad Request'
+    application/xml:
+      schema:
+        $ref: ./schemas.yaml#/Error
+
+ForbiddenErrorResponse:
+  description: '403 Forbidden Client Error'
+  content:
+    'application/json':
+      schema:
+        $ref: ./schemas.yaml#/Error
+      example:
+        error:
+          id: ApiKeyInvalidException
+          status: '403'
+          title: 'Missing or invalid API key'
+          detail: "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+    application/xml:
+      schema:
+        $ref: ./schemas.yaml#/Error
+      example:
+        error:
+          id: ApiKeyInvalidException
+          status: '403'
+          title: 'Missing or invalid API key'
+          detail: "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
+
+TooManyRequestsErrorResponse:
+  headers:
+    Retry-After:
+      schema:
+        type: integer
+      description: 'The Retry-After response HTTP header, expressed in seconds, indicates how long the user agent should wait before making a follow-up request.'
+      example: 180
+  description: '429 Too Many Requests Error'
+  content:
+    application/json:
+      schema:
+        $ref: ./schemas.yaml#/Error
+      example:
+        errors:
+          id: TooManyRequestsException
+          status: '429'
+          title: 'Too Many Requests'
+          detail: 'The user has sent too many requests in a given amount of time see "rate limiting".'
+    application/xml:
+      schema:
+        $ref: ./schemas.yaml#/Error

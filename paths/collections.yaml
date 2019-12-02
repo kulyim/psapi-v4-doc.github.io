@@ -1,0 +1,78 @@
+get:
+  tags:
+  - Collection
+  summary: GET /collections.
+  description: >-
+    Search the collections. This endpoint requires the user to be authenticated.
+    It will return a list of collections owned by the user. For pagination to
+    work, both per_page and page query parameters must be set.
+  operationId: collectionsGet
+  parameters:
+  - name: id
+    in: query
+    description: Collection ID to match in the query
+    required: false
+    style: form
+    explode: true
+    schema:
+      $ref: ../components/schemas.yaml#/CollectionId
+    example: C0000EXAMPLECOLL
+  - name: name
+    in: query
+    description: >-
+      Collection name to match in the query. Having this parameter set will
+      always default to an exact name matching unless specified otherwise by the
+      usage of the match parameter
+    required: false
+    style: form
+    explode: true
+    schema:
+      maxLength: 100
+      type: string
+    example: EXAMPLE NAME
+  - name: parent
+    in: query
+    description: >-
+      Limit collections to children of the provided collection ID. Pass blank to
+      find collections with no parent.
+    required: false
+    style: form
+    explode: true
+    schema:
+      $ref: ../components/schemas.yaml#/CollectionId
+    example: C0000EXAMPLECOLL
+  - name: match
+    $ref: ../components/parameters.yaml#/match
+  - name: sort_by
+    in: query
+    description: >-
+      Sort by an attribute. The available attributes to sort by is
+      creation_time, modification_time, name, and display_order. The default
+      behavior is to sort the collections by the attribute in ascending order.
+      This can be changed with the usage of the 'sort_direction' query parameter.
+    required: false
+    style: form
+    explode: true
+    schema:
+      type: string
+      enum:
+      - creation_time
+      - modification_time
+      - name
+      - display_order
+    example: name
+  - name: sort_direction
+    $ref: ../components/parameters.yaml#/sort_direction
+  - name: per_page
+    $ref: ../components/parameters.yaml#/per_page
+  - name: page
+    $ref: ../components/parameters.yaml#/page
+  responses:
+    200:
+      $ref: ../components/responses.yaml#/CollectionResponse
+    400:
+      $ref: ../components/errors.yaml#/BadRequestErrorResponse
+    403:
+      $ref: ../components/errors.yaml#/ForbiddenErrorResponse
+    429:
+      $ref: ../components/errors.yaml#/TooManyRequestsErrorResponse
