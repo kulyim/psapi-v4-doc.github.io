@@ -21,25 +21,25 @@ page:
   in: query
   description: 'The number of items to skip before returning the results'
   example: 1
+  required: false
   schema:
     type: integer
     minimum: 0
     maximum: 999
     default: 0
-    required: false
 
 per_page:
   name: per_page
   in: query
   description: 'The number of items to return'
   example: 20
+  required: false
   schema:
     type: integer
     format: int32
     minimum: 50
     maximum: 500
     default: 50
-    required: false
 
 sort_direction:
   name: sort_direction
