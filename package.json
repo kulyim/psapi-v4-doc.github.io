@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "compile": "./node_modules/.bin/multi-file-swagger -o yaml api.yaml > compiled.yaml",
-    "gulp": "./node_modules/.bin/gulp"
+    "watch": "./node_modules/.bin/gulp watch",
+    "compile": "./node_modules/.bin/speccy -o compiled.yaml api.yaml",
+    "lint": "./node_modules/.bin/speccy lint compiled.yaml",
+    "serve": "./node_modules/.bin/speccy serve compiled.yaml",
+    "gulp": "./node_modules/.bin/gulp",
+    "speccy": "./node_modules/.bin/speccy"
   },
   "repository": {
     "type": "git",
@@ -19,6 +23,8 @@
   "homepage": "https://github.com/photoshelter-dev/psapi-v4-doc.github.io#readme",
   "dependencies": {
     "gulp": "^4.0.2",
-    "multi-file-swagger": "^2.3.0"
+    "speccy": "^0.11.0",
+    "dompurify": "^2.0.7",
+    "marked": "^0.7.0"
   }
 }
