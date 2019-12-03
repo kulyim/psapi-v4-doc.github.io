@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "watch": "./node_modules/.bin/gulp watch",
-    "compile": "./node_modules/.bin/speccy -o compiled.yaml api.yaml",
-    "lint": "./node_modules/.bin/speccy lint compiled.yaml",
+    "compile": "./node_modules/.bin/speccy resolve -o compiled.yaml api.yaml",
+    "lint": "./node_modules/.bin/speccy lint --skip operation-tags --skip openapi-tags compiled.yaml",
     "serve": "./node_modules/.bin/speccy serve compiled.yaml",
     "gulp": "./node_modules/.bin/gulp",
     "speccy": "./node_modules/.bin/speccy"

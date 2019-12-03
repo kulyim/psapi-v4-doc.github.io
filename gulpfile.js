@@ -9,7 +9,7 @@ function compileYaml(cb)
 
 function lintYaml(cb)
 {
-	cp.exec('./node_modules/.bin/speccy lint compiled.yaml', (error, stdout, stderr) => {
+	cp.exec('./node_modules/.bin/speccy lint --skip operation-tags --skip openapi-tags compiled.yaml', (error, stdout, stderr) => {
 		if (error) {
 			console.error(`exec error: ${error}`);
 			return;
