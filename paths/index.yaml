@@ -1,2 +1,4 @@
 /collections:
   $ref: ./collections.yaml
+/library:
+  $ref: ./library.yaml

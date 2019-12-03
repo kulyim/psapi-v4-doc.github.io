@@ -1,5 +1,23 @@
+ArrayOfContainerResponse:
+  description: "List of containers (gallery or collection) - HTTP 200 OK Response."
+  content:
+    application/json:
+      schema:
+        type: array
+        items:
+          oneOf:
+            - $ref: ./schemas.yaml#/Collection
+            - $ref: ./schemas.yaml#/Gallery
+    application/xml:
+      schema:
+        type: array
+        items:
+          oneOf:
+            - $ref: ./schemas.yaml#/Collection
+            - $ref: ./schemas.yaml#/Gallery
+
 CollectionResponse:
-  description: "/collections/{collection_id} - HTTP 200 OK Response."
+  description: "A single collection - HTTP 200 OK Response."
   content:
     application/json:
       schema:

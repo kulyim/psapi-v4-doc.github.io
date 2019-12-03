@@ -9,13 +9,12 @@ Collection:
       $ref: '#/CollectionId' #example of how to link within the same YAML
     type:
       type: string
-      description: "Type"
+      pattern: collection
+      example: collection
     attributes:
       type: object
       required:
         - name
-        - org_id
-        - name_url
         - description
         - display_order
         - access_id
@@ -27,16 +26,6 @@ Collection:
           type: string
           description: "Name of the collection"
           example: "My Trip to DR"
-          maxLength: 100
-        org_id:
-          type: string
-          description: "ID of the organization that the collection belongs to."
-          example: "O0000EXAMPLE_ORG"
-          nullable: true
-        name_url:
-          type: string
-          description: "URL to the collection"
-          nullable: true
           maxLength: 100
         description:
           type: string
@@ -67,6 +56,14 @@ Collection:
           description: "Modified Date"
           example: '2019-04-25T14:54:12.136828'
           nullable: true
+    links:
+      type: object
+      properties:
+        self:
+          type: string
+          description: 'Link to itself'
+          example: 'https://api.photoshelter.com/psapi/v4/collections/C0000EXAMPLECOLL'
+
 
 CollectionId:
   type: string
@@ -74,7 +71,7 @@ CollectionId:
   maxLength: 16
   pattern: '^C0000[a-zA-Z0-9._]{11}$'
   example: 'C0000EXAMPLECOLL'
-  description: 'The Collection ID'
+  description: 'Collection ID'
 
 Error:
   description: 'This object generates errors in compliance with RFC 7807 API Problem'
@@ -105,6 +102,88 @@ Error:
           detail:
             description: 'An human readable explanation specific to this occurrence of the problem.'
             type: string
+
+Gallery:
+  type: object
+  required:
+    - id
+    - type
+    - attributes
+  properties:
+    id:
+      $ref: '#/GalleryId'
+    type:
+      type: string
+      pattern: gallery
+      example: gallery
+    attributes:
+      type: object
+      required:
+        - name
+        - description
+        - display_order
+        - access_id
+        - is_listed
+        - created_at
+        - modified_at
+      properties:
+        name:
+          type: string
+          description: 'Name of Gallery or Collection object (Whichever it is)'
+          example: 'My trip to DR'
+          maxLength: 100
+        description:
+          type: string
+          description: 'Description of the Gallery'
+          nullable: true
+          example: 'Trip to DR with my brothers and sisters'
+          maxLength: 100
+        display_order:
+          type: integer
+          description: 'Custom display order'
+          example: 1
+        access_id:
+          type: string
+          description: 'Access ID of the Gallery'
+          pattern: '^A0000[a-zA-Z0-9._]{11}$'
+          example: 'A0000EXAMPLE_ACS'
+        is_listed:
+          type: boolean
+          description: 'Flag that denotes if it is listed on the public site'
+          example: false
+        created_at:
+          type: string
+          description: 'Creation date'
+          example: '2019-04-25T14:54:12.136828'
+        modified_at:
+          type: string
+          description: 'Last modified date'
+          example: '2019-04-25T14:54:12.136828'
+    links:
+      type: object
+      properties:
+        self:
+          type: string
+          description: 'Link to itself'
+          example: 'https://api.photoshelter.com/psapi/v4/galleries/G0000EXAMPLEGALL'
+
+
+GalleryId:
+  type: string
+  minLength: 16
+  maxLength: 16
+  pattern: '^G0000[a-zA-Z0-9._]{11}$'
+  example: 'G0000EXAMPLEGALL'
+  description: 'Gallery ID'
+
+MediaId:
+  title: Media ID
+  maxLength: 16
+  minLength: 16
+  pattern: ^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$
+  type: string
+  description: Media ID
+  example: I0000zCtew4UPbBw
 
 MetaTag:
   type: object

@@ -55,11 +55,7 @@ get:
     explode: true
     schema:
       type: string
-      enum:
-      - creation_time
-      - modification_time
-      - name
-      - display_order
+      enum: [creation_time, modification_time, name, display_order]
     example: name
   - name: sort_direction
     $ref: ../components/parameters.yaml#/sort_direction

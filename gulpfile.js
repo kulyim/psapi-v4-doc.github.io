@@ -1,22 +1,22 @@
 const gulp = require('gulp');
 const cp = require('child_process');
 
-function createApiYaml(cb)
-{
-	compileYaml(cb);
-	compileJson(cb);
-	cb();
-}
-
 function compileYaml(cb)
 {
-	cp.exec('./node_modules/.bin/multi-file-swagger -o yaml api.yaml > compiled.yaml');
+	cp.exec('./node_modules/.bin/speccy -o compiled.yaml api.yaml');
 	cb();
 }
 
-function compileJson(cb)
+function lintYaml(cb)
 {
-	cp.exec('./node_modules/.bin/multi-file-swagger api.yaml > compiled.json');
+	cp.exec('./node_modules/.bin/speccy lint --skip operation-tags --skip openapi-tags compiled.yaml', (error, stdout, stderr) => {
+		if (error) {
+			console.error(`exec error: ${error}`);
+			return;
+		}
+		console.log(`stdout: ${stdout}`);
+		console.error(`stderr: ${stderr}`);
+	});
 	cb();
 }
 
@@ -26,10 +26,9 @@ function watch()
 		'info/*.yaml',
 		'components/*.yaml',
 		'paths/*.yaml'
-	], compileYaml);
+	], gulp.series(compileYaml, lintYaml));
 }
 
-exports.default = createApiYaml
 exports.watch = watch;
 exports.compileYaml = compileYaml;
-exports.compileJson = compileJson;
+exports.lintYaml = lintYaml;
