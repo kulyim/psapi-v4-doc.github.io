@@ -1,3 +1,7 @@
+/galleries/{gallery_id}:
+  $ref: ./galleriesGetId.yaml
+/galleries/{gallery_id}/children:
+  $ref: ./galleriesGetIdChildren.yaml
 /collections:
   $ref: ./collections.yaml
 /library:

@@ -1,0 +1,24 @@
+get:
+  operationId: galleriesGetId
+  tags:
+    - Gallery
+  description: 'Get a gallery by ID.'
+  summary: 'Get a single gallery.'
+  parameters:
+    - name: gallery_id
+      $ref: ../components/parameters.yaml#/gallery_id
+  responses:
+    '200':
+      $ref: ../components/responses.yaml#/GalleryResponse
+    '400':
+      $ref: ../components/errors.yaml#/BadRequestErrorResponse
+    '401':
+      $ref: ../components/errors.yaml#/UnauthorizedErrorResponse
+    '403':
+      $ref: ../components/errors.yaml#/ForbiddenErrorResponse
+    '404':
+      $ref: ../components/errors.yaml#/NotFoundErrorResponse
+    '415':
+      $ref: ../components/errors.yaml#/UnsupportedMediaTypeErrorResponse
+    '429':
+      $ref: ../components/errors.yaml#/TooManyRequestsErrorResponse

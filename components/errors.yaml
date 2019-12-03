@@ -36,6 +36,22 @@ ForbiddenErrorResponse:
           title: 'Missing or invalid API key'
           detail: "Missing or invalid API Key error. This occurs when an API key is either missing from the request to the server or\nis invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.\nIf you do not have an API key, you can request one on our website."
 
+NotFoundErrorResponse:
+  description: '404 Not Found Client Error'
+  content:
+    application/json:
+      schema:
+        $ref: ./schemas.yaml#/Error
+      example:
+        errors:
+          id: ResourceNotFoundException
+          status: '404'
+          title: 'Resource not found'
+          detail: 'The requested resource was not found.'
+    application/xml:
+      schema:
+        $ref: ./schemas.yaml#/Error
+
 TooManyRequestsErrorResponse:
   headers:
     Retry-After:
@@ -78,6 +94,22 @@ UnauthorizedErrorResponse:
           status: '401'
           title: 'Invalid access to resource: Gallery'
           detail: 'You are not authorized to view this resource.'
+    application/xml:
+      schema:
+        $ref: ./schemas.yaml#/Error
+
+UnsupportedMediaTypeErrorResponse:
+  description: '415 Unsupported Media Type Error'
+  content:
+    application/json:
+      schema:
+        $ref: ./schemas.yaml#/Error
+      example:
+        errors:
+          id: ResourceNotFoundException
+          status: '415'
+          title: 'Unsupported media type'
+          detail: 'The origin server is refusing to service the request because the payload is in a format not supported by this method on the target resource.'
     application/xml:
       schema:
         $ref: ./schemas.yaml#/Error

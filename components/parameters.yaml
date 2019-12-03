@@ -1,3 +1,17 @@
+gallery_id:
+  name: gallery_id
+  description: "The ID of the gallery"
+  example: "G0000EXAMPLEGALL"
+  in: path
+  required: true
+  schema:
+    type: string
+    minLength: 16
+    maxLength: 16
+    pattern: '^G0000[a-zA-Z0-9._]{11}$'
+    example: 'G0000EXAMPLEGALL'
+    description: 'The Gallery ID'
+
 match:
   name: match
   in: query

@@ -16,6 +16,54 @@ ArrayOfContainerResponse:
             - $ref: ./schemas.yaml#/Collection
             - $ref: ./schemas.yaml#/Gallery
 
+GalleryResponse:
+      description: "/galleries/{gallery_id} - HTTP 200 OK Response.\n"
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                $ref: ./schemas.yaml#/Gallery
+              meta:
+                $ref: ./schemas.yaml#/MetaTag
+        application/xml:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                $ref: ./schemas.yaml#/Gallery
+              meta:
+                $ref: ./schemas.yaml#/MetaTag
+
+GalleryChildrenResponse:
+  description: "Returns a gallery's media. Only returns the ID, type, display order, creation time, and modification time of each media."
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            $ref: ./schemas.yaml#/GalleryChildren
+          meta:
+            $ref: ./schemas.yaml#/PaginationMetaTag
+    application/xml:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data: 
+            $ref: ./schemas.yaml#/GalleryChildren
+          meta:
+            $ref: ./schemas.yaml#/PaginationMetaTag
+
 CollectionResponse:
   description: "A single collection - HTTP 200 OK Response."
   content:
