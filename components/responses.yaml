@@ -39,3 +39,19 @@ CollectionResponse:
             $ref: ./schemas.yaml#/Collection
           meta:
             $ref: ./schemas.yaml#/MetaTag
+
+MediaSearchResponse:
+  description: "Media search - HTTP 200 OK Response."
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: array
+            items:
+              $ref: ./schemas.yaml#/Media
+          meta:
+            $ref: ./schemas.yaml#/PaginationMetaTag

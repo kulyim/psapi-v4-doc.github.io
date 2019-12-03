@@ -176,6 +176,39 @@ GalleryId:
   example: 'G0000EXAMPLEGALL'
   description: 'Gallery ID'
 
+Media:
+  type: object
+  required:
+    - id
+    - type
+    - attributes
+  properties:
+    id:
+      type: string
+      pattern: '^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$'
+      example: I0000zCtew4UPbBw
+    type:
+      type: string
+      example: "media"
+      enum:
+        - media
+    attributes:
+      type: object
+      required:
+        - file_name
+        - type
+      properties:
+        file_name:
+          type: string
+          example: "Sample File Name"
+        type:
+          type: string
+          enum:
+            - image
+            - audio
+            - video
+            - doc
+
 MediaId:
   title: Media ID
   maxLength: 16
@@ -184,6 +217,44 @@ MediaId:
   type: string
   description: Media ID
   example: I0000zCtew4UPbBw
+
+MediaSearchEmpty:
+  type: array
+  items:
+    type: string
+    enum:
+      - title
+      - edit_status
+      - urgency
+      - category
+      - keywords
+      - instructions
+      - author
+      - position
+      - location
+      - city
+      - state
+      - country
+      - headline
+      - trans_ref
+      - credit
+      - source
+      - copyright
+      - caption
+      - caption_writer
+      - ci_city
+      - ci_country
+      - ci_address
+      - ci_postal_code
+      - ci_region
+      - ci_email
+      - ci_phone
+      - ci_url
+      - genre
+      - rights
+      - scene
+      - subject_code
+      - web_statement
 
 MetaTag:
   type: object
@@ -206,3 +277,28 @@ MetaTag:
         expires:
           type: integer
           example: 40
+
+PaginationMetaTag:
+  type: object
+  properties:
+    paging:
+      type: object
+      properties:
+        total:
+          type: integer
+          example: 100
+        page:
+          type: integer
+          example: 1
+        first:
+          type: string
+          example: "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1"
+        last:
+          type: string
+          example: "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=5"
+        next:
+          type: string
+          example: "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=2"
+        prev:
+          type: string
+          example: "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1"
