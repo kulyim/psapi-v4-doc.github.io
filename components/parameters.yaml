@@ -96,6 +96,16 @@ media_id:
     type: string
     pattern: '^(VD|AD|I0|DO)000[a-zA-Z0-9._]{11}$'
 
+media_id_path:
+  name: media_id
+  description: "ID of the media"
+  example: "I0000EXAMPLEIMAG"
+  in: path
+  required: true
+  schema:
+    type: string
+    pattern: '^(VD|AD|I0|DO)000[a-zA-Z0-9._]{11}$'
+
 org_id:
   name: org_id
   description: "Organization id to perform the search on"

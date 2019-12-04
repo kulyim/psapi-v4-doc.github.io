@@ -1,0 +1,28 @@
+get:
+  operationId: mediaGetId
+  tags:
+    - Media
+  description: >-
+    "Get media by ID. This endpoint works for both public and authenticated users. Certain fields 
+    are non-null only if users have the permission to view them. Users must provide a valid media 
+    ID which can be a video, document, audio, or image id. This endpoint will return data 
+    corresponding with the type of media that was retrieved."
+  summary: "Get a single media"
+  parameters:
+    - name: media_id
+      $ref: ../components/parameters.yaml#/media_id_path
+  responses:
+    '200':
+      $ref: ../components/responses.yaml#/MediaResponse
+    '400':
+      $ref: ../components/errors.yaml#/BadRequestErrorResponse
+    '401':
+      $ref: ../components/errors.yaml#/UnauthorizedErrorResponse
+    '403':
+      $ref: ../components/errors.yaml#/ForbiddenErrorResponse
+    '404':
+      $ref: ../components/errors.yaml#/NotFoundErrorResponse
+    '415':
+      $ref: ../components/errors.yaml#/UnsupportedMediaTypeErrorResponse
+    '429':
+      $ref: ../components/errors.yaml#/TooManyRequestsErrorResponse

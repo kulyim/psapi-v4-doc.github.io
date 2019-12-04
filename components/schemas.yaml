@@ -1,3 +1,11 @@
+AudioId:
+  type: string
+  minLength: 16
+  maxLength: 16
+  pattern: '^AD000[a-zA-Z0-9._]{11}$'
+  example: 'AD000EXAMPLE_AUD'
+  description: 'Audio Id'
+
 Collection:
   type: object
   required:
@@ -72,6 +80,14 @@ CollectionId:
   pattern: '^C0000[a-zA-Z0-9._]{11}$'
   example: 'C0000EXAMPLECOLL'
   description: 'Collection ID'
+
+DocId:
+  type: string
+  minLength: 16
+  maxLength: 16
+  pattern: '^DO000[a-zA-Z0-9._]{11}$'
+  example: 'DO000EXAMPLE_DOC'
+  description: 'Doc Id'
 
 Error:
   description: 'This object generates errors in compliance with RFC 7807 API Problem'
@@ -176,6 +192,14 @@ GalleryId:
   example: 'G0000EXAMPLEGALL'
   description: 'Gallery ID'
 
+ImageId:
+  type: string
+  minLength: 16
+  maxLength: 16
+  pattern: '^I0000[a-zA-Z0-9._]{11}$'
+  example: 'I0000EXAMPLE_IMG'
+  description: 'The Image ID'
+
 KeyImage:
   type: object
   required:
@@ -263,6 +287,386 @@ MediaId:
   description: Media ID
   example: I0000zCtew4UPbBw
 
+MediaGetObject:
+  type: object
+  required:
+    - id
+    - type
+    - attributes
+  properties:
+    id:
+      type: string
+      minLength: 16
+      maxLength: 16
+      pattern: '^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$'
+      example: I0000zCtew4UPbBw
+    type:
+      type: string
+      enum:
+        - image
+        - document
+        - audio
+        - video
+    attributes:
+      anyOf:
+        - $ref: ./schemas.yaml#/MediaImage
+        - $ref: ./schemas.yaml#/MediaAudio
+        - $ref: ./schemas.yaml#/MediaDocument
+        - $ref: ./schemas.yaml#/MediaVideo
+
+MediaImage:
+  type: object
+  required:
+    - owner_id
+    - organization_id
+    - creator_id
+    - photographer_id
+    - file_name
+    - file_size
+    - height
+    - width
+    - rating
+    - screen_height
+    - screen_width
+    - screen_height_max
+    - screen_width_max
+    - thumbnail_height
+    - thumbnail_width
+    - views
+    - searchable
+    - model_released
+    - property_released
+    - flagged
+    - focal_point_x
+    - focal_point_y
+    - created_at
+    - modified_at
+  properties:
+    owner_id:
+      $ref: ./schemas.yaml#/UserIdNullable
+    organization_id:
+      $ref: ./schemas.yaml#/OrganizationId
+    creator_id:
+      $ref: ./schemas.yaml#/UserId
+    photographer_id:
+      $ref: ./schemas.yaml#/PhotographerId
+    file_name:
+      type: string
+      description: 'The name of the file'
+      example: 'File Name'
+    file_size:
+      type: integer
+      description: 'The size of the file in bytes'
+      example: 10000
+    height:
+      type: integer
+      description: 'Native image height in pixels'
+      example: 1000
+    width:
+      type: integer
+      description: 'Native image width in pixels'
+      example: 600
+    rating:
+      type: number
+      description: 'The image rating from -1 to 5'
+      example: 3
+      nullable: true
+    screen_height:
+      type: integer
+      description: 'Screen image height in pixels'
+      example: 1000
+      nullable: true
+    screen_width:
+      type: integer
+      description: 'Screen image width in pixels'
+      example: 600
+      nullable: true
+    screen_height_max:
+      type: integer
+      description: 'Max screen image height in pixels'
+      example: 10000
+      nullable: true
+    screen_width_max:
+      type: integer
+      description: 'Max screen image width in pixels'
+      example: 6000
+      nullable: true
+    thumbnail_height:
+      type: integer
+      description: 'Thumbnail height in pixels'
+      example: 200
+      nullable: true
+    thumbnail_width:
+      type: integer
+      description: 'Thumbnail width in pixels'
+      example: 180
+      nullable: true
+    views:
+      type: integer
+      description: 'View counter for the image'
+      example: 0
+      nullable: true
+    searchable: 
+      type: boolean
+      description: 'Boolean flag that denotes if the image is publicly searchable'
+      nullable: true
+      example: true
+    model_released:
+      type: boolean
+      description: 'Boolean flag that denotes if the image model is released'
+      nullable: true
+      example: true
+    property_released:
+      type: boolean
+      description: 'Boolean flag that denotes if the image property is released'
+      nullable: true
+      example: true
+    flagged:
+      type: boolean
+      description: 'Boolean flag that denotes if the image has been flagged by the photographer'
+      nullable: true
+      example: true
+    focal_point_x:
+      type: integer
+      description: 'Core product specific variable. Denotes the focal point of the image on the x-coordinate plane'
+      example: 100
+      nullable: true
+    focal_point_y:
+      type: integer
+      description: 'Core product specific variabnle. Denotes the focal point of the image on the y-coordinate plane'
+      example: 100
+      nullable: true
+    created_at:
+      type: string
+      description: 'Date and time the image was last updated'
+      example: "2019-10-02 14:39:23 GMT"
+      nullable: true
+    modified_at:
+      type: string
+      description: 'Date and time the image was originally uploaded'
+      example: "2019-10-02 14:39:23 GMT"
+      nullable: true
+
+MediaAudio:
+  type: object
+  required:
+    - owner_id
+    - file_name
+    - file_size
+    - start_time
+    - duration
+    - format
+    - hash
+    - creator_id
+    - model_released
+    - property_released
+    - rating
+    - created_at
+    - modified_at
+  properties:
+    owner_id:
+      $ref: ./schemas.yaml#/UserIdNullable
+    file_name:
+      type: string
+      description: 'The name of the file'
+      example: 'File Name'
+    file_size:
+      type: integer
+      description: 'The size of the file in bytes'
+      example: 10000
+    start_time:
+      type: number
+      description: 'Start time of the audio'
+      example: 0.05
+    duration:
+      type: number
+      description: 'Duration of the audio file'
+      example: 25.00
+    format:
+      type: string
+      description: 'Format of the audio file'
+      example: 'mp3'
+    hash:
+      type: string
+      description: 'Audio file SHA-1 hash'
+      example: '051a007701ae51921e2e5eec19dfeexamplehash'
+      nullable: true
+    creator_id:
+      $ref: ./schemas.yaml#//UserIdNullable
+    model_released:
+      type: boolean
+      description: 'Boolean denoting if the model is released'
+      example: true
+      nullable: true
+    property_released:
+      type: boolean
+      description: 'Boolean denoting if the property is released'
+      example: true
+      nullable: true
+    rating:
+      type: number
+      description: 'Rating'
+      example: 3
+      nullable: true
+    created_at:
+      type: string
+      description: 'Date and time the audio was last updated'
+      example: "2019-10-02 14:39:23 GMT"
+      nullable: true
+    modified_at:
+      type: string
+      description: 'Date and time the audio was originally uploaded'
+      example: "2019-10-02 14:39:23 GMT"
+      nullable: true
+
+MediaDocument:
+  type: object
+  required:
+    - owner_id
+    - creator_id
+    - organization_id
+    - file_name
+    - file_size
+    - format
+    - format_readable
+    - hash
+    - rating
+    - created_at
+    - modified_at
+  properties:
+    owner_id:
+      $ref: ./schemas.yaml#//UserIdNullable
+    creator_id:
+      $ref: ./schemas.yaml#//UserId
+    organization_id:
+      $ref: ./schemas.yaml#//OrganizationId
+    file_name:
+      type: string
+      description: "File Name"
+      example: "Example File Name"
+    file_size:
+      type: integer
+      description: "File size in bytes"
+      example: 100000
+    format:
+      type: string
+      description: "Describes the format of the file"
+      example: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    format_readable:
+      type: string
+      description: "Format Readable"
+      example: "Microsoft Word"
+    hash:
+      type: string
+      description: 'Hash encryption of the file'
+      example: '051a007701ae51921e2e5eec19dfeexamplehash'
+      nullable: true
+    rating:
+      type: number
+      description: 'Document rating'
+      example: 1
+      nullable: true
+    created_at:
+      type: string
+      description: 'Date and time the document was last updated'
+      example: "2019-10-02 14:39:23 GMT"
+      nullable: true
+    modified_at:
+      type: string
+      description: 'Date and time the document was originally uploaded'
+      example: "2019-10-02 14:39:23 GMT"
+      nullable: true
+
+MediaVideo:
+  type: object
+  required:
+    - owner_id
+    - file_name
+    - file_size
+    - rotate
+    - height
+    - width
+    - start_time
+    - duration
+    - format
+    - photographer_id
+    - creator_id
+    - hash
+    - model_released
+    - property_released
+    - rating
+    - created_at
+    - modified_at
+  properties:
+    owner_id:
+      $ref: ./schemas.yaml#//UserIdNullable
+    file_name:
+      type: string
+      description: "File name"
+      example: "Sample file name"
+    file_size:
+      type: integer
+      description: "File size in bytes"
+      example: 100000
+    rotate:
+      type: number
+      description: "Video rotation in degrees"
+      example: 30
+    height:
+      type: integer
+      description: "Video height in pixels"
+      example: 360
+    width:
+      type: integer
+      description: "Video width in pixels"
+      example: 640
+    start_time:
+      type: number
+      description: "Video start time"
+      example: 0
+    duration:
+      type: number
+      description: "Duration of the video"
+      example: 30
+    format:
+      type: string
+      description: "Video format"
+      example: "x-ms-asf"
+    photographer_id:
+      $ref: ./schemas.yaml#//UserIdNullable
+    creator_id:
+      $ref: ./schemas.yaml#//UserIdNullable
+    hash:
+      type: string
+      description: "Hash Encryption of the file"
+      example: '051a007701ae51921e2e5eec19dfeexamplehash'
+      nullable: true
+    model_released:
+      type: boolean
+      description: "Boolean flag denoting if the model is released"
+      example: true
+      nullable: true
+    property_released:
+      type: boolean
+      description: "Boolean flag denoting if the property is released"
+      example: true
+      nullable: true
+    rating:
+      type: number
+      description: "Rating"
+      example: 1
+      nullable: true
+    created_at:
+      type: string
+      description: 'Date and time the document was last updated'
+      example: "2019-10-02 14:39:23 GMT"
+      nullable: true
+    modified_at:
+      type: string
+      description: 'Date and time the document was originally uploaded'
+      example: "2019-10-02 14:39:23 GMT"
+      nullable: true
+
 MediaSearchEmpty:
   type: array
   items:
@@ -322,6 +726,15 @@ MetaTag:
         expires:
           type: integer
           example: 40
+
+Mode:
+  type: string
+  description: Mode
+  example: "everyone"
+  enum:
+    - permission
+    - private
+    - everyone
 
 OAuthRegister:
   required:
@@ -466,3 +879,185 @@ PaginationMetaTag:
         prev:
           type: string
           example: "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1"
+
+Permissions:
+  type: object
+  required:
+    - id
+    - type
+    - attributes
+  properties:
+    id:
+      type: string
+      description: 'Permission ID'
+      pattern: '^AR000[a-zA-Z0-9._]{11}$'
+      example: AR000EXAMPLE_PMS
+    type:
+      type: string
+      enum:
+        - contact
+        - group
+        - token
+        - access_level
+        - password
+      example: token
+    attributes:
+      type: object
+      required:
+        - expires
+        - max_downloads
+        - download_image_filetype
+        - download_image_size
+        - download_image_embed
+        - download_video_filetype
+        - download_video_format
+        - download_audio_filetype
+        - download_doc_filetype
+        - group_id
+        - contact_id
+        - access_level
+        - password
+        - token
+      properties:
+        expires:
+          type: string
+          nullable: true
+          description: 'Expiration Date'
+          example: '2019-04-25T14:54:12.136828'
+        contact_id:
+          type: string
+          nullable: true
+          description: 'Contact ID'
+          pattern: '^CT000[a-zA-Z0-9._]{11}$'
+          example: CT000EXAMPLE_CNT
+        group_id:
+          type: string
+          description: 'Contact Group ID'
+          nullable: true
+          pattern: '^CTG00[a-zA-Z0-9._]{11}$'
+          example: CTG00EXAMPLE_CTG
+        access_level:
+          type: string
+          description: 'Access Level (OPEN)'
+          nullable: true
+          maxLength: 10
+          example: OPEN
+        password:
+          type: string
+          description: 'Password'
+          nullable: true
+          maxLength: 20
+          example: 'Open Sesame'
+        token:
+          type: string
+          description: 'Access Token'
+          nullable: true
+          maxLength: 32
+          example: Token123456789
+        max_downloads:
+          type: integer
+          description: 'Max Downloads'
+          nullable: true
+          example: 99
+        download_image_filetype:
+          type: string
+          description: 'Download Image FileType (original | jpeg)'
+          nullable: true
+          example: original
+          enum:
+            - original
+            - jpeg
+        download_image_size:
+          type: integer
+          description: 'Download Image Size (number of pixels of longest dimension)'
+          nullable: true
+          example: 1200
+        download_image_embed:
+          type: boolean
+          description: 'Download Image Embed (true | false)'
+          nullable: true
+          example: true
+        download_video_filetype:
+          type: string
+          description: 'Download Video FileType (original | mp4)'
+          nullable: true
+          example: original
+          enum:
+            - original
+            - mp4
+        download_video_format:
+          type: string
+          description: 'Download Video Format (hd1080 | hd720 | sd480)'
+          nullable: true
+          example: hd1080
+          enum:
+            - hd1080
+            - hd720
+            - sd480
+        download_audio_filetype:
+          type: string
+          description: 'Download Audio FileType (original)'
+          nullable: true
+          example: original
+          enum:
+            - original
+        download_doc_filetype:
+          type: string
+          description: 'Download Doc FileType (original)'
+          nullable: true
+          example: original
+          enum:
+            - original
+
+InheritedPermissions:
+  type: object
+  required:
+    - mode
+    - native_mode
+    - collection_id
+    - permissions
+  properties:
+    mode:
+      $ref: ./schemas.yaml#/Mode
+    native_mode:
+      $ref: ./schemas.yaml#/Mode
+    collection_id:
+      $ref: ./schemas.yaml#/CollectionId
+    permissions:
+      type: array
+      items:
+        $ref: ./schemas.yaml#/Permissions
+
+PhotographerId:
+  type: string
+  minLength: 16
+  maxLength: 16
+  pattern: '^U0000[a-zA-Z0-9._]{11}$'
+  example: 'U0000EXAMPLEUSER'
+  description: 'Photographer Id'
+  nullable: true
+
+UserId:
+  type: string
+  minLength: 16
+  maxLength: 16
+  pattern: '^U0000[a-zA-Z0-9._]{11}$'
+  example: 'U0000EXAMPLEUSER'
+  description: 'User Id'
+
+UserIdNullable:
+  type: string
+  minLength: 16
+  maxLength: 16
+  pattern: '^U0000[a-zA-Z0-9._]{11}$'
+  example: 'U0000EXAMPLEUSER'
+  description: 'User Id'
+  nullable: true
+
+VideoId:
+  type: string
+  minLength: 16
+  maxLength: 16
+  pattern: '^VD000[a-zA-Z0-9._]{11}$'
+  example: 'VD000EXAMPLE_VID'
+  description: 'Video Id'

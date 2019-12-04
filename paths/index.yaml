@@ -18,13 +18,17 @@
   $ref: ./collectionsIdLink.yaml
 /galleries:
   $ref: ./galleries.yaml
-# /galleries/{gallery_id}:
+/galleries/{gallery_id}:
+  $ref: ./galleriesId.yaml
 /galleries/{gallery_id}/key-image:
   $ref: ./galleriesIdKeyImage.yaml
-# /galleries/{gallery_id}/permissions:
+/galleries/{gallery_id}/permissions:
+  $ref: ./galleriesIdPermissions.yaml
 /library:
   $ref: ./library.yaml
 /media:
   $ref: ./media.yaml
-# /media/{media_id}:
+/media/{media_id}:
+  $ref: ./mediaId.yaml
 # /media/{media_id}/download:
+#   $ref: ./mediaIdDownload.yaml
