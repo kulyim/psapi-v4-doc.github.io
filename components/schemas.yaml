@@ -208,6 +208,76 @@ GalleryId:
   example: 'G0000EXAMPLEGALL'
   description: 'Gallery ID'
 
+GalleryCover:
+  type: object
+  required:
+    - id
+    - type
+  properties:
+    id:
+      type: string
+      description: "Any media id"
+      minLength: 16
+      maxLength: 16
+      pattern: '^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$'
+      example: I0000zCtew4UPbBw
+    type:
+      type: string
+      description: "The type of media"
+      enum:
+        - image
+        - video
+        - document
+        - audio
+
+GalleryChildrenMetaTag:
+  type: object
+  properties:
+    children_count:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: "Total children count"
+          example: 10
+        audio:
+          type: integer
+          description: "Audio count"
+          example: 2
+        video:
+          type: integer
+          description: "Video count"
+          example: 3
+        document:
+          type: integer
+          description: "Document count"
+          example: 1
+        image:
+          type: integer
+          description: "Image count"
+          example: 4
+    paging:
+      type: object
+      properties:
+        total:
+          type: integer
+          example: 100
+        page:
+          type: integer
+          example: 1
+        first:
+          type: string
+          example: "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1"
+        last:
+          type: string
+          example: "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=5"
+        next:
+          type: string
+          example: "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=2"
+        prev:
+          type: string
+          example: "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1"
+
 MediaId:
   title: Media ID
   maxLength: 16

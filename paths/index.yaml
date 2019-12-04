@@ -2,6 +2,10 @@
   $ref: ./galleriesGetId.yaml
 /galleries/{gallery_id}/children:
   $ref: ./galleriesGetIdChildren.yaml
+/galleries/{gallery_id}/children/count:
+  $ref: ./galleriesGetIdChildrenCount.yaml
+/galleries/{gallery_id}/cover:
+  $ref: ./galleriesGetIdCover.yaml
 /collections:
   $ref: ./collections.yaml
 /library:

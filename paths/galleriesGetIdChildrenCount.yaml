@@ -1,0 +1,30 @@
+get:
+  operationId: galleriesGetIdChildrenCount
+  tags:
+    - Gallery
+  description: >-
+    "Retrieve the children count of a gallery. This endpoint does not require authentication. It 
+    only requires the user using the endpoint to have access to the gallery they are trying to get 
+    the count of. Any unauthenticated user to the gallery will be thrown an error. An optional
+    collection_id query parameter can be set if the gallery inherits from the collection."
+  summary: "Get the children count of a gallery"
+  parameters:
+    - name: gallery_id
+      $ref: ../components/parameters.yaml#/gallery_id
+    - name: collection_id
+      $ref: ../components/parameters.yaml#/collection_id_query
+  responses:
+    '200':
+      $ref: ../components/responses.yaml#/GalleryChildrenCountResponse
+    '400':
+      $ref: ../components/errors.yaml#/BadRequestErrorResponse
+    '401':
+      $ref: ../components/errors.yaml#/UnauthorizedErrorResponse
+    '403':
+      $ref: ../components/errors.yaml#/ForbiddenErrorResponse
+    '404':
+      $ref: ../components/errors.yaml#/NotFoundErrorResponse
+    '415':
+      $ref: ../components/errors.yaml#/UnsupportedMediaTypeErrorResponse
+    '429':
+      $ref: ../components/errors.yaml#/TooManyRequestsErrorResponse

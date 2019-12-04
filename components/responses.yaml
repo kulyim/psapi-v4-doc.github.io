@@ -64,6 +64,42 @@ GalleryChildrenResponse:
           meta:
             $ref: ./schemas.yaml#/PaginationMetaTag
 
+GalleryCoverResponse:
+  description: "Returns a gallery's cover - the first four assets."
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: array
+            items:
+              $ref: ./schemas.yaml#/GalleryCover
+          meta:
+            $ref: ./schemas.yaml#/MetaTag
+
+GalleryChildrenCountResponse:
+  description: "Returns the children count for a gallery in the meta object of the payload"
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - meta
+        properties:
+          meta:
+            $ref: ./schemas.yaml#/GalleryChildrenMetaTag
+    application/xml:
+      schema:
+        type: object
+        required:
+          - meta
+        properties:
+          meta:
+            $ref: ./schemas.yaml#/GalleryChildrenMetaTag
+
 CollectionResponse:
   description: "A single collection - HTTP 200 OK Response."
   content:
