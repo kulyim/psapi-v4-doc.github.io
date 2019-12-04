@@ -1,6 +1,30 @@
+/authenticate:
+  $ref: ./authenticate.yaml
+/authenticate/logout:
+  $ref: ./authenticateLogout.yaml
+/organization/authenticate:
+  $ref: ./organizationAuth.yaml
+/organization/logout:
+  $ref: ./organizationLogout.yaml
+/oauth/register:
+  $ref: ./oauthRegister.yaml
 /collections:
   $ref: ./collections.yaml
+/collections/{collection_id}:
+  $ref: ./collectionsId.yaml
+/collections/{collection_id}/key-image:
+  $ref: ./collectionsIdKeyImage.yaml
+/collections/{collection_id}/link:
+  $ref: ./collectionsIdLink.yaml
+/galleries:
+  $ref: ./galleries.yaml
+# /galleries/{gallery_id}:
+/galleries/{gallery_id}/key-image:
+  $ref: ./galleriesIdKeyImage.yaml
+# /galleries/{gallery_id}/permissions:
 /library:
   $ref: ./library.yaml
 /media:
   $ref: ./media.yaml
+# /media/{media_id}:
+# /media/{media_id}/download:

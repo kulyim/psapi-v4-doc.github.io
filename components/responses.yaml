@@ -16,6 +16,34 @@ ArrayOfContainerResponse:
             - $ref: ./schemas.yaml#/Collection
             - $ref: ./schemas.yaml#/Gallery
 
+ArrayOfGalleryResponse:
+  description: "An array of galleries"
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: array
+            items:
+              $ref: ./schemas.yaml#/Gallery
+          meta:
+            $ref: ./schemas.yaml#/MetaTag
+    application/xml:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: array
+            items:
+              $ref: ./schemas.yaml#/Gallery
+          meta:
+            $ref: ./schemas.yaml#/PaginationMetaTag
+
 CollectionResponse:
   description: "A single collection - HTTP 200 OK Response."
   content:
@@ -40,6 +68,57 @@ CollectionResponse:
           meta:
             $ref: ./schemas.yaml#/MetaTag
 
+CustomLinkResponse:
+  description: 'Custom Link Response - Returns a shareable link in the payload to the collection specified'
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: object
+            required:
+              - id
+              - type
+              - attributes
+            properties:
+              id: 
+                $ref: ./schemas.yaml#/CollectionId
+              type:
+                type: string
+                example: 'link'
+              attributes:
+                type: object
+                properties:
+                  url:
+                    type: string
+
+KeyImageResponse:
+  description: "Returns a collection/gallery key image."
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            $ref: ./schemas.yaml#/KeyImage
+          meta:
+            $ref: ./schemas.yaml#/MetaTag
+    application/xml:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            $ref: ./schemas.yaml#/KeyImage
+          meta:
+            $ref: ./schemas.yaml#/MetaTag
+
 MediaSearchResponse:
   description: "Media search - HTTP 200 OK Response."
   content:
@@ -55,3 +134,33 @@ MediaSearchResponse:
               $ref: ./schemas.yaml#/Media
           meta:
             $ref: ./schemas.yaml#/PaginationMetaTag
+
+OAuthRegisterResponse:
+  description: 'OAuth Register Response'
+  content:
+    application/json:
+      schema:
+        required:
+          - data
+        type: object
+        properties:
+          data:
+            $ref: ./schemas.yaml#/OAuthRegister
+
+OrganizationAuthResponse:
+  description: 'Default response for authenticating and logging out'
+  content:
+    application/json:
+      schema:
+        required:
+          - meta
+        type: object
+        properties:
+          meta:
+            required:
+              - status
+            type: object
+            properties:
+              status:
+                type: string
+                example: OK

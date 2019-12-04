@@ -1,0 +1,24 @@
+get:
+  operationId: collectionsGetIdKeyImage
+  tags:
+    - Collection
+  description: >-
+    "Get a collection's key image. This endpoint is fully public. Visibility and access permissions 
+    do not apply here. Any user should be able to retrieve the key image of any collection."
+  summary: "Get the key image of a collection"
+  parameters:
+    - name: collection_id
+      $ref: ../components/parameters.yaml#/collection_id
+  responses:
+    '200':
+      $ref: ../components/responses.yaml#/KeyImageResponse
+    '400':
+      $ref: ../components/errors.yaml#/BadRequestErrorResponse
+    '403':
+      $ref: ../components/errors.yaml#/ForbiddenErrorResponse
+    '404':
+      $ref: ../components/errors.yaml#/NotFoundErrorResponse
+    '415':
+      $ref: ../components/errors.yaml#/UnsupportedMediaTypeErrorResponse
+    '429':
+      $ref: ../components/errors.yaml#/TooManyRequestsErrorResponse

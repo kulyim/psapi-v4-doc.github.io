@@ -1,0 +1,105 @@
+post:
+  summary: 'Use your PhotoShelter credentials to log in to your account.'
+  operationId: authenticate
+  tags: 
+  - Authenticate
+  description: 'Verify user is a member.'
+  parameters:
+    - name: X-PS-Api-Key
+      description: PhotoShelter API Key
+      in: header
+      required: true
+      schema:
+        type: string
+  requestBody:
+    content:
+      application/x-www-form-urlencoded:
+        schema:
+          type: object
+          properties:
+            email:
+              type: string
+              format: email
+            password:
+              type: string
+            mode:
+              type: string
+            org_id:
+              type: string
+          required:
+            - email
+            - password
+            - mode
+  responses:
+    '200':
+      description: 'Authenticate'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                description: auth token
+    '400':
+      $ref: ../components/errors.yaml#/BadRequestErrorResponse
+    '401':
+      $ref: ../components/errors.yaml#/UnauthorizedErrorResponse
+    '403':
+      $ref: ../components/errors.yaml#/ForbiddenErrorResponse
+    '404':
+      $ref: ../components/errors.yaml#/NotFoundErrorResponse
+    '429':
+      $ref: ../components/errors.yaml#/TooManyRequestsErrorResponse
+get:
+  summary: 'Use your PhotoShelter credentials to log in to your account.'
+  operationId: authenticate-get
+  tags: 
+  - Authenticate
+  description: 'Verify user is a member.'
+  parameters:
+    - name: api_key
+      description: 'The API Key. Can be requested if you do not have one.'
+      in: query
+      required: true
+      schema:
+        type: string
+    - name: email
+      description: 'Email Address'
+      in: query
+      required: true
+      schema:
+        type: string
+        format: email
+    - name: mode
+      description: 'token or cookie'
+      in: query
+      required: true
+      schema:
+        type: string
+    - name: org_id
+      description: 'Organization Id'
+      in: query
+      required: false
+      schema:
+        type: string
+  responses:
+    '200':
+      description: 'Authenticate'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+    '400':
+      $ref: ../components/errors.yaml#/BadRequestErrorResponse
+    '401':
+      $ref: ../components/errors.yaml#/UnauthorizedErrorResponse
+    '403':
+      $ref: ../components/errors.yaml#/ForbiddenErrorResponse
+    '404':
+      $ref: ../components/errors.yaml#/NotFoundErrorResponse
+    '429':
+      $ref: ../components/errors.yaml#/TooManyRequestsErrorResponse

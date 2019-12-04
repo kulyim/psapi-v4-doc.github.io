@@ -176,6 +176,51 @@ GalleryId:
   example: 'G0000EXAMPLEGALL'
   description: 'Gallery ID'
 
+KeyImage:
+  type: object
+  required:
+    - id
+    - type
+    - attributes
+  properties:
+    id:
+      type: string
+      description: 'Image ID'
+      pattern: '^I0000[a-zA-Z0-9._]{11}$'
+      example: I0000EXAMPLE_IMG
+    type:
+      type: string
+      pattern: keyImage
+      example: keyImage
+    attributes:
+      type: object
+      required:
+        - image_id
+        - custom
+        - image_url
+        - public
+      properties:
+        image_id:
+          $ref: ./schemas.yaml#/ImageId
+        gallery_id:
+          $ref: ./schemas.yaml#/GalleryId
+        collection_id:
+          $ref: ./schemas.yaml#/CollectionId
+        custom:
+          type: boolean
+          description: 'Custom assigned gallery key image'
+          example: true
+        image_url:
+          type: string
+          description: 'Key image URL'
+          nullable: true
+          example: "http://www.photoshelter.co/img-get/I0000EXAMPLE_IMG"
+        public:
+          type: boolean
+          description: 'Key Image is Public'
+          nullable: true
+          example: true
+
 Media:
   type: object
   required:
@@ -277,6 +322,125 @@ MetaTag:
         expires:
           type: integer
           example: 40
+
+OAuthRegister:
+  required:
+  - attributes
+  - id
+  - type
+  type: object
+  properties:
+    id:
+      pattern: ^OAC00[a-zA-Z0-9._]{11}$
+      type: string
+      description: OAuth Client ID
+      example: OAC00EXAMPLE_OAC
+    type:
+      type: string
+      description: The type of object
+      example: oAuthClient
+      enum:
+      - oAuthClient
+    attributes:
+      $ref: ./schemas.yaml#/OAuthRegisterAttributes
+
+OAuthRegisterRequest:
+  description: OAuth Registration
+  content:
+    application/x-www-form-urlencoded:
+      schema:
+        required:
+        - application_name
+        - callback_url
+        - description
+        - email
+        - name
+        type: object
+        properties:
+          name:
+            type: string
+          description:
+            type: string
+          callback_url:
+            type: string
+          scopes:
+            type: string
+          email:
+            type: string
+          application_name:
+            type: string
+          company_name:
+            type: string
+          homepage_uri:
+            type: string
+          privacy_policy_uri:
+            type: string
+          logo_uri:
+            type: string
+
+OAuthRegisterAttributes:
+  required:
+  - application_name
+  - callback_url
+  - client_id
+  - client_secret
+  - description
+  - email
+  - name
+  type: object
+  properties:
+    client_id:
+      type: string
+      description: OAuth Client ID
+    client_secret:
+      type: string
+      description: OAuth Client Secret
+    name:
+      type: string
+      description: Name of the client app
+    description:
+      type: string
+      description: Description of the client app
+    callback_url:
+      type: string
+      description: Callback Url
+    scopes:
+      type: string
+      description: App scopes
+    email:
+      type: string
+      description: Email
+    application_name:
+      type: string
+      description: Application name
+    company_name:
+      type: string
+      description: Company name
+    homepage_uri:
+      type: string
+      description: Homepage uri
+    privacy_policy_uri:
+      type: string
+      description: Privacy policy uri
+    logo_uri:
+      type: string
+      description: Logo uri
+
+OrgAuthenticateRequest:
+  description: Authenticate an organization
+  content:
+    application/x-www-form-urlencoded:
+      schema:
+        required:
+        - org_id
+        type: object
+        properties:
+          org_id:
+            maxLength: 16
+            minLength: 16
+            pattern: ^O0000[a-zA-Z0-9._]{11}$
+            type: string
+            example: O0000c1x4UMGPvkY
 
 PaginationMetaTag:
   type: object
