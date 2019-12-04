@@ -2,3 +2,5 @@
   $ref: ./collections.yaml
 /library:
   $ref: ./library.yaml
+/media:
+  $ref: ./media.yaml
