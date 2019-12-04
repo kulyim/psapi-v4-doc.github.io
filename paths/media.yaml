@@ -1,0 +1,469 @@
+get:
+  operationId: mediaGet
+  tags:
+    - Media
+  description: >-
+    "Media GET (aka media search). At least one of the following is required in order for the search 
+    to take place: (terms, custom_metadata, date_start, date_end, user_id, org_id, photographer_id, 
+    virtual_agency_id, orientation, state, country, country_iso). It is good practice to limit your 
+    page size when searching as callbacks for additional data can become expensive."
+  summary: "Media Search"
+  parameters:
+    - name: user_id
+      description: "User id to perform the search on"
+      example: "U0000EXAMPLEUSER"
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: '^U0000[a-zA-Z0-9._]{11}$'
+    - name: org_id
+      description: "Organization id to perform the search on"
+      example: "O0000EXAMPLE_ORG"
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: '^O0000[a-zA-Z0-9._]{11}$'
+    - name: media_id
+      description: "ID of the media"
+      example: "I0000EXAMPLEIMAG"
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: '^(VD|AD|I0|DO)000[a-zA-Z0-9._]{11}$'
+    - name: photographer_id
+      description: "ID of photographer"
+      example: "U0000EXAMPLEUSER"
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: "^U0000[a-zA-Z0-9._]{11}$"
+    - name: virtual_agency_id
+      description: "Virtual Agency ID"
+      in: query
+      example: "VA000____EXAMPLE"
+      required: false
+      schema:
+        type: string
+    - name: collections
+      description: "Limit search to files within given collections. Comma separated list of collection ids."
+      in: query
+      required: false
+      example: "C0000EXAMPLECOLL, C0000EXAMPLECOL2"
+      schema:
+        type: string
+    - name: galleries
+      description: "Limit search to files contained in given galleries. Comma separated list of gallery ids."
+      in: query
+      required: false
+      example: "G0000EXAMPLEGALL, G0000EXAMPLEGAL2"
+      schema:
+        type: string
+    - name: custom_metadata
+      description: "Limit search to files containing custom metadata. Requires use of the org_id parameter. Parameter format is a JSON object containing field_id and option_id key-value pairs. e.g. {\"Foo_field_123\":\"Foo_tag_abc\",\"Bar_field_456\":\"Bar_tag_def\"}."
+      in: query
+      required: false
+      example: "{\"Foo_field_123\":\"Foo_tag\"}"
+      schema:
+        type: string
+    - name: file_name
+      description: "Name of the file"
+      in: query
+      required: false
+      example: "File name"
+      schema:
+        type: string
+    - name: terms
+      description: "Search terms. Performs text search based on the terms across a variety of attributes such as file name, keywords, caption, etc."
+      in: query
+      required: false
+      example: "Example Search Terms"
+      schema:
+        type: string
+    - name: model_release
+      description: "Media has a model release"
+      in: query
+      required: false
+      example: true
+      schema:
+        type: boolean
+    - name: property_release
+      description: "Media has property release"
+      in: query
+      required: false
+      example: false
+      schema:
+        type: boolean
+    - name: priced
+      description: "Media is for sale"
+      in: query
+      required: false
+      example: true
+      schema:
+        type: boolean
+    - name: searchble
+      description: "Media is publicly searchable"
+      in: query
+      required: false
+      example: false
+      schema:
+        type: boolean
+    - name: print
+      description: "Media is available for prints"
+      in: query
+      required: false
+      example: true
+      schema:
+        type: boolean
+    - name: personal_use
+      description: "Media is available for personal use."
+      in: query
+      required: false
+      example: false
+      schema:
+        type: boolean
+    - name: royalty_free
+      description: "Media is available as royalty free."
+      in: query
+      required: false
+      example: true
+      schema:
+        type: boolean
+    - name: rights_managed
+      description: "Media is available for license."
+      in: query
+      required: false
+      example: false
+      schema:
+        type: boolean
+    - name: media_type
+      description: "Type of media (image | video | audio | doc) or a comma separated list"
+      in: query
+      required: false
+      example: "image,audio"
+      schema:
+        type: string
+    - name: city
+      description: "City parameter"
+      in: query
+      required: false
+      example: "Sample City"
+      schema:
+        type: string
+    - name: state
+      description: "State/Province parameter"
+      in: query
+      required: false
+      example: "Sample State"
+      schema:
+        type: string
+    - name: country
+      description: "Country Parameter"
+      in: query
+      required: false
+      example: "Sample Country"
+      schema:
+        type: string
+    - name: country_iso
+      description: "Country ISO code"
+      in: query
+      required: false
+      example: "Sample Code"
+      schema:
+        type: string
+    - name: rating
+      description: "Ratings are from -1 to 254"
+      in: query
+      required: false
+      example: 1
+      schema:
+        type: integer
+    - name: rating_min
+      description: "Minimum rating"
+      in: query
+      required: false
+      example: 1
+      schema:
+        type: integer
+    - name: rating_max
+      description: "Maximum rating"
+      in: query
+      required: false
+      example: 10
+      schema:
+        type: integer
+    - name: date_start
+      description: "Minimum date taken"
+      in: query
+      required: false
+      example: "2019-04-09T18:34:40-04:00"
+      schema:
+        type: string
+    - name: date_end
+      description: "Maximum date taken"
+      in: query
+      required: false
+      example: "2019-04-09T18:34:40-04:00"
+      schema:
+        type: string
+    - name: create_start
+      description: "Minimum create date"
+      in: query
+      required: false
+      example: "2019-04-09T18:34:40-04:00"
+      schema:
+        type: string
+    - name: create_end
+      description: "Maximum create date"
+      in: query
+      required: false
+      example: "2019-04-09T18:34:40-04:00"
+      schema:
+        type: string
+    - name: modify_start
+      description: "Minimum modify date"
+      in: query
+      required: false
+      example: "2019-04-09T18:34:40-04:00"
+      schema:
+        type: string
+    - name: modify_end
+      description: "Minimum modify date"
+      in: query
+      required: false
+      example: "2019-04-09T18:34:40-04:00"
+      schema:
+        type: string
+    - name: title
+      description: "Title"
+      in: query
+      required: false
+      example: "Sample Title"
+      schema:
+        type: string
+    - name: edit_status
+      description: "Edit status"
+      in: query
+      required: false
+      example: "Sample status"
+      schema:
+        type: string
+    - name: urgency
+      description: "Urgency"
+      in: query
+      required: false
+      example: "Urgency"
+      schema:
+        type: string
+    - name: category
+      description: "Category"
+      in: query
+      required: false
+      example: "Sample Category"
+      schema:
+        type: string
+    - name: keywords
+      description: "Keywords"
+      in: query
+      required: false
+      example: "Example Keywords"
+      schema:
+        type: string
+    - name: instructions
+      description: "Instructions"
+      in: query
+      required: false
+      example: "Sample instructions"
+      schema:
+        type: string
+    - name: author
+      description: "Author"
+      in: query
+      required: false
+      example: "Sample Author"
+      schema:
+        type: string
+    - name: position
+      description: "Author title/position"
+      in: query
+      required: false
+      example: "Sample Title/Position"
+      schema:
+        type: string
+    - name: location
+      description: "Location"
+      in: query
+      required: false
+      example: "Sample location"
+      schema:
+        type: string
+    - name: trans_ref
+      description: "Job ID/transmission reference"
+      in: query
+      required: false
+      example: "Sample ID"
+      schema:
+        type: string
+    - name: credit
+      description: "Credit"
+      in: query
+      required: false
+      example: "Sample Credit"
+      schema:
+        type: string
+    - name: source
+      description: "Source"
+      in: query
+      required: false
+      example: "Sample Source"
+      schema:
+        type: string
+    - name: copyright
+      description: "Copyright"
+      in: query
+      required: false
+      example: "Sample Copyright"
+      schema:
+        type: string
+    - name: caption
+      description: "Caption writer"
+      in: query
+      required: false
+      example: "Caption writer"
+      schema:
+        type: string
+    - name: contact_info
+      description: "Contact info. Query string based on key-value pairs. The available keys are - city, country, address, postal_code, region, email, phone, and url. For example, \"?contract_info=city,NYC,country,USA\ is equivalent to city being NYC and country being USA."
+      in: query
+      required: false
+      style: form
+      explode: false
+      example: "city,NYC,country,USA"
+      schema:
+        type: string
+    - name: genre
+      description: "Genre"
+      in: query
+      required: false
+      example: "Sample genre"
+      schema:
+        type: string
+    - name: rights
+      description: "Usage rights"
+      in: query
+      required: false
+      example: "Sample usage rights"
+      schema:
+        type: string
+    - name: scene
+      description: "Scene"
+      in: query
+      required: false
+      example: "Sample scene"
+      schema:
+        type: string
+    - name: subject_code
+      description: "Subject Code"
+      in: query
+      required: false
+      example: "Sample Subject Code"
+      schema:
+        type: string
+    - name: caption_writer
+      description: "Caption Writer"
+      in: query
+      required: false
+      example: "Sample Writer"
+      schema:
+        type: string
+    - name: orientation
+      description: "Orientation"
+      in: query
+      required: false
+      example: "horizontal"
+      schema:
+        type: string
+        enum:
+          - horizontal
+          - vertical
+          - panoramic
+          - square
+    - name: web_statement
+      description: "Web statement"
+      in: query
+      required: false
+      example: "Sample Web Statement"
+      schema:
+        type: string
+    - name: is_empty
+      description: "Denotes which parameters must be empty. Comma-separated list."
+      style: form
+      explode: false
+      in: query
+      required: false
+      example: "title, edit_status,urgency"
+      schema:
+        $ref: ../components/schemas.yaml#/MediaSearchEmpty'
+    - name: not_empty
+      description: "Denotes which parameters must have a value. Comma separated list."
+      in: query
+      required: false
+      style: form
+      explode: false
+      example: "title,edit_status,urgency"
+      schema:
+        $ref: ../components/schemas.yaml#/MediaSearchEmpty'
+    - name: match_all_terms
+      description: "Match all terms. Return all keywords specified in the terms parameter. Default to true."
+      in: query
+      example: true
+      schema:
+        type: boolean
+    - name: per_page
+      description: "Results per page."
+      in: query
+      required: false
+      example: 50
+      schema:
+        type: integer
+    - name: page
+      description: "Page number."
+      in: query
+      required: false
+      example: 1
+      schema:
+        type: integer
+    - name: sort_by
+      description: "Field to sort by."
+      in: query
+      required: false
+      example: "relevance"
+      schema:
+        type: string
+        enum:
+          - relevance
+          - date
+          - file_name
+          - upload_time
+    - name: sort_dir
+      description: "Direction to sort by."
+      in: query
+      required: false
+      example: asc
+      schema:
+        type: string
+        enum:
+          - asc
+          - desc
+  responses:
+    '200': 
+      $ref: ../components/responses.yaml#/MediaSearchResponse
+    '403':
+      $ref: ../components/errors.yaml#/ForbiddenErrorResponse
+    '415':
+      $ref: ../components/errors.yaml#/UnsupportedMediaTypeErrorResponse
+    '429':
+      $ref: ../components/errors.yaml#/TooManyRequestsErrorResponse

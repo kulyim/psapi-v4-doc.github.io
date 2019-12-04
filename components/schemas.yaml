@@ -1,3 +1,11 @@
+AudioId:
+  type: string
+  minLength: 16
+  maxLength: 16
+  pattern: '^AD000[a-zA-Z0-9._]{11}$'
+  example: 'AD000EXAMPLE_AUD'
+  description: 'Audio Id'
+
 Collection:
   type: object
   required:
@@ -72,6 +80,266 @@ CollectionId:
   pattern: '^C0000[a-zA-Z0-9._]{11}$'
   example: 'C0000EXAMPLECOLL'
   description: 'Collection ID'
+
+CollectionChildren:
+  type: array
+  items:
+    type: object
+    required:
+      - id
+      - type
+      - attributes
+    properties:
+      id:
+        type: string
+        description: "Gallery or collection id"
+        pattern: '^(G|C)0000[a-zA-Z0-9._]{11}$'
+        example: "G0000EXAMPLE_GAL"
+      type:
+        type: string
+        description: "Gallery or collection"
+        enum:
+          - gallery
+          - collection
+        example: "gallery"
+      attributes:
+        type: object
+        required:
+          - mode
+          - effective_mode
+          - access_inherit
+        properties:
+          mode:
+            type: string
+            example: "private"
+          effective_mode:
+            type: string
+            example: "private"
+          access_inherit:
+            type: boolean
+            example: true
+
+CollectionChildrenMetaTag:
+  type: object
+  properties:
+    children_count:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: "Total children count"
+        galleries:
+          type: integer
+          description: "Gallery count"
+          example: 10
+        collections:
+          type: integer
+          description: "Collection count"
+          example: 10
+    paging:
+      type: object
+      properties:
+        total:
+          type: integer
+          example: 100
+        page:
+          type: integer
+          example: 1
+        first:
+          type: string
+          example: "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1"
+        last:
+          type: string
+          example: "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=5"
+        next:
+          type: string
+          example: "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=2"
+        prev:
+          type: string
+          example: "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1"
+
+ChildGallery:
+  type: object
+  required:
+    - id
+    - type
+    - attributes
+  properties:
+    id:
+      type: string
+      description: 'Gallery ID'
+      pattern: '^G0000[a-zA-Z0-9._]{11}$'
+      example: 'G0000EXAMPLE_GAL'
+      xml:
+        attribute: true
+    type:
+      type: string
+      pattern: gallery
+      example: gallery
+    attributes:
+      type: object
+      required:
+        - name
+        - name_url
+        - description
+        - display_order
+        - key_image_id
+        - access_id
+        - is_listed
+        - is_orig_enabled
+        - is_watermark_disabled
+        - sort_order
+        - created_at
+        - modified_at
+      properties:
+        name:
+          type: string
+          description: 'Name of Gallery or Collection object (Whichever it is)'
+          example: 'My trip to DR'
+          maxLength: 100
+        name_url:
+          type: string
+          nullable: true
+          description: 'URL to the gallery'
+          maxLength: 100
+        description:
+          type: string
+          description: 'Description of the Gallery'
+          nullable: true
+          example: 'Trip to DR with my brothers and sisters'
+          maxLength: 100
+        display_order:
+          type: integer
+          description: 'Custom display order'
+          example: 1
+        key_image_id:
+          type: string
+          nullable: true
+          description: 'ID of the Image that is the key image'
+          pattern: '^GI000[a-zA-Z0-9._]{11}$'
+          example: 'GI000EXAMPLE_IMG'
+        access_id:
+          type: string
+          description: 'Access ID of the Gallery'
+          pattern: '^A0000[a-zA-Z0-9._]{11}$'
+          example: 'A0000EXAMPLE_ACS'
+        is_listed:
+          type: boolean
+          description: 'Flag that denotes if it is listed on the public site'
+          example: false
+        is_orig_enabled:
+          type: boolean
+          description: 'Original enabled boolean value'
+          example: true
+        is_watermark_disabled:
+          type: boolean
+          description: 'Watermark disabled boolean value'
+          example: true
+        sort_order:
+          type: integer
+          description: 'Sort order'
+          example: 1
+        created_at:
+          type: string
+          description: 'Creation date'
+          example: '2019-04-25T14:54:12.136828'
+        modified_at:
+          type: string
+          description: 'Last modified date'
+          example: '2019-04-25T14:54:12.136828'
+    links:
+      type: object
+      properties:
+        self:
+          type: string
+          description: 'Link to itself'
+          example: 'https://api.photoshelter.com/psapi/v4/galleries/G0000ZJCk9LW4Zfc'
+
+ChildCollection:
+  type: object
+  required:
+    - id
+    - type
+    - attributes
+  properties:
+    id:
+      type: string
+      description: "Collection Id"
+      pattern: '^C0000[a-zA-Z0-9._]{11}$'
+      example: "C0000EXAMPLECOLL"
+    type:
+      type: string
+      description: "Type"
+    attributes:
+      type: object
+      required:
+        - name
+        - org_id
+        - name_url
+        - description
+        - display_order
+        - access_id
+        - is_listed
+        - sort_order
+        - created_at
+        - modified_at
+      properties:
+        name:
+          type: string
+          description: "Name of the collection"
+          example: "My Trip to DR"
+          maxLength: 100
+        org_id:
+          type: string
+          description: "ID of the organization that the collection belongs to."
+          example: "O0000EXAMPLE_ORG"
+          nullable: true
+        name_url:
+          type: string
+          description: "URL to the gallery"
+          nullable: true
+          maxLength: 100
+        description:
+          type: string
+          description: "Description of the colletion"
+          example: "My Trip to DR Collection"
+          nullable: true
+        display_order:
+          type: integer
+          description: "Display order"
+          example: 1
+        access_id:
+          type: string
+          description: "Access ID"
+          pattern: '^A0000[a-zA-Z0-9._]{11}$'
+          example: "A0000EXAMPLE_ACS"
+          nullable: true
+        is_listed:
+          type: boolean
+          description: "Is listed on public site"
+          example: false
+        sort_order:
+          type: integer
+          description: 'Sort order'
+          example: 1
+        created_at:
+          type: string
+          description: "Creation date"
+          example: '2019-04-25T14:54:12.136828'
+          nullable: true
+        modified_at:
+          type: string
+          description: "Modified Date"
+          example: '2019-04-25T14:54:12.136828'
+          nullable: true
+
+DocId:
+  type: string
+  minLength: 16
+  maxLength: 16
+  pattern: '^DO000[a-zA-Z0-9._]{11}$'
+  example: 'DO000EXAMPLE_DOC'
+  description: 'Doc Id'
 
 Error:
   description: 'This object generates errors in compliance with RFC 7807 API Problem'
@@ -278,6 +546,14 @@ GalleryChildrenMetaTag:
           type: string
           example: "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1"
 
+ImageId:
+  type: string
+  minLength: 16
+  maxLength: 16
+  pattern: '^I0000[a-zA-Z0-9._]{11}$'
+  example: 'I0000EXAMPLE_IMG'
+  description: 'The Image ID'
+
 MediaId:
   title: Media ID
   maxLength: 16
@@ -309,6 +585,131 @@ MetaTag:
           type: integer
           example: 40
 
+KeyImage:
+  type: object
+  required:
+    - id
+    - type
+    - attributes
+  properties:
+    id:
+      type: string
+      description: 'Image ID'
+      pattern: '^I0000[a-zA-Z0-9._]{11}$'
+      example: I0000EXAMPLE_IMG
+    type:
+      type: string
+      pattern: keyImage
+      example: keyImage
+    attributes:
+      type: object
+      required:
+        - image_id
+        - custom
+        - image_url
+        - public
+      properties:
+        image_id:
+          $ref: ./schemas.yaml#/ImageId
+        gallery_id:
+          $ref: ./schemas.yaml#/GalleryId
+        collection_id:
+          $ref: ./schemas.yaml#/CollectionId
+        custom:
+          type: boolean
+          description: 'Custom assigned gallery key image'
+          example: true
+        image_url:
+          type: string
+          description: 'Key image URL'
+          nullable: true
+          example: "http://www.photoshelter.co/img-get/I0000EXAMPLE_IMG"
+        public:
+          type: boolean
+          description: 'Key Image is Public'
+          nullable: true
+          example: true
+
+Media:
+  type: object
+  required:
+    - id
+    - type
+    - attributes
+  properties:
+    id:
+      type: string
+      pattern: '^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$'
+      example: I0000zCtew4UPbBw
+    type:
+      type: string
+      example: "media"
+      enum:
+        - media
+    attributes:
+      type: object
+      required:
+        - file_name
+        - type
+      properties:
+        file_name:
+          type: string
+          example: "Sample File Name"
+        type:
+          type: string
+          enum:
+            - image
+            - audio
+            - video
+            - doc
+
+MediaSearchEmpty:
+  type: array
+  items:
+    type: string
+    enum:
+      - title
+      - edit_status
+      - urgency
+      - category
+      - keywords
+      - instructions
+      - author
+      - position
+      - location
+      - city
+      - state
+      - country
+      - headline
+      - trans_ref
+      - credit
+      - source
+      - copyright
+      - caption
+      - caption_writer
+      - ci_city
+      - ci_country
+      - ci_address
+      - ci_postal_code
+      - ci_region
+      - ci_email
+      - ci_phone
+      - ci_url
+      - genre
+      - rights
+      - scene
+      - subject_code
+      - web_statement
+
+Mode:
+  type: string
+  description: Mode
+  example: "everyone"
+  enum:
+    - permission
+    - private
+    - everyone
+
 PaginationMetaTag:
   type: object
   properties:
@@ -333,3 +734,194 @@ PaginationMetaTag:
         prev:
           type: string
           example: "example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1"
+
+OrganizationId:
+  type: string
+  minLength: 16
+  maxLength: 16
+  pattern: '^O0000[a-zA-Z0-9._]{11}$'
+  example: 'O0000EXAMPLE_OWN'
+  description: 'Organization Id'
+  nullable: true
+
+Permissions:
+  type: object
+  required:
+    - id
+    - type
+    - attributes
+  properties:
+    id:
+      type: string
+      description: 'Permission ID'
+      pattern: '^AR000[a-zA-Z0-9._]{11}$'
+      example: AR000EXAMPLE_PMS
+    type:
+      type: string
+      enum:
+        - contact
+        - group
+        - token
+        - access_level
+        - password
+      example: token
+    attributes:
+      type: object
+      required:
+        - expires
+        - max_downloads
+        - download_image_filetype
+        - download_image_size
+        - download_image_embed
+        - download_video_filetype
+        - download_video_format
+        - download_audio_filetype
+        - download_doc_filetype
+        - group_id
+        - contact_id
+        - access_level
+        - password
+        - token
+      properties:
+        expires:
+          type: string
+          nullable: true
+          description: 'Expiration Date'
+          example: '2019-04-25T14:54:12.136828'
+        contact_id:
+          type: string
+          nullable: true
+          description: 'Contact ID'
+          pattern: '^CT000[a-zA-Z0-9._]{11}$'
+          example: CT000EXAMPLE_CNT
+        group_id:
+          type: string
+          description: 'Contact Group ID'
+          nullable: true
+          pattern: '^CTG00[a-zA-Z0-9._]{11}$'
+          example: CTG00EXAMPLE_CTG
+        access_level:
+          type: string
+          description: 'Access Level (OPEN)'
+          nullable: true
+          maxLength: 10
+          example: OPEN
+        password:
+          type: string
+          description: 'Password'
+          nullable: true
+          maxLength: 20
+          example: 'Open Sesame'
+        token:
+          type: string
+          description: 'Access Token'
+          nullable: true
+          maxLength: 32
+          example: Token123456789
+        max_downloads:
+          type: integer
+          description: 'Max Downloads'
+          nullable: true
+          example: 99
+        download_image_filetype:
+          type: string
+          description: 'Download Image FileType (original | jpeg)'
+          nullable: true
+          example: original
+          enum:
+            - original
+            - jpeg
+        download_image_size:
+          type: integer
+          description: 'Download Image Size (number of pixels of longest dimension)'
+          nullable: true
+          example: 1200
+        download_image_embed:
+          type: boolean
+          description: 'Download Image Embed (true | false)'
+          nullable: true
+          example: true
+        download_video_filetype:
+          type: string
+          description: 'Download Video FileType (original | mp4)'
+          nullable: true
+          example: original
+          enum:
+            - original
+            - mp4
+        download_video_format:
+          type: string
+          description: 'Download Video Format (hd1080 | hd720 | sd480)'
+          nullable: true
+          example: hd1080
+          enum:
+            - hd1080
+            - hd720
+            - sd480
+        download_audio_filetype:
+          type: string
+          description: 'Download Audio FileType (original)'
+          nullable: true
+          example: original
+          enum:
+            - original
+        download_doc_filetype:
+          type: string
+          description: 'Download Doc FileType (original)'
+          nullable: true
+          example: original
+          enum:
+            - original
+
+InheritedPermissions:
+  type: object
+  required:
+    - mode
+    - native_mode
+    - collection_id
+    - permissions
+  properties:
+    mode:
+      $ref: ./schemas.yaml#/Mode
+    native_mode:
+      $ref: ./schemas.yaml#/Mode
+    collection_id:
+      $ref: ./schemas.yaml#/CollectionId
+    permissions:
+      type: array
+      items:
+        $ref: ./schemas.yaml#/Permissions
+
+PhotographerId:
+  type: string
+  minLength: 16
+  maxLength: 16
+  pattern: '^U0000[a-zA-Z0-9._]{11}$'
+  example: 'U0000EXAMPLEUSER'
+  description: 'Photographer Id'
+  nullable: true
+
+UserId:
+  type: string
+  minLength: 16
+  maxLength: 16
+  pattern: '^U0000[a-zA-Z0-9._]{11}$'
+  example: 'U0000EXAMPLEUSER'
+  description: 'User Id'
+
+UserIdNullable:
+  type: string
+  minLength: 16
+  maxLength: 16
+  pattern: '^U0000[a-zA-Z0-9._]{11}$'
+  example: 'U0000EXAMPLEUSER'
+  description: 'User Id'
+  nullable: true
+
+VideoId:
+  type: string
+  minLength: 16
+  maxLength: 16
+  pattern: '^VD000[a-zA-Z0-9._]{11}$'
+  example: 'VD000EXAMPLE_VID'
+  description: 'Video Id'

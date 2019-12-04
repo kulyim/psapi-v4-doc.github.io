@@ -6,7 +6,25 @@
   $ref: ./galleriesGetIdChildrenCount.yaml
 /galleries/{gallery_id}/cover:
   $ref: ./galleriesGetIdCover.yaml
+/galleries/{gallery_id}/permission:
+  $ref: ./galleriesGetIdPermission.yaml
 /collections:
   $ref: ./collections.yaml
+/collections/{collection_id}:
+  $ref: ./collectionsGetId.yaml
+/collections/{collection_id}/children:
+  $ref: ./collectionsGetIdChildren.yaml
+/collections/{collection_id}/count:
+  $ref: ./collectionsGetIdCount.yaml
+/collections/{collection_id}/link:
+  $ref: ./collectionsGetIdLink.yaml
+/collections/{collection_id}/parent:
+  $ref: ./collectionsGetIdParent.yaml
+/collections/{collection_id}/children/{child_id}:
+  $ref: ./collectionsGetIdChildrenId.yaml
+/collections/{collection_id}/key-image:
+  $ref: ./collectionsGetIdKeyImage.yaml
 /library:
   $ref: ./library.yaml
+/media:
+  $ref: ./media.yaml

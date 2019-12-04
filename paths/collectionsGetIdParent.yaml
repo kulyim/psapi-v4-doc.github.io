@@ -1,0 +1,38 @@
+get:
+  operationId: collectionsGetIdParent
+  tags:
+    - Collection
+  description: >-
+    "Get a collection's parent. This endpoint does not require authentication. The ability to view a
+    collection's parent is dependent on whether or not the user has access to the collection. Some 
+    fields will be returned as null if the user does not have ownership access. The fields are 
+    'created_at' and 'modified_at', and 'access_id'. If a parent is not found then the data object 
+    will be empty."
+  summary: "Get the parent of a collection."
+  parameters:
+    - name: collection_id
+      $ref: ../components/parameters.yaml#/collection_id
+    - name: password
+      $ref: ../components/parameters.yaml#/password
+    - name: token
+      description: "Token for collections that have token access"
+      example: "MYTOKEN"
+      in: query
+      required: false
+      schema:
+        type: string
+  responses:
+    '200':
+      $ref: ../components/responses.yaml#/CollectionResponse
+    '400':
+      $ref: ../components/errors.yaml#/BadRequestErrorResponse
+    '401':
+      $ref: ../components/errors.yaml#/UnauthorizedErrorResponse
+    '403':
+      $ref: ../components/errors.yaml#/ForbiddenErrorResponse
+    '404':
+      $ref: ../components/errors.yaml#/NotFoundErrorResponse
+    '415':
+      $ref: ../components/errors.yaml#/UnsupportedMediaTypeErrorResponse
+    '429':
+      $ref: ../components/errors.yaml#/TooManyRequestsErrorResponse

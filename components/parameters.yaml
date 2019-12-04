@@ -40,6 +40,20 @@ collection_id:
     example: C0000c1x4UMGPvkY
   description: 'The Collection ID'
 
+child_collection_id:
+  name: child_collection_id
+  in: path
+  required: true
+  schema:
+    description: 'My collection description'
+    title: 'My Collection Test'
+    type: string
+    minLength: 16
+    maxLength: 16
+    pattern: '^C0000[a-zA-Z0-9._]{11}$'
+    example: C0000c1x4UMGPvkY
+  description: 'The Collection ID'
+
 collection_id_query:
   name: collection_id
   in: query
@@ -83,6 +97,16 @@ page:
     minimum: 0
     maximum: 999
     default: 0
+
+password:
+  name: password
+  description: "Optional password parameter access contents of a gallery/collection"
+  example: "PASSWORD"
+  in: query
+  required: false
+  schema:
+    type: string
+    maxLength: 20
 
 per_page:
   name: per_page

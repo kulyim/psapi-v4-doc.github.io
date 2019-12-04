@@ -20,13 +20,7 @@ get:
     - name: collection_id
       $ref: ../components/parameters.yaml#/collection_id_query
     - name: password
-      description: "Optional password parameter used to access the contents of a gallery with permissions set."
-      example: "PASSWORD"
-      in: query
-      required: false
-      schema:
-        type: string
-        maxLength: 20
+      $ref: ../components/parameters.yaml#/password
     - name: per_page
       $ref: ../components/parameters.yaml#/per_page
     - name: page

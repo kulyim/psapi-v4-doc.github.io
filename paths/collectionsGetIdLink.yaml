@@ -1,0 +1,29 @@
+get:
+  operationId: collectionsGetIdLink
+  tags:
+    - Collection
+  description: >-
+    "Get a collection's link. This endpoint is fully public. It will generate a link to the 
+    user's/org's collection with the name and id of the collection in the link. In the example, the 
+    {name} will be replaced with the collection's name. There is no restriction to generating the 
+    link, but viewing the contents of the collection in the link is still subject to visibility and 
+    access permissions."
+  summary: "Get the link to a collection."
+  parameters:
+    - name: collection_id
+      $ref: ../components/parameters.yaml#/collection_id
+  responses:
+    '200': 
+      $ref: ../components/responses.yaml#/CustomLinkResponse
+    '400':
+      $ref: ../components/errors.yaml#/BadRequestErrorResponse
+    '401':
+      $ref: ../components/errors.yaml#/UnauthorizedErrorResponse
+    '403':
+      $ref: ../components/errors.yaml#/ForbiddenErrorResponse
+    '404':
+      $ref: ../components/errors.yaml#/NotFoundErrorResponse
+    '415':
+      $ref: ../components/errors.yaml#/UnsupportedMediaTypeErrorResponse
+    '429':
+      $ref: ../components/errors.yaml#/TooManyRequestsErrorResponse

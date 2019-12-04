@@ -123,3 +123,194 @@ CollectionResponse:
             $ref: ./schemas.yaml#/Collection
           meta:
             $ref: ./schemas.yaml#/MetaTag
+
+CollectionChildrenResponse:
+  description: "Returns a collection's children which contains either galleries or collections."
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data: 
+            $ref: ./schemas.yaml#/CollectionChildren
+          meta:
+            $ref: ./schemas.yaml#/CollectionChildrenMetaTag
+    application/xml:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data: 
+            $ref: ./schemas.yaml#/CollectionChildren
+          meta:
+            $ref: ./schemas.yaml#/CollectionChildrenMetaTag
+
+CollectionChildrenIdResponse:
+  description: "Returns information about a single child of a collection"
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            oneOf:
+              - $ref: ./schemas.yaml#/ChildGallery
+              - $ref: ./schemas.yaml#/ChildCollection
+          meta:
+            $ref: ./schemas.yaml#/MetaTag
+    application/xml:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            oneOf:
+              - $ref: ./schemas.yaml#/ChildGallery
+              - $ref: ./schemas.yaml#/ChildCollection
+          meta:
+            $ref: ./schemas.yaml#/MetaTag
+
+CollectionChildrenCountResponse:
+  description: "Returns the children count for a collection in the meta object of the payload"
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - meta
+        properties:
+          meta:
+            $ref: ./schemas.yaml#/CollectionChildrenMetaTag
+
+CustomLinkResponse:
+  description: 'Custom Link Response - Returns a shareable link in the payload to the collection specified'
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: object
+            required:
+              - id
+              - type
+              - attributes
+            properties:
+              id: 
+                $ref: ./schemas.yaml#/CollectionId
+              type:
+                type: string
+                example: 'link'
+              attributes:
+                type: object
+                properties:
+                  url:
+                    type: string
+          meta:
+            $ref: ./schemas.yaml#/MetaTag
+      example:
+        data:
+          id: 'C0000EXAMPLECOLL'
+          type: 'url'
+          attributes:
+            url: 'https://example.photoshelter.com/gallery-collection/{name}/C0000EXAMPLECOLL'
+        meta:
+          copyright: 'PhotoShelter 2019'
+          version: '2019-05-01'
+          rate_limit:
+            limit: 10
+            current: 1
+            expires: 40
+
+KeyImageResponse:
+  description: "Returns a collection/gallery key image."
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            $ref: ./schemas.yaml#/KeyImage
+          meta:
+            $ref: ./schemas.yaml#/MetaTag
+    application/xml:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            $ref: ./schemas.yaml#/KeyImage
+          meta:
+            $ref: ./schemas.yaml#/MetaTag
+
+MediaSearchResponse:
+  description: "/media - HTTP 200 OK Response.\n"
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: array
+            items:
+              $ref: ./schemas.yaml#/Media
+          meta:
+            $ref: ./schemas.yaml#/PaginationMetaTag
+
+PermissionsResponse:
+  description: "Gets lists of native and inherited gallery permissions depending on access level"
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: object
+            required:
+              - id
+              - type
+              - attributes
+            properties:
+              id:
+                type: string
+                description: 'Resource ID'
+                pattern: '^(G|C)0000[a-zA-Z0-9._]{11}$'
+                example: G0000EXAMPLE_GAL
+              type:
+                type: string
+                pattern: permissions
+                example: permissions
+              attributes:
+                type: object
+                required:
+                  - mode
+                  - native_mode
+                  - native
+                properties:
+                  mode:
+                    $ref: ./schemas.yaml#/Mode
+                  native_mode:
+                    $ref: ./schemas.yaml#/Mode
+                  native:
+                    type: array
+                    items:
+                      $ref: ./schemas.yaml#/Permissions
+                  inherited:
+                    type: array
+                    items:
+                      $ref: ./schemas.yaml#/InheritedPermissions

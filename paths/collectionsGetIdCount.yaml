@@ -1,0 +1,38 @@
+get:
+  operationId: collectionsGetIdCount
+  tags:
+    - Collection
+  description: >-
+    "Get a collection's children count. This endpoint does not require authentication. A user will 
+    not be permitted to access the count of the children in a collection unless given access to the 
+    collection. Any user with insufficient permissions to a collection will be thrown an error. An 
+    optional parameter 'visibile' can be passed in to retrieve the count of only publicly visible 
+    children of a collection."
+  summary: "Get the children count of a collection"
+  parameters:
+    - name: collection_id
+      $ref: ../components/parameters.yaml#/collection_id
+    - name: visibile
+      description: >-
+        "Boolean value to denote if only publicly viewable children of a collection is returned in 
+        the count."
+      example: true
+      in: query
+      required: false
+      schema:
+        type: boolean
+  responses:
+    '200':
+      $ref: ../components/responses.yaml#/CollectionChildrenCountResponse
+    '400':
+      $ref: ../components/errors.yaml#/BadRequestErrorResponse
+    '401':
+      $ref: ../components/errors.yaml#/UnauthorizedErrorResponse
+    '403':
+      $ref: ../components/errors.yaml#/ForbiddenErrorResponse
+    '404':
+      $ref: ../components/errors.yaml#/NotFoundErrorResponse
+    '415':
+      $ref: ../components/errors.yaml#/UnsupportedMediaTypeErrorResponse
+    '429':
+      $ref: ../components/errors.yaml#/TooManyRequestsErrorResponse

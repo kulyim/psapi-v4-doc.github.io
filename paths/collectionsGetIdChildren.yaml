@@ -1,0 +1,52 @@
+get:
+  operationId: collectionsGetIdChildren
+  tags:
+    - Collection
+  description: >-
+    "Get a collection's children. This endpoint does not require authentication. Accessing a 
+    collection's children depends on the visibility and access rights of the collection and if the 
+    user has permissions to view it. If a user does not have permission to access the children then 
+    a permission error will be thrown. The endpoint will return all galleries and collections 
+    contained in the specified collection. Certain fields will be returned back as null if the user 
+    does not have ownership access. Unlike getting the children of a gallery, collections can only 
+    exist under ONE collection and not multiple collections. Per_page and page MUST BOTH be set in 
+    order for pagination to work."
+  summary: "Get the children of a collection."
+  parameters:
+    - name: collection_id
+      $ref: ../components/parameters.yaml#/collection_id
+    - name: password
+      $ref: ../components/parameters.yaml#/password
+    - name: token
+      description: "Optional token parameter that can be used for collections with token access"
+      example: "MYTOKEN"
+      in: query
+      required: false
+      schema:
+        type: string
+    - name: visibile
+      description: "Set to true to only return items that are visible to all users"
+      example: true
+      in: query
+      required: false
+      schema:
+        type: boolean
+    - name: per_page
+      $ref: ../components/parameters.yaml#/per_page
+    - name: page
+      $ref: ../components/parameters.yaml#/page
+  responses:
+    '200':
+      $ref: ../components/responses.yaml#/CollectionChildrenResponse
+    '400':
+      $ref: ../components/errors.yaml#/BadRequestErrorResponse
+    '401':
+      $ref: ../components/errors.yaml#/UnauthorizedErrorResponse
+    '403':
+      $ref: ../components/errors.yaml#/ForbiddenErrorResponse
+    '404':
+      $ref: ../components/errors.yaml#/NotFoundErrorResponse
+    '415':
+      $ref: ../components/errors.yaml#/UnsupportedMediaTypeErrorResponse
+    '429':
+      $ref: ../components/errors.yaml#/TooManyRequestsErrorResponse

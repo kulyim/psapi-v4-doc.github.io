@@ -1,0 +1,47 @@
+get:
+  operationId: collectionsGetIdChildrenId
+  tags:
+    - Collection
+  description: >-
+    "Get information on a specific child of a collection. This endpoint does not require authentication. 
+    The ability to retrieve a specific child of a collection is dependent on the visibility and access 
+    options set to the parent collection. If a user does not have access to the collection then they 
+    will not be able to view a specific child of a collection. Some fields will be returned as null 
+    if the user does not have ownership access. The fields that are impacted are 'created_at', 
+    'access_id', modified_at'. If a child is not found with the id then a 404 error will be thrown."
+  summary: "Get a child of a collection"
+  parameters:
+    - name: collection_id
+      $ref: ../components/parameters.yaml#/collection_id
+    - name: child_id
+      $ref: ../components/parameters.yaml#/child_collection_id
+    - name: sort_by
+      description: "Field to sort by"
+      in: query
+      example: "name"
+      required: false
+      schema:
+        type: string
+        enum:
+          - last_modified
+          - name
+          - created_at
+          - added_at
+          - display_order
+    - name: sort_direction
+      $ref: ../components/parameters.yaml#/sort_direction
+  responses:
+    '200': 
+      $ref: ../components/responses.yaml#/CollectionChildrenIdResponse
+    '400':
+      $ref: ../components/errors.yaml#/BadRequestErrorResponse
+    '401':
+      $ref: ../components/errors.yaml#/UnauthorizedErrorResponse
+    '403':
+      $ref: ../components/errors.yaml#/ForbiddenErrorResponse
+    '404':
+      $ref: ../components/errors.yaml#/NotFoundErrorResponse
+    '415':
+      $ref: ../components/errors.yaml#/UnsupportedMediaTypeErrorResponse
+    '429':
+      $ref: ../components/errors.yaml#/TooManyRequestsErrorResponse

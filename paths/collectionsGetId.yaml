@@ -1,0 +1,28 @@
+get:
+  operationId: collectionsGetId
+  tags:
+    - Collection
+  description: >-
+    "Get a collection by ID. This endpoint is available to both public and authenticated users. 
+    Certain fields are only returned a non-null value if the users is authenticated and has 
+    permissions. The format of the collection id is defined by the regex : ^C0000[a-zA-Z0-9._]{11}$ 
+    (For example: 'COOOOEXAMPLECOLL')."
+  summary: "Get a single collection."
+  parameters:
+    - name: collection_id
+      $ref: ../components/parameters.yaml#/collection_id
+  responses:
+    '200':
+      $ref: ../components/responses.yaml#/CollectionResponse
+    '400':
+      $ref: ../components/errors.yaml#/BadRequestErrorResponse
+    '401':
+      $ref: ../components/errors.yaml#/UnauthorizedErrorResponse
+    '403':
+      $ref: ../components/errors.yaml#/ForbiddenErrorResponse
+    '404':
+      $ref: ../components/errors.yaml#/NotFoundErrorResponse
+    '415':
+      $ref: ../components/errors.yaml#/UnsupportedMediaTypeErrorResponse
+    '429':
+      $ref: ../components/errors.yaml#/TooManyRequestsErrorResponse
