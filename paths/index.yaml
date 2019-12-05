@@ -30,5 +30,5 @@
   $ref: ./media.yaml
 /media/{media_id}:
   $ref: ./mediaId.yaml
-# /media/{media_id}/download:
-#   $ref: ./mediaIdDownload.yaml
+/media/{media_id}/download:
+  $ref: ./mediaIdDownload.yaml
