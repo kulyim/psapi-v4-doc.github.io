@@ -15,9 +15,37 @@ servers:
   - url: https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4
     description: PhotoShelter Auto Mocking API
 paths:
+  /authenticate:
+    $ref: ./paths/authenticate.yaml
+  /authenticate/logout:
+    $ref: ./paths/authenticateLogout.yaml
+  /organization/authenticate:
+    $ref: ./paths/organizationAuth.yaml
+  /organization/logout:
+    $ref: ./paths/organizationLogout.yaml
+  /oauth/register:
+    $ref: ./paths/oauthRegister.yaml
   /collections:
-    $ref: './paths/collections.yaml'
+    $ref: ./paths/collections.yaml
+  /collections/{collection_id}:
+    $ref: ./paths/collectionsId.yaml
+  /collections/{collection_id}/key-image:
+    $ref: ./paths/collectionsIdKeyImage.yaml
+  /collections/{collection_id}/link:
+    $ref: ./paths/collectionsIdLink.yaml
+  /galleries:
+    $ref: ./paths/galleries.yaml
+  /galleries/{gallery_id}:
+    $ref: ./paths/galleriesId.yaml
+  /galleries/{gallery_id}/key-image:
+    $ref: ./paths/galleriesIdKeyImage.yaml
+  /galleries/{gallery_id}/permissions:
+    $ref: ./paths/galleriesIdPermissions.yaml
   /library:
-    $ref: './paths/library.yaml'
+    $ref: ./paths/library.yaml
   /media:
-    $ref: './paths/media.yaml'
+    $ref: ./paths/media.yaml
+  /media/{media_id}:
+    $ref: ./paths/mediaId.yaml
+  /media/{media_id}/download:
+    $ref: ./paths/mediaIdDownload.yaml
