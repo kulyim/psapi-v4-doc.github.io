@@ -61,12 +61,8 @@ Cherry pick the ones your prefer, although trying and using all of them is benef
 │   ├── requests.yaml
 │   ├── responses.yaml
 │   └── schemas.yaml
-├── info
-│   ├── info.yaml
-│   └── server.yaml
 ├── paths
-│   ├── collections.yaml
-│   └── index.yaml
+│   └── collections.yaml
 ├── dredd.yml
 ├── gulpfile.js
 ├── package-lock.json
@@ -77,12 +73,9 @@ Cherry pick the ones your prefer, although trying and using all of them is benef
 ```
 
 ##### /api.yaml
-The main file that holds the top level definitions of the final API definition
+The main file that holds the top level definitions of the final API definition along with the refs to the paths.
 
-##### /info/*.yaml
-These file hold the general information of API definition
-
-#### /paths/index.yaml
+#### /paths/*.yaml
 This file hold the top level resource of the API. For example the file `/paths/collections.yaml` should hold all the endpoints that
 falls under the `psapi/v4/collections` URI
 
