@@ -63,7 +63,6 @@ Cherry pick the ones your prefer, although trying and using all of them is benef
 │   └── schemas.yaml
 ├── paths
 │   └── collections.yaml
-├── collections.yaml
 ├── dredd.yml
 ├── gulpfile.js
 ├── package-lock.json
