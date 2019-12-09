@@ -1,0 +1,14 @@
+post:
+  tags:
+  - OAuth
+  summary: Registers an OAuth client.
+  description: Registration of the metadata for an OAuth client and returns back
+    the submitted metadata along with the client_id and client_secret.
+  operationId: oAuthRegister
+  requestBody:
+    $ref: ../components/schemas.yaml#/OAuthRegisterRequest
+  responses:
+    200:
+      $ref: ../components/responses.yaml#/OAuthRegisterResponse
+    400:
+      $ref: ../components/errors.yaml#/BadRequestErrorResponse

@@ -1,0 +1,21 @@
+post:
+  tags:
+  - Authenticate
+  summary: Authenticates an organization.
+  description: After API access authentication, this endpoint will allow you to
+    authenticate to a different PhotoShelter organization associated with your
+    API credentials.
+  operationId: orgAuthenticate
+  requestBody:
+    $ref: ../components/schemas.yaml#/OrgAuthenticateRequest
+  responses:
+    200:
+      $ref: ../components/responses.yaml#/OrganizationAuthResponse
+    400:
+      $ref: ../components/errors.yaml#/BadRequestErrorResponse
+    401:
+      $ref: ../components/errors.yaml#/UnauthorizedErrorResponse
+    404:
+      $ref: ../components/errors.yaml#/NotFoundErrorResponse
+    429:
+      $ref: ../components/errors.yaml#/TooManyRequestsErrorResponse

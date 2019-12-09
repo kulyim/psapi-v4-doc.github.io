@@ -1,3 +1,73 @@
+gallery_id:
+  name: gallery_id
+  description: "The ID of the gallery"
+  example: "G0000EXAMPLEGALL"
+  in: path
+  required: true
+  schema:
+    type: string
+    minLength: 16
+    maxLength: 16
+    pattern: '^G0000[a-zA-Z0-9._]{11}$'
+    example: 'G0000EXAMPLEGALL'
+    description: 'The Gallery ID'
+
+gallery_id_query:
+  name: gallery_id
+  description: "The ID of the gallery"
+  example: "G0000EXAMPLEGALL"
+  in: query
+  required: false
+  schema:
+    type: string
+    minLength: 16
+    maxLength: 16
+    pattern: '^G0000[a-zA-Z0-9._]{11}$'
+    example: 'G0000EXAMPLEGALL'
+    description: 'The Gallery ID'
+
+collection_id:
+  name: collection_id
+  in: path
+  required: true
+  schema:
+    description: 'My collection description'
+    title: 'My Collection Test'
+    type: string
+    minLength: 16
+    maxLength: 16
+    pattern: '^C0000[a-zA-Z0-9._]{11}$'
+    example: C0000c1x4UMGPvkY
+  description: 'The Collection ID'
+
+child_collection_id:
+  name: child_collection_id
+  in: path
+  required: true
+  schema:
+    description: 'My collection description'
+    title: 'My Collection Test'
+    type: string
+    minLength: 16
+    maxLength: 16
+    pattern: '^C0000[a-zA-Z0-9._]{11}$'
+    example: C0000c1x4UMGPvkY
+  description: 'The Collection ID'
+
+collection_id_query:
+  name: collection_id
+  in: query
+  required: false
+  schema:
+    description: 'My collection description'
+    title: 'My Collection Test'
+    type: string
+    minLength: 16
+    maxLength: 16
+    pattern: '^C0000[a-zA-Z0-9._]{11}$'
+    example: C0000c1x4UMGPvkY
+  description: 'The Collection ID'
+
 match:
   name: match
   in: query
@@ -22,6 +92,16 @@ media_id:
   example: "I0000EXAMPLEIMAG"
   in: query
   required: false
+  schema:
+    type: string
+    pattern: '^(VD|AD|I0|DO)000[a-zA-Z0-9._]{11}$'
+
+media_id_path:
+  name: media_id
+  description: "ID of the media"
+  example: "I0000EXAMPLEIMAG"
+  in: path
+  required: true
   schema:
     type: string
     pattern: '^(VD|AD|I0|DO)000[a-zA-Z0-9._]{11}$'

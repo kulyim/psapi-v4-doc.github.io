@@ -1,0 +1,22 @@
+get:
+  tags:
+  - Gallery
+  summary: Retrieves the gallery key image.
+  description: Retrieves the gallery key image.
+  operationId: galleriesGetIdKeyImage
+  parameters:
+    - name: gallery_id
+      $ref: ../components/parameters.yaml#/gallery_id
+  responses:
+    '200':
+      $ref: ../components/responses.yaml#/KeyImageResponse
+    '400':
+      $ref: ../components/errors.yaml#/BadRequestErrorResponse
+    '403':
+      $ref: ../components/errors.yaml#/ForbiddenErrorResponse
+    '404':
+      $ref: ../components/errors.yaml#/NotFoundErrorResponse
+    '415':
+      $ref: ../components/errors.yaml#/UnsupportedMediaTypeErrorResponse
+    '429':
+      $ref: ../components/errors.yaml#/TooManyRequestsErrorResponse

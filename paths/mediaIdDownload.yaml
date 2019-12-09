@@ -1,0 +1,77 @@
+get:
+  tags:
+  - Media
+  summary: Download media
+  description: Download the media with the associated ID.
+  operationId: mediaDownloadGetId
+  parameters:
+  - name: media_id
+    $ref: ../components/parameters.yaml#/media_id_path
+  - name: gallery_id
+    $ref: ../components/parameters.yaml#/gallery_id_query
+  - name: collection_id
+    $ref: ../components/parameters.yaml#/collection_id_query
+  - name: password
+    in: query
+    description: Password
+    required: false
+    style: form
+    explode: true
+    schema:
+      type: string
+  - name: token
+    in: query
+    description: Access Token
+    required: false
+    style: form
+    explode: true
+    schema:
+      type: string
+  - name: download_filetype
+    in: query
+    description: Download Filetype
+    required: false
+    style: form
+    explode: true
+    schema:
+      type: string
+      enum:
+        - original
+        - jpeg
+        - mp4
+  - name: download_quality
+    in: query
+    description: Download Quality
+    required: false
+    style: form
+    explode: true
+    schema:
+      type: string
+  - name: download_image_embed
+    in: query
+    description: Download Image Embed Metadata
+    required: false
+    style: form
+    explode: true
+    schema:
+      type: boolean
+  responses:
+    200:
+      description: Download - HTTP OK
+      content:
+        application/octet-stream:
+          schema:
+            type: string
+            format: binary
+    400:
+      $ref: ../components/errors.yaml#/BadRequestErrorResponse
+    401:
+      $ref: ../components/errors.yaml#/UnauthorizedErrorResponse
+    403:
+      $ref: ../components/errors.yaml#/ForbiddenErrorResponse
+    404:
+      $ref: ../components/errors.yaml#/NotFoundErrorResponse
+    415:
+      $ref: ../components/errors.yaml#/UnsupportedMediaTypeErrorResponse
+    429:
+      $ref: ../components/errors.yaml#/TooManyRequestsErrorResponse

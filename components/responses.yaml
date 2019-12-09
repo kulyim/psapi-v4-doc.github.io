@@ -16,6 +16,34 @@ ArrayOfContainerResponse:
             - $ref: ./schemas.yaml#/Collection
             - $ref: ./schemas.yaml#/Gallery
 
+ArrayOfGalleryResponse:
+  description: "An array of galleries"
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: array
+            items:
+              $ref: ./schemas.yaml#/Gallery
+          meta:
+            $ref: ./schemas.yaml#/MetaTag
+    application/xml:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: array
+            items:
+              $ref: ./schemas.yaml#/Gallery
+          meta:
+            $ref: ./schemas.yaml#/PaginationMetaTag
+
 CollectionResponse:
   description: "A single collection - HTTP 200 OK Response."
   content:
@@ -40,6 +68,134 @@ CollectionResponse:
           meta:
             $ref: ./schemas.yaml#/MetaTag
 
+CustomLinkResponse:
+  description: 'Custom Link Response - Returns a shareable link in the payload to the collection specified'
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: object
+            required:
+              - id
+              - type
+              - attributes
+            properties:
+              id: 
+                $ref: ./schemas.yaml#/CollectionId
+              type:
+                type: string
+                example: 'link'
+              attributes:
+                type: object
+                properties:
+                  url:
+                    type: string
+
+GalleryResponse:
+  description: "/galleries/{gallery_id} - HTTP 200 OK Response.\n"
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            $ref: ./schemas.yaml#/Gallery
+          meta:
+            $ref: ./schemas.yaml#/MetaTag
+    application/xml:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            $ref: ./schemas.yaml#/Gallery
+          meta:
+            $ref: ./schemas.yaml#/MetaTag
+
+KeyImageResponse:
+  description: "Returns a collection/gallery key image."
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            $ref: ./schemas.yaml#/KeyImage
+          meta:
+            $ref: ./schemas.yaml#/MetaTag
+    application/xml:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            $ref: ./schemas.yaml#/KeyImage
+          meta:
+            $ref: ./schemas.yaml#/MetaTag
+
+MediaResponse:
+  description: "/media/{media_id} - HTTP 200 OK Response"
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            $ref: ./schemas.yaml#/MediaGetObject
+          meta:
+            $ref: ./schemas.yaml#/MetaTag
+        example:
+          data:
+            id: "VD000EXAMPLE_VID"
+            type: "video"
+            attributes:
+              owner_id: null
+              file_name: "Sample Video"
+              file_size: 10000
+              rotate: 0
+              height: 640
+              width: 360
+              start_time: 0
+              duration: 60
+              format:
+              photographer_id: null
+              creator_id: "U0000EXAMPLEUSER"
+              hash: '051a007701ae51921e2e5eec19dfeexamplehash'
+              model_released: true
+              property_released: true
+              rating: 1
+              updated_at: "2019-10-02 14:39:23 GMT"
+              uploaded_at: "2019-10-02 14:39:23 GMT"
+          meta:
+            copyright: 'PhotoShelter 2019'
+            version: '2019-05-01'
+            rate_limit:
+              limit: 10
+              current: 1
+              expires: 40
+    application/xml:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            $ref: ./schemas.yaml#/MediaGetObject
+          meta:
+            $ref: ./schemas.yaml#/MetaTag
+
 MediaSearchResponse:
   description: "Media search - HTTP 200 OK Response."
   content:
@@ -55,3 +211,78 @@ MediaSearchResponse:
               $ref: ./schemas.yaml#/Media
           meta:
             $ref: ./schemas.yaml#/PaginationMetaTag
+
+OAuthRegisterResponse:
+  description: 'OAuth Register Response'
+  content:
+    application/json:
+      schema:
+        required:
+          - data
+        type: object
+        properties:
+          data:
+            $ref: ./schemas.yaml#/OAuthRegister
+
+OrganizationAuthResponse:
+  description: 'Default response for authenticating and logging out'
+  content:
+    application/json:
+      schema:
+        required:
+          - meta
+        type: object
+        properties:
+          meta:
+            required:
+              - status
+            type: object
+            properties:
+              status:
+                type: string
+                example: OK
+
+PermissionsResponse:
+  description: "Gets lists of native and inherited gallery permissions depending on access level"
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - data
+        properties:
+          data:
+            type: object
+            required:
+              - id
+              - type
+              - attributes
+            properties:
+              id:
+                type: string
+                description: 'Resource ID'
+                pattern: '^(G|C)0000[a-zA-Z0-9._]{11}$'
+                example: G0000EXAMPLE_GAL
+              type:
+                type: string
+                pattern: permissions
+                example: permissions
+              attributes:
+                type: object
+                required:
+                  - mode
+                  - native_mode
+                  - native
+                properties:
+                  mode:
+                    $ref: ./schemas.yaml#/Mode
+                  native_mode:
+                    $ref: ./schemas.yaml#/Mode
+                  native:
+                    type: array
+                    items:
+                      $ref: ./schemas.yaml#/Permissions
+                  inherited:
+                    type: array
+                    items:
+                      $ref: ./schemas.yaml#/InheritedPermissions

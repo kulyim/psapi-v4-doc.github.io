@@ -1,0 +1,30 @@
+get:
+  operationId: galleriesGetIdPermission
+  tags:
+    - Gallery
+  description: >-
+    "Retrieves the gallery permissions. When authenticated, retrieves all the native and inherited 
+    access rights along with their credentials. When not authenticated, retrieves all the access 
+    rights without their associated credentials. An optional collection_id query parameter can be
+    set if the gallery inherits permissions from the collection."
+  summary: "Get the permissions of a single gallery"
+  parameters:
+    - in: gallery_id
+      $ref: ../components/parameters.yaml#/gallery_id
+    - name: collection_id
+      $ref: ../components/parameters.yaml#/collection_id_query
+  responses:
+    '200':
+      $ref: ../components/responses.yaml#/PermissionsResponse
+    '400':
+      $ref: ../components/errors.yaml#/BadRequestErrorResponse
+    '401':
+      $ref: ../components/errors.yaml#/UnauthorizedErrorResponse
+    '403':
+      $ref: ../components/errors.yaml#/ForbiddenErrorResponse
+    '404':
+      $ref: ../components/errors.yaml#/NotFoundErrorResponse
+    '415':
+      $ref: ../components/errors.yaml#/UnsupportedMediaTypeErrorResponse
+    '429':
+      $ref: ../components/errors.yaml#/TooManyRequestsErrorResponse

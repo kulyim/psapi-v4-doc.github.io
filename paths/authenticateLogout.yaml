@@ -1,0 +1,42 @@
+get:
+  summary: 'Log out of PhotoShelter.'
+  operationId: logout
+  tags: 
+  - Authenticate
+  description: 'Log our of PhotoShelter'
+  parameters:
+    - name: X-PS-Api-Key
+      description: PhotoShelter API Key
+      in: header
+      required: true
+      schema:
+        type: object
+    - name: X-PS-Auth-Token
+      description: PhotoShelter Auth Token
+      in: header
+      required: true
+      schema:
+        type: object
+  responses:
+    '200':
+      description: OK
+post:
+  summary: 'Log out of PhotoShelter.'
+  operationId: logout_post
+  tags: 
+  - Authenticate
+  description: 'Log out of PhotoShelter'
+  parameters:
+    - name: X-PS-Api-Key
+      description: PhotoShelter API Key
+      in: header
+      schema:
+        type: object
+    - name: X-PS-Auth-Token
+      description: PhotoShelter Auth Token
+      in: header
+      schema:
+        type: object
+  responses:
+    '200':
+      description: OK

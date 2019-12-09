@@ -1,0 +1,82 @@
+get:
+  tags:
+  - Gallery
+  summary: Gets all the galleries for the account.
+  description: Gets all the galleries for the account!
+  operationId: galleriesGet
+  parameters:
+  - name: page
+    $ref: ../components/parameters.yaml#/page
+  - name: per_page
+    $ref: ../components/parameters.yaml#/per_page
+  - name: sort_by
+    in: query
+    description: Sort by gallery property.
+    required: false
+    style: form
+    explode: true
+    schema:
+      type: string
+      default: creation_time
+      enum:
+      - creation_time
+      - modification_time
+      - name
+      - display_order
+  - name: sort_direction
+    $ref: ../components/parameters.yaml#/sort_direction
+  - name: name
+    in: query
+    description: Full or partial gallery name
+    required: false
+    style: form
+    explode: true
+    schema:
+      type: string
+      description: Search galleries by partial name
+  - name: parent
+    in: query
+    description: |-
+      Limit galleries to children of the provided collection ID. Pass
+      blank to find galleries with no parent.
+    required: false
+    style: form
+    explode: true
+    schema:
+      pattern: ^C0000[a-zA-Z0-9._]{11}$
+      type: string
+      description: Collection ID
+      example: C0000LYrqIr59eJI
+  - name: portfolio
+    in: query
+    description: Filter the result set to return galleries listed on public site
+    required: false
+    style: form
+    explode: true
+    schema:
+      type: boolean
+      default: false
+  - name: recently_updated
+    in: query
+    description: Filter the result set to return galleries recently updated
+    required: false
+    style: form
+    explode: true
+    schema:
+      type: boolean
+      default: false
+  responses:
+    200:
+      $ref: ../components/responses.yaml#/ArrayOfGalleryResponse
+    400:
+      $ref: ../components/errors.yaml#/BadRequestErrorResponse
+    401:
+      $ref: ../components/errors.yaml#/UnauthorizedErrorResponse
+    403:
+      $ref: ../components/errors.yaml#/ForbiddenErrorResponse
+    404:
+      $ref: ../components/errors.yaml#/NotFoundErrorResponse
+    415:
+      $ref: ../components/errors.yaml#/UnsupportedMediaTypeErrorResponse
+    429:
+      $ref: ../components/errors.yaml#/TooManyRequestsErrorResponse

@@ -1,0 +1,12 @@
+get:
+  tags:
+  - Authenticate
+  summary: Logs out of current organization
+  description: >-
+    Logs the user out of their current organization after they have called /organization/authenticate.
+  operationId: orgLogout
+  responses:
+    200:
+      $ref: ../components/responses.yaml#/OrganizationAuthResponse
+    401:
+      $ref: ../components/errors.yaml#/UnauthorizedErrorResponse
