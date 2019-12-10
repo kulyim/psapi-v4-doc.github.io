@@ -790,6 +790,43 @@ OAuthRegisterRequest:
             type: string
           logo_uri:
             type: string
+            
+OAuthToken:
+  required:
+    - attributes
+    - id
+    - type
+  type: object
+  properties:
+    id:
+      type: string
+      description: OAuth Token
+    type:
+      type: string
+      description: The type of object
+      example: oAuthToken
+      enum:
+        - oAuthToken
+    attributes:
+      $ref: ./schemas.yaml#/OAuthTokenAttributes
+
+OAuthTokenRequest:
+  description: OAuth Token Request
+  content:
+    application/x-www-form-urlencoded:
+      schema:
+        required:
+          - grant_type
+          - callback_url
+          - code
+        type: object
+        properties:
+          grant_type:
+            type: string
+          callback_url:
+            type: string
+          code:
+            type: string
 
 OAuthRegisterAttributes:
   required:
@@ -838,6 +875,27 @@ OAuthRegisterAttributes:
     logo_uri:
       type: string
       description: Logo uri
+      
+OAuthTokenAttributes:
+  required:
+    - token_type
+    - expires_in
+    - access_token
+    - refresh_token
+  type: object
+  properties:
+    token_type:
+      type: string
+      description: OAuth Token Type
+    expires_in:
+      type: integer
+      description: OAuth Token Expiration Time
+    access_token:
+      type: string
+      description: OAuth Access Token
+    refresh_token:
+      type: string
+      description: OAuth Refresh Token
 
 OrgAuthenticateRequest:
   description: Authenticate an organization

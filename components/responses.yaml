@@ -223,6 +223,18 @@ OAuthRegisterResponse:
         properties:
           data:
             $ref: ./schemas.yaml#/OAuthRegister
+            
+OAuthTokenResponse:
+  description: 'OAuth Token Response'
+  content:
+    application/json:
+      schema:
+        required:
+          - data
+        type: object
+        properties:
+          data:
+            $ref: ./schemas.yaml#/OAuthToken
 
 OrganizationAuthResponse:
   description: 'Default response for authenticating and logging out'

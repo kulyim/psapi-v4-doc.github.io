@@ -9,3 +9,5 @@ X-PS-Api-Key:
   example: 'i.e: QF3Oai9Wk6'
 X-PS-Auth-Token:
   description: 'PS supplied, opaque string'
+Authorization:
+  description: 'Authorization Header'

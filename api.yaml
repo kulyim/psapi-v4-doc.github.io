@@ -25,6 +25,8 @@ paths:
     $ref: ./paths/organizationLogout.yaml
   /oauth/register:
     $ref: ./paths/oauthRegister.yaml
+  /oauth/token:
+    $ref: ./paths/oAuthToken.yaml
   /collections:
     $ref: ./paths/collections.yaml
   /collections/{collection_id}:

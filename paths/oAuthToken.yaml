@@ -1,0 +1,20 @@
+post:
+  tags:
+  - OAuth
+  summary: Procures an OAuth token.
+  description: Generate an OAuth access token for the specified grant_type based on the client_id and client_secret.
+  operationId: oAuthToken
+  parameters:
+    - name: Authorization
+      description: OAuth Authorization Hash
+      in: header
+      required: true
+      schema:
+        type: object
+  requestBody:
+    $ref: ../components/schemas.yaml#/OAuthTokenRequest
+  responses:
+    200:
+      $ref: ../components/responses.yaml#/OAuthTokenResponse
+    400:
+      $ref: ../components/errors.yaml#/BadRequestErrorResponse
