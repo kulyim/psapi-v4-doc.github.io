@@ -1,1 +1,11 @@
-wip
+type: oauth2
+flows:
+  authorizationCode
+    authorizationUrl: https://<srv>/oauth/authorize
+    tokenUrl: https://<srv>/oauth/token
+    refreshUrl: https://<svr>/oauth/token
+    scopes:
+      write:all: generic meaningless write scope
+      read:all: generic meaningless read scope
+      
+
