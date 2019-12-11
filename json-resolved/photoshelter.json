@@ -1,687 +1,2663 @@
-{
-  "openapi" : "3.0.0",
-  "info" : {
-    "title" : "PhotoShelter API v4",
-    "description" : "# PhotoShelter API v4 definition",
-    "termsOfService" : "https://www.photoshelter.com/support/terms/",
-    "contact" : {
-      "name" : "PhotoShelter API Support Team",
-      "url" : "https://support.photoshelter.com",
-      "email" : "api-support@photoshelter.com"
-    },
-    "license" : {
-      "name" : "PhotoShelter License",
-      "url" : "https://www.photoshelter.com/support/license"
-    },
-    "version" : "4"
-  },
-  "servers" : [ {
-    "url" : "https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4",
-    "description" : "PhotoShelter Auto Mocking API"
-  } ],
-  "paths" : {
-    "/collection" : {
-      "get" : {
-        "summary" : "Gets all the collections for the account.",
-        "description" : "Gets all the collections for the account!",
-        "operationId" : "GetCollection",
-        "parameters" : [ {
-          "name" : "page",
-          "in" : "query",
-          "description" : "If provided, the endpoint will returns the requested data page if available.",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int32"
-          }
-        }, {
-          "name" : "per_page",
-          "in" : "query",
-          "description" : "If provided. the endpoint will return the requested data limited by the value of per_page",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int32"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "HTTP OK",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "allOf" : [ {
-                    "$ref" : "#/components/schemas/v1JsonApi"
-                  }, {
-                    "properties" : {
-                      "data" : {
-                        "oneOf" : [ {
-                          "$ref" : "#/components/schemas/Gallery"
-                        }, {
-                          "$ref" : "#/components/schemas/Image"
-                        } ]
-                      },
-                      "meta" : {
-                        "$ref" : "#/components/schemas/MetaTag"
-                      }
-                    }
-                  } ]
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/galleries" : {
-      "get" : {
-        "summary" : "Gets all the galleries for the account.",
-        "description" : "Gets all the galleries for the account!",
-        "operationId" : "GalleryGet",
-        "parameters" : [ {
-          "name" : "page",
-          "in" : "query",
-          "description" : "If provided, the endpoint will returns the requested data page if available.",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int32"
-          }
-        }, {
-          "name" : "per_page",
-          "in" : "query",
-          "description" : "If provided. the endpoint will return the requested data limited by the value of per_page",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int32"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Successful operation",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "allOf" : [ {
-                    "$ref" : "#/components/schemas/v1JsonApi"
-                  }, {
-                    "properties" : {
-                      "data" : {
-                        "oneOf" : [ {
-                          "$ref" : "#/components/schemas/Gallery"
-                        }, {
-                          "$ref" : "#/components/schemas/Image"
-                        } ]
-                      },
-                      "meta" : {
-                        "$ref" : "#/components/schemas/MetaTag"
-                      }
-                    }
-                  } ]
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/galleries/{gallery_id}" : {
-      "get" : {
-        "summary" : "Get gallery data based off gallery id.",
-        "description" : "Get gallery data based off gallery id",
-        "operationId" : "GalleryGetId",
-        "parameters" : [ {
-          "name" : "gallery_id",
-          "in" : "path",
-          "description" : "The gallery ID",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "$ref" : "#/components/schemas/schema"
-          }
-        }, {
-          "name" : "include",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "title" : "string",
-            "pattern" : "[a-zA-Z]",
-            "type" : "string",
-            "description" : "ITS A TRAP.",
-            "enum" : [ "children", "images, images.iptc, images.xmp", "cover", "count" ]
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "HTTP OK",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "allOf" : [ {
-                    "$ref" : "#/components/schemas/v1JsonApi"
-                  }, {
-                    "properties" : {
-                      "data" : {
-                        "oneOf" : [ {
-                          "$ref" : "#/components/schemas/Gallery"
-                        }, {
-                          "$ref" : "#/components/schemas/Image"
-                        } ]
-                      },
-                      "meta" : {
-                        "$ref" : "#/components/schemas/MetaTag"
-                      }
-                    }
-                  } ]
-                }
-              }
-            }
-          }
-        },
-        "x-code-samples" : {
-          "lang" : "PHP",
-          "label" : "PHP 7.1",
-          "source" : "echo \"ITS A TRAP!\";"
-        }
-      },
-      "delete" : {
-        "summary" : "Delete a gallery.",
-        "description" : "Delete a gallery.",
-        "operationId" : "GalleryDeleteId",
-        "parameters" : [ {
-          "name" : "gallery_id",
-          "in" : "path",
-          "description" : "Gallery ID",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "$ref" : "#/components/schemas/schema"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "HTTP OK"
-          }
-        }
-      },
-      "patch" : {
-        "summary" : "Update the gallery at that id.",
-        "description" : "Update the gallery at that id.",
-        "operationId" : "GalleryUpdateId",
-        "parameters" : [ {
-          "name" : "gallery_id",
-          "in" : "path",
-          "description" : "The Gallery ID",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "$ref" : "#/components/schemas/schema"
-          }
-        }, {
-          "name" : "name",
-          "in" : "header",
-          "description" : "Gallery name",
-          "required" : false,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "description",
-          "in" : "header",
-          "description" : "Gallery description",
-          "required" : false,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "f_list",
-          "in" : "header",
-          "description" : "Boolean value denoting if it's listed on public site",
-          "required" : false,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "boolean"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "HTTP OK",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/gallery/search" : {
-      "get" : {
-        "summary" : "Retrieve a subset of galleries via parameters.",
-        "description" : "Search galleries for the account",
-        "operationId" : "GallerySearch",
-        "parameters" : [ {
-          "name" : "name",
-          "in" : "query",
-          "description" : "If provided, search for galleries by the name",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "parent",
-          "in" : "query",
-          "description" : "If provided, limit galleries to children of the provided collection ID",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "sort_by",
-          "in" : "query",
-          "description" : "If provided, gives a field to sort by",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string",
-            "enum" : [ "creation_time", "modification_time", "name", "display_order" ]
-          }
-        }, {
-          "name" : "sort_dir",
-          "in" : "query",
-          "description" : "If provided, gives an order to sort by",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string",
-            "enum" : [ "asc", "desc" ]
-          }
-        }, {
-          "name" : "per_page",
-          "in" : "query",
-          "description" : "If provided, defines the number of results per age",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int32"
-          }
-        }, {
-          "name" : "page",
-          "in" : "query",
-          "description" : "If provided, defines the current page number",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int32"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "HTTP OK",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_1"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/gallery/insert" : {
-      "post" : {
-        "summary" : "Insert a gallery.",
-        "description" : "Insert a gallery",
-        "operationId" : "GalleryInsert",
-        "parameters" : [ {
-          "name" : "name",
-          "in" : "header",
-          "description" : "Gallery name",
-          "required" : false,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "description",
-          "in" : "header",
-          "description" : "Gallery description",
-          "required" : false,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "f_list",
-          "in" : "header",
-          "description" : "Boolean denoting if gallery is listed on public site",
-          "required" : false,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "boolean"
-          }
-        }, {
-          "name" : "mode",
-          "in" : "header",
-          "description" : "Visibility mode",
-          "required" : false,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string",
-            "enum" : [ "private", "permission", "everyone" ]
-          }
-        }, {
-          "name" : "native_mode",
-          "in" : "header",
-          "description" : "Native visibility mode of the specific gallery",
-          "required" : false,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string",
-            "enum" : [ "private", "permission", "everyone" ]
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "HTTP OK",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200_2"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/media/{media_id}" : {
-      "get" : {
-        "summary" : "Get the media with the associated ID.",
-        "description" : "Get the media with the associated ID.",
-        "operationId" : "Media Get",
-        "parameters" : [ {
-          "name" : "media_id",
-          "in" : "path",
-          "description" : "Media",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string",
-            "enum" : [ "ok" ]
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "discriminator" : {
-                    "propertyName" : "type",
-                    "mapping" : {
-                      "gallery" : "#/components/schemas/Gallery",
-                      "image" : "#/components/schemas/Image"
-                    }
-                  },
-                  "oneOf" : [ {
-                    "$ref" : "#/components/schemas/Gallery"
-                  }, {
-                    "$ref" : "#/components/schemas/Image"
-                  } ]
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "components" : {
-    "schemas" : {
-      "ApiProblem" : {
-        "type" : "object",
-        "properties" : {
-          "title" : {
-            "type" : "string",
-            "description" : "A short, human-readable summary of the problem type"
-          },
-          "type" : {
-            "type" : "string",
-            "description" : "A URI reference (RFC3986) that identifies the problem type"
-          },
-          "status" : {
-            "type" : "integer",
-            "description" : "The HTTP status code set by the origin server for this occurrence of the problem.",
-            "format" : "int32"
-          },
-          "detail" : {
-            "type" : "string",
-            "description" : "An human readable explanation specific to this occurrence of the problem."
-          },
-          "instance" : {
-            "type" : "string",
-            "description" : "A URI reference that identifies the specific occurrence of the problem."
-          }
-        },
-        "description" : "This object generates errors in compliance with RFC 7807 'API Problem'"
-      },
-      "v1JsonApi" : {
-        "type" : "object",
-        "properties" : {
-          "data" : {
-            "type" : "object",
-            "example" : { },
-            "oneOf" : [ {
-              "$ref" : "#/components/schemas/Gallery"
-            }, {
-              "$ref" : "#/components/schemas/Image"
-            } ]
-          },
-          "meta" : {
-            "type" : "object"
-          },
-          "errors" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/ApiProblem"
-            }
-          }
-        },
-        "description" : "A flat schema for the JSONAPI-light"
-      },
-      "Gallery" : {
-        "required" : [ "type" ],
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "description" : "The gallery ID",
-            "example" : "G0000b9PbmJDQcko"
-          },
-          "type" : {
-            "type" : "string",
-            "description" : "Entity type",
-            "example" : "gallery"
-          },
-          "description" : {
-            "type" : "string",
-            "description" : "Gallery description",
-            "example" : "My trip to DR"
-          },
-          "f_list" : {
-            "type" : "boolean",
-            "description" : "Listed on public site"
-          },
-          "display_order" : {
-            "type" : "integer",
-            "description" : "Custom display order",
-            "format" : "int32",
-            "example" : 0
-          },
-          "mode" : {
-            "type" : "string",
-            "description" : "Native visibility mode"
-          },
-          "effective_mode" : {
-            "type" : "string",
-            "description" : "Effective mode with permission inheritance"
-          },
-          "created_at" : {
-            "type" : "string",
-            "description" : "Creation date",
-            "example" : "2019-04-12"
-          },
-          "modified_at" : {
-            "type" : "string",
-            "description" : "Modification date",
-            "example" : "2019-04-12"
-          },
-          "collection_id" : {
-            "type" : "string",
-            "description" : "Collection ID",
-            "example" : "C0000IRVZsqAiXtA"
-          }
-        }
-      },
-      "Image" : {
-        "type" : "object",
-        "properties" : {
-          "gallery_id" : {
-            "$ref" : "#/components/schemas/id"
-          }
-        }
-      },
-      "id" : {
-        "type" : "string",
-        "description" : "The gallery ID",
-        "example" : "G0000b9PbmJDQcko"
-      },
-      "MetaTag" : {
-        "type" : "object",
-        "properties" : {
-          "copyright" : {
-            "type" : "string"
-          },
-          "authors" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
-          }
-        }
-      },
-      "schema" : {
-        "maxLength" : 16,
-        "minLength" : 16,
-        "pattern" : "^G0000[a-zA-Z0-9]{11}$",
-        "type" : "string",
-        "example" : "G0000ZJCk9LW4Zfc"
-      },
-      "inline_response_200_data" : {
-        "type" : "object",
-        "properties" : {
-          "gallery_id" : {
-            "$ref" : "#/components/schemas/schema"
-          }
-        }
-      },
-      "inline_response_200" : {
-        "type" : "object",
-        "properties" : {
-          "data" : {
-            "$ref" : "#/components/schemas/inline_response_200_data"
-          },
-          "meta" : {
-            "type" : "object"
-          }
-        }
-      },
-      "inline_response_200_1_data" : {
-        "type" : "object",
-        "properties" : {
-          "total" : {
-            "type" : "integer",
-            "format" : "int32",
-            "example" : 1
-          },
-          "galleries" : {
-            "type" : "array",
-            "items" : { }
-          }
-        }
-      },
-      "inline_response_200_1" : {
-        "type" : "object",
-        "properties" : {
-          "status" : {
-            "type" : "string",
-            "enum" : [ "OK", "error" ]
-          },
-          "data" : {
-            "$ref" : "#/components/schemas/inline_response_200_1_data"
-          }
-        }
-      },
-      "inline_response_200_2_data" : {
-        "type" : "object",
-        "properties" : {
-          "gallery" : {
-            "pattern" : "^G0000[a-zA-Z0-9]{11}$",
-            "type" : "string",
-            "example" : "G0000ZJCk9LW4Zfc"
-          }
-        }
-      },
-      "inline_response_200_2" : {
-        "type" : "object",
-        "properties" : {
-          "status" : {
-            "type" : "string",
-            "enum" : [ "OK", "error" ]
-          },
-          "data" : {
-            "$ref" : "#/components/schemas/inline_response_200_2_data"
-          }
-        }
-      }
-    }
-  }
-}
+openapi: 3.0.2
+info:
+  title: PhotoShelter API v4
+  description: "# PhotoShelter API v4 definition"
+  termsOfService: https://www.photoshelter.com/support/terms/
+  contact:
+    name: PhotoShelter API Support Team
+    url: https://support.photoshelter.com
+    email: api-support@photoshelter.com
+  license:
+    name: PhotoShelter License
+    url: https://www.photoshelter.com/support/license
+  version: "1.0"
+servers:
+  - url: https://virtserver.swaggerhub.com/PhotoShelter/PhotoShelter/4
+    description: PhotoShelter Auto Mocking API
+paths:
+  /authenticate:
+    post:
+      summary: Use your PhotoShelter credentials to log in to your account.
+      operationId: authenticate
+      tags:
+        - Authenticate
+      description: Verify user is a member.
+      parameters:
+        - name: X-PS-Api-Key
+          description: PhotoShelter API Key
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                mode:
+                  type: string
+                org_id:
+                  type: string
+              required:
+                - email
+                - password
+                - mode
+      responses:
+        "200":
+          description: Authenticate
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: auth token
+        "400":
+          description: Bad Request Error
+          content:
+            application/json:
+              schema:
+                description: This object generates errors in compliance with RFC 7807 API
+                  Problem
+                type: object
+                required:
+                  - errors
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: A unique identifier for this occurrence of the
+                            problem
+                          type: string
+                        links:
+                          type: object
+                          properties:
+                            about:
+                              type: string
+                              example: http://api.developer.com/404.html
+                        title:
+                          description: A short, human-readable summary of the problem type
+                          type: string
+                        status:
+                          description: The HTTP status code set by the origin server for
+                            this occurrence of the problem.
+                          type: string
+                        detail:
+                          description: An human readable explanation specific to this
+                            occurrence of the problem.
+                          type: string
+              example:
+                errors:
+                  id: ThisShouldBeARealId
+                  status: "400"
+                  title: Bad Request / Syntax
+                  detail: Bad Request
+            application/xml:
+              schema:
+                $ref: "#/paths/~1authenticate/post/responses/400/content/applicatio\
+                  n~1json/schema"
+        "401":
+          description: Unauthorized Client Error
+          headers:
+            WWW-Authenticate:
+              description: The HTTP WWW-Authenticate response header defines the
+                authentication method that should be used to gain access to a
+                resource.
+              style: simple
+              explode: false
+              schema:
+                type: string
+              example: "WWW-Authenticate: Bearer"
+          content:
+            application/json:
+              schema:
+                $ref: "#/paths/~1authenticate/post/responses/400/content/applicatio\
+                  n~1json/schema"
+              example:
+                errors:
+                  id: AcsPermissionException
+                  status: "401"
+                  title: "Invalid access to resource: Gallery"
+                  detail: You are not authorized to view this resource.
+            application/xml:
+              schema:
+                $ref: "#/paths/~1authenticate/post/responses/400/content/applicatio\
+                  n~1json/schema"
+        "403":
+          description: Forbidden Client Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/paths/~1authenticate/post/responses/400/content/applicatio\
+                  n~1json/schema"
+              example:
+                error:
+                  id: ApiKeyInvalidException
+                  status: "403"
+                  title: Missing or invalid API key
+                  detail: >-
+                    Missing or invalid API Key error. This occurs when an API
+                    key is either missing from the request to the server or
+
+                    is invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.
+
+                    If you do not have an API key, you can request one on our website.
+            application/xml:
+              schema:
+                $ref: "#/paths/~1authenticate/post/responses/400/content/applicatio\
+                  n~1json/schema"
+              example:
+                error:
+                  id: ApiKeyInvalidException
+                  status: "403"
+                  title: Missing or invalid API key
+                  detail: >-
+                    Missing or invalid API Key error. This occurs when an API
+                    key is either missing from the request to the server or
+
+                    is invalid. This error can be resolved by including the API key in the request URL with the api_key parameter or in the HTTP request headers.
+
+                    If you do not have an API key, you can request one on our website.
+        "404":
+          description: Not Found Client Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/paths/~1authenticate/post/responses/400/content/applicatio\
+                  n~1json/schema"
+              example:
+                errors:
+                  id: ResourceNotFoundException
+                  status: "404"
+                  title: Resource not found
+                  detail: The requested resource was not found.
+            application/xml:
+              schema:
+                $ref: "#/paths/~1authenticate/post/responses/400/content/applicatio\
+                  n~1json/schema"
+        "429":
+          headers:
+            Retry-After:
+              schema:
+                type: integer
+              description: The Retry-After response HTTP header, expressed in seconds,
+                indicates how long the user agent should wait before making a
+                follow-up request.
+              example: 180
+          description: Too Many Requests Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/paths/~1authenticate/post/responses/400/content/applicatio\
+                  n~1json/schema"
+              example:
+                errors:
+                  id: TooManyRequestsException
+                  status: "429"
+                  title: Too Many Requests
+                  detail: The user has sent too many requests in a given amount of
+                    time see "rate limiting".
+            application/xml:
+              schema:
+                $ref: "#/paths/~1authenticate/post/responses/400/content/applicatio\
+                  n~1json/schema"
+    get:
+      summary: Use your PhotoShelter credentials to log in to your account.
+      operationId: authenticate-get
+      tags:
+        - Authenticate
+      description: Verify user is a member.
+      parameters:
+        - name: api_key
+          description: The API Key. Can be requested if you do not have one.
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: email
+          description: Email Address
+          in: query
+          required: true
+          schema:
+            type: string
+            format: email
+        - name: mode
+          description: token or cookie
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: org_id
+          description: Organization Id
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Authenticate
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        "400":
+          $ref: "#/paths/~1authenticate/post/responses/400"
+        "401":
+          $ref: "#/paths/~1authenticate/post/responses/401"
+        "403":
+          $ref: "#/paths/~1authenticate/post/responses/403"
+        "404":
+          $ref: "#/paths/~1authenticate/post/responses/404"
+        "429":
+          $ref: "#/paths/~1authenticate/post/responses/429"
+  /authenticate/logout:
+    get:
+      summary: Log out of PhotoShelter.
+      operationId: logout
+      tags:
+        - Authenticate
+      description: Log our of PhotoShelter
+      parameters:
+        - name: X-PS-Api-Key
+          description: PhotoShelter API Key
+          in: header
+          required: true
+          schema:
+            type: object
+        - name: X-PS-Auth-Token
+          description: PhotoShelter Auth Token
+          in: header
+          required: true
+          schema:
+            type: object
+      responses:
+        "200":
+          description: OK
+    post:
+      summary: Log out of PhotoShelter.
+      operationId: logout_post
+      tags:
+        - Authenticate
+      description: Log out of PhotoShelter
+      parameters:
+        - name: X-PS-Api-Key
+          description: PhotoShelter API Key
+          in: header
+          schema:
+            type: object
+        - name: X-PS-Auth-Token
+          description: PhotoShelter Auth Token
+          in: header
+          schema:
+            type: object
+      responses:
+        "200":
+          description: OK
+  /organization/authenticate:
+    post:
+      tags:
+        - Authenticate
+      summary: Authenticates an organization.
+      description: After API access authentication, this endpoint will allow you to
+        authenticate to a different PhotoShelter organization associated with
+        your API credentials.
+      operationId: orgAuthenticate
+      requestBody:
+        description: Authenticate an organization
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - org_id
+              type: object
+              properties:
+                org_id:
+                  maxLength: 16
+                  minLength: 16
+                  pattern: ^O0000[a-zA-Z0-9._]{11}$
+                  type: string
+                  example: O0000c1x4UMGPvkY
+      responses:
+        "200":
+          description: Default response for authenticating and logging out
+          content:
+            application/json:
+              schema:
+                required:
+                  - meta
+                type: object
+                properties:
+                  meta:
+                    required:
+                      - status
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                        example: OK
+        "400":
+          $ref: "#/paths/~1authenticate/post/responses/400"
+        "401":
+          $ref: "#/paths/~1authenticate/post/responses/401"
+        "404":
+          $ref: "#/paths/~1authenticate/post/responses/404"
+        "429":
+          $ref: "#/paths/~1authenticate/post/responses/429"
+  /organization/logout:
+    get:
+      tags:
+        - Authenticate
+      summary: Logs out of current organization
+      description: Logs the user out of their current organization after they have called
+        /organization/authenticate.
+      operationId: orgLogout
+      responses:
+        "200":
+          $ref: "#/paths/~1organization~1authenticate/post/responses/200"
+        "401":
+          $ref: "#/paths/~1authenticate/post/responses/401"
+  /oauth/register:
+    post:
+      tags:
+        - OAuth
+      summary: Registers an OAuth client.
+      description: Registration of the metadata for an OAuth client and returns back the
+        submitted metadata along with the client_id and client_secret.
+      operationId: oAuthRegister
+      requestBody:
+        description: OAuth Registration
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - application_name
+                - callback_url
+                - description
+                - email
+                - name
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                callback_url:
+                  type: string
+                scopes:
+                  type: string
+                email:
+                  type: string
+                application_name:
+                  type: string
+                company_name:
+                  type: string
+                homepage_uri:
+                  type: string
+                privacy_policy_uri:
+                  type: string
+                logo_uri:
+                  type: string
+      responses:
+        "200":
+          description: OAuth Register Response
+          content:
+            application/json:
+              schema:
+                required:
+                  - data
+                type: object
+                properties:
+                  data:
+                    required:
+                      - attributes
+                      - id
+                      - type
+                    type: object
+                    properties:
+                      id:
+                        pattern: ^OAC00[a-zA-Z0-9._]{11}$
+                        type: string
+                        description: OAuth Client ID
+                        example: OAC00EXAMPLE_OAC
+                      type:
+                        type: string
+                        description: The type of object
+                        example: oAuthClient
+                        enum:
+                          - oAuthClient
+                      attributes:
+                        required:
+                          - application_name
+                          - callback_url
+                          - client_id
+                          - client_secret
+                          - description
+                          - email
+                          - name
+                        type: object
+                        properties:
+                          client_id:
+                            type: string
+                            description: OAuth Client ID
+                          client_secret:
+                            type: string
+                            description: OAuth Client Secret
+                          name:
+                            type: string
+                            description: Name of the client app
+                          description:
+                            type: string
+                            description: Description of the client app
+                          callback_url:
+                            type: string
+                            description: Callback Url
+                          scopes:
+                            type: string
+                            description: App scopes
+                          email:
+                            type: string
+                            description: Email
+                          application_name:
+                            type: string
+                            description: Application name
+                          company_name:
+                            type: string
+                            description: Company name
+                          homepage_uri:
+                            type: string
+                            description: Homepage uri
+                          privacy_policy_uri:
+                            type: string
+                            description: Privacy policy uri
+                          logo_uri:
+                            type: string
+                            description: Logo uri
+        "400":
+          $ref: "#/paths/~1authenticate/post/responses/400"
+  /collections:
+    get:
+      tags:
+        - Collection
+      summary: Query collections.
+      description: Search the collections. This endpoint requires the user to be
+        authenticated. It will return a list of collections owned by the user.
+        For pagination to work, both per_page and page query parameters must be
+        set.
+      operationId: collectionsGet
+      parameters:
+        - name: id
+          in: query
+          description: Collection ID to match in the query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            minLength: 16
+            maxLength: 16
+            pattern: ^C0000[a-zA-Z0-9._]{11}$
+            example: C0000EXAMPLECOLL
+            description: Collection ID
+          example: C0000EXAMPLECOLL
+        - name: name
+          in: query
+          description: Collection name to match in the query. Having this parameter set
+            will always default to an exact name matching unless specified
+            otherwise by the usage of the match parameter
+          required: false
+          style: form
+          explode: true
+          schema:
+            maxLength: 100
+            type: string
+          example: EXAMPLE NAME
+        - name: parent
+          in: query
+          description: Limit collections to children of the provided collection ID. Pass
+            blank to find collections with no parent.
+          required: false
+          style: form
+          explode: true
+          schema:
+            $ref: "#/paths/~1collections/get/parameters/0/schema"
+          example: C0000EXAMPLECOLL
+        - name: match
+          in: query
+          description: Flag that denotes whether to perform a partial name match. This
+            parameter will only work if the name query parameter has been set
+            and the only value available for this parameter is false. Setting
+            this parameter to false will perform case insensitive partial name
+            matching.
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: boolean
+            default: false
+            enum:
+              - false
+              - true
+          example: false
+        - name: sort_by
+          in: query
+          description: Sort by an attribute. The available attributes to sort by is
+            creation_time, modification_time, name, and display_order. The
+            default behavior is to sort the collections by the attribute in
+            ascending order. This can be changed with the usage of the
+            'sort_direction' query parameter.
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            enum:
+              - creation_time
+              - modification_time
+              - name
+              - display_order
+          example: name
+        - name: sort_direction
+          in: query
+          description: Sort direction. This parameter requires the usage of the 'sort_by'
+            query parameter. Setting this parameter to one of the allowed values
+            will set the direction of the sort.
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            enum:
+              - ascending
+              - descending
+          example: ascending
+        - name: per_page
+          in: query
+          description: The number of items to return
+          example: 20
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimum: 50
+            maximum: 500
+            default: 50
+        - name: page
+          in: query
+          description: The number of items to skip before returning the results
+          example: 1
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 999
+            default: 0
+      responses:
+        "200":
+          description: A single collection - HTTP 200 OK Response.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    type: object
+                    required:
+                      - id
+                      - type
+                      - attributes
+                    properties:
+                      id:
+                        type: string
+                        minLength: 16
+                        maxLength: 16
+                        pattern: ^C0000[a-zA-Z0-9._]{11}$
+                        example: C0000EXAMPLECOLL
+                        description: Collection ID
+                      type:
+                        type: string
+                        pattern: collection
+                        example: collection
+                      attributes:
+                        type: object
+                        required:
+                          - name
+                          - description
+                          - display_order
+                          - access_id
+                          - is_listed
+                          - created_at
+                          - modified_at
+                        properties:
+                          name:
+                            type: string
+                            description: Name of the collection
+                            example: My Trip to DR
+                            maxLength: 100
+                          description:
+                            type: string
+                            description: Description of the colletion
+                            example: My Trip to DR Collection
+                            nullable: true
+                          display_order:
+                            type: integer
+                            description: Display order
+                            example: 1
+                          access_id:
+                            type: string
+                            description: Access ID
+                            pattern: ^A0000[a-zA-Z0-9._]{11}$
+                            example: A0000EXAMPLE_ACS
+                            nullable: true
+                          is_listed:
+                            type: boolean
+                            description: Is listed on public site
+                            example: false
+                          created_at:
+                            type: string
+                            description: Creation date
+                            example: 2019-04-25T14:54:12.136828
+                            nullable: true
+                          modified_at:
+                            type: string
+                            description: Modified Date
+                            example: 2019-04-25T14:54:12.136828
+                            nullable: true
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                            description: Link to itself
+                            example: https://api.photoshelter.com/psapi/v4/collections/C0000EXAMPLECOLL
+                  meta:
+                    type: object
+                    properties:
+                      copyright:
+                        type: string
+                        example: PhotoShelter 2019
+                      version:
+                        type: string
+                        example: 2019-05-01
+                      rate_limit:
+                        type: object
+                        properties:
+                          limit:
+                            type: integer
+                            example: 10
+                          current:
+                            type: integer
+                            example: 1
+                          expires:
+                            type: integer
+                            example: 40
+            application/xml:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    $ref: "#/paths/~1collections/get/responses/200/content/applicat\
+                      ion~1json/schema/properties/data"
+                  meta:
+                    $ref: "#/paths/~1collections/get/responses/200/content/applicat\
+                      ion~1json/schema/properties/meta"
+        "400":
+          $ref: "#/paths/~1authenticate/post/responses/400"
+        "403":
+          $ref: "#/paths/~1authenticate/post/responses/403"
+        "429":
+          $ref: "#/paths/~1authenticate/post/responses/429"
+  "/collections/{collection_id}":
+    get:
+      operationId: collectionsGetId
+      tags:
+        - Collection
+      description: "\"Get a collection by ID. This endpoint is available to both public and
+        authenticated users.  Certain fields are only returned a non-null value
+        if the users is authenticated and has  permissions. The format of the
+        collection id is defined by the regex : ^C0000[a-zA-Z0-9._]{11}$  (For
+        example: 'COOOOEXAMPLECOLL').\""
+      summary: Get a single collection.
+      parameters:
+        - name: collection_id
+          in: path
+          required: true
+          schema:
+            description: My collection description
+            title: My Collection Test
+            type: string
+            minLength: 16
+            maxLength: 16
+            pattern: ^C0000[a-zA-Z0-9._]{11}$
+            example: C0000c1x4UMGPvkY
+          description: The Collection ID
+      responses:
+        "200":
+          $ref: "#/paths/~1collections/get/responses/200"
+        "400":
+          $ref: "#/paths/~1authenticate/post/responses/400"
+        "401":
+          $ref: "#/paths/~1authenticate/post/responses/401"
+        "403":
+          $ref: "#/paths/~1authenticate/post/responses/403"
+        "404":
+          $ref: "#/paths/~1authenticate/post/responses/404"
+        "415":
+          description: Unsupported Media Type Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/paths/~1authenticate/post/responses/400/content/applicatio\
+                  n~1json/schema"
+              example:
+                errors:
+                  id: ResourceNotFoundException
+                  status: "415"
+                  title: Unsupported media type
+                  detail: The origin server is refusing to service the request because
+                    the payload is in a format not supported by this method on
+                    the target resource.
+            application/xml:
+              schema:
+                $ref: "#/paths/~1authenticate/post/responses/400/content/applicatio\
+                  n~1json/schema"
+        "429":
+          $ref: "#/paths/~1authenticate/post/responses/429"
+  "/collections/{collection_id}/key-image":
+    get:
+      operationId: collectionsGetIdKeyImage
+      tags:
+        - Collection
+      description: "\"Get a collection's key image. This endpoint is fully public.
+        Visibility and access permissions  do not apply here. Any user should be
+        able to retrieve the key image of any collection.\""
+      summary: Get the key image of a collection
+      parameters:
+        - $ref: "#/paths/~1collections~1%7Bcollection_id%7D/get/parameters/0"
+      responses:
+        "200":
+          description: Returns a collection/gallery key image.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    type: object
+                    required:
+                      - id
+                      - type
+                      - attributes
+                    properties:
+                      id:
+                        type: string
+                        description: Image ID
+                        pattern: ^I0000[a-zA-Z0-9._]{11}$
+                        example: I0000EXAMPLE_IMG
+                      type:
+                        type: string
+                        pattern: keyImage
+                        example: keyImage
+                      attributes:
+                        type: object
+                        required:
+                          - image_id
+                          - custom
+                          - image_url
+                          - public
+                        properties:
+                          image_id:
+                            type: string
+                            minLength: 16
+                            maxLength: 16
+                            pattern: ^I0000[a-zA-Z0-9._]{11}$
+                            example: I0000EXAMPLE_IMG
+                            description: The Image ID
+                          gallery_id:
+                            type: string
+                            minLength: 16
+                            maxLength: 16
+                            pattern: ^G0000[a-zA-Z0-9._]{11}$
+                            example: G0000EXAMPLEGALL
+                            description: Gallery ID
+                          collection_id:
+                            $ref: "#/paths/~1collections/get/parameters/0/schema"
+                          custom:
+                            type: boolean
+                            description: Custom assigned gallery key image
+                            example: true
+                          image_url:
+                            type: string
+                            description: Key image URL
+                            nullable: true
+                            example: http://www.photoshelter.co/img-get/I0000EXAMPLE_IMG
+                          public:
+                            type: boolean
+                            description: Key Image is Public
+                            nullable: true
+                            example: true
+                  meta:
+                    $ref: "#/paths/~1collections/get/responses/200/content/applicat\
+                      ion~1json/schema/properties/meta"
+            application/xml:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    $ref: "#/paths/~1collections~1%7Bcollection_id%7D~1key-image/ge\
+                      t/responses/200/content/application~1json/schema/properti\
+                      es/data"
+                  meta:
+                    $ref: "#/paths/~1collections/get/responses/200/content/applicat\
+                      ion~1json/schema/properties/meta"
+        "400":
+          $ref: "#/paths/~1authenticate/post/responses/400"
+        "403":
+          $ref: "#/paths/~1authenticate/post/responses/403"
+        "404":
+          $ref: "#/paths/~1authenticate/post/responses/404"
+        "415":
+          $ref: "#/paths/~1collections~1%7Bcollection_id%7D/get/responses/415"
+        "429":
+          $ref: "#/paths/~1authenticate/post/responses/429"
+  "/collections/{collection_id}/link":
+    get:
+      operationId: collectionsGetIdLink
+      tags:
+        - Collection
+      description: "\"Get a collection's link. This endpoint is fully public. It will
+        generate a link to the  user's/org's collection with the name and id of
+        the collection in the link. In the example, the  {name} will be replaced
+        with the collection's name. There is no restriction to generating
+        the  link, but viewing the contents of the collection in the link is
+        still subject to visibility and  access permissions.\""
+      summary: Get the link to a collection.
+      parameters:
+        - $ref: "#/paths/~1collections~1%7Bcollection_id%7D/get/parameters/0"
+      responses:
+        "200":
+          description: Custom Link Response - Returns a shareable link in the payload to
+            the collection specified
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    type: object
+                    required:
+                      - id
+                      - type
+                      - attributes
+                    properties:
+                      id:
+                        $ref: "#/paths/~1collections/get/parameters/0/schema"
+                      type:
+                        type: string
+                        example: link
+                      attributes:
+                        type: object
+                        properties:
+                          url:
+                            type: string
+        "400":
+          $ref: "#/paths/~1authenticate/post/responses/400"
+        "401":
+          $ref: "#/paths/~1authenticate/post/responses/401"
+        "403":
+          $ref: "#/paths/~1authenticate/post/responses/403"
+        "404":
+          $ref: "#/paths/~1authenticate/post/responses/404"
+        "415":
+          $ref: "#/paths/~1collections~1%7Bcollection_id%7D/get/responses/415"
+        "429":
+          $ref: "#/paths/~1authenticate/post/responses/429"
+  /galleries:
+    get:
+      tags:
+        - Gallery
+      summary: Gets all the galleries for the account.
+      description: Gets all the galleries for the account!
+      operationId: galleriesGet
+      parameters:
+        - $ref: "#/paths/~1collections/get/parameters/7"
+        - $ref: "#/paths/~1collections/get/parameters/6"
+        - name: sort_by
+          in: query
+          description: Sort by gallery property.
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            default: creation_time
+            enum:
+              - creation_time
+              - modification_time
+              - name
+              - display_order
+        - $ref: "#/paths/~1collections/get/parameters/5"
+        - name: name
+          in: query
+          description: Full or partial gallery name
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            description: Search galleries by partial name
+        - name: parent
+          in: query
+          description: |-
+            Limit galleries to children of the provided collection ID. Pass
+            blank to find galleries with no parent.
+          required: false
+          style: form
+          explode: true
+          schema:
+            pattern: ^C0000[a-zA-Z0-9._]{11}$
+            type: string
+            description: Collection ID
+            example: C0000LYrqIr59eJI
+        - name: portfolio
+          in: query
+          description: Filter the result set to return galleries listed on public site
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: boolean
+            default: false
+        - name: recently_updated
+          in: query
+          description: Filter the result set to return galleries recently updated
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: boolean
+            default: false
+      responses:
+        "200":
+          description: An array of galleries
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - id
+                        - type
+                        - attributes
+                      properties:
+                        id:
+                          type: string
+                          minLength: 16
+                          maxLength: 16
+                          pattern: ^G0000[a-zA-Z0-9._]{11}$
+                          example: G0000EXAMPLEGALL
+                          description: Gallery ID
+                        type:
+                          type: string
+                          pattern: gallery
+                          example: gallery
+                        attributes:
+                          type: object
+                          required:
+                            - name
+                            - description
+                            - display_order
+                            - access_id
+                            - is_listed
+                            - created_at
+                            - modified_at
+                          properties:
+                            name:
+                              type: string
+                              description: Name of Gallery or Collection object (Whichever
+                                it is)
+                              example: My trip to DR
+                              maxLength: 100
+                            description:
+                              type: string
+                              description: Description of the Gallery
+                              nullable: true
+                              example: Trip to DR with my brothers and sisters
+                              maxLength: 100
+                            display_order:
+                              type: integer
+                              description: Custom display order
+                              example: 1
+                            access_id:
+                              type: string
+                              description: Access ID of the Gallery
+                              pattern: ^A0000[a-zA-Z0-9._]{11}$
+                              example: A0000EXAMPLE_ACS
+                            is_listed:
+                              type: boolean
+                              description: Flag that denotes if it is listed on the public
+                                site
+                              example: false
+                            created_at:
+                              type: string
+                              description: Creation date
+                              example: 2019-04-25T14:54:12.136828
+                            modified_at:
+                              type: string
+                              description: Last modified date
+                              example: 2019-04-25T14:54:12.136828
+                        links:
+                          type: object
+                          properties:
+                            self:
+                              type: string
+                              description: Link to itself
+                              example: https://api.photoshelter.com/psapi/v4/galleries/G0000EXAMPLEGALL
+                  meta:
+                    $ref: "#/paths/~1collections/get/responses/200/content/applicat\
+                      ion~1json/schema/properties/meta"
+            application/xml:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/paths/~1galleries/get/responses/200/content/applicat\
+                        ion~1json/schema/properties/data/items"
+                  meta:
+                    type: object
+                    properties:
+                      paging:
+                        type: object
+                        properties:
+                          total:
+                            type: integer
+                            example: 100
+                          page:
+                            type: integer
+                            example: 1
+                          first:
+                            type: string
+                            example: example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1
+                          last:
+                            type: string
+                            example: example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=5
+                          next:
+                            type: string
+                            example: example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=2
+                          prev:
+                            type: string
+                            example: example.photoshelter.com/psapi/v4.0/endpoint?api_key=EXAMPLE_KEY&page=1
+        "400":
+          $ref: "#/paths/~1authenticate/post/responses/400"
+        "401":
+          $ref: "#/paths/~1authenticate/post/responses/401"
+        "403":
+          $ref: "#/paths/~1authenticate/post/responses/403"
+        "404":
+          $ref: "#/paths/~1authenticate/post/responses/404"
+        "415":
+          $ref: "#/paths/~1collections~1%7Bcollection_id%7D/get/responses/415"
+        "429":
+          $ref: "#/paths/~1authenticate/post/responses/429"
+  "/galleries/{gallery_id}":
+    get:
+      operationId: galleriesGetId
+      tags:
+        - Gallery
+      description: Get a gallery by ID.
+      summary: Get a single gallery.
+      parameters:
+        - name: gallery_id
+          description: The ID of the gallery
+          example: G0000EXAMPLEGALL
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 16
+            maxLength: 16
+            pattern: ^G0000[a-zA-Z0-9._]{11}$
+            example: G0000EXAMPLEGALL
+            description: The Gallery ID
+      responses:
+        "200":
+          description: |
+            /galleries/{gallery_id} - HTTP 200 OK Response.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    $ref: "#/paths/~1galleries/get/responses/200/content/applicatio\
+                      n~1json/schema/properties/data/items"
+                  meta:
+                    $ref: "#/paths/~1collections/get/responses/200/content/applicat\
+                      ion~1json/schema/properties/meta"
+            application/xml:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    $ref: "#/paths/~1galleries/get/responses/200/content/applicatio\
+                      n~1json/schema/properties/data/items"
+                  meta:
+                    $ref: "#/paths/~1collections/get/responses/200/content/applicat\
+                      ion~1json/schema/properties/meta"
+        "400":
+          $ref: "#/paths/~1authenticate/post/responses/400"
+        "401":
+          $ref: "#/paths/~1authenticate/post/responses/401"
+        "403":
+          $ref: "#/paths/~1authenticate/post/responses/403"
+        "404":
+          $ref: "#/paths/~1authenticate/post/responses/404"
+        "415":
+          $ref: "#/paths/~1collections~1%7Bcollection_id%7D/get/responses/415"
+        "429":
+          $ref: "#/paths/~1authenticate/post/responses/429"
+  "/galleries/{gallery_id}/key-image":
+    get:
+      tags:
+        - Gallery
+      summary: Retrieves the gallery key image.
+      description: Retrieves the gallery key image.
+      operationId: galleriesGetIdKeyImage
+      parameters:
+        - $ref: "#/paths/~1galleries~1%7Bgallery_id%7D/get/parameters/0"
+      responses:
+        "200":
+          $ref: "#/paths/~1collections~1%7Bcollection_id%7D~1key-image/get/response\
+            s/200"
+        "400":
+          $ref: "#/paths/~1authenticate/post/responses/400"
+        "403":
+          $ref: "#/paths/~1authenticate/post/responses/403"
+        "404":
+          $ref: "#/paths/~1authenticate/post/responses/404"
+        "415":
+          $ref: "#/paths/~1collections~1%7Bcollection_id%7D/get/responses/415"
+        "429":
+          $ref: "#/paths/~1authenticate/post/responses/429"
+  "/galleries/{gallery_id}/permissions":
+    get:
+      operationId: galleriesGetIdPermission
+      tags:
+        - Gallery
+      description: '"Retrieves the gallery permissions. When authenticated, retrieves all
+        the native and inherited  access rights along with their credentials.
+        When not authenticated, retrieves all the access  rights without their
+        associated credentials. An optional collection_id query parameter can be
+        set if the gallery inherits permissions from the collection."'
+      summary: Get the permissions of a single gallery
+      parameters:
+        - $ref: "#/paths/~1galleries~1%7Bgallery_id%7D/get/parameters/0"
+        - name: collection_id
+          in: query
+          required: false
+          schema:
+            description: My collection description
+            title: My Collection Test
+            type: string
+            minLength: 16
+            maxLength: 16
+            pattern: ^C0000[a-zA-Z0-9._]{11}$
+            example: C0000c1x4UMGPvkY
+          description: The Collection ID
+      responses:
+        "200":
+          description: Gets lists of native and inherited gallery permissions depending on
+            access level
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    type: object
+                    required:
+                      - id
+                      - type
+                      - attributes
+                    properties:
+                      id:
+                        type: string
+                        description: Resource ID
+                        pattern: ^(G|C)0000[a-zA-Z0-9._]{11}$
+                        example: G0000EXAMPLE_GAL
+                      type:
+                        type: string
+                        pattern: permissions
+                        example: permissions
+                      attributes:
+                        type: object
+                        required:
+                          - mode
+                          - native_mode
+                          - native
+                        properties:
+                          mode:
+                            type: string
+                            description: Mode
+                            example: everyone
+                            enum:
+                              - permission
+                              - private
+                              - everyone
+                          native_mode:
+                            $ref: "#/paths/~1galleries~1%7Bgallery_id%7D~1permissio\
+                              ns/get/responses/200/content/application~1json/sc\
+                              hema/properties/data/properties/attributes/proper\
+                              ties/mode"
+                          native:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                                - id
+                                - type
+                                - attributes
+                              properties:
+                                id:
+                                  type: string
+                                  description: Permission ID
+                                  pattern: ^AR000[a-zA-Z0-9._]{11}$
+                                  example: AR000EXAMPLE_PMS
+                                type:
+                                  type: string
+                                  enum:
+                                    - contact
+                                    - group
+                                    - token
+                                    - access_level
+                                    - password
+                                  example: token
+                                attributes:
+                                  type: object
+                                  required:
+                                    - expires
+                                    - max_downloads
+                                    - download_image_filetype
+                                    - download_image_size
+                                    - download_image_embed
+                                    - download_video_filetype
+                                    - download_video_format
+                                    - download_audio_filetype
+                                    - download_doc_filetype
+                                    - group_id
+                                    - contact_id
+                                    - access_level
+                                    - password
+                                    - token
+                                  properties:
+                                    expires:
+                                      type: string
+                                      nullable: true
+                                      description: Expiration Date
+                                      example: 2019-04-25T14:54:12.136828
+                                    contact_id:
+                                      type: string
+                                      nullable: true
+                                      description: Contact ID
+                                      pattern: ^CT000[a-zA-Z0-9._]{11}$
+                                      example: CT000EXAMPLE_CNT
+                                    group_id:
+                                      type: string
+                                      description: Contact Group ID
+                                      nullable: true
+                                      pattern: ^CTG00[a-zA-Z0-9._]{11}$
+                                      example: CTG00EXAMPLE_CTG
+                                    access_level:
+                                      type: string
+                                      description: Access Level (OPEN)
+                                      nullable: true
+                                      maxLength: 10
+                                      example: OPEN
+                                    password:
+                                      type: string
+                                      description: Password
+                                      nullable: true
+                                      maxLength: 20
+                                      example: Open Sesame
+                                    token:
+                                      type: string
+                                      description: Access Token
+                                      nullable: true
+                                      maxLength: 32
+                                      example: Token123456789
+                                    max_downloads:
+                                      type: integer
+                                      description: Max Downloads
+                                      nullable: true
+                                      example: 99
+                                    download_image_filetype:
+                                      type: string
+                                      description: Download Image FileType (original | jpeg)
+                                      nullable: true
+                                      example: original
+                                      enum:
+                                        - original
+                                        - jpeg
+                                    download_image_size:
+                                      type: integer
+                                      description: Download Image Size (number of pixels of
+                                        longest dimension)
+                                      nullable: true
+                                      example: 1200
+                                    download_image_embed:
+                                      type: boolean
+                                      description: Download Image Embed (true | false)
+                                      nullable: true
+                                      example: true
+                                    download_video_filetype:
+                                      type: string
+                                      description: Download Video FileType (original | mp4)
+                                      nullable: true
+                                      example: original
+                                      enum:
+                                        - original
+                                        - mp4
+                                    download_video_format:
+                                      type: string
+                                      description: Download Video Format (hd1080 | hd720 |
+                                        sd480)
+                                      nullable: true
+                                      example: hd1080
+                                      enum:
+                                        - hd1080
+                                        - hd720
+                                        - sd480
+                                    download_audio_filetype:
+                                      type: string
+                                      description: Download Audio FileType (original)
+                                      nullable: true
+                                      example: original
+                                      enum:
+                                        - original
+                                    download_doc_filetype:
+                                      type: string
+                                      description: Download Doc FileType (original)
+                                      nullable: true
+                                      example: original
+                                      enum:
+                                        - original
+                          inherited:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                                - mode
+                                - native_mode
+                                - collection_id
+                                - permissions
+                              properties:
+                                mode:
+                                  $ref: "#/paths/~1galleries~1%7Bgallery_id%7D~1per\
+                                    missions/get/responses/200/content/applicat\
+                                    ion~1json/schema/properties/data/properties\
+                                    /attributes/properties/mode"
+                                native_mode:
+                                  $ref: "#/paths/~1galleries~1%7Bgallery_id%7D~1per\
+                                    missions/get/responses/200/content/applicat\
+                                    ion~1json/schema/properties/data/properties\
+                                    /attributes/properties/mode"
+                                collection_id:
+                                  $ref: "#/paths/~1collections/get/parameters/0/sch\
+                                    ema"
+                                permissions:
+                                  type: array
+                                  items:
+                                    $ref: "#/paths/~1galleries~1%7Bgallery_id%7D~1p\
+                                      ermissions/get/responses/200/content/appl\
+                                      ication~1json/schema/properties/data/prop\
+                                      erties/attributes/properties/native/items"
+        "400":
+          $ref: "#/paths/~1authenticate/post/responses/400"
+        "401":
+          $ref: "#/paths/~1authenticate/post/responses/401"
+        "403":
+          $ref: "#/paths/~1authenticate/post/responses/403"
+        "404":
+          $ref: "#/paths/~1authenticate/post/responses/404"
+        "415":
+          $ref: "#/paths/~1collections~1%7Bcollection_id%7D/get/responses/415"
+        "429":
+          $ref: "#/paths/~1authenticate/post/responses/429"
+  /library:
+    get:
+      tags:
+        - Library
+      summary: Retrieve library listing.
+      description: Retrieve library listing.
+      operationId: libraryGet
+      parameters:
+        - name: is_listed
+          in: query
+          description: listed or unlisted
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: boolean
+            default: false
+            enum:
+              - false
+              - true
+          example: false
+      responses:
+        "200":
+          description: List of containers (gallery or collection) - HTTP 200 OK Response.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  oneOf:
+                    - $ref: "#/paths/~1collections/get/responses/200/content/applic\
+                        ation~1json/schema/properties/data"
+                    - $ref: "#/paths/~1galleries/get/responses/200/content/applicat\
+                        ion~1json/schema/properties/data/items"
+            application/xml:
+              schema:
+                type: array
+                items:
+                  oneOf:
+                    - $ref: "#/paths/~1collections/get/responses/200/content/applic\
+                        ation~1json/schema/properties/data"
+                    - $ref: "#/paths/~1galleries/get/responses/200/content/applicat\
+                        ion~1json/schema/properties/data/items"
+        "400":
+          $ref: "#/paths/~1authenticate/post/responses/400"
+        "401":
+          $ref: "#/paths/~1authenticate/post/responses/401"
+        "403":
+          $ref: "#/paths/~1authenticate/post/responses/403"
+        "429":
+          $ref: "#/paths/~1authenticate/post/responses/429"
+  /media:
+    get:
+      tags:
+        - Media
+      summary: Media search
+      description: '"Media GET (aka media search). At least one of the following is
+        required in order for the search to take place: (terms, custom_metadata,
+        date_start, date_end, user_id, org_id,  photographer_id,
+        virtual_agency_id, orientation, state, country, country_iso). It is
+        good  practice to limit your page size when searching as callbacks for
+        additional data can  become expensive."'
+      operationId: mediaGet
+      parameters:
+        - name: user_id
+          description: User id to perform the search on
+          example: U0000EXAMPLEUSER
+          in: query
+          required: false
+          schema:
+            type: string
+            pattern: ^U0000[a-zA-Z0-9._]{11}$
+        - name: org_id
+          description: Organization id to perform the search on
+          example: O0000EXAMPLE_ORG
+          in: query
+          required: false
+          schema:
+            type: string
+            pattern: ^O0000[a-zA-Z0-9._]{11}$
+        - name: media_id
+          description: ID of the media
+          example: I0000EXAMPLEIMAG
+          in: query
+          required: false
+          schema:
+            type: string
+            pattern: ^(VD|AD|I0|DO)000[a-zA-Z0-9._]{11}$
+        - name: photographer_id
+          description: ID of photographer
+          example: U0000EXAMPLEUSER
+          in: query
+          required: false
+          schema:
+            type: string
+            pattern: ^U0000[a-zA-Z0-9._]{11}$
+        - name: virtual_agency_id
+          description: Virtual Agency ID
+          in: query
+          example: VA000____EXAMPLE
+          required: false
+          schema:
+            type: string
+        - name: collections
+          description: Limit search to files within given collections. Comma separated list
+            of collection ids.
+          in: query
+          required: false
+          example: C0000EXAMPLECOLL, C0000EXAMPLECOL2
+          schema:
+            type: string
+        - name: galleries
+          description: Limit search to files contained in given galleries. Comma separated
+            list of gallery ids.
+          in: query
+          required: false
+          example: G0000EXAMPLEGALL, G0000EXAMPLEGAL2
+          schema:
+            type: string
+        - name: custom_metadata
+          description: Limit search to files containing custom metadata. Requires use of
+            the org_id parameter. Parameter format is a JSON object containing
+            field_id and option_id key-value pairs. e.g.
+            {"Foo_field_123":"Foo_tag_abc","Bar_field_456":"Bar_tag_def"}.
+          in: query
+          required: false
+          example: '{"Foo_field_123":"Foo_tag"}'
+          schema:
+            type: string
+        - name: file_name
+          description: Name of the file
+          in: query
+          required: false
+          example: File name
+          schema:
+            type: string
+        - name: terms
+          description: Search terms. Performs text search based on the terms across a
+            variety of attributes such as file name, keywords, caption, etc.
+          in: query
+          required: false
+          example: Example Search Terms
+          schema:
+            type: string
+        - name: model_release
+          description: Media has a model release
+          in: query
+          required: false
+          example: true
+          schema:
+            type: boolean
+        - name: property_release
+          description: Media has property release
+          in: query
+          required: false
+          example: false
+          schema:
+            type: boolean
+        - name: priced
+          description: Media is for sale
+          in: query
+          required: false
+          example: true
+          schema:
+            type: boolean
+        - name: searchble
+          description: Media is publicly searchable
+          in: query
+          required: false
+          example: false
+          schema:
+            type: boolean
+        - name: print
+          description: Media is available for prints
+          in: query
+          required: false
+          example: true
+          schema:
+            type: boolean
+        - name: personal_use
+          description: Media is available for personal use.
+          in: query
+          required: false
+          example: false
+          schema:
+            type: boolean
+        - name: royalty_free
+          description: Media is available as royalty free.
+          in: query
+          required: false
+          example: true
+          schema:
+            type: boolean
+        - name: rights_managed
+          description: Media is available for license.
+          in: query
+          required: false
+          example: false
+          schema:
+            type: boolean
+        - name: media_type
+          description: Type of media (image | video | audio | doc) or a comma separated list
+          in: query
+          required: false
+          example: image,audio
+          schema:
+            type: string
+        - name: city
+          description: City parameter
+          in: query
+          required: false
+          example: Sample City
+          schema:
+            type: string
+        - name: state
+          description: State/Province parameter
+          in: query
+          required: false
+          example: Sample State
+          schema:
+            type: string
+        - name: country
+          description: Country Parameter
+          in: query
+          required: false
+          example: Sample Country
+          schema:
+            type: string
+        - name: country_iso
+          description: Country ISO code
+          in: query
+          required: false
+          example: Sample Code
+          schema:
+            type: string
+        - name: rating
+          description: Ratings are from -1 to 254
+          in: query
+          required: false
+          example: 1
+          schema:
+            type: integer
+        - name: rating_min
+          description: Minimum rating
+          in: query
+          required: false
+          example: 1
+          schema:
+            type: integer
+        - name: rating_max
+          description: Maximum rating
+          in: query
+          required: false
+          example: 10
+          schema:
+            type: integer
+        - name: date_start
+          description: Minimum date taken
+          in: query
+          required: false
+          example: 2019-10-15 12:00:00 GMT
+          schema:
+            type: string
+        - name: date_end
+          description: Maximum date taken
+          in: query
+          required: false
+          example: 2019-10-15 12:00:00 GMT
+          schema:
+            type: string
+        - name: create_start
+          description: Minimum create date
+          in: query
+          required: false
+          example: 2019-10-15 12:00:00 GMT
+          schema:
+            type: string
+        - name: create_end
+          description: Maximum create date
+          in: query
+          required: false
+          example: 2019-10-15 12:00:00 GMT
+          schema:
+            type: string
+        - name: modify_start
+          description: Minimum modify date
+          in: query
+          required: false
+          example: 2019-10-15 12:00:00 GMT
+          schema:
+            type: string
+        - name: modify_end
+          description: Minimum modify date
+          in: query
+          required: false
+          example: 2019-10-15 12:00:00 GMT
+          schema:
+            type: string
+        - name: title
+          description: Title
+          in: query
+          required: false
+          example: Sample Title
+          schema:
+            type: string
+        - name: edit_status
+          description: Edit status
+          in: query
+          required: false
+          example: Sample status
+          schema:
+            type: string
+        - name: urgency
+          description: Urgency
+          in: query
+          required: false
+          example: Urgency
+          schema:
+            type: string
+        - name: category
+          description: Category
+          in: query
+          required: false
+          example: Sample Category
+          schema:
+            type: string
+        - name: keywords
+          description: Keywords
+          in: query
+          required: false
+          example: Example Keywords
+          schema:
+            type: string
+        - name: instructions
+          description: Instructions
+          in: query
+          required: false
+          example: Sample instructions
+          schema:
+            type: string
+        - name: author
+          description: Author
+          in: query
+          required: false
+          example: Sample Author
+          schema:
+            type: string
+        - name: position
+          description: Author title/position
+          in: query
+          required: false
+          example: Sample Title/Position
+          schema:
+            type: string
+        - name: location
+          description: Location
+          in: query
+          required: false
+          example: Sample location
+          schema:
+            type: string
+        - name: trans_ref
+          description: Job ID/transmission reference
+          in: query
+          required: false
+          example: Sample ID
+          schema:
+            type: string
+        - name: credit
+          description: Credit
+          in: query
+          required: false
+          example: Sample Credit
+          schema:
+            type: string
+        - name: source
+          description: Source
+          in: query
+          required: false
+          example: Sample Source
+          schema:
+            type: string
+        - name: copyright
+          description: Copyright
+          in: query
+          required: false
+          example: Sample Copyright
+          schema:
+            type: string
+        - name: caption
+          description: Caption writer
+          in: query
+          required: false
+          example: Caption writer
+          schema:
+            type: string
+        - name: contact_info
+          description: Contact info. Query string based on key-value pairs. The available
+            keys are - city, country, address, postal_code, region, email,
+            phone, and url. For example, "?contract_info=city,NYC,country,USA is
+            equivalent to city being NYC and country being USA.
+          in: query
+          required: false
+          style: form
+          explode: false
+          example: city,NYC,country,USA
+          schema:
+            type: string
+        - name: genre
+          description: Genre
+          in: query
+          required: false
+          example: Sample genre
+          schema:
+            type: string
+        - name: rights
+          description: Usage rights
+          in: query
+          required: false
+          example: Sample usage rights
+          schema:
+            type: string
+        - name: scene
+          description: Scene
+          in: query
+          required: false
+          example: Sample scene
+          schema:
+            type: string
+        - name: subject_code
+          description: Subject Code
+          in: query
+          required: false
+          example: Sample Subject Code
+          schema:
+            type: string
+        - name: caption_writer
+          description: Caption Writer
+          in: query
+          required: false
+          example: Sample Writer
+          schema:
+            type: string
+        - name: orientation
+          description: Orientation
+          in: query
+          required: false
+          example: horizontal
+          schema:
+            type: string
+            enum:
+              - horizontal
+              - vertical
+              - panoramic
+              - square
+        - name: web_statement
+          description: Web statement
+          in: query
+          required: false
+          example: Sample Web Statement
+          schema:
+            type: string
+        - name: is_empty
+          description: Denotes which parameters must be empty. Comma-separated list.
+          style: form
+          explode: false
+          in: query
+          required: false
+          example: title, edit_status,urgency
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - title
+                - edit_status
+                - urgency
+                - category
+                - keywords
+                - instructions
+                - author
+                - position
+                - location
+                - city
+                - state
+                - country
+                - headline
+                - trans_ref
+                - credit
+                - source
+                - copyright
+                - caption
+                - caption_writer
+                - ci_city
+                - ci_country
+                - ci_address
+                - ci_postal_code
+                - ci_region
+                - ci_email
+                - ci_phone
+                - ci_url
+                - genre
+                - rights
+                - scene
+                - subject_code
+                - web_statement
+        - name: not_empty
+          description: Denotes which parameters must have a value. Comma separated list.
+          in: query
+          required: false
+          style: form
+          explode: false
+          example: title,edit_status,urgency
+          schema:
+            $ref: "#/paths/~1media/get/parameters/54/schema"
+        - name: match_all_terms
+          description: Match all terms. Return all keywords specified in the terms
+            parameter. Default to true.
+          in: query
+          example: true
+          schema:
+            type: boolean
+        - name: per_page
+          description: Results per page.
+          in: query
+          required: false
+          example: 50
+          schema:
+            type: integer
+        - name: page
+          description: Page number.
+          in: query
+          required: false
+          example: 1
+          schema:
+            type: integer
+        - name: sort_by
+          description: Field to sort by.
+          in: query
+          required: false
+          example: relevance
+          schema:
+            type: string
+            enum:
+              - relevance
+              - date
+              - file_name
+              - upload_time
+        - name: sort_dir
+          description: Direction to sort by.
+          in: query
+          required: false
+          example: asc
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+      responses:
+        "200":
+          description: Media search - HTTP 200 OK Response.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - id
+                        - type
+                        - attributes
+                      properties:
+                        id:
+                          type: string
+                          pattern: ^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$
+                          example: I0000zCtew4UPbBw
+                        type:
+                          type: string
+                          example: media
+                          enum:
+                            - media
+                        attributes:
+                          type: object
+                          required:
+                            - file_name
+                            - type
+                          properties:
+                            file_name:
+                              type: string
+                              example: Sample File Name
+                            type:
+                              type: string
+                              enum:
+                                - image
+                                - audio
+                                - video
+                                - doc
+                  meta:
+                    $ref: "#/paths/~1galleries/get/responses/200/content/applicatio\
+                      n~1xml/schema/properties/meta"
+        "403":
+          $ref: "#/paths/~1authenticate/post/responses/403"
+        "429":
+          $ref: "#/paths/~1authenticate/post/responses/429"
+  "/media/{media_id}":
+    get:
+      operationId: mediaGetId
+      tags:
+        - Media
+      description: '"Get media by ID. This endpoint works for both public and authenticated
+        users. Certain fields  are non-null only if users have the permission to
+        view them. Users must provide a valid media  ID which can be a video,
+        document, audio, or image id. This endpoint will return
+        data  corresponding with the type of media that was retrieved."'
+      summary: Get a single media
+      parameters:
+        - name: media_id
+          description: ID of the media
+          example: I0000EXAMPLEIMAG
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: ^(VD|AD|I0|DO)000[a-zA-Z0-9._]{11}$
+      responses:
+        "200":
+          description: /media/{media_id} - HTTP 200 OK Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    type: object
+                    required:
+                      - id
+                      - type
+                      - attributes
+                    properties:
+                      id:
+                        type: string
+                        minLength: 16
+                        maxLength: 16
+                        pattern: ^(AD|VD|DO|I0)000[a-zA-Z0-9._]{11}$
+                        example: I0000zCtew4UPbBw
+                      type:
+                        type: string
+                        enum:
+                          - image
+                          - document
+                          - audio
+                          - video
+                      attributes:
+                        anyOf:
+                          - type: object
+                            required:
+                              - owner_id
+                              - organization_id
+                              - creator_id
+                              - photographer_id
+                              - file_name
+                              - file_size
+                              - height
+                              - width
+                              - rating
+                              - screen_height
+                              - screen_width
+                              - screen_height_max
+                              - screen_width_max
+                              - thumbnail_height
+                              - thumbnail_width
+                              - views
+                              - searchable
+                              - model_released
+                              - property_released
+                              - flagged
+                              - focal_point_x
+                              - focal_point_y
+                              - created_at
+                              - modified_at
+                            properties:
+                              owner_id:
+                                type: string
+                                minLength: 16
+                                maxLength: 16
+                                pattern: ^U0000[a-zA-Z0-9._]{11}$
+                                example: U0000EXAMPLEUSER
+                                description: User Id
+                                nullable: true
+                              organization_id: {}
+                              creator_id:
+                                type: string
+                                minLength: 16
+                                maxLength: 16
+                                pattern: ^U0000[a-zA-Z0-9._]{11}$
+                                example: U0000EXAMPLEUSER
+                                description: User Id
+                              photographer_id:
+                                type: string
+                                minLength: 16
+                                maxLength: 16
+                                pattern: ^U0000[a-zA-Z0-9._]{11}$
+                                example: U0000EXAMPLEUSER
+                                description: Photographer Id
+                                nullable: true
+                              file_name:
+                                type: string
+                                description: The name of the file
+                                example: File Name
+                              file_size:
+                                type: integer
+                                description: The size of the file in bytes
+                                example: 10000
+                              height:
+                                type: integer
+                                description: Native image height in pixels
+                                example: 1000
+                              width:
+                                type: integer
+                                description: Native image width in pixels
+                                example: 600
+                              rating:
+                                type: number
+                                description: The image rating from -1 to 5
+                                example: 3
+                                nullable: true
+                              screen_height:
+                                type: integer
+                                description: Screen image height in pixels
+                                example: 1000
+                                nullable: true
+                              screen_width:
+                                type: integer
+                                description: Screen image width in pixels
+                                example: 600
+                                nullable: true
+                              screen_height_max:
+                                type: integer
+                                description: Max screen image height in pixels
+                                example: 10000
+                                nullable: true
+                              screen_width_max:
+                                type: integer
+                                description: Max screen image width in pixels
+                                example: 6000
+                                nullable: true
+                              thumbnail_height:
+                                type: integer
+                                description: Thumbnail height in pixels
+                                example: 200
+                                nullable: true
+                              thumbnail_width:
+                                type: integer
+                                description: Thumbnail width in pixels
+                                example: 180
+                                nullable: true
+                              views:
+                                type: integer
+                                description: View counter for the image
+                                example: 0
+                                nullable: true
+                              searchable:
+                                type: boolean
+                                description: Boolean flag that denotes if the image is
+                                  publicly searchable
+                                nullable: true
+                                example: true
+                              model_released:
+                                type: boolean
+                                description: Boolean flag that denotes if the image model
+                                  is released
+                                nullable: true
+                                example: true
+                              property_released:
+                                type: boolean
+                                description: Boolean flag that denotes if the image
+                                  property is released
+                                nullable: true
+                                example: true
+                              flagged:
+                                type: boolean
+                                description: Boolean flag that denotes if the image has
+                                  been flagged by the photographer
+                                nullable: true
+                                example: true
+                              focal_point_x:
+                                type: integer
+                                description: Core product specific variable. Denotes the
+                                  focal point of the image on the x-coordinate
+                                  plane
+                                example: 100
+                                nullable: true
+                              focal_point_y:
+                                type: integer
+                                description: Core product specific variabnle. Denotes the
+                                  focal point of the image on the y-coordinate
+                                  plane
+                                example: 100
+                                nullable: true
+                              created_at:
+                                type: string
+                                description: Date and time the image was last updated
+                                example: 2019-10-02 14:39:23 GMT
+                                nullable: true
+                              modified_at:
+                                type: string
+                                description: Date and time the image was originally uploaded
+                                example: 2019-10-02 14:39:23 GMT
+                                nullable: true
+                          - type: object
+                            required:
+                              - owner_id
+                              - file_name
+                              - file_size
+                              - start_time
+                              - duration
+                              - format
+                              - hash
+                              - creator_id
+                              - model_released
+                              - property_released
+                              - rating
+                              - created_at
+                              - modified_at
+                            properties:
+                              owner_id:
+                                $ref: "#/paths/~1media~1%7Bmedia_id%7D/get/response\
+                                  s/200/content/application~1json/schema/proper\
+                                  ties/data/properties/attributes/anyOf/0/prope\
+                                  rties/owner_id"
+                              file_name:
+                                type: string
+                                description: The name of the file
+                                example: File Name
+                              file_size:
+                                type: integer
+                                description: The size of the file in bytes
+                                example: 10000
+                              start_time:
+                                type: number
+                                description: Start time of the audio
+                                example: 0.05
+                              duration:
+                                type: number
+                                description: Duration of the audio file
+                                example: 25
+                              format:
+                                type: string
+                                description: Format of the audio file
+                                example: mp3
+                              hash:
+                                type: string
+                                description: Audio file SHA-1 hash
+                                example: 051a007701ae51921e2e5eec19dfeexamplehash
+                                nullable: true
+                              creator_id:
+                                type: string
+                                minLength: 16
+                                maxLength: 16
+                                pattern: ^U0000[a-zA-Z0-9._]{11}$
+                                example: U0000EXAMPLEUSER
+                                description: User Id
+                                nullable: true
+                              model_released:
+                                type: boolean
+                                description: Boolean denoting if the model is released
+                                example: true
+                                nullable: true
+                              property_released:
+                                type: boolean
+                                description: Boolean denoting if the property is released
+                                example: true
+                                nullable: true
+                              rating:
+                                type: number
+                                description: Rating
+                                example: 3
+                                nullable: true
+                              created_at:
+                                type: string
+                                description: Date and time the audio was last updated
+                                example: 2019-10-02 14:39:23 GMT
+                                nullable: true
+                              modified_at:
+                                type: string
+                                description: Date and time the audio was originally uploaded
+                                example: 2019-10-02 14:39:23 GMT
+                                nullable: true
+                          - type: object
+                            required:
+                              - owner_id
+                              - creator_id
+                              - organization_id
+                              - file_name
+                              - file_size
+                              - format
+                              - format_readable
+                              - hash
+                              - rating
+                              - created_at
+                              - modified_at
+                            properties:
+                              owner_id:
+                                $ref: "#/paths/~1media~1%7Bmedia_id%7D/get/response\
+                                  s/200/content/application~1json/schema/proper\
+                                  ties/data/properties/attributes/anyOf/1/prope\
+                                  rties/creator_id"
+                              creator_id:
+                                type: string
+                                minLength: 16
+                                maxLength: 16
+                                pattern: ^U0000[a-zA-Z0-9._]{11}$
+                                example: U0000EXAMPLEUSER
+                                description: User Id
+                              organization_id: {}
+                              file_name:
+                                type: string
+                                description: File Name
+                                example: Example File Name
+                              file_size:
+                                type: integer
+                                description: File size in bytes
+                                example: 100000
+                              format:
+                                type: string
+                                description: Describes the format of the file
+                                example: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                              format_readable:
+                                type: string
+                                description: Format Readable
+                                example: Microsoft Word
+                              hash:
+                                type: string
+                                description: Hash encryption of the file
+                                example: 051a007701ae51921e2e5eec19dfeexamplehash
+                                nullable: true
+                              rating:
+                                type: number
+                                description: Document rating
+                                example: 1
+                                nullable: true
+                              created_at:
+                                type: string
+                                description: Date and time the document was last updated
+                                example: 2019-10-02 14:39:23 GMT
+                                nullable: true
+                              modified_at:
+                                type: string
+                                description: Date and time the document was originally
+                                  uploaded
+                                example: 2019-10-02 14:39:23 GMT
+                                nullable: true
+                          - type: object
+                            required:
+                              - owner_id
+                              - file_name
+                              - file_size
+                              - rotate
+                              - height
+                              - width
+                              - start_time
+                              - duration
+                              - format
+                              - photographer_id
+                              - creator_id
+                              - hash
+                              - model_released
+                              - property_released
+                              - rating
+                              - created_at
+                              - modified_at
+                            properties:
+                              owner_id:
+                                $ref: "#/paths/~1media~1%7Bmedia_id%7D/get/response\
+                                  s/200/content/application~1json/schema/proper\
+                                  ties/data/properties/attributes/anyOf/1/prope\
+                                  rties/creator_id"
+                              file_name:
+                                type: string
+                                description: File name
+                                example: Sample file name
+                              file_size:
+                                type: integer
+                                description: File size in bytes
+                                example: 100000
+                              rotate:
+                                type: number
+                                description: Video rotation in degrees
+                                example: 30
+                              height:
+                                type: integer
+                                description: Video height in pixels
+                                example: 360
+                              width:
+                                type: integer
+                                description: Video width in pixels
+                                example: 640
+                              start_time:
+                                type: number
+                                description: Video start time
+                                example: 0
+                              duration:
+                                type: number
+                                description: Duration of the video
+                                example: 30
+                              format:
+                                type: string
+                                description: Video format
+                                example: x-ms-asf
+                              photographer_id:
+                                $ref: "#/paths/~1media~1%7Bmedia_id%7D/get/response\
+                                  s/200/content/application~1json/schema/proper\
+                                  ties/data/properties/attributes/anyOf/1/prope\
+                                  rties/creator_id"
+                              creator_id:
+                                $ref: "#/paths/~1media~1%7Bmedia_id%7D/get/response\
+                                  s/200/content/application~1json/schema/proper\
+                                  ties/data/properties/attributes/anyOf/1/prope\
+                                  rties/creator_id"
+                              hash:
+                                type: string
+                                description: Hash Encryption of the file
+                                example: 051a007701ae51921e2e5eec19dfeexamplehash
+                                nullable: true
+                              model_released:
+                                type: boolean
+                                description: Boolean flag denoting if the model is released
+                                example: true
+                                nullable: true
+                              property_released:
+                                type: boolean
+                                description: Boolean flag denoting if the property is
+                                  released
+                                example: true
+                                nullable: true
+                              rating:
+                                type: number
+                                description: Rating
+                                example: 1
+                                nullable: true
+                              created_at:
+                                type: string
+                                description: Date and time the document was last updated
+                                example: 2019-10-02 14:39:23 GMT
+                                nullable: true
+                              modified_at:
+                                type: string
+                                description: Date and time the document was originally
+                                  uploaded
+                                example: 2019-10-02 14:39:23 GMT
+                                nullable: true
+                  meta:
+                    $ref: "#/paths/~1collections/get/responses/200/content/applicat\
+                      ion~1json/schema/properties/meta"
+                example:
+                  data:
+                    id: VD000EXAMPLE_VID
+                    type: video
+                    attributes:
+                      owner_id: null
+                      file_name: Sample Video
+                      file_size: 10000
+                      rotate: 0
+                      height: 640
+                      width: 360
+                      start_time: 0
+                      duration: 60
+                      format: null
+                      photographer_id: null
+                      creator_id: U0000EXAMPLEUSER
+                      hash: 051a007701ae51921e2e5eec19dfeexamplehash
+                      model_released: true
+                      property_released: true
+                      rating: 1
+                      updated_at: 2019-10-02 14:39:23 GMT
+                      uploaded_at: 2019-10-02 14:39:23 GMT
+                  meta:
+                    copyright: PhotoShelter 2019
+                    version: 2019-05-01
+                    rate_limit:
+                      limit: 10
+                      current: 1
+                      expires: 40
+            application/xml:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    $ref: "#/paths/~1media~1%7Bmedia_id%7D/get/responses/200/conten\
+                      t/application~1json/schema/properties/data"
+                  meta:
+                    $ref: "#/paths/~1collections/get/responses/200/content/applicat\
+                      ion~1json/schema/properties/meta"
+        "400":
+          $ref: "#/paths/~1authenticate/post/responses/400"
+        "401":
+          $ref: "#/paths/~1authenticate/post/responses/401"
+        "403":
+          $ref: "#/paths/~1authenticate/post/responses/403"
+        "404":
+          $ref: "#/paths/~1authenticate/post/responses/404"
+        "415":
+          $ref: "#/paths/~1collections~1%7Bcollection_id%7D/get/responses/415"
+        "429":
+          $ref: "#/paths/~1authenticate/post/responses/429"
+  "/media/{media_id}/download":
+    get:
+      tags:
+        - Media
+      summary: Download media
+      description: Download the media with the associated ID.
+      operationId: mediaDownloadGetId
+      parameters:
+        - $ref: "#/paths/~1media~1%7Bmedia_id%7D/get/parameters/0"
+        - name: gallery_id
+          description: The ID of the gallery
+          example: G0000EXAMPLEGALL
+          in: query
+          required: false
+          schema:
+            type: string
+            minLength: 16
+            maxLength: 16
+            pattern: ^G0000[a-zA-Z0-9._]{11}$
+            example: G0000EXAMPLEGALL
+            description: The Gallery ID
+        - $ref: "#/paths/~1galleries~1%7Bgallery_id%7D~1permissions/get/parameters/1"
+        - name: password
+          in: query
+          description: Password
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: token
+          in: query
+          description: Access Token
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: download_filetype
+          in: query
+          description: Download Filetype
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            enum:
+              - original
+              - jpeg
+              - mp4
+        - name: download_quality
+          in: query
+          description: Download Quality
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: download_image_embed
+          in: query
+          description: Download Image Embed Metadata
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: Download - HTTP OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        "400":
+          $ref: "#/paths/~1authenticate/post/responses/400"
+        "401":
+          $ref: "#/paths/~1authenticate/post/responses/401"
+        "403":
+          $ref: "#/paths/~1authenticate/post/responses/403"
+        "404":
+          $ref: "#/paths/~1authenticate/post/responses/404"
+        "415":
+          $ref: "#/paths/~1collections~1%7Bcollection_id%7D/get/responses/415"
+        "429":
+          $ref: "#/paths/~1authenticate/post/responses/429"
